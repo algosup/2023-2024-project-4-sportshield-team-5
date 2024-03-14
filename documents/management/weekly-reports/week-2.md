@@ -37,5 +37,3 @@ Include relevant metrics and key performance indicators to measure progress.
 Add any additional notes or comments that may be relevant to the overall report.
 
 ---
-
-*Note: Replace "[Week Number]" with the actual week number of your report.*
