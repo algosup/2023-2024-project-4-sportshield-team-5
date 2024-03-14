@@ -74,14 +74,17 @@ SportShield, an innovative anti-theft device for sports equipment, represents a 
 
 ### Documentation:
 
-1. **Functional specification documentation:**
+1. **Functional specification Document:**
     This document will contain all the necessary information concerning the project. It is more like a document outlining what we are supposed to do and what the project is all about. For example, it will specify which library we are supposed to use, which programming languages will be employed, Use Case, project objectives.
 
-2. **Technical Specification Documents:**
+2. **Technical Specification Document:**
     Just like the functional document, the technical document operates similarly, but from a technical standpoint, it slightly deviates from the functional document. This document contains all the necessary detail information on how we will build the project. For example, it outlines how we will install all the desired libraries, which development environment will be used, and how it will be installed. It also specifies which components will be used for the project, their roles, and how we will interact with them.
 
-3. **Quality Assurance:**
+3. **Test Plan Document**
     The quality assurance document provide all the information on all the test that have been carried out on each function of the code, what went wrong and what went well, how each function was tested, what was the result, what was the issue, what outcome was expected. The quality assurance document serves as a comprehensive record of the testing activities conducted on the codebase, providing insights into both the strengths and weaknesses of the software and guiding efforts to improve its quality and reliability.
+
+4. **User Manual Document:**
+    Provide clear instructions and essential information on how to effectively operate and maintain the enhanced SportShield Anti-Theft Device. It will empower users to utilize the device's features, understand its functionalities, troubleshoot common issues, and ensure safe and efficient usage, thereby enhancing the overall user experience and maximizing the device's utility.
 
 ## Project Scope
 1. **Battery Consumption Management:**
@@ -89,7 +92,7 @@ SportShield, an innovative anti-theft device for sports equipment, represents a 
 
     - Develop and implement algorithms for optimizing energy usage, including intelligent component activation and sleep mode management.
 
-    - The battery must operate for a minimal duration of 7 days.
+    - The battery must operate for a minimal duration of 7 days under different weather conditions.
 
     - Conduct extensive testing under various usage scenarios to validate the achieved operating time and identify opportunities for further optimization.
 
