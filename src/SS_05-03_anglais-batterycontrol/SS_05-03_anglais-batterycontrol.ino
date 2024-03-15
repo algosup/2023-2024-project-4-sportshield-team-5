@@ -69,18 +69,17 @@ bool send_move = false;
 const int buzzerPin = D2;
 void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff);
 unsigned long previousMillis = 0;
-int currentRep = 0;
 
 //Electroaimant
 const int aimantPin = D3;
 
 // Set a threshold to determine a "small" or "big" movement
 
-float SmallMT = 20.0;  //     SmallMotionThreshold
-float BigMT = 150.0;   //    BigMotionThreshold
+float SmallMT = 5000.0;  //     SmallMotionThreshold
+float BigMT = 7000.0;    //    BigMotionThreshold
 
-float SmallRT = 20.0;  //     SmallRotationThreshold
-float BigRT = 125.0;   //     BigRotationThreshold
+float SmallRT = 45.0;  //     SmallRotationThreshold
+float BigRT = 100.0;   //     BigRotationThreshold
 
 //batterie
 #define VBAT_ENABLE 14
@@ -167,10 +166,9 @@ void loop() {
 
   MotionData = getMotionData();
   RotationData = getRotationData();
-
+  Config.isActivate = 1;    // TO REMOVE !!!
   if (Config.isActivate) {  //alarm enalbled
     activateGPS();
-
     if (MotionData > BigMT || RotationData > BigRT) {  //Big motion detection
       if (MotionData > BigMT) {
         Serial.print("Motion detected : ");
@@ -183,9 +181,9 @@ void loop() {
       MotionSmall = false;
       send_move = true;
 
-    } else if ((MotionBig == false) && (MotionData > SmallMT || RotationData > SmallRT)) {  //Small motion detection
+    } else if (MotionData > SmallMT || RotationData > SmallRT) {  //Small motion detection
       if (MotionData > SmallMT) {
-        Serial.print(" Small motion: ");
+        Serial.print("Small motion: ");
         Serial.println(MotionData);
       } else {
         Serial.print("Small rota : ");
@@ -196,24 +194,18 @@ void loop() {
   }
 
   if (MotionBig) {
-    PulseBuzzer(5, 500, 1000);  // repetitions, DurationOn , DurationOff
+    Serial.println("Big motion detected");
+    PulseBuzzer(3, 100, 100);  // repetitions, DurationOn , DurationOff
     //sending positions & shock notif via SIM module
   }
 
   if (MotionSmall) {
+    Serial.println("Small motion detected");
     PulseBuzzer(3, 100, 100);  // repetitions, DurationOn , DurationOff
   }
 
   MotionDetect = true;
-  if ((MotionData > SmallMT) || (RotationData > SmallRT)) {
-    if (MotionData > SmallMT) {
-      Serial.print("WAKE UP : ");
-      Serial.println(MotionData);
-    } else {
-      Serial.print("WAKE UP Rota: ");
-      Serial.println(RotationData);
-    }
-  }
+
 
   //if a mvt is detected and bluetooth is disabled bluetooth activation
   if (MotionDetect == true) {
@@ -379,13 +371,13 @@ void sim_setup(void) {
   }
   Serial.println(String(signal));
   NetworkRegistration network = sim800l->getRegistrationStatus();
-  while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
-    delay(1000);
-    network = sim800l->getRegistrationStatus();
-    Serial.print(network + " ");
-    Serial.println(F("Problem to register, retry in 1 sec"));
-    digitalWrite(LEDG, !digitalRead(LEDG));
-  }
+  // while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
+  //   delay(1000);
+  //   network = sim800l->getRegistrationStatus();
+  //   Serial.print(network + " ");
+  //   Serial.println(F("Problem to register, retry in 1 sec"));
+  //   digitalWrite(LEDG, !digitalRead(LEDG));
+  // }
   delay(50);
   sim800l->setPowerMode(MINIMUM);      // set minimum functionnality mode
   digitalWrite(SIM800_DTR_PIN, HIGH);  // put in sleep mode
@@ -447,22 +439,22 @@ void Temps(void) {
 
 void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff) {
   static int buzzerState = LOW;
-  unsigned long currentMillis = millis();
+  unsigned long currentMillis;
+  while (repetitions > 0) {
+     currentMillis=millis();
 
-  if (currentRep < repetitions) {
     if (currentMillis - previousMillis >= (buzzerState == LOW ? durationOn : durationOff)) {
       digitalWrite(buzzerPin, buzzerState = !buzzerState);
       previousMillis = currentMillis;
-      if (!buzzerState) currentRep++;
+      if (!buzzerState) repetitions--;
     }
-  } else {
+  }
     // Reset variables after performing all repetitions
-    currentRep = 0;
     previousMillis = 0;
     MotionSmall = false;
     MotionBig = false;
-  }
 }
+
 
 void GPS_ISR() {
   if (Config.isActivate != 0) {
@@ -569,7 +561,7 @@ void onWriteActivation(BLEDevice central, BLECharacteristic characteristic) {
 }
 
 void onReadActivation(BLEDevice central, BLECharacteristic characteristic) {
-  // Serial.println("CALLBACK READ");
+  // Serial.println("CALLBACK READ");decimals
   // Serial.println(isAuthenticate);
   ActivationCharacteristic.writeValue(Config.isActivate);
 }
@@ -599,7 +591,7 @@ String convertDMMtoDD(String dmmCoordinates) {
   float decimalDegrees = degrees + (minutes / 60.0);
 
   // Convert to string and format coordinates to decimal degrees
-  String ddCoordinates = String(decimalDegrees, 10);  // You can adjust the number of decimals here
+  String ddCoordinates = String(decimalDegrees, 10);  // You can adjust the number of  here
 
   return ddCoordinates;
 }
