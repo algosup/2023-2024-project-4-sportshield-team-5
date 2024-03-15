@@ -67,7 +67,7 @@ bool send_move = false;
 
 // Buzzer
 const int buzzerPin = D2;
-void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff);
+void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity);
 unsigned long previousMillis = 0;
 
 //Electroaimant
@@ -161,7 +161,7 @@ void setup() {
   Serial.println(getBatteryVoltage());
 }
 
-//-------------------------------- LOOP ----------------------------------------
+//-------------------------------- LOOP --------f--------------------------------
 void loop() {
 
   MotionData = getMotionData();
@@ -195,13 +195,13 @@ void loop() {
 
   if (MotionBig) {
     Serial.println("Big motion detected");
-    PulseBuzzer(3, 100, 100);  // repetitions, DurationOn , DurationOff
+    PulseBuzzer(3, 100, 100, 128);  // repetitions, DurationOn , DurationOff
     //sending positions & shock notif via SIM module
   }
 
   if (MotionSmall) {
     Serial.println("Small motion detected");
-    PulseBuzzer(3, 100, 100);  // repetitions, DurationOn , DurationOff
+    PulseBuzzer(3, 100, 00, 64);  // repetitions, DurationOn , DurationOff
   }
 
   MotionDetect = true;
@@ -437,22 +437,23 @@ void Temps(void) {
   Serial.println("s");
 }
 
-void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff) {
+void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity) {
   static int buzzerState = LOW;
   unsigned long currentMillis;
   while (repetitions > 0) {
-     currentMillis=millis();
+    currentMillis = millis();
 
     if (currentMillis - previousMillis >= (buzzerState == LOW ? durationOn : durationOff)) {
-      digitalWrite(buzzerPin, buzzerState = !buzzerState);
+      analogWrite(buzzerPin, intensity);
       previousMillis = currentMillis;
       if (!buzzerState) repetitions--;
     }
   }
-    // Reset variables after performing all repetitions
-    previousMillis = 0;
-    MotionSmall = false;
-    MotionBig = false;
+  // Reset variables after performing all repetitions
+  analogWrite(buzzerPin, 0);
+  previousMillis = 0;
+  MotionSmall = false;
+  MotionBig = false;
 }
 
 
@@ -561,7 +562,7 @@ void onWriteActivation(BLEDevice central, BLECharacteristic characteristic) {
 }
 
 void onReadActivation(BLEDevice central, BLECharacteristic characteristic) {
-  // Serial.println("CALLBACK READ");decimals
+  // Serial.println("CALLBACK READ");
   // Serial.println(isAuthenticate);
   ActivationCharacteristic.writeValue(Config.isActivate);
 }
@@ -591,7 +592,7 @@ String convertDMMtoDD(String dmmCoordinates) {
   float decimalDegrees = degrees + (minutes / 60.0);
 
   // Convert to string and format coordinates to decimal degrees
-  String ddCoordinates = String(decimalDegrees, 10);  // You can adjust the number of  here
+  String ddCoordinates = String(decimalDegrees, 10);  // You can adjust the number of decimals here
 
   return ddCoordinates;
 }
