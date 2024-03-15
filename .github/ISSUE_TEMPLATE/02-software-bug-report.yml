@@ -6,11 +6,10 @@ assignees:
   - aurelienfernandez
 body:
   - type: markdown
-    attributes: |
-    Thank you for filling an issue! If you are here for an issue unrelated to software behaviours, please use the other templates available.
+    attributes:
+        value: "Thank you for filling an issue! If you are here for an issue unrelated to software behaviours, please use the other templates available.
 
-    This issue form is for SportShield, including its dependencies.
-
+    This issue form is for SportShield, including its dependencies."
   - type: textarea
     id: description
     attributes:
@@ -79,5 +78,4 @@ body:
     attributes:
       label: This issue was tested on a development release
       placeholder: d23280c (commit hash)
-      description: |
-        The issue might already be fixed in a development release or main. This is not required, but helps us greatly.
+      description: "The issue might already be fixed in a development release or main. This is not required, but helps us greatly."

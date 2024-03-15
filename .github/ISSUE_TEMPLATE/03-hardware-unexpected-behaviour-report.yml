@@ -6,11 +6,8 @@ assignees:
   - arthur-lemo1ne
 body:
   - type: markdown
-    attributes: |
-    Thank you for filling an issue! If you are here for an issue unrelated to hardware behaviours, please use the other templates available.
-
-    This issue form is for SportShield, including its dependencies.
-
+    attributes:
+    value: "Thank you for filling an issue! If you are here for an issue unrelated to hardware behaviours, please use the other templates available."
   - type: textarea
     id: description
     attributes:

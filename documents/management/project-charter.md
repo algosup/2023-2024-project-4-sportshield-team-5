@@ -27,16 +27,14 @@ SportShield, an innovative anti-theft device for sports equipment, represents a 
 
 ## Team Members
 
-| **Pictures**                                                                                          | **Name**               | **Role**          | **GitHub address**                                  |
-| ----------------------------------------------------------------------------------------------------- | ---------------------- | ----------------- | --------------------------------------------------- |
-| <img src=https://ca.slack-edge.com/T019N8PRR7W-U04JK8487BK-b37025b07600-512 width="150" height="150"> | Tsangue Vivien Bistrel | Project Manager   | [GitHub Link](https://github.com/Bistrel2002)       |
-| <img src=https://ca.slack-edge.com/T06C726V31S-U06C4FFK53M-75d8750e33b8-512 width="150" height="150"> | LEMOINE Arthur         | Program Manager   | [GitHub Link](https://github.com/arthur-lemo1ne)    |
-| <img src=https://ca.slack-edge.com/T019N8PRR7W-U05SZ8EGZLK-b8a90fc9d463-512 width="150" height="150"> | Benoît de Keyn         | Technical Lead    | [GitHub Link](https://github.com/benoitdekeyn-algosup)                                     |
-| <img src=https://ca.slack-edge.com/T019N8PRR7W-U05SZ8DQ0GK-7e592dc1d1fe-512 width="150" height="150"> | PREVOST Antoine        | Quality Assurance | [GitHub Link](https://github.com/TechXplorerFR)     |
-| <img src=https://ca.slack-edge.com/T06C726V31S-U06C1LRUYJ1-g4a7908c1162-512 width="150" height="150"> | FERNANDEZ Aurélien     | Software Engineer | [GitHub Link](https://github.com/aurelienfernandez) |
-| <img src=https://ca.slack-edge.com/T019N8PRR7W-U01J9JNHZDM-593483a5505e-512 width="150" height="150"> | Clementine CUREL       | Technical Writer  | [GitHub Link](https://github.com/Clementine951)     |
-
-
+| **Pictures**                                                                                          | **Name**               | **Role**          | **GitHub address**                                     |
+| ----------------------------------------------------------------------------------------------------- | ---------------------- | ----------------- | ------------------------------------------------------ |
+| <img src=https://ca.slack-edge.com/T019N8PRR7W-U04JK8487BK-b37025b07600-512 width="150" height="150"> | Tsangue Vivien Bistrel | Project Manager   | [GitHub Link](https://github.com/Bistrel2002)          |
+| <img src=https://ca.slack-edge.com/T06C726V31S-U06C4FFK53M-75d8750e33b8-512 width="150" height="150"> | LEMOINE Arthur         | Program Manager   | [GitHub Link](https://github.com/arthur-lemo1ne)       |
+| <img src=https://ca.slack-edge.com/T019N8PRR7W-U05SZ8EGZLK-b8a90fc9d463-512 width="150" height="150"> | Benoît de Keyn         | Technical Lead    | [GitHub Link](https://github.com/benoitdekeyn-algosup) |
+| <img src=https://ca.slack-edge.com/T019N8PRR7W-U05SZ8DQ0GK-7e592dc1d1fe-512 width="150" height="150"> | PREVOST Antoine        | Quality Assurance | [GitHub Link](https://github.com/TechXplorerFR)        |
+| <img src=https://ca.slack-edge.com/T06C726V31S-U06C1LRUYJ1-g4a7908c1162-512 width="150" height="150"> | FERNANDEZ Aurélien     | Software Engineer | [GitHub Link](https://github.com/aurelienfernandez)    |
+| <img src=https://ca.slack-edge.com/T019N8PRR7W-U01J9JNHZDM-593483a5505e-512 width="150" height="150"> | Clementine CUREL       | Technical Writer  | [GitHub Link](https://github.com/Clementine951)        |
 
 ## Project Objectives
 
