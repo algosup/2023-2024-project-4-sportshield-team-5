@@ -6,20 +6,14 @@ assignees:
   - arthur-lemo1ne
 body:
   - type: markdown
-    attributes: |
-    Thank you for filling an issue! If you are here for an issue unrelated to hardware behaviours, please use the other templates available.
-
-    This issue form is for SportShield, including its dependencies.
-
+    attributes:
+      value: "Thank you for filling an issue! If you are here for an issue unrelated to hardware behaviours, please use the other templates available."
   - type: textarea
     id: description
     attributes:
       label: "Issue description"
       description: "Describe the problem encountered"
-      placeholder: |
-      What happens:
-      1. Explicit description of the problem
-      2. Your code sample if needed
+      placeholder: "Explicit description of the problem and your code sample if needed"
     validations:
       required: true
   - type: dropdown
@@ -52,7 +46,7 @@ body:
         - macOS Ventura 13.3.1
         - If used: g++ 13.2.0 (`g++ --version`)
         - Do not hesitate to add information which seems relevant
-      validations:
+    validations:
         required: true
   - type: textarea
     id: steps
