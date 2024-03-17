@@ -1,5 +1,18 @@
 # Weekly Report - Week 6
 
+<details>
+<summary><b>Table of Contents</b></summary>
+
+1. [Overview](#overview)
+2. [Goals](#goals)
+3. [Challenges](#challenges)
+4. [Key Accomplishments](#key-accomplishments)
+5. [Metrics and KPIs](#metrics-and-kpis)
+6. [Other Notes](#other-notes)
+
+</details>
+
+------------
 ## Overview
 
 Provide a brief overview of the key activities and achievements during the week.
@@ -16,17 +29,7 @@ Highlight any challenges or obstacles encountered during the week and discuss po
 
 List the significant accomplishments and milestones achieved throughout the week.
 
-## Upcoming Week
 
-Preview the goals and tasks planned for the upcoming week.
-
-## Meetings and Collaborations
-
-Summarize any important meetings, collaborations, or discussions that took place during the week.
-
-## Action Items
-
-Enumerate the action items that need attention in the coming days.
 
 ## Metrics and KPIs
 
