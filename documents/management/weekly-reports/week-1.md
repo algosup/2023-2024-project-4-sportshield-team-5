@@ -17,7 +17,7 @@
 ------------
 ## Overview
 
-The week started with CORIS INNOVATION presenting to us their sportshield prototype innovative idea, followed by the improvement they want us to do on the project, and the expected outcomes they wish to have at the end of the project. We started analyzing the hardware product by focusing on studying and understanding the prototype CORIS INNOVATION gave to us, thoroughly understanding the documents detailing each piece of the hardware and how it functions.
+The week started with a COMPANY presenting to us their sportshield prototype innovative idea, followed by the improvement they want us to do on the project, and the expected outcomes they wish to have at the end of the project. We started analyzing the hardware product by focusing on studying and understanding the prototype COMPANY gave to us, thoroughly understanding the documents detailing each piece of the hardware and how it functions.
 
 ## Goals
 
@@ -63,8 +63,17 @@ The week started with CORIS INNOVATION presenting to us their sportshield protot
 
 ## Metrics and KPIs
 
-1. Code Metrics:
-<img src= "images/>
+1. **Code Metrics:**
+The image unders shows all the commit and push that have been done within the week. and global information on what have been done.
+
+<img src= "images/Commit&push_history.png">
+
+2. **Project management metrics:**
+
+The image below displays various information on each task; the starting and ending date, the priority of each tasks, completed tasks, tasks in progress, and finally tasks that haven't yet started, this information allows us to know how far we are from the final product and at what rate we are supposed to work so as to not meet the deadline(Commits Titles).
+
+<img src="images/Week1_TaskManagement.png">
+
 
 ## Other Notes
 
