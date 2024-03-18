@@ -68,7 +68,7 @@ bool send_move = false;
 // Buzzer
 const int buzzerPin = D2;
 void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity);
-unsigned long previousMillis = 0;
+unsigned long startCycle = 0;
 
 //Electroaimant
 const int aimantPin = D3;
@@ -161,7 +161,7 @@ void setup() {
   Serial.println(getBatteryVoltage());
 }
 
-//-------------------------------- LOOP --------f--------------------------------
+//-------------------------------- LOOP ----------------------------------------
 void loop() {
 
   MotionData = getMotionData();
@@ -194,14 +194,12 @@ void loop() {
   }
 
   if (MotionBig) {
-    Serial.println("Big motion detected");
-    PulseBuzzer(3, 100, 100, 128);  // repetitions, DurationOn , DurationOff
+    PulseBuzzer(5, 350, 350, 25);  // repetitions, DurationOn , DurationOff, repetitions
     //sending positions & shock notif via SIM module
   }
 
   if (MotionSmall) {
-    Serial.println("Small motion detected");
-    PulseBuzzer(3, 100, 00, 64);  // repetitions, DurationOn , DurationOff
+    PulseBuzzer(3, 200, 100, 12);  // repetitions, DurationOn , DurationOff, repetitions
   }
 
   MotionDetect = true;
@@ -439,19 +437,27 @@ void Temps(void) {
 
 void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity) {
   static int buzzerState = LOW;
-  unsigned long currentMillis;
-  while (repetitions > 0) {
-    currentMillis = millis();
+  unsigned long timePassed;
 
-    if (currentMillis - previousMillis >= (buzzerState == LOW ? durationOn : durationOff)) {
-      analogWrite(buzzerPin, intensity);
-      previousMillis = currentMillis;
+  startCycle = millis();
+  while (repetitions > 0) {
+    timePassed = millis();
+
+    if (timePassed- startCycle <= (buzzerState == LOW ? durationOff : durationOn)) {
+
+      analogWrite(buzzerPin, (buzzerState == LOW ? 0 : intensity));
+
+    } else if (timePassed - startCycle > (buzzerState == LOW ? durationOff : durationOn)) {
+
+      buzzerState = !buzzerState;
+      startCycle = timePassed;
       if (!buzzerState) repetitions--;
+
     }
   }
+
   // Reset variables after performing all repetitions
   analogWrite(buzzerPin, 0);
-  previousMillis = 0;
   MotionSmall = false;
   MotionBig = false;
 }
