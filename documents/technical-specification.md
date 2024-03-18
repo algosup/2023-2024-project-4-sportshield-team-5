@@ -8,7 +8,7 @@
 | Tech Lead | Benoît DE KEYN |
 | Software Developer | Aurélien FERNANDEZ |
 | Quality Assurance | Antoine PREVOST |
-| Technical Writer | Quentin CLEMENT |
+| Technical Writer | Clémentine CUREL |
 
 
 <details>
