@@ -117,7 +117,7 @@ As defined by the project owner (ALGOSUP), the team is arranged as follows:
 
 | Role | Description | Assigned Person |
 | --- | --- | :-: |
-| Project Manager | Is in charge of organization, planing and budgeting.<br>Keep the team motivated. | Bistrel TSANQUE |
+| Project Manager | Is in charge of organization, planing and budgeting.<br>Keep the team motivated. | Bistrel TSANGUE |
 | Program Manager | Makes sure the project meets expectations. <br> Is in charge of design. <br> Is responsible for writing the Functional Specifications | Arthur LEMOINE |
 | Technical Lead | Makes the technical decision in the project.<br>Translates the Functional Specification into Technical Specifications.<br>Does code review. | Benoît DE KEYN |
 | Software Engineer | Writes the code.<br>Writes documentation<br>Participate in the technical design. | Aurélien FERNANDEZ |
@@ -209,39 +209,53 @@ These are improvement we intend to bring to the client's prototype.
 
 ### 2.2.1 Connection To The Device
 
-[MODIFY]
-
 #### 2.2.1.1 Bluetooth
 
-[MODIFY]
+Users should be able to connect to the device via the application and its bluetooth capabilities. user will be able to activate and deactive the anti-theft function, unlock the security cable and enter sleep mode via this connection.
 
 #### 2.2.1.2 NFC
 
-[MODIFY]
+Users should be able to connect to the device via the application and its NFC capabilities (The NFC connection should have the same capabilities as the bluetooth connection). It is however important to note that the NFC functionality is a nice to have feature, meaning that it isn't the msot important want to implement and will be done if everything else has been already done.
 
 ### 2.2.2 Anti-Theft function
 
-[MODIFY]
+Once activated, this function will detect all shocks and mouvement, depending on wich it will activate certain features to prevent theft. There are two types of shocks or mouvement which are small and big, the exact threshold at which is shock should be considered as nose, small or big will be define after further testing to ensure the right match with real situations. The user will be able to activate or deactivate this function at will while they are connected to the device (either via bluetooth or NFC).
 
 #### 2.2.2.1 Alarm
 
-[MODIFY]
+When a shock or mouvement is detected, depending of its type there are two outcomes:
+- The shock or mouvement is a small one => an alarm of three (3) short bips (two hundred (200) milliseconds of sound, one hundred (100) milliseconds of silence) will ring at 50% of the sound level capacity.
+- The shock or mouvement is a big one => an alarm of five (5) long bips (five hundred (500) milliseconds of sound, one hundred (100) milliseconds of silence) will ring at 100% of the sound level capacity.
+
+The software should be able to interupt the alarm if needed (e.g. the alarm is ringing and the user want to stop it as there are no theif)
 
 #### 2.2.2.2 Get GPS Position
 
-[MODIFY]
+When a big shock or mouvement is detected, the software should get the GPS position of the device. 
+
+The GPS of the device will also be requested to be sent in regular notification when the anti-theft function is activated.
+
+This feature need to be activated only when nessecary to avoid unnessecary battery consomption.
 
 #### 2.2.2.3 Send Notification
 
-[MODIFY]
+When the anti-theft function is activated, the software should send a notification every fifteen (15) minutes to the user containing the GPS position and the battery level of the device.
+
+When a strong shock or mouvement is detected, the software should send a notification to the user (e.g. "Your Equipement Is Currently Being Stolen") with the GPS position of the device.
 
 ### 2.2.3 Unlock Security Cable
 
-[MODIFY]
+the software should be able to unlock the security cable when the user request it (via the application).
 
-### 2.2.4 Speep Mode
+### 2.2.4 Sleep Mode
 
-[MODIFY]
+When the anti-theft function is deactivated, and the device hasn't detected any mouvement for 40 second, the bluetooth will be turned off to save battery. It will be activated again if a rotation of 180° on the x axis is detected.
+
+[ADD_SHEMATICS]
+
+### 2.2.5 Simultaneous Action
+
+The software should be capable of executing multiple actions at the same time (e.g. ring the alarm while get GPS position and sending notification to user).
 
 ## 2.3 Personae Definition
 
