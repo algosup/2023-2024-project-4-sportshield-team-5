@@ -205,51 +205,51 @@ The device will get out of sleep mode if a mouvement is detected.
 
 ## 2.2 Features Breakdown
 
-These are improvement we intend to bring to the client's prototype. 
+These are improvements we intend to bring to the client's prototype. 
 
 ### 2.2.1 Connection To The Device
 
 #### 2.2.1.1 Bluetooth
 
-Users should be able to connect to the device via the application and its bluetooth capabilities. user will be able to activate and deactive the anti-theft function, unlock the security cable and enter sleep mode via this connection.
+Users should be able to connect to the device via the application and its Bluetooth capabilities. Users will be able to activate and deactivate the anti-theft function, unlock the security cable and enter sleep mode via this connection.
 
 #### 2.2.1.2 NFC
 
-Users should be able to connect to the device via the application and its NFC capabilities (The NFC connection should have the same capabilities as the bluetooth connection). It is however important to note that the NFC functionality is a nice to have feature, meaning that it isn't the msot important want to implement and will be done if everything else has been already done.
+Users should be able to connect to the device via the application and its NFC capabilities (The NFC connection should have the same capabilities as the Bluetooth connection). It is however important to note that the NFC functionality is a nice to have feature, meaning that it isn't the most important want to implement and will be done if everything else has been already done.
 
 ### 2.2.2 Anti-Theft function
 
-Once activated, this function will detect all shocks and mouvement, depending on wich it will activate certain features to prevent theft. There are two types of shocks or mouvement which are small and big, the exact threshold at which is shock should be considered as nose, small or big will be define after further testing to ensure the right match with real situations. The user will be able to activate or deactivate this function at will while they are connected to the device (either via bluetooth or NFC).
+Once activated, this function will detect all shocks and movement, depending on which it will activate certain features to prevent theft. There are two types of shocks or movements which are small and big, the exact threshold at which a shock should be considered as noise, small or big will be defined after further testing to ensure the right match with real situations. The user will be able to activate or deactivate this function at will while they are connected to the device (either via Bluetooth or NFC).
 
 #### 2.2.2.1 Alarm
 
-When a shock or mouvement is detected, depending of its type there are two outcomes:
-- The shock or mouvement is a small one => an alarm of three (3) short bips (two hundred (200) milliseconds of sound, one hundred (100) milliseconds of silence) will ring at 50% of the sound level capacity.
-- The shock or mouvement is a big one => an alarm of five (5) long bips (five hundred (500) milliseconds of sound, one hundred (100) milliseconds of silence) will ring at 100% of the sound level capacity.
+When a shock or movement is detected, depending on its type there are two outcomes:
+- The shock or movement is a small one => an alarm of three (3) short beeps (two hundred (200) milliseconds of sound, one hundred (100) milliseconds of silence) will ring at 50% of the sound level capacity.
+- The shock or movement is a big one => an alarm of five (5) long pips (five hundred (500) milliseconds of sound, one hundred (100) milliseconds of silence) will ring at 100% of the sound level capacity.
 
-The software should be able to interupt the alarm if needed (e.g. the alarm is ringing and the user want to stop it as there are no theif)
+The software should be able to interrupt the alarm if needed (e.g. the alarm is ringing and the user wants to stop it as there are no thieves)
 
 #### 2.2.2.2 Get GPS Position
 
-When a big shock or mouvement is detected, the software should get the GPS position of the device. 
+When a big shock or movement is detected, the software should get the GPS position of the device. 
 
 The GPS of the device will also be requested to be sent in regular notification when the anti-theft function is activated.
 
-This feature need to be activated only when nessecary to avoid unnessecary battery consomption.
+This feature needs to be activated only when necessary to avoid unnecessary battery consumption.
 
 #### 2.2.2.3 Send Notification
 
 When the anti-theft function is activated, the software should send a notification every fifteen (15) minutes to the user containing the GPS position and the battery level of the device.
 
-When a strong shock or mouvement is detected, the software should send a notification to the user (e.g. "Your Equipement Is Currently Being Stolen") with the GPS position of the device.
+When a strong shock or movement is detected, the software should send a notification to the user (e.g. "Your Equipment Is Currently Being Stolen") with the GPS position of the device.
 
 ### 2.2.3 Unlock Security Cable
 
-the software should be able to unlock the security cable when the user request it (via the application).
+the software should be able to unlock the security cable when the user requests it (via the application).
 
 ### 2.2.4 Sleep Mode
 
-When the anti-theft function is deactivated, and the device hasn't detected any mouvement for 40 second, the bluetooth will be turned off to save battery. It will be activated again if a rotation of 180° on the x axis is detected.
+When the anti-theft function is deactivated, and the device hasn't detected any movement for 40 seconds, the Bluetooth will be turned off to save energy. It will be activated again if a rotation of 180° on the x-axis is detected.
 
 [ADD_SHEMATICS]
 
