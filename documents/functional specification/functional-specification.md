@@ -15,7 +15,7 @@ Don't forget the [MODIFY] parts !!!
 
 ## 1.1 Project Overview
 
-We were asked to improve the embedded software of a prototype product made by the company "Coris Innovation". This product is a security device called "SportShield", designed to secure sports equipment, this device is equipped with sensors to detect movement and is programmed to activate an alarm and notify the user on a smartphone application.
+We were asked to improve the embedded software of a prototype product. This product is a security device designed to secure sports equipment, this device is equipped with sensors to detect movement and is programmed to activate an alarm and notify the user on a smartphone application.
 
 The software is currently developed in a C/C++ environment with added libraries meaning that we have to continue using this language to ensure that already implemented features will stay operational.
 
@@ -27,10 +27,10 @@ The software is currently developed in a C/C++ environment with added libraries 
 - Alarm
     - 3 light sounds when a small shock is detected
     - 5 long loud sounds when a big shock is detected
-- Send movement notification via a SIM card (GPS coordinates recorded via GPRS)
+- Send movement notification via a SIM card
 - Send GPS position and Battery level every 15 minutes via a SIM card
 - Sleep mode 
-    - GPS and GPRS functionalities are only powered when information should be sent
+    - GPS functionalities are only powered when information should be sent
     - When the antitheft system is deactivated, and no movements are detected for 5 minutes, then the BLE function is disabled. As soon as a movement is detected, the BLE turns on again
 
 **The features we were tasked with improving:**
@@ -83,6 +83,7 @@ We are making improvements on the current prototype. We will upgrade the energy 
 | Weekly Reports | Document(Markdown) | Every Friday | [weekly-reports/](./management/weekly-reports/) |
 | Test Plan | Document(Markdown) | 10/04/2024 | [test-plan.md](./qa/test-plan.md) |
 | User Manual | Document(PDF) | 10/04/2024 | [user-manual.pdf](./functional-specification.md) |
+| Code Documentation | Document(PDF) | 10/04/2024 | [update.md](../update.md) |
 
 ## 1.3 Project Organisation
 
@@ -90,7 +91,6 @@ We are making improvements on the current prototype. We will upgrade the energy 
 
 | Project Owner | Represented by... |
 | --- | --- |
-| **Coris Innovation** | Florant Anon |
 | **ALGOSUP** | Franck Jeannin |
 | Bistrel Tsangue | Arthur Lemoine (Program Manager) |
 
@@ -107,7 +107,6 @@ The project sponsors (represented in **bold**) are expected to be in charge of:
 
 | Stakeholder | May Have/Find an Interest In |
 | --- | --- |
-| Coris Innovation | Having their prototype tested and upgraded <br> & Help train the next generation of software engineers |
 | ALGOSUP | Have the students learn C/C++ programmation |
 | ALGOSUP's Students | Learn C/C++ & get experience |
 
@@ -118,11 +117,11 @@ As defined by the project owner (ALGOSUP), the team is arranged as follows:
 | Role | Description | Assigned Person |
 | --- | --- | :-: |
 | Project Manager | Is in charge of organization, planing and budgeting.<br>Keep the team motivated. | Bistrel TSANGUE |
-| Program Manager | Makes sure the project meets expectations. <br> Is in charge of design. <br> Is responsible for writing the Functional Specifications | Arthur LEMOINE |
+| Program Manager | Makes sure the project meets expectations. <br> Is in charge of design. <br> Is responsible for writing the Functional Specifications. | Arthur LEMOINE |
 | Technical Lead | Makes the technical decision in the project.<br>Translates the Functional Specification into Technical Specifications.<br>Does code review. | Benoît DE KEYN |
-| Software Engineer | Writes the code.<br>Writes documentation<br>Participate in the technical design. | Aurélien FERNANDEZ |
+| Software Engineer | Writes the code.<br>Writes documentation.<br>Participate in the technical design. | Aurélien FERNANDEZ |
 | Quality Assurance | Tests all the functionalities of a product to find bugs and issues.<br>Document bugs and issues.<br>Write the test plan.<br>Check that issues have been fixed. | Antoine PREVOST |
-| Technical Writer | Makes the User Manual | Clémentine CUREL |
+| Technical Writer | Makes the User Manual. | Clémentine CUREL |
 
 ### 1.3.4 Project Reviewers
 
@@ -187,7 +186,7 @@ These are the features of the prototype as they are currently implemented.
 
 ### 2.1.1 Connection To The Device
 
-User can connect their smartphone to the device via an Bluetooth. This connection allow the user to Activate/Deactivate the Anti-theft functionality of the device and Unlock the security cable.
+User can connect their smartphone to the device via an BLE. This connection allow the user to Activate/Deactivate the Anti-theft functionality of the device and Unlock the security cable.
 
 ### 2.1.2 Anti-Theft function
 
@@ -199,7 +198,7 @@ This feature allow the user to unlock the security cable and retreive their equi
 
 ### 2.1.7 Sleep Mode
 
-When the anti-theft function isn't activated and the device didn't detect any mouvement for 5 minutes, then the bluetooth is disable to preserve the system's battery.
+When the anti-theft function isn't activated and the device didn't detect any mouvement for 5 minutes, then the BLE is disable to preserve the system's battery.
 
 The device will get out of sleep mode if a mouvement is detected.
 
@@ -209,23 +208,23 @@ These are improvements we intend to bring to the client's prototype.
 
 ### 2.2.1 Connection To The Device
 
-#### 2.2.1.1 Bluetooth
+#### 2.2.1.1 BLE
 
-Users should be able to connect to the device via the application and its Bluetooth capabilities. Users will be able to activate and deactivate the anti-theft function, unlock the security cable and enter sleep mode via this connection.
+Users should be able to connect to the device via the application and its BLE capabilities. Users will be able to activate and deactivate the anti-theft function, unlock the security cable and enter sleep mode via this connection.
 
 #### 2.2.1.2 NFC
 
-Users should be able to connect to the device via the application and its NFC capabilities (The NFC connection should have the same capabilities as the Bluetooth connection). It is however important to note that the NFC functionality is a nice to have feature, meaning that it isn't the most important want to implement and will be done if everything else has been already done.
+Users should be able to connect to the device via the application and its NFC capabilities (The NFC connection should have the same capabilities as the BLE connection). It is however important to note that the NFC functionality is a nice to have feature, meaning that it isn't the most important want to implement and will be done if everything else has been already done.
 
 ### 2.2.2 Anti-Theft function
 
-Once activated, this function will detect all shocks and movement, depending on which it will activate certain features to prevent theft. There are two types of shocks or movements which are small and big, the exact threshold at which a shock should be considered as noise, small or big will be defined after further testing to ensure the right match with real situations. The user will be able to activate or deactivate this function at will while they are connected to the device (either via Bluetooth or NFC).
+Once activated, this function will detect all shocks and movement, depending on which it will activate certain features to prevent theft. There are two types of shocks or movements which are small and big, the exact threshold at which a shock should be considered as noise, small or big will be defined after further testing to ensure the right match with real situations. The user will be able to activate or deactivate this function at will while they are connected to the device (either via BLE or NFC).
 
 #### 2.2.2.1 Alarm
 
 When a shock or movement is detected, depending on its type there are two outcomes:
-- The shock or movement is a small one => an alarm of three (3) short beeps (two hundred (200) milliseconds of sound, one hundred (100) milliseconds of silence) will ring at 50% of the sound level capacity.
-- The shock or movement is a big one => an alarm of five (5) long pips (five hundred (500) milliseconds of sound, one hundred (100) milliseconds of silence) will ring at 100% of the sound level capacity.
+- The shock or movement is a small one => an alarm of three (3) short beeps (two hundred (200) milliseconds of sound, two hundred (200) milliseconds of silence) will ring at 50% of the sound level capacity.
+- The shock or movement is a big one => an alarm of five (5) long pips (three hundred fifty (350) milliseconds of sound, three hundred fifty (350) milliseconds of silence) will ring at 100% of the sound level capacity.
 
 The software should be able to interrupt the alarm if needed (e.g. the alarm is ringing and the user wants to stop it as there are no thieves)
 
@@ -249,9 +248,9 @@ the software should be able to unlock the security cable when the user requests 
 
 ### 2.2.4 Sleep Mode
 
-When the anti-theft function is deactivated, and the device hasn't detected any movement for 40 seconds, the Bluetooth will be turned off to save energy. It will be activated again if a rotation of 180° on the x-axis is detected.
+When the anti-theft function is deactivated, and the device hasn't detected any movement for 40 seconds, the BLE will be turned off to save energy. It will be activated again if a rotation of 180° on the x-axis is detected. (Schematics For Refence bellow)
 
-[ADD_SHEMATICS]
+![](./3dModel.png)
 
 ### 2.2.5 Simultaneous Action
 
@@ -259,42 +258,80 @@ The software should be capable of executing multiple actions at the same time (e
 
 ## 2.3 Personae Definition
 
-[MODIFY]
+### Proffessional skier - Sam  
+Goals:
+- Ensure nobody touches his skis at a competition to ensure they are not sabotaged to hinder his worldwide success.
+- Having a long-lasting battery lock which would limit the time his skis are not protected.
+
+Challenges:
+
+- Ensuring a faithful recognition of shocks triggering a notification to Sam's mobile.
+- Alarm triggering sufficiently loud to catch people's attention on the skis.
+
+
+### Vacationer - Juan  
+Goals:
+- Protect his skis while eating at a restaurant.
+- Have access to the location of his skis at any time. 
+
+Challenges:
+
+- Avoid disturbance to surrounding people with the option to activate sleep mode from the app.
+- Limit battery consumption while sending location information.
+
+
+### Ski instructor - Joe  
+Goals:
+- Protect his skis between two ski lessons even in a cold environment.
+- Unlock the skis even if he has no battery on his phone.  
+
+Challenges:
+
+- Manage low battery situation while increasing battery lifespan.
+- Add a reliable NFC detector to detect the phone's NFC system.
 
 ## 2.4 Use Cases Analysis
 
-- secure sport equipment
-- retreve sport equipment
-- alert in case of theft
-- Sleep when not used
-- turn back on when needed
+| Use Case Number | Name | Description | Pre-Conditions | Flow of Events | Post Conditions | Exit Criteria |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Secure Sport Equipment | The device will secure the equipment | The device is connected to the application | The user activate the anti-theft function and lock the security cable around the equipment they want secured | - The security cable is locked<br>- the anti-theft function is activated | The anti-theft function is deactivated |
+| 2 | Retreive Sport equipment | The device will unlock the security cable |- The device is connected to the application<br>- The device's anti-theft function is activated | The user deactivate the anti-theft function on the application, the device unlock the security cable | - The security cable is unlocked<br>- The anti-theft function is deactivated | - The anti-theft function is activated <br>- The device goes into sleep mode |
+| 3 | Alert When theft | When someone tries to steal the equipment | The device's anti-theft function is activated | Someone tries to steal the equipment, the device rings its alarm and notify the user | - The device's alarm is on<br>- The user has received a notification on the application | The anti-theft function is deactivated |
+| 4 | Sleep Mode | When not used, the device goes into sleep mode | - The anti-theft function is deactivated<br>- No movement has been detect for 40 seconds<br><br>- The user activate sleep mode via the application | The device deactivate its BLE and NFC functions | The device's BLE and NFC is deactivated | The device is rotatated 180° on the x-axis |
 
 ## 2.5 Flow Charts
 
-each of the use cases above needs it own flow chart
+![](./FlowChart1.png)
+
+![](./FlowChart2.png)
+
 
 # 3 Non-Functional Requirements
 
 ## 3.1 Reliability
 
-frost & shock resistant & able to secure equipment & able de release the equipment when needed & alarm when needed
+The software should be able to secure and release the sports equipment when needed and should be able to recover from crashes and failures.
 
 ## 3.4 Operability
 
-should run on the provided hardware
+The software should run on the hardware provided by the client.
 
 ## 3.5 Recovery
 
-should keep the cable locked in case of critical failure of the software and restart itself
+The software should keep the cable locked in case of critical failure and then recover to ensure security.
 
 ## 3.7 Maintainability
 
-commented and heavely documented code (link to documentation)
+To ensure that the software is and will be maintainable in the future, our code should be heavily commented and documented.
 
 ## 3.8 Security
 
-secure connection, resistant hardware, ...
+In terms of security, we need to ensure that the device cannot be accessed by unwanted users (such as thieves) either via BLE or by NFC connection. We also need to ensure that the software is capable of recovering from failures and crashes.
 
 # 4 Glossary
 
-[MODIFY]
+| Term / Acronym | Definition |
+| --- | --- |
+| BLE | Acronym for Bluetooth, a wireless connection between electronic devices. |
+| NFC | Acronym for Near-Field Communcation which allows communication between two electronic devices over a distance of 4 centimetres (1.6 in) or less. |
+| IDE | Acronym for Integrated Development Environment which is an application that helps programmers develop software. | 
