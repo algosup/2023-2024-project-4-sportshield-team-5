@@ -9,6 +9,8 @@ body:
       label: "Description"
       description: "Please describe the documentation issue in detail."
       placeholder: "Short and explicit description of the problem..."
+    validations:
+      required: true
   - type: dropdown
     id: severity
     attributes:
@@ -25,11 +27,15 @@ body:
     attributes:
       label: "Version"
       description: "Hash of the commit in which the issue was found."
+    validations:
+      required: true
   - type: textarea
     id: expected
     attributes:
       label: "Expected Correction"
       description: "What is the expected correction for the documentation?"
+    validations:
+      required: true
   - type: textarea
     id: other
     attributes:
