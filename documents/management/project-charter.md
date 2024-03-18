@@ -159,13 +159,19 @@ Effective communication is crucial for the success of the SportShield Anti-Theft
 
 ## Project Timeline
 
-1. **Requirement Analysis and Specification (Week 1-2):**
+1. **Requirement Analysis and Specification (Week 1-5):**
 
     - Gather and analyze project requirements from CORIS INNOVATION.
 
     - Define detailed specifications for each enhancement.
 
-    - Functional and technical specification document.
+    - Functional specification document -> 18/03/2024 .
+
+    - Technical specification document -> 26/03/2024.
+
+    - Test plan -> 10/03/2024.
+
+    - User manual -> 10/03/2024.
 
     - Finalize project scope and deliverables.
 
