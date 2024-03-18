@@ -2,8 +2,6 @@
 
 <p align="right">created : 15/03/2024<br>last modified : 15/03/2024</p>
 
-Don't forget the [MODIFY] parts !!!
-
 <details>
 <summary>Table Of Content</summary>
 
@@ -21,13 +19,13 @@ The software is currently developed in a C/C++ environment with added libraries 
 
 **The prototype's current features are:**
 
-- Connexion to the device via BLE
+- Connection to the device via BLE
 - Activate / Deactivate the anti-theft function via BLE
 - Unlock the security cable via BLE
 - Alarm
     - 3 light sounds when a small shock is detected
     - 5 long loud sounds when a big shock is detected
-- Send movement notification via a SIM card
+- Send movement notifications via a SIM card
 - Send GPS position and Battery level every 15 minutes via a SIM card
 - Sleep mode 
     - GPS functionalities are only powered when information should be sent
@@ -144,23 +142,23 @@ External project reviewers have been appointed by the project owner to review ou
 
 The MVP requires some prior understanding of the technologies used before being developed, meaning that its development will probably start a bit later in the project.
 
-The Oral Presentation, depend on all the project and where we are at the end of deadlines.
+The Oral Presentation depends on all the project and where we are at the end of deadlines.
 
-The MVP requires the first version of the Technical Specifications in order to know how the project will be implemented.
+The MVP requires the first version of the Technical Specifications to know how the project will be implemented.
 
-The Technical Specifications require the first version of the Functional Specifications in order to know what will be implemented in the project.
+The Technical Specifications require the first version of the Functional Specifications to know what will be implemented in the project.
 
-These dependencies can be summerised as follows:
+These dependencies can be summarised as follows:
 
 *Functional Specifications* **->** *Technical Specifications* **->** *MVP* **->** *Oral Presentation*
 
 ### 1.4.4 Resources
 
-We have an estimated [MODIFY] man hours for this project
+We have an estimated four hundred twenty (420) man-hours for this project
 
 - Our team (6 people)
 - 1 computer per team member
-- Each team member personal knowledge
+- Each team member's knowledge
 - Teachers
 - ALGOSUP's library
 
@@ -176,7 +174,7 @@ We have an estimated [MODIFY] man hours for this project
 | --- |
 | Arduino's IDE is reliable enough to not be a concern |
 | Arduino's IDE will work on every computer configuration available in the team |
-| The Hardware provided will work as entended without major or critical failure |
+| The Hardware provided will work as intended without major or critical failure |
 
 # 2 Functional Requirements
 
@@ -186,21 +184,21 @@ These are the features of the prototype as they are currently implemented.
 
 ### 2.1.1 Connection To The Device
 
-User can connect their smartphone to the device via an BLE. This connection allow the user to Activate/Deactivate the Anti-theft functionality of the device and Unlock the security cable.
+User can connect their smartphone to the device via a BLE connection. This connection allows the user to Activate/Deactivate the Anti-theft functionality of the device and Unlock the security cable.
 
 ### 2.1.2 Anti-Theft function
 
-The device's anti-theft function locks and thighten the security cable. Then every 15 minutes the device send a notification to the user via a SIM card containing the GPS position of the device and its current battery level. Also the device would detect any mouvement and activate the alarm depending along with sending a notification depending on the shock/mouvement detected.
+The device's anti-theft function locks and tightens the security cable. Then every 15 minutes the device sends a notification to the user via a SIM card containing the GPS position of the device and its current battery level. Also, the device would detect any movement and activate the alarm along with sending a notification depending on the shock/movement detected.
 
 ### 2.1.3 Unlock Security Cable
 
-This feature allow the user to unlock the security cable and retreive their equipment (along with deactivating the anti-theft function).
+This feature allows the user to unlock the security cable and retrieve their equipment (along with deactivating the anti-theft function).
 
 ### 2.1.7 Sleep Mode
 
-When the anti-theft function isn't activated and the device didn't detect any mouvement for 5 minutes, then the BLE is disable to preserve the system's battery.
+When the anti-theft function isn't activated and the device doesn't detect any movement for 5 minutes, then the BLE is disabled to preserve the system's battery.
 
-The device will get out of sleep mode if a mouvement is detected.
+The device will get out of sleep mode if a movement is detected.
 
 ## 2.2 Features Breakdown
 
@@ -214,7 +212,7 @@ Users should be able to connect to the device via the application and its BLE ca
 
 #### 2.2.1.2 NFC
 
-Users should be able to connect to the device via the application and its NFC capabilities (The NFC connection should have the same capabilities as the BLE connection). It is however important to note that the NFC functionality is a nice to have feature, meaning that it isn't the most important want to implement and will be done if everything else has been already done.
+Users should be able to connect to the device via the application and its NFC capabilities (The NFC connection should have the same capabilities as the BLE connection). It is however important to note that the NFC functionality is a nice-to-have feature, meaning that it isn't the most important want to implement and will be done if everything else has been already done.
 
 ### 2.2.2 Anti-Theft function
 
@@ -248,13 +246,13 @@ the software should be able to unlock the security cable when the user requests 
 
 ### 2.2.4 Sleep Mode
 
-When the anti-theft function is deactivated, and the device hasn't detected any movement for 40 seconds, the BLE will be turned off to save energy. It will be activated again if a rotation of 180° on the x-axis is detected. (Schematics For Refence bellow)
+When the anti-theft function is deactivated, and the device hasn't detected any movement for 40 seconds, the BLE will be turned off to save energy. It will be activated again if a rotation of 180° on the x-axis is detected. (Schematics for reference bellow)
 
 ![](./3dModel.png)
 
 ### 2.2.5 Simultaneous Action
 
-The software should be capable of executing multiple actions at the same time (e.g. ring the alarm while get GPS position and sending notification to user).
+The software should be capable of executing multiple actions at the same time (e.g. ringing the alarm while getting GPS position and sending a notification to the user).
 
 ## 2.3 Personae Definition
 
@@ -294,10 +292,10 @@ Challenges:
 
 | Use Case Number | Name | Description | Pre-Conditions | Flow of Events | Post Conditions | Exit Criteria |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Secure Sport Equipment | The device will secure the equipment | The device is connected to the application | The user activate the anti-theft function and lock the security cable around the equipment they want secured | - The security cable is locked<br>- the anti-theft function is activated | The anti-theft function is deactivated |
-| 2 | Retreive Sport equipment | The device will unlock the security cable |- The device is connected to the application<br>- The device's anti-theft function is activated | The user deactivate the anti-theft function on the application, the device unlock the security cable | - The security cable is unlocked<br>- The anti-theft function is deactivated | - The anti-theft function is activated <br>- The device goes into sleep mode |
-| 3 | Alert When theft | When someone tries to steal the equipment | The device's anti-theft function is activated | Someone tries to steal the equipment, the device rings its alarm and notify the user | - The device's alarm is on<br>- The user has received a notification on the application | The anti-theft function is deactivated |
-| 4 | Sleep Mode | When not used, the device goes into sleep mode | - The anti-theft function is deactivated<br>- No movement has been detect for 40 seconds<br><br>- The user activate sleep mode via the application | The device deactivate its BLE and NFC functions | The device's BLE and NFC is deactivated | The device is rotatated 180° on the x-axis |
+| 1 | Secure Sports Equipment | The device will secure the equipment | The device is connected to the application | The user activates the anti-theft function and locks the security cable around the equipment they want to be secured | - The security cable is locked<br>- the anti-theft function is activated | The anti-theft function is deactivated |
+| 2 | Retrieve Sports equipment | The device will unlock the security cable |- The device is connected to the application<br>- The device's anti-theft function is activated | The user deactivates the anti-theft function on the application, the device unlocks the security cable | - The security cable is unlocked<br>- The anti-theft function is deactivated | - The anti-theft function is activated <br>- The device goes into sleep mode |
+| 3 | Alert When theft | When someone tries to steal the equipment | The device's anti-theft function is activated | Someone tries to steal the equipment, the device rings its alarm and notifies the user | - The device's alarm is on<br>- The user has received a notification on the application | The anti-theft function is deactivated |
+| 4 | Sleep Mode | When not used, the device goes into sleep mode | - The anti-theft function is deactivated<br>- No movement has been detect for 40 seconds<br><br>- The user activate sleep mode via the application | The device deactivate its BLE and NFC functions | The device's BLE and NFC is deactivated | The device is rotated 180° on the x-axis |
 
 ## 2.5 Flow Charts
 
@@ -322,7 +320,7 @@ The software should keep the cable locked in case of critical failure and then r
 
 ## 3.7 Maintainability
 
-To ensure that the software is and will be maintainable in the future, our code should be heavily commented and documented.
+To ensure that the software is and will be maintainable in the future, our code should be heavily commented on and documented.
 
 ## 3.8 Security
 
@@ -333,5 +331,5 @@ In terms of security, we need to ensure that the device cannot be accessed by un
 | Term / Acronym | Definition |
 | --- | --- |
 | BLE | Acronym for Bluetooth, a wireless connection between electronic devices. |
-| NFC | Acronym for Near-Field Communcation which allows communication between two electronic devices over a distance of 4 centimetres (1.6 in) or less. |
+| NFC | Acronym for Near-Field Communication which allows communication between two electronic devices over a distance of 4 centimetres (1.6 in) or less. |
 | IDE | Acronym for Integrated Development Environment which is an application that helps programmers develop software. | 
