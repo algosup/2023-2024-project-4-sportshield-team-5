@@ -2,6 +2,8 @@
 
 <p align="right">created : 15/03/2024<br>last modified : 15/03/2024</p>
 
+Don't forget the [MODIFY] parts !!!
+
 <details>
 <summary>Table Of Content</summary>
 
@@ -84,7 +86,7 @@ We are making improvements on the current prototype. We will upgrade the energy 
 
 ## 1.3 Project Organisation
 
-### 1.3.1 Project Representative
+### 1.3.1 Project Representatives
 
 | Project Owner | Represented by... |
 | --- | --- |
@@ -126,3 +128,159 @@ As defined by the project owner (ALGOSUP), the team is arranged as follows:
 
 External project reviewers have been appointed by the project owner to review our specifications and provide us with feedback.
 
+## 1.4 Project Plan
+
+### 1.4.1 Retroplanning
+
+### 1.4.2 Milestones
+
+| Milestone | Deadline |
+| --- | --- |
+| Functional Specifications V1 | Monday, March 18th 2024 |
+| Technical Specifications V1 | Tuesday, March 26th 2024 |
+| MVP (First Official Release) | Wednesday, Arpil 10th 2024 |
+| Oral Presentation | Friday, April 19th 2024 |
+
+### 1.4.3 Dependencies
+
+The MVP requires some prior understanding of the technologies used before being developed, meaning that its development will probably start a bit later in the project.
+
+The Oral Presentation, depend on all the project and where we are at the end of deadlines.
+
+The MVP requires the first version of the Technical Specifications in order to know how the project will be implemented.
+
+The Technical Specifications require the first version of the Functional Specifications in order to know what will be implemented in the project.
+
+These dependencies can be summerised as follows:
+
+*Functional Specifications* **->** *Technical Specifications* **->** *MVP* **->** *Oral Presentation*
+
+### 1.4.4 Resources
+
+We have an estimated [MODIFY] man hours for this project
+
+- Our team (6 people)
+- 1 computer per team member
+- Each team member personal knowledge
+- Teachers
+- ALGOSUP's library
+
+### 1.4.5 Constraints & Assumptions
+
+| Constraints |
+| --- |
+| We have to code in C/C++ |
+| We have to use Arduino's IDE (to write the program onto the embedded hardware) |
+| We cannot render this project public outside of this GitHub repository and the school environment |
+
+| Assumptions |
+| --- |
+| Arduino's IDE is reliable enough to not be a concern |
+| Arduino's IDE will work on every computer configuration available in the team |
+| The Hardware provided will work as entended without major or critical failure |
+
+# 2 Functional Requirements
+
+## 2.1 Features Overview
+
+These are the features of the prototype as they are currently implemented.
+
+### 2.1.1 Connection To The Device
+
+User can connect their smartphone to the device via an Bluetooth. This connection allow the user to Activate/Deactivate the Anti-theft functionality of the device and Unlock the security cable.
+
+### 2.1.2 Anti-Theft function
+
+The device's anti-theft function locks and thighten the security cable. Then every 15 minutes the device send a notification to the user via a SIM card containing the GPS position of the device and its current battery level. Also the device would detect any mouvement and activate the alarm depending along with sending a notification depending on the shock/mouvement detected.
+
+### 2.1.3 Unlock Security Cable
+
+This feature allow the user to unlock the security cable and retreive their equipment (along with deactivating the anti-theft function).
+
+### 2.1.7 Sleep Mode
+
+When the anti-theft function isn't activated and the device didn't detect any mouvement for 5 minutes, then the bluetooth is disable to preserve the system's battery.
+
+The device will get out of sleep mode if a mouvement is detected.
+
+## 2.2 Features Breakdown
+
+These are improvement we intend to bring to the client's prototype. 
+
+### 2.2.1 Connection To The Device
+
+[MODIFY]
+
+#### 2.2.1.1 Bluetooth
+
+[MODIFY]
+
+#### 2.2.1.2 NFC
+
+[MODIFY]
+
+### 2.2.2 Anti-Theft function
+
+[MODIFY]
+
+#### 2.2.2.1 Alarm
+
+[MODIFY]
+
+#### 2.2.2.2 Get GPS Position
+
+[MODIFY]
+
+#### 2.2.2.3 Send Notification
+
+[MODIFY]
+
+### 2.2.3 Unlock Security Cable
+
+[MODIFY]
+
+### 2.2.4 Speep Mode
+
+[MODIFY]
+
+## 2.3 Personae Definition
+
+[MODIFY]
+
+## 2.4 Use Cases Analysis
+
+- secure sport equipment
+- retreve sport equipment
+- alert in case of theft
+- Sleep when not used
+- turn back on when needed
+
+## 2.5 Flow Charts
+
+each of the use cases above needs it own flow chart
+
+# 3 Non-Functional Requirements
+
+## 3.1 Reliability
+
+frost & shock resistant & able to secure equipment & able de release the equipment when needed & alarm when needed
+
+## 3.4 Operability
+
+should run on the provided hardware
+
+## 3.5 Recovery
+
+should keep the cable locked in case of critical failure of the software and restart itself
+
+## 3.7 Maintainability
+
+commented and heavely documented code (link to documentation)
+
+## 3.8 Security
+
+secure connection, resistant hardware, ...
+
+# 4 Glossary
+
+[MODIFY]
