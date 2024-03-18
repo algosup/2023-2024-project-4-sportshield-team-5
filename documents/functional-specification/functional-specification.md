@@ -122,14 +122,16 @@ We are making improvements to the current prototype. We will upgrade the energy 
 
 ### 1.2.4 Deliverables
 
+
 | Name                     | Type               |   Deadline   |                                                         Link |
 | ------------------------ | ------------------ | :----------: | -----------------------------------------------------------: |
 | Functional Specification | Document(Markdown) |  18/03/2024  | [functional-specification.md](./functional-specification.md) |
-| Technical Specification  | Document(Markdown) |  26/03/2024  |  [technical-specification.md](./functional-specification.md) |
+| Technical Specification  | Document(Markdown) |  26/03/2024  |  [technical-specification.md](../technical-specifications/technical-specification.md) |
 | Weekly Reports           | Document(Markdown) | Every Friday |              [weekly-reports/](./management/weekly-reports/) |
 | Test Plan                | Document(Markdown) |  10/04/2024  |                            [test-plan.md](./qa/test-plan.md) |
 | User Manual              | Document(PDF)      |  10/04/2024  |             [user-manual.pdf](./functional-specification.md) |
 | Code Documentation       | Document(PDF)      |  10/04/2024  |                                    [update.md](../update.md) |
+
 
 ## 1.3 Project Organisation
 
