@@ -17,7 +17,7 @@
 ------------
 ## Overview
 
-The week started with CORIS INNOVATION presenting to us their sportshield prototype innovative idea, followed by the improvement they want us to do on the project, and the expected outcomes they wish to have at the end of the project. We started analyzing the hardware product by focusing on studying and understanding the prototype CORIS INNOVATION gave to us, thoroughly understanding the documents detailing each piece of the hardware and how it functions.
+The week started with a COMPANY presenting to us their sportshield prototype innovative idea, followed by the improvement they want us to do on the project, and the expected outcomes they wish to have at the end of the project. We started analyzing the hardware product by focusing on studying and understanding the prototype COMPANY gave to us, thoroughly understanding the documents detailing each piece of the hardware and how it functions.
 
 ## Goals
 

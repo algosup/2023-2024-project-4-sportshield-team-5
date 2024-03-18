@@ -6,21 +6,14 @@ assignees:
   - aurelienfernandez
 body:
   - type: markdown
-    attributes: |
-    Thank you for filling an issue! If you are here for an issue unrelated to software behaviours, please use the other templates available.
-
-    This issue form is for SportShield, including its dependencies.
-
+    attributes:
+        value: "Thank you for filling an issue! If you are here for an issue unrelated to software behaviours, please use the other templates available. This issue form is for SportShield, including its dependencies."
   - type: textarea
     id: description
     attributes:
       label: "Issue description"
-      description: "Describe the problem encountered"
-      placeholder: |
-      What happens:
-      1. Explicit description of the problem
-      2. Your error message
-      3. Your code sample if needed
+      description: "Describe the problem encountered (Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.)"
+      value: "Explicit description of the problem and your error message and code sample if needed"
     validations:
       required: true
   - type: dropdown
@@ -47,13 +40,14 @@ body:
     attributes:
       label: "Environment information"
       description: "What are your environment characteristics"
-      placeholder: |
-        - Arduino IDE 2.3.2 (Displayed in the window title)
-        - Hardware used (SIM800L card, Xiao BLE Sense nrf52840, ...)
-        - macOS Ventura 13.3.1
-        - If used: g++ 13.2.0 (`g++ --version`)
+      value: |
+        - Arduino IDE X.X.X (Displayed in the window title)
+        - Hardware used: (SIM800L card, Xiao BLE Sense nrf52840, ...)
+        - macOS Ventura X.X.X
+        - If used: g++ X.X.X (`g++ --version`)
         - Do not hesitate to add information which seems relevant
-      validations:
+      render: markdown
+    validations:
         required: true
   - type: textarea
     id: steps
@@ -79,5 +73,4 @@ body:
     attributes:
       label: This issue was tested on a development release
       placeholder: d23280c (commit hash)
-      description: |
-        The issue might already be fixed in a development release or main. This is not required, but helps us greatly.
+      description: "The issue might already be fixed in a development release or main. This is not required, but helps us greatly."

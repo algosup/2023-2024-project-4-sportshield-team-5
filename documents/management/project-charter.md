@@ -23,7 +23,7 @@
 
 ## Project Description
 
-SportShield, an innovative anti-theft device for sports equipment, represents a breakthrough in safeguarding valuable gear. Equipped with state-of-the-art sensors and actuators, SportShield detects movement, triggers alarms, and promptly notifies owners of potential theft attempts. Our mission, as entrusted by **CORIS INNOVATION**, is to elevate SportShield's performance by focusing on crucial aspects such as battery consumption management, device accessibility via NFC, alarm functionality, and security enhancements.
+SportShield, an innovative anti-theft device for sports equipment, represents a breakthrough in safeguarding valuable gear. Equipped with state-of-the-art sensors and actuators, SportShield detects movement, triggers alarms, and promptly notifies owners of potential theft attempts. Our mission, as entrusted by a **COMPANY**, is to elevate SportShield's performance by focusing on crucial aspects such as battery consumption management, device accessibility via NFC, alarm functionality, and security enhancements.
 
 ## Team Members
 
@@ -137,11 +137,11 @@ SportShield, an innovative anti-theft device for sports equipment, represents a 
 
 ## Stakeholders
 
-1. **CORIS INNOVATION & ALGOSUP:** As the client and owner of the SportShield project, ***CORIS INNOVATION*** has a vested interest in the successful enhancement of the anti-theft device. They provide the project requirements, and overall direction for the project passing through **ALGOSUP.**
+1. **CORIS INNOVATION & ALGOSUP:** As the client and owner of the SportShield project, the ***COMPANY*** has a vested interest in the successful enhancement of the anti-theft device. They provide the project requirements, and overall direction for the project passing through **ALGOSUP.**
 
 2. **End Users:** These are individuals or organizations who utilize the SportShield anti-theft device to protect their sports equipment. End users rely on the device's functionality and performance to safeguard their valuable assets.
 
-3. **Development Team:** This includes the technical lead, technical writer, program manager, software developers, project manager, and quality assurance responsible for implementing the enhancements outlined in the project scope. Working closely with **CORIS INNOVATION** to ensure that the project meets requirements and objectives.
+3. **Development Team:** This includes the technical lead, technical writer, program manager, software developers, project manager, and quality assurance responsible for implementing the enhancements outlined in the project scope. Working closely with the **COMPANY** to ensure that the project meets requirements and objectives.
 
 ## Communication Plan
 
@@ -155,13 +155,13 @@ Effective communication is crucial for the success of the SportShield Anti-Theft
 
 3. **Project Management Tool:** A project management tool, such as Notion, will be used to track tasks, deadlines, and project progress.
 
-4. **Stakeholder Updates:** Periodic updates will be provided to stakeholders, including **CORIS INNOVATION**, on project milestones, challenges, and achievements.
+4. **Stakeholder Updates:** Periodic updates will be provided to stakeholders, including the **COMPANY**, on project milestones, challenges, and achievements.
 
 ## Project Timeline
 
 1. **Requirement Analysis and Specification (Week 1-5):**
 
-    - Gather and analyze project requirements from CORIS INNOVATION.
+    - Gather and analyze project requirements from the COMPANY
 
     - Define detailed specifications for each enhancement.
 
@@ -200,7 +200,7 @@ Effective communication is crucial for the success of the SportShield Anti-Theft
 
     - Conduct training sessions for end-users and support personnel.
 
-    - Hand over the completed project deliverables to **CORIS INNOVATION.**
+    - Hand over the completed project deliverables to the **COMPANY.**
 
 5. **Oral Presentation(Week 6):**
     - Prepare for the final oral presentation of the project, present in front of the juries the final product.
@@ -215,28 +215,28 @@ Identifying and mitigating potential risks is essential to ensuring the success 
 
 3. **Regulatory Compliance:** Changes in regulations or certification requirements may necessitate adjustments to the project scope or timeline.
 
-4. **Hardware constraints:** In case the hardware prototype provided by **CORIS INNOVATION**, we will have some difficulties to complete all the requirements.
+4. **Hardware constraints:** In case the hardware prototype provided by the **COMPANY**, we will have some difficulties to complete all the requirements.
 
 ## Project Constraints
 
 The SportShield Anti-Theft Device Enhancement project is subject to the following constraints:
 
-1. **Time Constraints:** The project timeline is constrained by deadlines set by **CORIS INNOVATION** and **ALGOSUP.**
+1. **Time Constraints:** The project timeline is constrained by deadlines set by the **COMPANY** and **ALGOSUP.**
 
 2. **Technology Limitations:** Enhancements must be feasible within the limitations of existing technology and hardware components.
 
 3. **Regulatory Compliance:** The device must comply with relevant regulations and certifications to ensure market acceptance.
 
-4. **Stakeholder Expectations:** The project must meet the expectations and requirements of all stakeholders involved, including **CORIS INNOVATION** and end users.
+4. **Stakeholder Expectations:** The project must meet the expectations and requirements of all stakeholders involved, including **COMPANY** and end users.
 
 ## Project Assumptions
 
 - Availability of necessary resources, including hardware components, software development tools, and testing equipment.
 
-- Collaboration and support from stakeholders, including ***CORIS INNOVATION***, throughout the project lifecycle.
+- Collaboration and support from stakeholders, including the ***COMPANY***, throughout the project lifecycle.
 
 - Compliance with relevant industry standards and regulations governing anti-theft device functionality and security.
 
 ## Conclusion
 
-The proposed enhancements to the SportShield anti-theft device represent a significant step forward in ensuring the security and reliability of sports equipment protection. By addressing critical aspects such as battery consumption, device accessibility, alarm functionality, and security, we aim to provide users with a comprehensive and effective solution that exceeds their expectations. We are committed to delivering results that align with **CORIS INNOVATION's** vision for SportShield and contribute to its success in the market.
+The proposed enhancements to the SportShield anti-theft device represent a significant step forward in ensuring the security and reliability of sports equipment protection. By addressing critical aspects such as battery consumption, device accessibility, alarm functionality, and security, we aim to provide users with a comprehensive and effective solution that exceeds their expectations. We are committed to delivering results that align with the **COMPANY's** vision for SportShield and contribute to its success in the market.

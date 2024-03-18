@@ -1,5 +1,20 @@
 # Weekly Report - Week 3
 
+<details>
+<summary><b>Table of Contents</b></summary>
+
+1. [Overview](#overview)
+2. [Goals](#goals)
+3. [Challenges](#challenges)
+4. [Key Accomplishments](#key-accomplishments)
+5. [Upcoming Week](#upcoming-week)
+6. [Meetings and Collaborations](#meetings-and-collaborations)
+7. [Metrics and KPIs](#metrics-and-kpis)
+8. [Other Notes](#other-notes)
+
+</details>
+
+------------
 ## Overview
 
 Provide a brief overview of the key activities and achievements during the week.
@@ -24,9 +39,6 @@ Preview the goals and tasks planned for the upcoming week.
 
 Summarize any important meetings, collaborations, or discussions that took place during the week.
 
-## Action Items
-
-Enumerate the action items that need attention in the coming days.
 
 ## Metrics and KPIs
 
