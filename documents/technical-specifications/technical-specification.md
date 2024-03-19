@@ -70,17 +70,22 @@ The aim is to make the sports shield as rustic and resilient as possible, minimi
 This project is not about the entire conception of the device from scratch. To be able to develop the firmware of the device we needed only the electronic and informatic parts of the project being developed. Thus, we received :
 
 - the electronic card (which gathers and links by soldered circuits all the micro-electronic) of the embedded system, which includes :
-  - **A programmable board**: a "Seeed Xiao BLE nRF52840 Sense" Arduino-based.
-  - **SIM card holder**: a "GSM/2G SIM800L Module"
-  - **GPS module**: a "Galileo GNSS PA1010D with-antenna module"
-  - 12V DC converter : based on a MT3608 DC-DC converter microship, the circuit provides exactly 12.7V (the MT3608 handles "2V-24V ➔ 3V-28V" with 2A)
-  - 4V DC converter** : based on the same MT3608 as above, this circuit provides exactly 4.13V.
-  - 2x **electronic-switch** circuits : based on a MOSFET "DMG1012t" (basically, it is just a transistor).
-  - 4x **2 pins plugs**: to connect the external components.
+  - **A programmable board**: a "Seeed Xiao BLE nRF52840 Sense" Arduino-based
+  - **SIM card holder**: a "SIM800L GSM/GPRS 2G" version "S2-1065J-Z143N"
+  - **GPS module**: a "Galileo GNSS PA1010D antenna-included module"
+  - **12V DC converter** : Based on a MT3608 DC-DC converter microship, the circuit provides exactly 12.7V (the MT3608 handles "2V-24V ➔ 3V-28V" with 2A).
+  - **4V DC converter** : Based on the same MT3608 as above, this circuit provides exactly 4.13V.
+  - 2x **electronic-switch** circuits : based on a MOSFET "DMG1012t" (basically, it is just a transistor)
+  - 4x **2 pins plugs**: to connect the external components
+  <img src = "files/circuits.png">
 - the pluggable components :
-  - the Li-Po **battery** : a "LP603449" Lithium-Polymer battery ► 3.7V ► 1100mAh ► 4.3Wh
-  - the **electromagnetic lock** : a 12V/500mA DC electromagnetic lock
-  - the **buzzer** :  
+  - **battery** : a "LP603449" Lithium-Polymer battery ► 3.7V ► 1100mAh ► 4.3Wh (2 pins plug)
+  - **electromagnetic lock** : a 12V/500mA DC electromagnetic lock (2 pins plug)
+  - **buzzer** : a 3V-24V DC piezzo-electric buzzer (2 pins plug)
+  - **NFC antenna** : a "Molex 1462360031" NFC antenna directly plugged on the main board for NFC communication. (2 pins plug)
+  - **2G antenna** : pluggable on the SIM module (2 pins plug)
+  - **SIM card** : a 2G nano-SIM in its micro-SIM adaptator, pluggable in the SIM holder
+<img src = "files/components.png">
 
 ## Documentation Provided
 
