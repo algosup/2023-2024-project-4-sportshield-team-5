@@ -28,7 +28,10 @@ Algosup - Team 5 - Project n°4 - Sport Shield
 - [Project Overview](#project-overview)
   - [Project Brief](#project-brief)
   - [Hardware provided](#hardware-provided)
-  - [Documentation Provided](#documentation-provided)
+  - [Documentation for this project](#documentation-for-this-project)
+      - [Documentation about the programmable board](#documentation-about-the-programmable-board)
+      - [Documentation about the different components connected to the Xiao board.](#documentation-about-the-different-components-connected-to-the-xiao-board)
+      - [Electronic circuit diagram of the whole device](#electronic-circuit-diagram-of-the-whole-device)
   - [Software Provided](#software-provided)
 
 
@@ -70,12 +73,12 @@ The aim is to make the sports shield as rustic and resilient as possible, minimi
 This project is not about the entire conception of the device from scratch. To be able to develop the firmware of the device we needed only the electronic and informatic parts of the project being developed. Thus, we received :
 
 - the electronic card (which gathers and links by soldered circuits all the micro-electronic) of the embedded system, which includes :
-  - **A programmable board**: a "Seeed Xiao BLE nRF52840 Sense" Arduino-based
+  - **A programmable board**: a "Seeed Xiao BLE nRF52840 Sense" (more details below)
   - **SIM card holder**: a "SIM800L GSM/GPRS 2G" version "S2-1065J-Z143N"
-  - **GPS module**: a "Galileo GNSS PA1010D antenna-included module"
+  - **GPS module**: a "CD-PA1010D GNSS patch antenna module"
   - **12V DC converter** : Based on a MT3608 DC-DC converter microship, the circuit provides exactly 12.7V (the MT3608 handles "2V-24V ➔ 3V-28V" with 2A).
   - **4V DC converter** : Based on the same MT3608 as above, this circuit provides exactly 4.13V.
-  - 2x **electronic-switch** circuits : based on a MOSFET "DMG1012t" (basically, it is just a transistor)
+  - 3x **electronic-switch** circuits : basically, it is just a MOSFET transistor. Two are a "DMG1012t" and the last is not referenced.
   - 4x **2 pins plugs**: to connect the external components
   <img src = "files/circuits.png">
 - the pluggable components :
@@ -87,7 +90,22 @@ This project is not about the entire conception of the device from scratch. To b
   - **SIM card** : a 2G nano-SIM in its micro-SIM adaptator, pluggable in the SIM holder
 <img src = "files/components.png">
 
-## Documentation Provided
+## Documentation for this project
 
+The state of the project before the project had been summaried in [this PDF](files/SportShield-project-Brief-AlgoSup-Embedded-software-optimization.pdf)
+
+For the Hardware, we received the documentation of each component and the scheme of the electronic circuit :
+
+#### Documentation about the programmable board
+- [*Xiao NRF52840 sense* electronic architechture](files/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf)
+- [*Xiao NRF52840 sense* pinout](files/xiao-nrf52840-pinout.jpg)
+- [NRF52840 microcontroller datasheet](files/nRF52840-PS-v1.5.pdf)
+#### Documentation about the different components connected to the Xiao board.
+- [GPS module datasheet](files/CD-PA1010D-datasheet-v.02.pdf)
+- [SIM module datasheet](files/SIM800L-SIMCom.pdf)
+- [Li-Po Battery datasheet](files/batterie-LP603449.pdf)
+#### Electronic circuit diagram of the whole device
+- [SportShield's easyEDA schematic](files/SportShield-Electronics-diagram.png)  
+  !!! This diagram is not up to date, there is another electronic switch (a mosfet) missing and the NFC is now pluggable on the board.
 ## Software Provided
 
