@@ -27,12 +27,11 @@ Algosup - Team 5 - Project n°4 - Sport Shield
 - [Glossary](#glossary)
 - [Project Overview](#project-overview)
   - [Project Brief](#project-brief)
-  - [Hardware provided](#hardware-provided)
-  - [Documentation for this project](#documentation-for-this-project)
-      - [Documentation about the programmable board](#documentation-about-the-programmable-board)
-      - [Documentation about the different components connected to the Xiao board.](#documentation-about-the-different-components-connected-to-the-xiao-board)
-      - [Electronic circuit diagram of the whole device](#electronic-circuit-diagram-of-the-whole-device)
-  - [Software Provided](#software-provided)
+  - [Hardware](#hardware)
+  - [Software](#software)
+  - [Ressources](#ressources)
+    - [Documentation about components](#documentation-about-components)
+      - [Electronic circuit diagrams](#electronic-circuit-diagrams)
 
 
 </details>
@@ -68,7 +67,9 @@ To stop the alarm or unlock the shield, the owner uses the application and it pr
 Also, during the locked period, the device will send regularly the GPS position and battery level by the 2G network, to a remote server communicating with the app.
 The aim is to make the sports shield as rustic and resilient as possible, minimizing direct user interactions with the hardware and keeping them remote, via the Bluetooth app.
 
-## Hardware provided
+The company who gave us this project, explained all of it during a presentation at the very beginning. Here is the [PDF of the presentation](files/SportShield-project-Brief-AlgoSup-Embedded-software-optimization.pdf).
+
+## Hardware
 
 This project is not about the entire conception of the device from scratch. To be able to develop the firmware of the device we needed only the electronic and informatic parts of the project being developed. Thus, we received :
 
@@ -90,22 +91,29 @@ This project is not about the entire conception of the device from scratch. To b
   - **SIM card** : a 2G nano-SIM in its micro-SIM adaptator, pluggable in the SIM holder
 <img src = "files/components.png">
 
-## Documentation for this project
+## Software
 
-The state of the project before the project had been summaried in [this PDF](files/SportShield-project-Brief-AlgoSup-Embedded-software-optimization.pdf)
+This project uses C/C++ through the Arduino® IDE, to develop the firmware of the Seeed board.  
+The company gave us their first version of the software they coded, which includes all the features explained in [their presentation](files/SportShield-project-Brief-AlgoSup-Embedded-software-optimization.pdf), and in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
 
-For the Hardware, we received the documentation of each component and the scheme of the electronic circuit :
+The usage of public libraries is allowed.
 
-#### Documentation about the programmable board
-- [*Xiao NRF52840 sense* electronic architechture](files/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf)
-- [*Xiao NRF52840 sense* pinout](files/xiao-nrf52840-pinout.jpg)
+## Ressources
+
+For the Hardware, we received some documentation about the components and also the old schematics of the electronic circuit :
+
+### Documentation about components
+- [*Xiao NRF52840 sense* electronic architechture](files/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf) *(provided by the company)*
 - [NRF52840 microcontroller datasheet](files/nRF52840-PS-v1.5.pdf)
-#### Documentation about the different components connected to the Xiao board.
-- [GPS module datasheet](files/CD-PA1010D-datasheet-v.02.pdf)
-- [SIM module datasheet](files/SIM800L-SIMCom.pdf)
-- [Li-Po Battery datasheet](files/batterie-LP603449.pdf)
-#### Electronic circuit diagram of the whole device
-- [SportShield's easyEDA schematic](files/SportShield-Electronics-diagram.png)  
-  !!! This diagram is not up to date, there is another electronic switch (a mosfet) missing and the NFC is now pluggable on the board.
-## Software Provided
+- [GPS module datasheet](files/CD-PA1010D-datasheet-v.02.pdf) *(provided by the company)*
+- [SIM module datasheet](files/SIM800L-SIMCom.pdf) *(provided by the company)*
+- [Li-Po Battery datasheet](files/batterie-LP603449.pdf) *(provided by the company)*
 
+![gps, SIM, and seeed pinout](files/main-components-pinout.png)
+#### Electronic circuit diagrams
+The power management of the board follows this diagram :
+![Power management diagram](files/power_diagram.png)
+Here, the connectics for the Seeed Board, the SIM module and the GPS module :
+![SIM, GPS, and Seeed board connectics](files/easyEDA-connectics.png)([easyEDA sketch here](files/easyEDA-connectics.json))  
+
+If you want to dive into the electronic circuits of the PCB, there is the [PCB circuit schematic](files/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET used to cut the battery to other components using the control pin D9.
