@@ -94,7 +94,7 @@ This project is not about the entire conception of the device from scratch. To b
 ## Software
 
 This project uses C/C++ through the Arduino® IDE, to develop the firmware of the Seeed board.  
-The company gave us their first version of the software they coded, which includes all the features explained in [their presentation](files/SportShield-project-Brief-AlgoSup-Embedded-software-optimization.pdf), and in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
+The company gave us their first version of the software they coded ([here to download](files/arduino-code-05-03.zip)), which includes all the features explained in [their presentation](files/SportShield-project-Brief-AlgoSup-Embedded-software-optimization.pdf), and in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
 
 The usage of public libraries is allowed.
 
@@ -117,3 +117,5 @@ Here, the connectics for the Seeed Board, the SIM module and the GPS module :
 ![SIM, GPS, and Seeed board connectics](files/easyEDA-connectics.png)([easyEDA sketch here](files/easyEDA-connectics.json))  
 
 If you want to dive into the electronic circuits of the PCB, there is the [PCB circuit schematic](files/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET used to cut the battery to other components using the control pin D9.
+
+
