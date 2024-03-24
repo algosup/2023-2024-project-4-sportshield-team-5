@@ -129,6 +129,6 @@ In order to improve the software of the device, you need to :
 ![where to copy-paste the URL](files/tutorial-arduino-1.png)
 
 3. Open the board manager and install the "Seeed NRF52 mbed-enabled Boards" driver.  
-   <img src="files/tutorial-arduino-2.png" | height=100>
+   ![board manager](files/tutorial-arduino-2.png | height=100)
    
 4.
