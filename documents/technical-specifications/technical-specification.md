@@ -32,6 +32,7 @@ Algosup - Team 5 - Project n°4 - Sport Shield
   - [Ressources](#ressources)
     - [Documentation about components](#documentation-about-components)
       - [Electronic circuit diagrams](#electronic-circuit-diagrams)
+- [Set-up the environnement](#set-up-the-environnement)
 
 
 </details>
@@ -81,7 +82,7 @@ This project is not about the entire conception of the device from scratch. To b
   - **4V DC converter** : Based on the same MT3608 as above, this circuit provides exactly 4.13V.
   - 3x **electronic-switch** circuits : basically, it is just a MOSFET transistor. Two are a "DMG1012t" and the last is not referenced.
   - 4x **2 pins plugs**: to connect the external components
-  <img src = "files/circuits.png">
+  [ ![waw](files/circuits.png) ](files/components.png)
 - the pluggable components :
   - **battery** : a "LP603449" Lithium-Polymer battery ► 3.7V ► 1100mAh ► 4.3Wh (2 pins plug)
   - **electromagnetic lock** : a 12V/500mA DC electromagnetic lock (2 pins plug)
@@ -118,4 +119,16 @@ Here, the connectics for the Seeed Board, the SIM module and the GPS module :
 
 If you want to dive into the electronic circuits of the PCB, there is the [PCB circuit schematic](files/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET used to cut the battery to other components using the control pin D9.
 
+# Set-up the environnement
 
+In order to improve the software of the device, you need to :
+
+1. Download and install the Arduino® IDE from [the official website](https://www.arduino.cc/en/software)
+
+2. Open the software, and click on 'File'->'Preferences' . Then, copy-paste this URL : "https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json" in the last blank section of the window. Then, click 'OK' :
+![where to copy-paste the URL](files/tutorial-arduino-1.png)
+
+3. Open the board manager and install the "Seeed NRF52 mbed-enabled Boards" driver.  
+   ![board manager](files/tutorial-arduino-2.png)
+   
+4.
