@@ -126,7 +126,7 @@ In order to improve the software of the device, you need to :
 1. Download and install the Arduino® IDE from [the official website](https://www.arduino.cc/en/software)
 
 2. Open the software, and click on 'File'->'Preferences' . Then, copy-paste this URL : "https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json" in the last blank section of the window. Then, click 'OK' :
-![where to copy-paste the URL](files/tutorial-arduino-1.png)
+<img src="files/tutorial-arduino-1.png" width="800px">
 
 3. Open the board manager and install the "Seeed NRF52 mbed-enabled Boards" driver.  
    <img src="files/tutorial-arduino-2.png" height="500px">
