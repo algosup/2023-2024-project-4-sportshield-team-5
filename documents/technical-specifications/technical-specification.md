@@ -81,16 +81,16 @@ This project is not about the entire conception of the device from scratch. To b
   - **12V DC converter** : Based on a MT3608 DC-DC converter microship, the circuit provides exactly 12.7V (the MT3608 handles "2V-24V ➔ 3V-28V" with 2A).
   - **4V DC converter** : Based on the same MT3608 as above, this circuit provides exactly 4.13V.
   - 3x **electronic-switch** circuits : basically, it is just a MOSFET transistor. Two are a "DMG1012t" and the last is not referenced.
-  - 4x **2 pins plugs**: to connect the external components
-  [ ![waw](files/circuits.png) ](files/components.png)
+  - 4x **2 pins plugs**: to connect the external components  
+![map of the whole board](files/circuits.png)
 - the pluggable components :
   - **battery** : a "LP603449" Lithium-Polymer battery ► 3.7V ► 1100mAh ► 4.3Wh (2 pins plug)
   - **electromagnetic lock** : a 12V/500mA DC electromagnetic lock (2 pins plug)
   - **buzzer** : a 3V-24V DC piezzo-electric buzzer (2 pins plug)
   - **NFC antenna** : a "Molex 1462360031" NFC antenna directly plugged on the main board for NFC communication. (2 pins plug)
   - **2G antenna** : pluggable on the SIM module (2 pins plug)
-  - **SIM card** : a 2G nano-SIM in its micro-SIM adaptator, pluggable in the SIM holder
-<img src = "files/components.png">
+  - **SIM card** : a 2G nano-SIM in its micro-SIM adaptator, pluggable in the SIM holder  
+![all the pluggable components](files/components.png)
 
 ## Software
 
@@ -129,6 +129,6 @@ In order to improve the software of the device, you need to :
 ![where to copy-paste the URL](files/tutorial-arduino-1.png)
 
 3. Open the board manager and install the "Seeed NRF52 mbed-enabled Boards" driver.  
-   ![board manager](files/tutorial-arduino-2.png)
+   <img src="files/tutorial-arduino-2.png" style="zoom:50%">
    
 4.
