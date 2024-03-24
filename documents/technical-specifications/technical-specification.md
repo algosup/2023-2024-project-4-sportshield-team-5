@@ -22,23 +22,46 @@ Algosup - Team 5 - Project n°4 - Sport Shield
 
 - [Technical Specifications](#technical-specifications)
 - [Table of Content](#table-of-content)
-- [1. Introduction](#1-introduction)
 - [Document Purpose \& Definition](#document-purpose--definition)
 - [Glossary](#glossary)
-- [Project Overview](#project-overview)
+- [1. Project Overview](#1-project-overview)
   - [Project Brief](#project-brief)
   - [Hardware](#hardware)
   - [Software](#software)
   - [Ressources](#ressources)
     - [Documentation about components](#documentation-about-components)
-      - [Electronic circuit diagrams](#electronic-circuit-diagrams)
-- [Set-up the environnement](#set-up-the-environnement)
+    - [Electronic circuit diagrams](#electronic-circuit-diagrams)
+- [2. Set-up the environnement](#2-set-up-the-environnement)
+      - [1. Download and install the Arduino® IDE](#1-download-and-install-the-arduino-ide)
+      - [2. Add the board to Arduino®](#2-add-the-board-to-arduino)
+      - [3. Add the libraries](#3-add-the-libraries)
+      - [4. Open the current code](#4-open-the-current-code)
+      - [5. Connect the board](#5-connect-the-board)
+      - [6. Select the board and the port](#6-select-the-board-and-the-port)
+      - [7. Upload code](#7-upload-code)
+      - [8. Troubleshoot](#8-troubleshoot)
+- [3. Methodology and Conventions](#3-methodology-and-conventions)
+  - [GitHub](#github)
+    - [Branches](#branches)
+    - [Files and folders architecture](#files-and-folders-architecture)
+  - [Code](#code)
+    - [Instructions](#instructions)
+    - [Example of a nice code\*](#example-of-a-nice-code)
+- [4. Implementation technical specifications](#4-implementation-technical-specifications)
+  - [Introduction](#introduction)
+  - [The main loop (.ino)](#the-main-loop-ino)
+  - ['definitions' header](#definitions-header)
+  - ['bluetooth' header](#bluetooth-header)
+  - ['detection' header](#detection-header)
+  - ['alarm' header](#alarm-header)
+  - ['power' header](#power-header)
+  - ['lock' header](#lock-header)
+  - ['sim' header](#sim-header)
+  - ['gps' header](#gps-header)
 
 
 </details>
 
-
-# 1. Introduction
 
 # Document Purpose & Definition
 
@@ -55,7 +78,7 @@ The document should also benefit other stakeholders and project owners by giving
 
 # Glossary
 
-# Project Overview
+# 1. Project Overview
 
 ## Project Brief
 
@@ -111,7 +134,7 @@ For the Hardware, we received some documentation about the components and also t
 - [Li-Po Battery datasheet](files/batterie-LP603449.pdf) *(provided by the company)*
 
 ![gps, SIM, and seeed pinout](files/main-components-pinout.png)
-#### Electronic circuit diagrams
+### Electronic circuit diagrams
 The power management of the board follows this diagram :
 ![Power management diagram](files/power_diagram.png)
 Here, the connectics for the Seeed Board, the SIM module and the GPS module :
@@ -119,16 +142,208 @@ Here, the connectics for the Seeed Board, the SIM module and the GPS module :
 
 If you want to dive into the electronic circuits of the PCB, there is the [PCB circuit schematic](files/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET used to cut the battery to other components using the control pin D9.
 
-# Set-up the environnement
+# 2. Set-up the environnement
 
-In order to improve the software of the device, you need to :
+In order to improve the software of the device, you need to:
 
-1. Download and install the Arduino® IDE from [the official website](https://www.arduino.cc/en/software)
+#### 1. Download and install the Arduino® IDE 
+You can download the executable for your OS, from [the official website](https://www.arduino.cc/en/software).
 
-2. Open the software, and click on 'File'->'Preferences' . Then, copy-paste this URL : "https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json" in the last blank section of the window. Then, click 'OK' :
+#### 2. Add the board to Arduino®
+Open the software and click on 'File'->'Preferences' . Then, copy-paste this URL : "https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json" in the last blank section of the window. Then, click 'OK':
 <img src="files/tutorial-arduino-1.png" width="800px">
-
-3. Open the board manager and install the "Seeed NRF52 mbed-enabled Boards" driver.  
+Now, open the board manager and install the "Seeed NRF52 mbed-enabled Boards" driver:  
    <img src="files/tutorial-arduino-2.png" height="500px">
    
-4.
+#### 3. Add the libraries
+Open the library manager (button which is just under the board manager one) and intall at least these ones by searching them:
+   - NRF52_MBED_TimerInterrupt *V1.4.1*
+   - ArduinoBLE *V1.3.6*
+   - Adafruit GPS Library *V1.7.4 (instal all)*
+   - Sim800L http connector *V1.14.0*
+   - Seeed Arduino LSM6DS3 *V2.0.3*
+   - OneWire *V2.3.7*
+  
+#### 4. Open the current code
+Download [here](files/arduino-code-05-03.zip) the given code, and after unzipping it, open "SS_05-03_anglais-batterycontrol.ino" 
+   
+#### 5. Connect the board
+Just connect the Seeed board with a USB-C cable. And to have a concrete result, plug all the 6 components (shown above).
+
+#### 6. Select the board and the port
+
+On your IDE, ypu have a bar on the top like that :  
+<img src="files/tutorial-arduino-3.png" width="400px">  
+- The first button is to compile code.
+- The second button is to upload code to the board.
+- The third one is to debug code.
+- The bar is to select the board and the right USB port.
+
+So now, click on the bar, and then, on 'Select other...'  
+<img src="files/tutorial-arduino-4.png" width="300px">  
+
+Now you have this page opened, search for the Seeed BLE nrf52840 sense board, and click on the name.  
+On the right, appears the list of the available USB ports to upload to. Click on the one corresponding to your board. Often, there is only one, but, unplug/replug your board to see which one it is.  
+Then click 'OK'  
+<img src="files/tutorial-arduino-5.png" width="800px">  
+
+#### 7. Upload code
+
+Just click on the 'upload' button we saw previously. It will compile, then upload your code.
+
+#### 8. Troubleshoot
+
+If you did not encouter any problem, you can skip this point.
+
+Before anymore solution, you can simply press the 'reset' button on your card (Cf. pinout above) and try to upload again.
+
+If your code is still not uploading, try first to run an simple code on your board : for that, click on 'File'->'Examples'->'01.Basics'->'Blink' and try to upload again. This code should make a LED blinking on your board. If not, maybe you selected the wrong port.
+
+I won't develop all the possible causes of a fail, so I encourage you to read again attentively these 7 steps, and check if it worked well. If you are still having problems, find some help on internet, by copying the error message of the terminal ouput. And if you can, try with another board.
+
+# 3. Methodology and Conventions
+
+## GitHub
+
+### Branches
+
+The **main branch** hosts only files which are finished and reviewed by the Quality Assurance. This branch requires a 'pull request' reviewed by at least 1 other member of the team before a merge. It can't be bypassed by anybody.
+
+The **document branch** hosts the document being redacted and doesn't follow any particular rule.
+
+The **dev branch** hosts the software we are coding, but requires the code inside to don't have any compilation errors, and, if possible, to work as expected at th current step.
+This branch requires a 'pull request' reviewed by at least 1 other member of the team before a merge.
+
+### Files and folders architecture
+
+Each folders' and files' name will be in ```kebab-case```, except for the files used as illustration or ressources in the main documents of the project. Also, the folder and its .ino file where is contained the firmware will follow the ```snake_case```.
+```
+Root/
+├── src/
+│   └── sport_shield_team_5/
+│       ├── sport_shield_team_5.ino
+│       ├── definition.h
+│       ├── bluetooth.h
+│       ├── detection.h
+│       ├── alarm.h
+│       ├── power.h
+│       ├── lock.h
+│       ├── sim.h
+│       ├── gps.h
+│       └── nfc.h
+├── documents/
+│   ├── functionnal-specification/
+│   │   ├── functionnal-specification.md
+│   │   └── files/
+│   │       └── ...
+│   ├── technical-specification/
+│   │   ├── technical-specification.md
+│   │   └── files/
+│   │       └── ...
+│   ├── quality-assurance/
+│   │   ├── test-plan.md
+│   │   └── test-files/
+│   │       └── ...
+│   ├── management/
+│   │   ├── weekly-reports/
+│   │   ├── project-charter.md
+│   │   ├── files/
+│   │   │   └── ...
+│   │   └── ...
+│   ├── user-manual/
+│   │   ├── user-manual.pdf
+│   │   ├── user-manual.md
+│   │   └── files/
+│   │       └── ...
+│   └── firmware_updates.md
+├── README.md
+├── LICENSE.md
+└── .github
+```
+## Code
+
+### Instructions
+
+The identation of 2 spaces is added after each carriage return in after a curly bracket.
+
+When a condition or a loop occurs, the curly brackets are opened at the end of the first line of the statement, and closed in a single-last line without the identation.
+
+However some simple statements can be written in one line, as long as it doesn't take more than 50 characters aproximately.
+
+The variables' names are in ```snake_case```.
+The functions' names are in ```camelCase```.
+The definitions' names are in ```COBOL_CASE```.
+
+Each constant value accross the code need to be defined with '#define' in the 'definitions.h' header file.
+
+**No value can be hard-coded\* !**
+
+**if a number appears in your code, it have to be defined in the 'definitions.h' header and not directly inserted in the algorithm itself, even if "it shouldn't change" !, and even at the variables' assignement. (Cf. example below)*
+
+Each function has to be written in the suitable header.h  
+Each function need a comment above explaining its behavior and how parameters are used.  
+Any weird or touchy algorithm you made has to be commented.  
+Any 
+
+### Example of a nice code*
+
+```
+#define BUZZER D2
+#define LONG_ALARM_REPETITIONS 5
+#define LONG_ALARM_PERIOD 350
+
+int current_period; // duration of silence at the end of the alarm loop
+
+// Generic arduino function containing the code executed after a RESET
+void setup(){
+  pinMode(BUZZER, OUTPUT);
+}
+
+void loop(){
+  current_period = LONG_ALARM_PERIOD;
+  while (current_period>=0){
+    longAlarm(current_period);
+    current_period--;
+  }
+}
+
+// Make the buzzer ringing 5 times : (period)ms ON / (period)ms OFF
+void longAlarm(int period){
+  for (int i=0; i<LONG_ALARM_REPETITIONS; i++){
+    digitalWrite(BUZZER, HIGH);
+    delay(period);
+    digitalWrite(BUZZER, LOW);
+    if (i>0){delay(period);} //skip the last silence
+  }
+}
+```
+**Of course this code doesn't make sense, it is just an example.*
+
+# 4. Implementation technical specifications
+
+## Introduction
+
+Each one of the following parts will explain the technical implementation following the structure of the very complete 'Functionnal Requirements' part of the Functionnal specification I invite you to read before a last time.
+Now I will avoid any redundance with this document.
+We will first details the main loop algorithm, and then, the implementation properties of each component.
+We will clarify the expected content of each of the 9 individual files (cf. above) that make up our complete code.
+
+## The main loop (.ino)
+
+## 'definitions' header
+
+## 'bluetooth' header
+
+## 'detection' header
+
+## 'alarm' header
+
+## 'power' header
+
+## 'lock' header
+
+## 'sim' header
+
+## 'gps' header
+
+
