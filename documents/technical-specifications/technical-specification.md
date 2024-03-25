@@ -13,15 +13,10 @@ Algosup - Team 5 - Project n°4 - Sport Shield
 | Technical Writer | Clémentine CUREL |
 
 <details>
+<summary>Table Of Content</summary>
 
-<summary>
-
-# Table of Content
-
-</summary>
 
 - [Technical Specifications](#technical-specifications)
-- [Table of Content](#table-of-content)
 - [Document Purpose \& Definition](#document-purpose--definition)
 - [Glossary](#glossary)
 - [1. Project Overview](#1-project-overview)
@@ -31,33 +26,34 @@ Algosup - Team 5 - Project n°4 - Sport Shield
   - [Ressources](#ressources)
     - [Documentation about components](#documentation-about-components)
     - [Electronic circuit diagrams](#electronic-circuit-diagrams)
-- [2. Set-up the environnement](#2-set-up-the-environnement)
-      - [1. Download and install the Arduino® IDE](#1-download-and-install-the-arduino-ide)
-      - [2. Add the board to Arduino®](#2-add-the-board-to-arduino)
-      - [3. Add the libraries](#3-add-the-libraries)
-      - [4. Open the current code](#4-open-the-current-code)
-      - [5. Connect the board](#5-connect-the-board)
-      - [6. Select the board and the port](#6-select-the-board-and-the-port)
-      - [7. Upload code](#7-upload-code)
-      - [8. Troubleshoot](#8-troubleshoot)
-- [3. Methodology and Conventions](#3-methodology-and-conventions)
+- [2. Set-up the environnement](#2-set-up-the-environnement)  
+    - [1. Download and install the Arduino® IDE](#1-download-and-install-the-arduino-ide)  
+    - [2. Add the board to Arduino®](#2-add-the-board-to-arduino)  
+    - [3. Add the libraries](#3-add-the-libraries)  
+    - [4. Open the current code](#4-open-the-current-code)  
+    - [5. Connect the board](#5-connect-the-board)  
+    - [6. Select the board and the port](#6-select-the-board-and-the-port)  
+    - [7. Upload code](#7-upload-code)  
+    - [8. Troubleshoot](#8-troubleshoot)  
+- [3. Methodology and Conventions](#3-methodology-and-conventions)  
   - [GitHub](#github)
     - [Branches](#branches)
     - [Files and folders architecture](#files-and-folders-architecture)
   - [Code](#code)
     - [Instructions](#instructions)
-    - [Example of a nice code\*](#example-of-a-nice-code)
-- [4. Implementation technical specifications](#4-implementation-technical-specifications)
+      - [Appearence](#appearence)
+      - [Variables](#variables)
+      - [Comments](#comments)
+    - [Example of a good code*](#example-of-a-nice-code)
+- [4. Implementation's technical specifications](#4-implementation-technical-specifications)
   - [Introduction](#introduction)
   - [The main loop (.ino)](#the-main-loop-ino)
-  - ['definitions' header](#definitions-header)
-  - ['bluetooth' header](#bluetooth-header)
-  - ['detection' header](#detection-header)
-  - ['alarm' header](#alarm-header)
-  - ['power' header](#power-header)
-  - ['lock' header](#lock-header)
-  - ['sim' header](#sim-header)
-  - ['gps' header](#gps-header)
+  - [Headers and defintition.h](#headers-and-defintitionh)
+  - [Features' implemetation](#features-implemetation)
+  - [Algorithm](#algorithm)
+  - [Power Management](#power-management)
+  - [Detection of a theft](#detection-of-a-theft)
+  - [NFC](#nfc)
 
 
 </details>
@@ -261,28 +257,33 @@ Root/
 
 ### Instructions
 
+#### Appearence
+
+The variables' names are in ```snake_case```.
+The functions' names are in ```camelCase```.
+The definitions' names are in ```COBOL_CASE```.
+
 The identation of 2 spaces is added after each carriage return in after a curly bracket.
 
 When a condition or a loop occurs, the curly brackets are opened at the end of the first line of the statement, and closed in a single-last line without the identation.
 
 However some simple statements can be written in one line, as long as it doesn't take more than 50 characters aproximately.
 
-The variables' names are in ```snake_case```.
-The functions' names are in ```camelCase```.
-The definitions' names are in ```COBOL_CASE```.
+#### Variables
 
-Each constant value accross the code need to be defined with '#define' in the 'definitions.h' header file.
+**No value can be hard-coded !**
 
-**No value can be hard-coded\* !**
+If a number or a constant is needed in the code, it have to be defined in the 'definitions.h' header and not directly inserted in the algorithm itself, even if "it shouldn't change".
 
-**if a number appears in your code, it have to be defined in the 'definitions.h' header and not directly inserted in the algorithm itself, even if "it shouldn't change" !, and even at the variables' assignement. (Cf. example below)*
+In the same idea, variables' declaration and first assignement should be separated : the declaration in 'definition.h. An example of this appears in the example below.
 
-Each function has to be written in the suitable header.h  
+#### Comments
+
 Each function need a comment above explaining its behavior and how parameters are used.  
-Any weird or touchy algorithm you made has to be commented.  
-Any 
+Any weird or tricky algorithm has to be commented.  
+Any variable declaration need a comment on the same line to quickly explain what it is. If it is too obvious, just write ```// explicit```.
 
-### Example of a nice code*
+### Example of a good code*
 
 ```
 #define BUZZER D2
@@ -294,10 +295,10 @@ int current_period; // duration of silence at the end of the alarm loop
 // Generic arduino function containing the code executed after a RESET
 void setup(){
   pinMode(BUZZER, OUTPUT);
+  current_period = LONG_ALARM_PERIOD;
 }
 
 void loop(){
-  current_period = LONG_ALARM_PERIOD;
   while (current_period>=0){
     longAlarm(current_period);
     current_period--;
@@ -316,35 +317,71 @@ void longAlarm(int period){
 ```
 **Of course this code doesn't make sense, it is just an example.*
 
-# 4. Implementation technical specifications
+# 4. Implementation's technical specifications
 
 ## Introduction
 
-Each one of the following parts will explain the technical implementation following the structure of the very complete 'Functionnal Requirements' part of the Functionnal specification I invite you to read before a last time.
+Each one of the following parts will explain the technical implementation following the structure of the 'Functionnal Requirements' part of the Functionnal specification I invite you to read before a last time.
 Now I will avoid any redundance with this document.
 We will first details the main loop algorithm, and then, the implementation properties of each component.
-We will clarify the expected content of each of the 9 individual files (cf. above) that make up our complete code.
 
 ## The main loop (.ino)
 
+In this file there are :
+- **inclusion** of the different **headers** (and not the libraries -> 'definition.h')
+- the '**void setup()**' where are executed only functions.  
+  this function contains the code which will be executed once at the beginning after a reload of the program on the board (after a power-up or reset)
+- the '**void loop()**'
+  this function has the role of a 'while(true)' loop : it is the main loop
 
+Base of the .ino file :  
+  ```
+#include"definition.h"
+#include"bluetooth.h"
+#include"detection.h"
+#include"alarm.h"
+#include"power.h"
+#include"lock.h"
+#include"sim.h"
+#include"gps.h"
+#include"nfc.h"
 
-## 'definitions' header
+void setup(){
+  //code executed once at the beginning
+  //only functions
+}
 
-In this file, we define all the constant values, used in the different headers.
+void loop(){
+  //main loop
+}
+  ```
 
-## 'bluetooth' header
+## Headers and defintition.h
 
-## 'detection' header
+In this file there are :
+- Inclusion of all the public libraries used in the firmware.
+- Definition of all the constant values, used in the different headers
+- Definition of all the structures, classes, global functions, and so on
 
-## 'alarm' header
+The advantage would be to have all the "settings" of the entire firmware in one file. In this way, we can make some changes about values extremely easily.
 
-## 'power' header
+Each header file will include the necessary public libraries a second time if it is needed. However, the use of a conditional inclusion is required to avoid multiple inclusions of the same library.
 
-## 'lock' header
+## Features' implemetation
 
-## 'sim' header
+We don't have access to the application, the server with which the SIM card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC or the bluetooth.That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not". 
+The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usally 6 or 7.)
+We will therefore focus on technical detail only on the points where we can take action. These are:
+- battery management and energy consumption (sleep mode, power cut, ...)
+- multi tasks to make the buzzer ringing and to send the notification at the same time, while also being able to stop the alarm at any moment.
+- take the NFC into account
+- movement detection (improve the way to detect a theft)
 
-## 'gps' header
+## Algorithm
 
+## Power Management
+
+## Detection of a theft
+
+## NFC
 
