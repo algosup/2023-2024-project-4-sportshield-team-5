@@ -87,8 +87,6 @@ To stop the alarm or unlock the shield, the owner uses the application and it pr
 Also, during the locked period, the device will send regularly the GPS position and battery level by the 2G network, to a remote server communicating with the app.
 The aim is to make the sports shield as rustic and resilient as possible, minimizing direct user interactions with the hardware and keeping them remote, via the Bluetooth app.
 
-The company who gave us this project, explained all of it during a presentation at the very beginning. Here is the [PDF of the presentation](files/SportShield-project-Brief-AlgoSup-Embedded-software-optimization.pdf).
-
 ## Hardware
 
 This project is not about the entire conception of the device from scratch. To be able to develop the firmware of the device we needed only the electronic and informatic parts of the project being developed. Thus, we received :
@@ -114,7 +112,7 @@ This project is not about the entire conception of the device from scratch. To b
 ## Software
 
 This project uses C/C++ through the Arduino® IDE, to develop the firmware of the Seeed board.  
-The company gave us their first version of the software they coded ([here to download](files/arduino-code-05-03.zip)), which includes all the features explained in [their presentation](files/SportShield-project-Brief-AlgoSup-Embedded-software-optimization.pdf), and in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
+The company gave us their first version of the software they coded ([here to download](files/arduino-code-05-03.zip)), which includes all the features exposed in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
 
 The usage of public libraries is allowed.
 
