@@ -234,11 +234,11 @@ Root/
 ├── documents/
 │   ├── functionnal-specification/
 │   │   ├── functionnal-specification.md
-│   │   └── files/
+│   │   └── data/
 │   │       └── ...
 │   ├── technical-specification/
 │   │   ├── technical-specification.md
-│   │   └── files/
+│   │   └── data/
 │   │       └── ...
 │   ├── quality-assurance/
 │   │   ├── test-plan.md
@@ -247,13 +247,13 @@ Root/
 │   ├── management/
 │   │   ├── weekly-reports/
 │   │   ├── project-charter.md
-│   │   ├── files/
+│   │   ├── data/
 │   │   │   └── ...
 │   │   └── ...
 │   ├── user-manual/
 │   │   ├── user-manual.pdf
 │   │   ├── user-manual.md
-│   │   └── files/
+│   │   └── data/
 │   │       └── ...
 │   └── firmware_updates.md
 ├── README.md
