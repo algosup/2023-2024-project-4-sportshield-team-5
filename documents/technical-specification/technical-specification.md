@@ -1,11 +1,12 @@
-# Technical Specifications
+# Technical Specification
+ Algosup - Team 5 - Project n°4 - Sport Shield
 
-Algosup - Team 5 - Project n°4 - Sport Shield
-
+  
+    
 
 | Role | Name |
 |---|---|
-| Project Manager | Vivien TSONGUE |
+| Project Manager | Vivien TSANGUE |
 | Program Manager | Arthur LEMOINE |
 | Tech Lead | Benoît DE KEYN |
 | Software Developer | Aurélien FERNANDEZ |
@@ -13,29 +14,29 @@ Algosup - Team 5 - Project n°4 - Sport Shield
 | Technical Writer | Clémentine CUREL |
 
 <details>
-<summary>Table Of Content</summary>
+<summary>Table Of Contents</summary>
 
 
-- [Technical Specifications](#technical-specifications)
-- [Document Purpose \& Definition](#document-purpose--definition)
-- [Glossary](#glossary)
-- [1. Project Overview](#1-project-overview)
+
+- [1. Document Purpose \& Definition](#1-document-purpose--definition)
+- [2. Glossary](#2-glossary)
+- [3. Project Overview](#3-project-overview)
   - [Project Brief](#project-brief)
   - [Hardware](#hardware)
   - [Software](#software)
   - [Ressources](#ressources)
     - [Documentation about components](#documentation-about-components)
     - [Electronic circuit diagrams](#electronic-circuit-diagrams)
-- [2. Set-up the environnement](#2-set-up-the-environnement)  
-    - [1. Download and install the Arduino® IDE](#1-download-and-install-the-arduino-ide)  
-    - [2. Add the board to Arduino®](#2-add-the-board-to-arduino)  
-    - [3. Add the libraries](#3-add-the-libraries)  
-    - [4. Open the current code](#4-open-the-current-code)  
-    - [5. Connect the board](#5-connect-the-board)  
-    - [6. Select the board and the port](#6-select-the-board-and-the-port)  
-    - [7. Upload code](#7-upload-code)  
-    - [8. Troubleshoot](#8-troubleshoot)  
-- [3. Methodology and Conventions](#3-methodology-and-conventions)  
+- [4. Set-up the environnement](#4-set-up-the-environnement)
+    - [1. Download and install the Arduino® IDE](#1-download-and-install-the-arduino-ide)
+    - [2. Add the board to Arduino®](#2-add-the-board-to-arduino)
+    - [3. Add the libraries](#3-add-the-libraries)
+    - [4. Open the current code](#4-open-the-current-code)
+    - [5. Connect the board](#5-connect-the-board)
+    - [6. Select the board and the port](#6-select-the-board-and-the-port)
+    - [7. Upload code](#7-upload-code)
+    - [8. Troubleshoot](#8-troubleshoot)
+- [5. Methodology and Conventions](#5-methodology-and-conventions)
   - [GitHub](#github)
     - [Branches](#branches)
     - [Files and folders architecture](#files-and-folders-architecture)
@@ -44,12 +45,11 @@ Algosup - Team 5 - Project n°4 - Sport Shield
       - [Appearence](#appearence)
       - [Variables](#variables)
       - [Comments](#comments)
-    - [Example of a good code*](#example-of-a-nice-code)
-- [4. Implementation's technical specifications](#4-implementation-technical-specifications)
-  - [Introduction](#introduction)
-  - [The main loop (.ino)](#the-main-loop-ino)
+    - [Example of a good code\*](#example-of-a-good-code)
+- [6. Software's technical specifications](#6-softwares-technical-specifications)
+  - [Overview](#overview)
   - [Headers and defintition.h](#headers-and-defintitionh)
-  - [Features' implemetation](#features-implemetation)
+  - [The main file (.ino)](#the-main-file-ino)
   - [Algorithm](#algorithm)
   - [Power Management](#power-management)
   - [Detection of a theft](#detection-of-a-theft)
@@ -59,22 +59,18 @@ Algosup - Team 5 - Project n°4 - Sport Shield
 </details>
 
 
-# Document Purpose & Definition
+# 1. Document Purpose & Definition
 
-The goal of the Technical Specifications is to take the Functional Requirements that define the features, scope, and goals of the project, dissect each requirement, and turn it into instructions, as clear as possible, to guide the development team as well as the quality assurance team in the successful completion of their mission.
+The goal of the Technical Specifications is to take the Functional Requirements that define the features, scope, and goals of the project, dissect each requirement, and turn it into instructions, as clear as possible, to guide the development team in the successful completion of their mission.
 
 We therefore encourage thorough reading of the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) before further reading.
 
 The goal of the Technical Requirements is to clarify as many dark areas as possible to prevent the engineers from making decisions
 In a sense, while the Functional Requirements represent the "What/Why" aspect of the project, the Technical Requirements are supposed to represent the "How" of the project.
 
-With that being said, we will try to cover as many functional and non-functional aspects of the project while making technological and architectural decisions, evaluating those decisions, measuring their associated risks and impact (providing mitigation), and comparing those to other potential solutions.
+# 2. Glossary
 
-The document should also benefit other stakeholders and project owners by giving insight into our methodology and may serve as a future reference for maintenance or simple documentation purposes.
-
-# Glossary
-
-# 1. Project Overview
+# 3. Project Overview
 
 ## Project Brief
 
@@ -99,7 +95,7 @@ This project is not about the entire conception of the device from scratch. To b
   - **4V DC converter** : Based on the same MT3608 as above, this circuit provides exactly 4.13V.
   - 3x **electronic-switch** circuits : basically, it is just a MOSFET transistor. Two are a "DMG1012t" and the last is not referenced.
   - 4x **2 pins plugs**: to connect the external components  
-![map of the whole board](files/circuits.png)
+![map of the whole board](data/circuits.png)
 - the pluggable components :
   - **battery** : a "LP603449" Lithium-Polymer battery ► 3.7V ► 1100mAh ► 4.3Wh (2 pins plug)
   - **electromagnetic lock** : a 12V/500mA DC electromagnetic lock (2 pins plug)
@@ -107,12 +103,12 @@ This project is not about the entire conception of the device from scratch. To b
   - **NFC antenna** : a "Molex 1462360031" NFC antenna directly plugged on the main board for NFC communication. (2 pins plug)
   - **2G antenna** : pluggable on the SIM module (2 pins plug)
   - **SIM card** : a 2G nano-SIM in its micro-SIM adaptator, pluggable in the SIM holder  
-![all the pluggable components](files/components.png)
+![all the pluggable components](data/components.png)
 
 ## Software
 
 This project uses C/C++ through the Arduino® IDE, to develop the firmware of the Seeed board.  
-The company gave us their first version of the software they coded ([here to download](files/arduino-code-05-03.zip)), which includes all the features exposed in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
+The company gave us their first version of the software they coded ([here to download](data/arduino-code-05-03.zip)), which includes all the features exposed in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
 
 The usage of public libraries is allowed.
 
@@ -121,33 +117,33 @@ The usage of public libraries is allowed.
 For the Hardware, we received some documentation about the components and also the old schematics of the electronic circuit :
 
 ### Documentation about components
-- [*Xiao NRF52840 sense* electronic architechture](files/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf) *(provided by the company)*
-- [NRF52840 microcontroller datasheet](files/nRF52840-PS-v1.5.pdf)
-- [GPS module datasheet](files/CD-PA1010D-datasheet-v.02.pdf) *(provided by the company)*
-- [SIM module datasheet](files/SIM800L-SIMCom.pdf) *(provided by the company)*
-- [Li-Po Battery datasheet](files/batterie-LP603449.pdf) *(provided by the company)*
+- [*Xiao NRF52840 sense* electronic architechture](data/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf) *(provided by the company)*
+- [NRF52840 microcontroller datasheet](data/nRF52840-PS-v1.5.pdf)
+- [GPS module datasheet](data/CD-PA1010D-datasheet-v.02.pdf) *(provided by the company)*
+- [SIM module datasheet](data/SIM800L-SIMCom.pdf) *(provided by the company)*
+- [Li-Po Battery datasheet](data/batterie-LP603449.pdf) *(provided by the company)*
 
-![gps, SIM, and seeed pinout](files/main-components-pinout.png)
+![gps, SIM, and seeed pinout](data/main-components-pinout.png)
 ### Electronic circuit diagrams
 The power management of the board follows this diagram :
-![Power management diagram](files/power_diagram.png)
+![Power management diagram](data/power_diagram.png)
 Here, the connectics for the Seeed Board, the SIM module and the GPS module :
-![SIM, GPS, and Seeed board connectics](files/easyEDA-connectics.png)([easyEDA sketch here](files/easyEDA-connectics.json))  
+![SIM, GPS, and Seeed board connectics](data/easyEDA-connectics.png)([easyEDA sketch here](data/easyEDA-connectics.json))  
 
-If you want to dive into the electronic circuits of the PCB, there is the [PCB circuit schematic](files/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET used to cut the battery to other components using the control pin D9.
+To dive into the electronic circuits of the PCB, there is the [PCB circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET used to cut the battery to other components using the control pin D9.
 
-# 2. Set-up the environnement
+# 4. Set-up the environnement
 
-In order to improve the software of the device, you need to:
+This is a tutoriel of how to upload in the hardware, the code we had been given :
 
 #### 1. Download and install the Arduino® IDE 
-You can download the executable for your OS, from [the official website](https://www.arduino.cc/en/software).
+Download the executable according to the OS from [the official website](https://www.arduino.cc/en/software).
 
 #### 2. Add the board to Arduino®
 Open the software and click on 'File'->'Preferences' . Then, copy-paste this URL : "https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json" in the last blank section of the window. Then, click 'OK':
-<img src="files/tutorial-arduino-1.png" width="800px">
+<img src="data/tutorial-arduino-1.png" width="800px">  
 Now, open the board manager and install the "Seeed NRF52 mbed-enabled Boards" driver:  
-   <img src="files/tutorial-arduino-2.png" height="500px">
+   <img src="data/tutorial-arduino-2.png" height="500px">   
    
 #### 3. Add the libraries
 Open the library manager (button which is just under the board manager one) and intall at least these ones by searching them:
@@ -159,43 +155,43 @@ Open the library manager (button which is just under the board manager one) and 
    - OneWire *V2.3.7*
   
 #### 4. Open the current code
-Download [here](files/arduino-code-05-03.zip) the given code, and after unzipping it, open "SS_05-03_anglais-batterycontrol.ino" 
+Download [here](data/arduino-code-05-03.zip) the given code, and after unzipping it, open "SS_05-03_anglais-batterycontrol.ino" 
    
 #### 5. Connect the board
 Just connect the Seeed board with a USB-C cable. And to have a concrete result, plug all the 6 components (shown above).
 
 #### 6. Select the board and the port
 
-On your IDE, ypu have a bar on the top like that :  
-<img src="files/tutorial-arduino-3.png" width="400px">  
+On the IDE, there is a bar on the top like that :  
+<img src="data/tutorial-arduino-3.png" width="400px">  
 - The first button is to compile code.
 - The second button is to upload code to the board.
 - The third one is to debug code.
 - The bar is to select the board and the right USB port.
 
 So now, click on the bar, and then, on 'Select other...'  
-<img src="files/tutorial-arduino-4.png" width="300px">  
+<img src="data/tutorial-arduino-4.png" width="300px">  
 
-Now you have this page opened, search for the Seeed BLE nrf52840 sense board, and click on the name.  
-On the right, appears the list of the available USB ports to upload to. Click on the one corresponding to your board. Often, there is only one, but, unplug/replug your board to see which one it is.  
+Now this page is opened, search for the Seeed BLE nrf52840 sense board, and click on the name.  
+On the right, appears the list of the available USB ports to upload to. Click on the one corresponding to the board. Often, there is only one, but, unplug/replug the board to see which one it is.  
 Then click 'OK'  
-<img src="files/tutorial-arduino-5.png" width="800px">  
+<img src="data/tutorial-arduino-5.png" width="800px">    
 
 #### 7. Upload code
 
-Just click on the 'upload' button we saw previously. It will compile, then upload your code.
+Just click on the 'upload' button we saw previously. It will compile, then upload the code.
 
 #### 8. Troubleshoot
 
-If you did not encouter any problem, you can skip this point.
+If any problem encountered, skip this point.
 
-Before anymore solution, you can simply press the 'reset' button on your card (Cf. pinout above) and try to upload again.
+Before anymore solution, simply press the 'reset' button on the card (Cf. pinout above) and try to upload again.
 
-If your code is still not uploading, try first to run an simple code on your board : for that, click on 'File'->'Examples'->'01.Basics'->'Blink' and try to upload again. This code should make a LED blinking on your board. If not, maybe you selected the wrong port.
+If the code is still not uploading, try first to run an simple code on the board : for that, click on 'File'->'Examples'->'01.Basics'->'Blink' and try to upload again. This code should make a LED blinking on the board. If not, maybe the wrong port is selected.
 
-I won't develop all the possible causes of a fail, so I encourage you to read again attentively these 7 steps, and check if it worked well. If you are still having problems, find some help on internet, by copying the error message of the terminal ouput. And if you can, try with another board.
+We won't develop all the possible causes of a fail, so we encourage you to read again attentively these 7 steps, and check if it worked well. If there are still some problems, find some help on internet, by copying the error message of the terminal ouput. And if possible, try with another board.
 
-# 3. Methodology and Conventions
+# 5. Methodology and Conventions
 
 ## GitHub
 
@@ -315,15 +311,33 @@ void longAlarm(int period){
 ```
 **Of course this code doesn't make sense, it is just an example.*
 
-# 4. Implementation's technical specifications
+# 6. Software's technical specifications
 
-## Introduction
+## Overview
 
-Each one of the following parts will explain the technical implementation following the structure of the 'Functionnal Requirements' part of the Functionnal specification I invite you to read before a last time.
-Now I will avoid any redundance with this document.
-We will first details the main loop algorithm, and then, the implementation properties of each component.
+Each one of the following parts will explain the technical implementation following the structure of the 'Functionnal Requirements' part of the [Functionnal specification](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
 
-## The main loop (.ino)
+We don't have access to the application, the server with which the SIM card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC or the bluetooth.  
+That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not".   
+The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usally 6 or 7.)
+We will therefore focus on technical detail only on the points where we can take action. These are:
+- battery management and energy consumption (sleep mode, power cut, ...)
+- multi tasks to make the buzzer ringing and to send the notification at the same time, while also being able to stop the alarm at any moment.
+- take the NFC into account
+- movement detection (improve the way to detect a theft)
+
+## Headers and defintition.h
+
+In this file there are :
+- Inclusion of all the public libraries used in the firmware.
+- Definition of all the constant values, used in the different headers
+- Definition of all the structures, classes, global functions, and so on
+
+The advantage would be to have all the "settings" of the entire firmware in one file. In this way, we can make some changes about values extremely easily.
+
+Each header file will include the necessary public libraries a second time if it is needed. However, the use of a conditional inclusion is required to avoid multiple inclusions of the same library.
+
+## The main file (.ino)
 
 In this file there are :
 - **inclusion** of the different **headers** (and not the libraries -> 'definition.h')
@@ -353,27 +367,6 @@ void loop(){
   //main loop
 }
   ```
-
-## Headers and defintition.h
-
-In this file there are :
-- Inclusion of all the public libraries used in the firmware.
-- Definition of all the constant values, used in the different headers
-- Definition of all the structures, classes, global functions, and so on
-
-The advantage would be to have all the "settings" of the entire firmware in one file. In this way, we can make some changes about values extremely easily.
-
-Each header file will include the necessary public libraries a second time if it is needed. However, the use of a conditional inclusion is required to avoid multiple inclusions of the same library.
-
-## Features' implemetation
-
-We don't have access to the application, the server with which the SIM card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC or the bluetooth.That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not". 
-The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usally 6 or 7.)
-We will therefore focus on technical detail only on the points where we can take action. These are:
-- battery management and energy consumption (sleep mode, power cut, ...)
-- multi tasks to make the buzzer ringing and to send the notification at the same time, while also being able to stop the alarm at any moment.
-- take the NFC into account
-- movement detection (improve the way to detect a theft)
 
 ## Algorithm
 

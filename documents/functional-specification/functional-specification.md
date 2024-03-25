@@ -126,9 +126,9 @@ We are making improvements to the current prototype. We will upgrade the energy 
 | Name                     | Type               |   Deadline   |                                                         Link |
 | ------------------------ | ------------------ | :----------: | -----------------------------------------------------------: |
 | Functional Specification | Document(Markdown) |  18/03/2024  | [functional-specification.md](./functional-specification.md) |
-| Technical Specification  | Document(Markdown) |  26/03/2024  |  [technical-specification.md](../technical-specifications/technical-specification.md) |
+| Technical Specification  | Document(Markdown) |  26/03/2024  |  [technical-specification.md](../technical-specification/technical-specification.md) |
 | Weekly Reports           | Document(Markdown) | Every Friday |              [weekly-reports/](./management/weekly-reports/) |
-| Test Plan                | Document(Markdown) |  10/04/2024  |                            [test-plan.md](./qa/test-plan.md) |
+| Test Plan                | Document(Markdown) |  10/04/2024  |                            [test-plan.md](./quality-assurance/test-plan.md) |
 | User Manual              | Document(PDF)      |  10/04/2024  |             [user-manual.pdf](./functional-specification.md) |
 | Code Documentation       | Document(PDF)      |  10/04/2024  |                                    [update.md](../update.md) |
 
@@ -300,7 +300,7 @@ the software should be able to unlock the security cable when the user requests 
 
 When the anti-theft function is deactivated, and the device hasn't detected any movement for 40 seconds, the BLE will be turned off to save energy. It will be activated again if a rotation of 180° on the x-axis is detected. (Schematics for reference bellow)
 
-![](./3dModel.png)
+![](data/3dModel.png)
 
 ### 2.2.5 Simultaneous Action
 
@@ -354,9 +354,9 @@ Challenges:
 
 ## 2.5 Flow Charts
 
-![](./FlowChart1.png)
+![](data/FlowChart1.png)
 
-![](./FlowChart2.png)
+![](data/FlowChart2.png)
 
 # 3 Non-Functional Requirements
 
