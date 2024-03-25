@@ -242,8 +242,8 @@ Root/
 │   │       └── ...
 │   ├── quality-assurance/
 │   │   ├── test-plan.md
-│   │   └── test-files/
-│   │       └── ...
+│   │   ├── data/
+│   │   └── ...
 │   ├── management/
 │   │   ├── weekly-reports/
 │   │   ├── project-charter.md
@@ -251,10 +251,7 @@ Root/
 │   │   │   └── ...
 │   │   └── ...
 │   ├── user-manual/
-│   │   ├── user-manual.pdf
-│   │   ├── user-manual.md
-│   │   └── data/
-│   │       └── ...
+│   │   └── user-manual.pdf
 │   └── firmware_updates.md
 ├── README.md
 ├── LICENSE.md
@@ -330,7 +327,11 @@ We will clarify the expected content of each of the 9 individual files (cf. abov
 
 ## The main loop (.ino)
 
+
+
 ## 'definitions' header
+
+In this file, we define all the constant values, used in the different headers.
 
 ## 'bluetooth' header
 
