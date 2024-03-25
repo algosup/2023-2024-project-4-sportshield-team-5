@@ -137,7 +137,7 @@ SportShield, an innovative anti-theft device for sports equipment, represents a 
 
 ## Stakeholders
 
-1. **CORIS INNOVATION & ALGOSUP:** As the client and owner of the SportShield project, the ***COMPANY*** has a vested interest in the successful enhancement of the anti-theft device. They provide the project requirements, and overall direction for the project passing through **ALGOSUP.**
+1. **CLIENT & ALGOSUP:** As the client and owner of the SportShield project, the ***COMPANY*** has a vested interest in the successful enhancement of the anti-theft device. They provide the project requirements, and overall direction for the project passing through **ALGOSUP.**
 
 2. **End Users:** These are individuals or organizations who utilize the SportShield anti-theft device to protect their sports equipment. End users rely on the device's functionality and performance to safeguard their valuable assets.
 
