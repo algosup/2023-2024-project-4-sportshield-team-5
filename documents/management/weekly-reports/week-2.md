@@ -17,34 +17,50 @@
 ------------
 ## Overview
 
-Provide a brief overview of the key activities and achievements during the week.
+The week started off normally in our project rooms, with the main objectives being to complete the functional phase and commence the implementation phase of the project.
 
 ## Goals
 
-Outline the goals set for the week and evaluate the progress made towards each goal.
+1. Deliver the Functional Specification document.
+2. Begin work on the Technical Specification document.
+3. Ask questions to the client to gain a clear and concise understanding of their expectations for the final product and what they require from us.
 
 ## Challenges
 
-Highlight any challenges or obstacles encountered during the week and discuss possible solutions.
 
 ## Key Accomplishments
 
-List the significant accomplishments and milestones achieved throughout the week.
+1. The functional specification document was delivered at time
+<img src="images/fucntional.png">
+2. We got a respond from the client, and we finally understood what the client actually need from us
 
 ## Upcoming Week
 
-Preview the goals and tasks planned for the upcoming week.
+1. We planned to start with the implementation phase of the battery(optimizing the battery to be more precise"Reduce the battery consumption").
+2. Start with the improvements that are suppose to be done on the Alarm.
+2. Complete the technical specification document.
+3. Keep working as usual
+4. Continue with learning phase of the c++ programming language
 
 ## Meetings and Collaborations
 
-Summarize any important meetings, collaborations, or discussions that took place during the week.
+We held a meeting to review the progress of each team member and identify any areas where they encountered obstacles or challenges. We discussed the key points they considered in order to succeed and their planned approach to finding solutions.
+
+The image below summarize key points noted during the meeting
+<img src="images/Week2_meeting.png">
+
 
 ## Metrics and KPIs
 
-Include relevant metrics and key performance indicators to measure progress.
+1. **Project management metrics:**
+The images below will show the progression level of the project in the documentation phase and in the coding phase.
+- Individual tasks.
+<img src="images/week2_tasks.png">
+
+- Overall project percentage
+<img src="images/Progression.png">
+
 
 ## Other Notes
 
-Add any additional notes or comments that may be relevant to the overall report.
-
----
+The week was full of challenges but we are moving slowly and learning new things as days are moving.
