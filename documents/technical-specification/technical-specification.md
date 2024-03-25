@@ -1,5 +1,5 @@
 # Technical Specification
- Algosup - Team 5 - Project n°4 - Sport Shield
+ Algosup - Team 5 - Project n°4 - SportShield
 
   
     
@@ -24,7 +24,7 @@
   - [Project Brief](#project-brief)
   - [Hardware](#hardware)
   - [Software](#software)
-  - [Ressources](#ressources)
+  - [Resources](#resources)
     - [Documentation about components](#documentation-about-components)
     - [Electronic circuit diagrams](#electronic-circuit-diagrams)
 - [4. Set-up the environnement](#4-set-up-the-environnement)
@@ -61,11 +61,11 @@
 
 # 1. Document Purpose & Definition
 
-The goal of the Technical Specifications is to take the Functional Requirements that define the features, scope, and goals of the project, dissect each requirement, and turn it into instructions, as clear as possible, to guide the development team in the successful completion of their mission.
+The goal of the Technical Specifications is to take the Functional Requirements that define the features, scope, and goals of the project, dissect each requirement, and turn it into instructions, as clear as possible, to guide the development team.
 
-We therefore encourage thorough reading of the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) before further reading.
+We therefore encourage a thorough reading of the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) before further reading.
 
-The goal of the Technical Requirements is to clarify as many dark areas as possible to prevent the engineers from making decisions
+The aim is to clarify as many dark areas as possible to prevent the engineers from making decisions
 In a sense, while the Functional Requirements represent the "What/Why" aspect of the project, the Technical Requirements are supposed to represent the "How" of the project.
 
 # 2. Glossary
@@ -74,35 +74,35 @@ In a sense, while the Functional Requirements represent the "What/Why" aspect of
 
 ## Project Brief
 
-As fully explained in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md), our goal in this project is to improve the firmware of an embedded system called "Sport Shield". This "Sport Shield" is an anti-theft device intended only for snowboards and skis at present. It consists of a box equipped with a set of electronic and mechanical equipment, containing a steel cable to be wrapped around the object to be secured.
+As fully explained in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md), our goal in this project is to improve the firmware of an embedded system called "SportShield". This "SportShield" is an anti-theft device intended only for snowboards and skis at present. It consists of a box equipped with a set of electronic and mechanical equipment, containing a steel cable to be wrapped around the object to be secured.
 
-How does this Sport Shield work?
+How does this SportShield work?
 
 When the cable is wrapped and the box is in a locked state, the device is looking for any physical disturbances. If any movement or vibration of the box is detected as a possible theft, it turns on a strong alarm, more or less loud according to the level of disturbance (intensity and duration of the movement). At the same time, it sends a warning notification to the owner by a dedicated smartphone application, using the internet network.
 To stop the alarm or unlock the shield, the owner uses the application and it processes via Bluetooth or NFC.
 Also, during the locked period, the device will send regularly the GPS position and battery level by the 2G network, to a remote server communicating with the app.
-The aim is to make the sports shield as rustic and resilient as possible, minimizing direct user interactions with the hardware and keeping them remote, via the Bluetooth app.
+The aim is to make the SportShield as rustic and resilient as possible, minimizing direct user interactions with the hardware and keeping them remote, via the Bluetooth app.
 
 ## Hardware
 
 This project is not about the entire conception of the device from scratch. To be able to develop the firmware of the device we needed only the electronic and informatic parts of the project being developed. Thus, we received :
 
-- the electronic card (which gathers and links by soldered circuits all the micro-electronic) of the embedded system, which includes :
+- The electronic card (which gathers and links by soldered circuits all the micro-electronic) of the embedded system, which includes :
   - **A programmable board**: a "Seeed Xiao BLE nRF52840 Sense" (more details below)
   - **SIM card holder**: a "SIM800L GSM/GPRS 2G" version "S2-1065J-Z143N"
   - **GPS module**: a "CD-PA1010D GNSS patch antenna module"
-  - **12V DC converter** : Based on a MT3608 DC-DC converter microship, the circuit provides exactly 12.7V (the MT3608 handles "2V-24V ➔ 3V-28V" with 2A).
+  - **12V DC converter** : Based on a MT3608 DC-DC converter microchip, the circuit provides exactly 12.7V (the MT3608 handles "2V-24V ➔ 3V-28V" with 2A).
   - **4V DC converter** : Based on the same MT3608 as above, this circuit provides exactly 4.13V.
-  - 3x **electronic-switch** circuits : basically, it is just a MOSFET transistor. Two are a "DMG1012t" and the last is not referenced.
+  - 3x **electronic-switch** circuits: basically, it is just a MOSFET transistor. Two are a "DMG1012t" and the last is not referenced.
   - 4x **2 pins plugs**: to connect the external components  
 ![map of the whole board](data/circuits.png)
-- the pluggable components :
-  - **battery** : a "LP603449" Lithium-Polymer battery ► 3.7V ► 1100mAh ► 4.3Wh (2 pins plug)
-  - **electromagnetic lock** : a 12V/500mA DC electromagnetic lock (2 pins plug)
-  - **buzzer** : a 3V-24V DC piezzo-electric buzzer (2 pins plug)
-  - **NFC antenna** : a "Molex 1462360031" NFC antenna directly plugged on the main board for NFC communication. (2 pins plug)
-  - **2G antenna** : pluggable on the SIM module (2 pins plug)
-  - **SIM card** : a 2G nano-SIM in its micro-SIM adaptator, pluggable in the SIM holder  
+- The pluggable components :
+  - **Battery** : a "LP603449" Lithium-Polymer battery ► 3.7V ► 1100mAh ► 4.3Wh (2 pins plug)
+  - **Electromagnetic lock** : a 12V/500mA DC electromagnetic lock (2 pins plug)
+  - **Buzzer** : a 3V-24V DC piezzo-electric buzzer (2 pins plug)
+  - **NFC antenna**: a "Molex 1462360031" NFC antenna directly plugged into the main board for NFC communication. (2 pins plug)
+  - **2G antenna**: pluggable on the SIM module (2 pins plug)
+  - **SIM card**: a 2G nano-SIM in its micro-SIM adapter, pluggable in the SIM holder 
 ![all the pluggable components](data/components.png)
 
 ## Software
@@ -112,7 +112,7 @@ The company gave us their first version of the software they coded ([here to dow
 
 The usage of public libraries is allowed.
 
-## Ressources
+## Resources
 
 For the Hardware, we received some documentation about the components and also the old schematics of the electronic circuit :
 
@@ -162,14 +162,14 @@ Just connect the Seeed board with a USB-C cable. And to have a concrete result, 
 
 #### 6. Select the board and the port
 
-On the IDE, there is a bar on the top like that :  
+On the IDE, there is a some buttons on the top like that :  
 <img src="data/tutorial-arduino-3.png" width="400px">  
 - The first button is to compile code.
 - The second button is to upload code to the board.
 - The third one is to debug code.
-- The bar is to select the board and the right USB port.
+- The dropdown is to select the board and the right USB port.
 
-So now, click on the bar, and then, on 'Select other...'  
+So now, click on the dropdown, and then, on 'Select other...'  
 <img src="data/tutorial-arduino-4.png" width="300px">  
 
 Now this page is opened, search for the Seeed BLE nrf52840 sense board, and click on the name.  
@@ -185,11 +185,11 @@ Just click on the 'upload' button we saw previously. It will compile, then uploa
 
 If any problem encountered, skip this point.
 
-Before anymore solution, simply press the 'reset' button on the card (Cf. pinout above) and try to upload again.
+First and foremost, simply press the 'reset' button on the card (Cf. pinout above) and try to upload again.
 
-If the code is still not uploading, try first to run an simple code on the board : for that, click on 'File'->'Examples'->'01.Basics'->'Blink' and try to upload again. This code should make a LED blinking on the board. If not, maybe the wrong port is selected.
+If the code is still not uploading, try first to run a simple code on the board : for that, click on 'File'->'Examples'->'01.Basics'->'Blink' and try to upload again. This code should make an LED blinking on the board. If not, maybe the wrong port is selected.
 
-We won't develop all the possible causes of a fail, so we encourage you to read again attentively these 7 steps, and check if it worked well. If there are still some problems, find some help on internet, by copying the error message of the terminal ouput. And if possible, try with another board.
+We won't expand on all the possible causes of a failure, so we encourage to read again attentively these 7 steps, and check if it worked well. If there are still some problems, find some help on the internet, by copying the error message of the terminal output. And if possible, try with another board.
 
 # 5. Methodology and Conventions
 
@@ -206,7 +206,7 @@ This branch requires a 'pull request' reviewed by at least 1 other member of the
 
 ### Files and folders architecture
 
-Each folders' and files' name will be in ```kebab-case```, except for the files used as illustration or ressources in the main documents of the project. Also, the folder and its .ino file where is contained the firmware will follow the ```snake_case```.
+Each folder and file name will be in ```kebab-case```, except for the files used as illustrations or resources in the main documents of the project. Also, the folder and its .ino file where is contained the firmware will follow the ```snake_case```.
 ```
 Root/
 ├── src/
@@ -257,7 +257,7 @@ The variables' names are in ```snake_case```.
 The functions' names are in ```camelCase```.
 The definitions' names are in ```COBOL_CASE```.
 
-The identation of 2 spaces is added after each carriage return in after a curly bracket.
+The indentation of 2 spaces is added after each carriage return in after a curly bracket.
 
 When a condition or a loop occurs, the curly brackets are opened at the end of the first line of the statement, and closed in a single-last line without the identation.
 
@@ -315,12 +315,12 @@ void longAlarm(int period){
 
 ## Overview
 
-Each one of the following parts will explain the technical implementation following the structure of the 'Functionnal Requirements' part of the [Functionnal specification](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
+Each of the following parts will explain the technical implementation, following the structure of the 'Functional Requirements' part of the [Functional specification](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) document.  
 
 We don't have access to the application, the server with which the SIM card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC or the bluetooth.  
 That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not".   
 The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usally 6 or 7.)
-We will therefore focus on technical detail only on the points where we can take action. These are:
+We will therefore focus on technical detail only on the points where we can take action. These are:  
 - battery management and energy consumption (sleep mode, power cut, ...)
 - multi tasks to make the buzzer ringing and to send the notification at the same time, while also being able to stop the alarm at any moment.
 - take the NFC into account
