@@ -91,7 +91,7 @@ The aim is to make the SportShield as rustic and resilient as possible, minimizi
 
 ## Hardware
 
-This project is not about the entire conception of the device from scratch. To be able to develop the firmware[^3] of the device we needed only the electronic and informatic parts of the project being developed. Thus, we received :
+This project is not about the entire conception of the device from scratch. To be able to develop the firmware[^3] of the device we needed only the electronic and informatics parts of the project being developed. Thus, we received :
 
 - The electronic card (which gathers and links by soldered circuits all the micro-electronic) of the embedded system[^13], which includes :
   - **A programmable board[^9]**: a "Seeed Xiao BLE nRF52840 Sense" (more details below)
@@ -123,7 +123,7 @@ The usage of public libraries is allowed.
 For the Hardware, we received some documentation about the components and also the old schematics of the electronic circuit :
 
 ### Documentation about components
-- [*Xiao NRF52840 sense* electronic architechture](data/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf) *(provided by the company)*
+- [*Xiao NRF52840 sense* electronic architecture](data/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf) *(provided by the company)*
 - [NRF52840 microcontroller datasheet](data/nRF52840-PS-v1.5.pdf)
 - [GPS module datasheet](data/CD-PA1010D-datasheet-v.02.pdf) *(provided by the company)*
 - [SIM[^11] module datasheet](data/SIM800L-SIMCom.pdf) *(provided by the company)*
@@ -136,7 +136,7 @@ The power management of the board follows this diagram :
 Here, the connections for the Seeed Board, the SIM[^11] module and the GPS module :
 ![SIM[^11], GPS, and Seeed board connections](data/easyEDA-connections.png)([easyEDA[^14] sketch here](data/easyEDA-connections.json))  
 
-To dive into the electronic circuits of the PCB[^8], there is the [PCB[^8] circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET[^6] used to cut the battery to other components using the control pin D9.
+To dive into the electronic circuits of the PCB[^8], there is the [PCB[^8] circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this sematic is not up to date. The most important is the absence of the Q5 MOSFET[^6] used to cut the battery to other components using the control pin D9.
 
 # 3. Set-up the environnement
 
@@ -152,7 +152,7 @@ Now, open the board manager and install the "Seeed NRF52 mbed-enabled Boards" dr
    <img src="data/tutorial-arduino-2.png" height="500px">   
    
 ## 3. Add the libraries
-Open the library manager[^5] (button which is just under the board manager one) and intall at least these ones by searching them:
+Open the library manager[^5] (button which is just under the board manager one) and install at least these ones by searching them:
    - NRF52_MBED_TimerInterrupt *V1.4.1*
    - ArduinoBLE *V1.3.6*
    - Adafruit GPS Library *V1.7.4 (instal all)*
@@ -228,8 +228,8 @@ Root/
 │       ├── gps.h
 │       └── nfc.h
 ├── documents/
-│   ├── functionnal-specification/
-│   │   ├── functionnal-specification.md
+│   ├── functional-specification/
+│   │   ├── functional-specification.md
 │   │   └── data/
 │   │       └── ...
 │   ├── technical-specification/
@@ -265,9 +265,9 @@ The definitions' names are in ```COBOL_CASE```.
 
 The indentation of 2 spaces is added after each carriage return in after a curly bracket.
 
-When a condition or a loop occurs, the curly brackets are opened at the end of the first line of the statement, and closed in a single-last line without the identation.
+When a condition or a loop occurs, the curly brackets are opened at the end of the first line of the statement, and closed in a single-last line without the indentation.
 
-However some simple statements can be written in one line, as long as it doesn't take more than 50 characters aproximately.
+However some simple statements can be written in one line, as long as it doesn't take more than 50 characters approximately.
 
 #### Variables
 
@@ -275,7 +275,7 @@ However some simple statements can be written in one line, as long as it doesn't
 
 If a number or a constant is needed in the code, it have to be defined in the 'definitions.h' header and not directly inserted in the algorithm itself, even if "it shouldn't change".
 
-In the same idea, variables' declaration and first assignement should be separated : the declaration in 'definition.h. An example of this appears in the example below.
+In the same idea, variables' declaration and first assignment should be separated : the declaration in 'definition.h. An example of this appears in the example below.
 
 #### Comments
 
@@ -325,7 +325,7 @@ Each of the following parts will explain the technical implementation, following
 
 We don't have access to the application, the server with which the SIM[^11] card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC[^7] or the bluetooth.  
 That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network[^12] (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not".   
-The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usally 6 or 7.)
+The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usually 6 or 7.)
 We will therefore focus on technical detail only on the points where we can take action. These are:  
 - battery management and energy consumption (sleep mode, power cut, ...)
 - multi tasks to make the buzzer ringing and to send the notification at the same time, while also being able to stop the alarm at any moment.
@@ -458,7 +458,7 @@ We won't look at the sinusoidal aspect of the movement and but only look only at
 
 ## Alarm
 
-As the buzzer is controlled by a MOSFET[^6], we decided to use PWM (Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set), to make the piezzo-electric[^18] buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET[^6] has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
+As the buzzer is controlled by a MOSFET[^6], we decided to use PWM (Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set), to make the piezoelectric[^18] buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET[^6] has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
 
 ## NFC
 
