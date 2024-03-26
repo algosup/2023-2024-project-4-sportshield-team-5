@@ -167,8 +167,8 @@ void setup() {
   digitalWrite(LEDG, LOW);
   Temps();
 
-  Serial.print("V Bat: ");
-  Serial.println(getBatteryVoltage());
+  Serial.print("Battery level: ");
+  Serial.println(getBatteryLevel());
 }
 
 //-------------------------------- LOOP ----------------------------------------
@@ -316,6 +316,10 @@ void loop() {
   //   sim800l->disconnectGPRS();
   //   send_position = false;
   // }
+
+  if (getBatteryLevel()<20){
+    deepSleepMode();
+  }
 }
 
 //------------- SETUP FUNCTIONS ------------------------------
@@ -642,4 +646,19 @@ String convertDMMtoDD(String dmmCoordinates) {
   String ddCoordinates = String(decimalDegrees, 10);  // You can adjust the number of decimals here
 
   return ddCoordinates;
+}
+
+int getBatteryLevel() {
+  int battery = analogRead(PIN_VBAT);
+  int batteryLevel = map(battery, 0, 1023, 0, 100);
+
+  return batteryLevel;
+}
+void deepSleepMode() {
+  battery = updateBatteryLevel();
+  while (battery < 20) {
+    battery = updateBatteryLevel();
+    // Send battery level & gps location to the app
+    delay(1000);
+  }
 }
