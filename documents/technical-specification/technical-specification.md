@@ -84,7 +84,7 @@ As fully explained in the [Functional Specifications](https://github.com/algosup
 
 How does this SportShield work?
 
-When the cable is wrapped and the box is in a locked state, the device is looking for any physical disturbances. If any movement or vibration of the box is detected as a possible theft, it turns on a strong alarm, more or less loud according to the level of disturbance (intensity and duration of the movement). At the same time, it sends a warning notification to the owner by a dedicated smartphone application, using the internet network.
+When the cable is wrapped and the lock is in a locked state, the device is sensitive to any disturbance. Suppose a movement or vibration of the box is detected as a possible theft. It turns on an alarm, with a sound intensity proportional to the motion detected (intensity and duration of the movement). At the same time, it sends a warning notification to the owner by a dedicated smartphone application, using the 2G network.
 To stop the alarm or unlock the equipment, the owner can use the application and unlock his device via Bluetooth or NFC[^7].
 Also, during the locked period, the device will send regularly the GPS position and battery level by the 2G network[^12], to a remote server communicating with the app.
 The aim is to make the SportShield as resilient as possible, minimising user interactions directly with the hardware to keep them remote, via the app and Bluetooth connectivity.
@@ -136,7 +136,7 @@ The power management of the board follows this diagram :
 You can find the connections for the Seeed Board, the SIM[^11] module and the GPS module in the following document:
 ![SIM[^11], GPS, and Seeed board connections](data/easyEDA-connections.png)([easyEDA[^14] sketch here](data/easyEDA-connections.json))  
 
-To dive into the electronic circuits of the PCB[^8], there is the [PCB[^8] circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this sematic is not up to date. The most important is the absence of the Q5 MOSFET[^6] used to cut the battery to other components using the control pin D9.
+To dive into the electronic circuits of the PCB, there is the [PCB circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this schematic is not up to date. The most important point is the absence of the Q5 MOSFET. This component is principally used to cut power supply to other components using the control pin D9.
 
 # 3. Set-up the environnement
 
@@ -168,7 +168,7 @@ Just connect the Seeed board with a USB-C cable. And to have a concrete result, 
 
 ## 6. Select the board and the port
 
-On the IDE[^4], there is a some buttons on the top like that :  
+On the IDE[^4], there are some buttons on the top organized as follows:  
 <img src="data/tutorial-arduino-3.png" width="400px">  
 - The first button is used to compile code.
 - The second button is used to upload code to the board.
