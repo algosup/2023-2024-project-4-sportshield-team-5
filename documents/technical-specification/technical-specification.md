@@ -279,7 +279,7 @@ Any variable declaration need a comment on the same line to quickly explain what
 
 ### Example of a good code*
 
-```
+```cpp
 #define BUZZER D2
 #define LONG_ALARM_REPETITIONS 5
 #define LONG_ALARM_PERIOD 350
@@ -347,7 +347,7 @@ In this file there are :
   this function has the role of a 'while(true)' loop : it is the main loop
 
 Base of the .ino file :  
-  ```
+  ```cpp
 #include"definition.h"
 #include"bluetooth.h"
 #include"detection.h"
@@ -370,9 +370,36 @@ void loop(){
 
 ## Algorithm
 
+We don't need to forecast what is in the 'void setup()' function. This is just all the initializations of the different components and libraries, and the setting of what is the initial state of the device.
+
+Now, the algorithm itself, the main loop of the firmware, is available in this diagram (please forgive the size !) :
+
+![algorithm diagram](data/algorithm-main-loop-diagram.png)
+
+It allows :
+- the battery consumption's management
+- execute parallel tasks when a theft is detected
+- to take advantage of the NFC
+
 ## Power Management
+
+The device will have different behaviors of power consumption according to 3 parameters : 
+- the lock state of the SportShield
+- the level of battery (or charging the battery)
+- the period of inactivity.
+
+If the battery level is ABOVE 15%, NFC only is enabled because NFC consume like 5mA while Bluetooth Low Energy (BLE) consumes 15mA (3 times more).
+
+By default the buzzer, the electromagnetic lock and SIM module circuit are disabled by turning D9 and D4 'LOW' (Cf. [power management diagram](#electronic-circuit-diagrams)).  
+If only one of these components are required, we turn on both D4 and D9, and a variable have to keep track of the number of devices currently used. If there is any, D9 and D4 are turned OFF to save as much energy as possible.
+
+Each time we need to get the GPS position we first have to enable the wake up pin of the GPS module : D8, and then turned it off again.
+
+%%%%
 
 ## Detection of a theft
 
 ## NFC
+
+
 
