@@ -54,7 +54,7 @@
   - [Power Management](#power-management)
       - [specifications](#specifications)
       - [implementation](#implementation)
-  - [Detection of a theft](#detection-of-a-theft)
+  - [Detection of movement](#detection-of-movement)
   - [Alarm](#alarm)
   - [NFC](#nfc)
 - [6. Suggestions (out of scope)](#6-suggestions-out-of-scope)
@@ -421,7 +421,7 @@ Furthermore, as the temperature would be quite low, around 41°F to 23°F (as it
 
 Nowing that, all these values and decisions are really subjective and need to be defined precisely after a bunch of tests with the final hardware, in the real conditions. That's why we'll put these values without considering more than the assomptions above, cause with our current hardware, any measurement could be accurate.
 
-## Detection of a theft
+## Detection of movement
 
 When we received the project, the current idea was to split a detected movement into 3 categories : noise, small and big movements.
 
