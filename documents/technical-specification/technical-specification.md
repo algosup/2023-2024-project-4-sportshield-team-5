@@ -468,8 +468,13 @@ As the Seeed boards company released their Xiao-NRF52840 quite recently, we foun
 # 6. Suggestions (out of scope)
 
 ## Electro-Magnetic lock
+(not finished)
+(Usage of an electrolytic capacitor (16V, 3300uF works well : 2 second of charge, 50ms of discharge) just plugging it at the output of the 12V voltage booster)
 
 ## Power Button
+
+(not finished)
+(Usage of a magnetic switch (2 pieces of metal in a void buble, touching each other or not, if a magnet is close to them) to have a button without any decrease of the resilience of the SportShield, to cut-off the battery wires when not used. Of course, when the steel cable is inserted to lock the device, it pushes mechanically the magnetic switch away from the magnet location, even in an anti-magnetic area.)
 
 # 7. Glossary
 
