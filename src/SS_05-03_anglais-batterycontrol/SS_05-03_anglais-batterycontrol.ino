@@ -365,7 +365,6 @@ void ble_setup(void) {
   ActivationCharacteristic.setEventHandler(BLEWritten, onWriteActivation);
   ActivationCharacteristic.setEventHandler(BLERead, onReadActivation);
   UnlockCharacteristic.setEventHandler(BLEWritten, onWriteUnlock);
-  AlarmCharacteristic.setEventHandler(BLEWritten, onWriteAlarm);
   // start advertising
   BLE.advertise();
 }
@@ -379,16 +378,41 @@ void imu_setup(void) {
 }
 
 void gps_setup(void) {
-  pinMode(GPS_WKUP_PIN, OUTPUT);
-  digitalWrite(GPS_WKUP_PIN, LOW);
-  GPS.begin(9600);
-  GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
-  GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);
-  GPS.sendCommand("$PMTK225,4*2F");  // send to backup mode
+  // pinMode(GPS_WKUP_PIN, OUTPUT);
+  // digitalWrite(GPS_WKUP_PIN, LOW);
+  // GPS.begin(9600);
+  // GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
+  // GPS.sendCommand(PMTK_SET_im800l->isReady()) {
+  //   Serial.println(F("Problem to initialize AT command, retry in 1 sec"));
+  //   digitalWrite(LEDR, !digitalRead(LEDR));
+  //   delay(1000);
+  // }
+  // sim800l->enableEchoMode();
+  // sim800l->setupGPRS("iot.1nce.net");
+
+  // uint8_t signal = sim800l->getSignal();
+  // while (signal <= 0) {
+  //   delay(1000);
+  //   signal = sim800l->getSignal();
+  // }
+  // Serial.println(String(signal));
+  // NetworkRegistration network = sim800l->getRegistrationStatus();
+  // // while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
+  // //   delay(1000);
+  // //   network = sim800l->getRegistrationStatus();
+  // //   Serial.print(network + " ");
+  // //   Serial.println(F("Problem to register, retry in 1 sec"));
+  // //   digitalWrite(LEDG, !digitalRead(LEDG));
+  // // }
+  // delay(50);
+  // sim800l->setPowerMode(MINIMUM);      // set minimum functionnality mode
+  // digiNMEA_UPDATE_1HZ);
+  // GPS.sendCommand("$PMTK225,4*2F");  // send to backup mode
   // GPS.sendCommand("$PMTK225,8*23");   // send to Always Locate backup mode
   // GPS.sendCommand("$PMTK225,9*22");   // send to Always Locate standby mode
   // GPS.sendCommand("$PMTK225,2,4000,15000,24000,90000*16");  // send to periodic standby mode
   // GPS.sendCommand("$PMTK161,0*28");   // send to standby mode
+  // }
 }
 
 void sim_setup(void) {
@@ -479,10 +503,12 @@ void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durati
   startCycle = millis();
   while (repetitions > 0) {
     timePassed = millis();
-
-    if (AlarmCharacteristic.written() && isAuthenticate) {
+    BLE.poll();
+    if (AlarmCharacteristic.value()!=0) {
+      AlarmCharacteristic.setValue(0);
       break;
     }
+
 
     if (timePassed - startCycle <= (buzzerState == LOW ? durationOff : durationOn)) {
 
@@ -495,9 +521,9 @@ void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durati
       if (!buzzerState) repetitions--;
     }
   }
-
   // Reset variables after performing all repetitions
   analogWrite(buzzerPin, 0);
+  delay(0500);
   MotionSmall = false;
   MotionBig = false;
 }
@@ -620,11 +646,6 @@ void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic) {
     digitalWrite(aimantPin, HIGH);
     delay(2000);
     digitalWrite(aimantPin, LOW);
-  }
-}
-void onWriteAlarm(BLEDevice central, BLECharacteristic characteristic) {
-  if (isAuthenticate) {
-    deactivate = true;
   }
 }
 
