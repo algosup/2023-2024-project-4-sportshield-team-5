@@ -155,7 +155,7 @@ Now, open the board manager and install the "Seeed NRF52 mbed-enabled Boards" dr
 Open the library manager[^5] (button which is just under the board manager one) and install at least these ones by searching them:
    - NRF52_MBED_TimerInterrupt *V1.4.1*
    - ArduinoBLE *V1.3.6*
-   - Adafruit GPS Library *V1.7.4 (instal all)*
+   - Adafruit GPS Library *V1.7.4 (installall)*
    - Sim800L http connector *V1.14.0*
    - Seeed Arduino[^1] LSM6DS3 *V2.0.3*
    - OneWire *V2.3.7*
@@ -170,10 +170,10 @@ Just connect the Seeed board with a USB-C cable. And to have a concrete result, 
 
 On the IDE[^4], there is a some buttons on the top like that :  
 <img src="data/tutorial-arduino-3.png" width="400px">  
-- The first button is to compile code.
-- The second button is to upload code to the board.
-- The third one is to debug code.
-- The dropdown is to select the board and the right USB port.
+- The first button is used to compile code.
+- The second button is used to upload code to the board.
+- The third one is used to debug code.
+- The dropdown is used to select the board and the right USB port.
 
 So now, click on the dropdown, and then, on 'Select other...'  
 <img src="data/tutorial-arduino-4.png" width="300px">  
@@ -189,11 +189,11 @@ Just click on the 'upload' button we saw previously. It will compile, then uploa
 
 ## 8. Troubleshoot
 
-If any problem encountered, skip this point.
+If no problem was encountered during the whole process, skip this point.
 
 First and foremost, simply press the 'reset' button on the card (Cf. pinout above) and try to upload again.
 
-If the code is still not uploading, try first to run a simple code on the board : for that, click on 'File'->'Examples'->'01.Basics'->'Blink' and try to upload again. This code should make an LED blinking on the board. If not, maybe the wrong port is selected.
+If the code is still not uploading, try first to run a simple code on the board : for that, click on 'File'->'Examples'->'01.Basics'->'Blink' and try to upload again. This code should make an LED blink on the board. If not, maybe the wrong port is selected.
 
 We won't expand on all the possible causes of a failure, so we encourage to read again attentively these 7 steps, and check if it worked well. If there are still some problems, find some help on the internet, by copying the error message of the terminal output. And if possible, try with another board.
 
