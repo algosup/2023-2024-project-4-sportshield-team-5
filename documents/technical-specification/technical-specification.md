@@ -54,7 +54,8 @@
   - [Power Management](#power-management)
       - [specifications](#specifications)
       - [implementation](#implementation)
-  - [Detection of movement](#detection-of-movement)
+  - [Detection of a theft](#detection-of-a-theft)
+  - [Detection of the wake-up movement](#detection-of-the-wake-up-movement)
   - [Alarm](#alarm)
   - [NFC](#nfc)
 - [6. Suggestions (out of scope)](#6-suggestions-out-of-scope)
@@ -421,12 +422,14 @@ Furthermore, as the temperature would be quite low, around 41°F to 23°F (as it
 
 Nowing that, all these values and decisions are really subjective and need to be defined precisely after a bunch of tests with the final hardware, in the real conditions. That's why we'll put these values without considering more than the assomptions above, cause with our current hardware, any measurement could be accurate.
 
-## Detection of movement
+## Detection of a theft
 
 When we received the project, the current idea was to split a detected movement into 3 categories : noise, small and big movements.
 
 However, they admitted that a smooth and slow theft could stay undetected.
 That's why we decided to just differenciate noise and movement, and to look at the duration of the movement more than the intensity. This way, a short shock, wich can happens won't be detected as a theft while any movement lasting more than 1 second is detected as a theft, and in any case, any movement trigger a small alarm for 1 second, as a dissuasion. However the GPRS signal to get a notification on the app will be received only when an real theft is detected.
+
+## Detection of the wake-up movement
 
 A specific movement of a 180° back-and-forth rotation on the x axis is required to wake up the device.
 
