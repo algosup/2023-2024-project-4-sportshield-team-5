@@ -1,5 +1,5 @@
 # Technical Specification
- Algosup - Team 5 - Project n°4 - SportShield
+ ALGOSUP - Team 5 - Project n°4 - SportShield
 
   
     
@@ -71,7 +71,7 @@
 
 The goal of the Technical Specifications is to take the Functional Requirements that define the features, scope, and goals of the project, dissect each requirement, and turn it into instructions, as clear as possible, to guide the development team.
 
-We therefore encourage a thorough reading of the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) before further reading.
+We, therefore, encourage a thorough reading of the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) before further reading.
 
 The aim is to clarify as many dark areas as possible to prevent the engineers from making decisions
 In a sense, while the Functional Requirements represent the "What/Why" aspect of the project, the Technical Requirements are supposed to represent the "How" of the project.
@@ -85,13 +85,13 @@ As fully explained in the [Functional Specifications](https://github.com/algosup
 How does this SportShield work?
 
 When the cable is wrapped and the box is in a locked state, the device is looking for any physical disturbances. If any movement or vibration of the box is detected as a possible theft, it turns on a strong alarm, more or less loud according to the level of disturbance (intensity and duration of the movement). At the same time, it sends a warning notification to the owner by a dedicated smartphone application, using the internet network.
-To stop the alarm or unlock the shield, the owner uses the application and it processes via Bluetooth or NFC[^7].
+To stop the alarm or unlock the equipment, the owner can use the application and unlock his device via Bluetooth or NFC[^7].
 Also, during the locked period, the device will send regularly the GPS position and battery level by the 2G network[^12], to a remote server communicating with the app.
-The aim is to make the SportShield as rustic and resilient as possible, minimizing direct user interactions with the hardware and keeping them remote, via the Bluetooth app.
+The aim is to make the SportShield as resilient as possible, minimising user interactions directly with the hardware to keep them remote, via the app and Bluetooth connectivity.
 
 ## Hardware
 
-This project is not about the entire conception of the device from scratch. To be able to develop the firmware[^3] of the device we needed only the electronic and informatics parts of the project being developed. Thus, we received :
+This project is not about the entire conception of the device from scratch. To be able to enhance its firmware, we needed only the hardware components. Thus, we received:
 
 - The electronic card (which gathers and links by soldered circuits all the micro-electronic) of the embedded system[^13], which includes :
   - **A programmable board[^9]**: a "Seeed Xiao BLE nRF52840 Sense" (more details below)
@@ -133,14 +133,14 @@ For the Hardware, we received some documentation about the components and also t
 ### Electronic circuit diagrams
 The power management of the board follows this diagram :
 ![Power management diagram](data/power_diagram.png)
-Here, the connections for the Seeed Board, the SIM[^11] module and the GPS module :
+You can find the connections for the Seeed Board, the SIM[^11] module and the GPS module in the following document:
 ![SIM[^11], GPS, and Seeed board connections](data/easyEDA-connections.png)([easyEDA[^14] sketch here](data/easyEDA-connections.json))  
 
 To dive into the electronic circuits of the PCB[^8], there is the [PCB[^8] circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this sematic is not up to date. The most important is the absence of the Q5 MOSFET[^6] used to cut the battery to other components using the control pin D9.
 
 # 3. Set-up the environnement
 
-This is a tutoriel of how to upload in the hardware, the code we had been given :
+This is a tutorial of how to upload in the hardware, the code we had been given:  
 
 ## 1. Download and install the Arduino® IDE 
 Download the executable according to the OS[^15] from [the official website](https://www.arduino.cc/en/software).
