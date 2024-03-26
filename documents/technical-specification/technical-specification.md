@@ -133,8 +133,8 @@ For the Hardware, we received some documentation about the components and also t
 ### Electronic circuit diagrams
 The power management of the board follows this diagram :
 ![Power management diagram](data/power_diagram.png)
-Here, the connectics for the Seeed Board, the SIM[^11] module and the GPS module :
-![SIM[^11], GPS, and Seeed board connectics](data/easyEDA-connectics.png)([easyEDA[^14] sketch here](data/easyEDA-connectics.json))  
+Here, the connections for the Seeed Board, the SIM[^11] module and the GPS module :
+![SIM[^11], GPS, and Seeed board connections](data/easyEDA-connections.png)([easyEDA[^14] sketch here](data/easyEDA-connections.json))  
 
 To dive into the electronic circuits of the PCB[^8], there is the [PCB[^8] circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET[^6] used to cut the battery to other components using the control pin D9.
 
