@@ -18,6 +18,7 @@
 
 
 
+- [Technical Specification](#technical-specification)
 - [1. Document Purpose \& Definition](#1-document-purpose--definition)
 - [2. Glossary](#2-glossary)
 - [3. Project Overview](#3-project-overview)
@@ -28,14 +29,14 @@
     - [Documentation about components](#documentation-about-components)
     - [Electronic circuit diagrams](#electronic-circuit-diagrams)
 - [4. Set-up the environnement](#4-set-up-the-environnement)
-    - [1. Download and install the Arduino® IDE](#1-download-and-install-the-arduino-ide)
-    - [2. Add the board to Arduino®](#2-add-the-board-to-arduino)
-    - [3. Add the libraries](#3-add-the-libraries)
-    - [4. Open the current code](#4-open-the-current-code)
-    - [5. Connect the board](#5-connect-the-board)
-    - [6. Select the board and the port](#6-select-the-board-and-the-port)
-    - [7. Upload code](#7-upload-code)
-    - [8. Troubleshoot](#8-troubleshoot)
+  - [1. Download and install the Arduino® IDE](#1-download-and-install-the-arduino-ide)
+  - [2. Add the board to Arduino®](#2-add-the-board-to-arduino)
+  - [3. Add the libraries](#3-add-the-libraries)
+  - [4. Open the current code](#4-open-the-current-code)
+  - [5. Connect the board](#5-connect-the-board)
+  - [6. Select the board and the port](#6-select-the-board-and-the-port)
+  - [7. Upload code](#7-upload-code)
+  - [8. Troubleshoot](#8-troubleshoot)
 - [5. Methodology and Conventions](#5-methodology-and-conventions)
   - [GitHub](#github)
     - [Branches](#branches)
@@ -52,8 +53,14 @@
   - [The main file (.ino)](#the-main-file-ino)
   - [Algorithm](#algorithm)
   - [Power Management](#power-management)
+      - [specifications](#specifications)
+      - [implementation](#implementation)
   - [Detection of a theft](#detection-of-a-theft)
+  - [Alarm](#alarm)
   - [NFC](#nfc)
+- [7. Suggestions (out of scope)](#7-suggestions-out-of-scope)
+  - [Electro-Magnetic lock](#electro-magnetic-lock)
+  - [Power Button](#power-button)
 
 
 </details>
@@ -136,16 +143,16 @@ To dive into the electronic circuits of the PCB, there is the [PCB circuit schem
 
 This is a tutoriel of how to upload in the hardware, the code we had been given :
 
-#### 1. Download and install the Arduino® IDE 
+## 1. Download and install the Arduino® IDE 
 Download the executable according to the OS from [the official website](https://www.arduino.cc/en/software).
 
-#### 2. Add the board to Arduino®
+## 2. Add the board to Arduino®
 Open the software and click on 'File'->'Preferences' . Then, copy-paste this URL : "https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json" in the last blank section of the window. Then, click 'OK':
 <img src="data/tutorial-arduino-1.png" width="800px">  
 Now, open the board manager and install the "Seeed NRF52 mbed-enabled Boards" driver:  
    <img src="data/tutorial-arduino-2.png" height="500px">   
    
-#### 3. Add the libraries
+## 3. Add the libraries
 Open the library manager (button which is just under the board manager one) and intall at least these ones by searching them:
    - NRF52_MBED_TimerInterrupt *V1.4.1*
    - ArduinoBLE *V1.3.6*
@@ -154,13 +161,13 @@ Open the library manager (button which is just under the board manager one) and 
    - Seeed Arduino LSM6DS3 *V2.0.3*
    - OneWire *V2.3.7*
   
-#### 4. Open the current code
+## 4. Open the current code
 Download [here](data/arduino-code-05-03.zip) the given code, and after unzipping it, open "SS_05-03_anglais-batterycontrol.ino" 
    
-#### 5. Connect the board
+## 5. Connect the board
 Just connect the Seeed board with a USB-C cable. And to have a concrete result, plug all the 6 components (shown above).
 
-#### 6. Select the board and the port
+## 6. Select the board and the port
 
 On the IDE, there is a some buttons on the top like that :  
 <img src="data/tutorial-arduino-3.png" width="400px">  
@@ -177,11 +184,11 @@ On the right, appears the list of the available USB ports to upload to. Click on
 Then click 'OK'  
 <img src="data/tutorial-arduino-5.png" width="800px">    
 
-#### 7. Upload code
+## 7. Upload code
 
 Just click on the 'upload' button we saw previously. It will compile, then upload the code.
 
-#### 8. Troubleshoot
+## 8. Troubleshoot
 
 If any problem encountered, skip this point.
 
@@ -432,4 +439,8 @@ As the buzzer is controlled by a MOSFET, we decided to use PWM (Pulse Wave Modul
 As the Seeed boards company released their Xiao-NRF52840 quite recently, we found on the official forum of the company website for documentation, that they said they still didn't ended to develop the NFC library of their board. The problem with this unfinished library, is that, as they have their own version of RFID microship and circuit, embedded in the board, the only solution we found to try having it working, is by coding our own library directly in assembly. That's why we probably won't develop the concrete NFC functions more than simulating input and output through the terminal.
 
 
+# 7. Suggestions (out of scope)
 
+## Electro-Magnetic lock
+
+## Power Button
