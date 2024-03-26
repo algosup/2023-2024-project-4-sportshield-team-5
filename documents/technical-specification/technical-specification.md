@@ -20,15 +20,14 @@
 
 - [Technical Specification](#technical-specification)
 - [1. Document Purpose \& Definition](#1-document-purpose--definition)
-- [2. Glossary](#2-glossary)
-- [3. Project Overview](#3-project-overview)
+- [2. Project Overview](#2-project-overview)
   - [Project Brief](#project-brief)
   - [Hardware](#hardware)
   - [Software](#software)
   - [Resources](#resources)
     - [Documentation about components](#documentation-about-components)
     - [Electronic circuit diagrams](#electronic-circuit-diagrams)
-- [4. Set-up the environnement](#4-set-up-the-environnement)
+- [3. Set-up the environnement](#3-set-up-the-environnement)
   - [1. Download and install the Arduino® IDE](#1-download-and-install-the-arduino-ide)
   - [2. Add the board to Arduino®](#2-add-the-board-to-arduino)
   - [3. Add the libraries](#3-add-the-libraries)
@@ -37,7 +36,7 @@
   - [6. Select the board and the port](#6-select-the-board-and-the-port)
   - [7. Upload code](#7-upload-code)
   - [8. Troubleshoot](#8-troubleshoot)
-- [5. Methodology and Conventions](#5-methodology-and-conventions)
+- [4. Methodology and Conventions](#4-methodology-and-conventions)
   - [GitHub](#github)
     - [Branches](#branches)
     - [Files and folders architecture](#files-and-folders-architecture)
@@ -47,7 +46,7 @@
       - [Variables](#variables)
       - [Comments](#comments)
     - [Example of a good code\*](#example-of-a-good-code)
-- [6. Software's technical specifications](#6-softwares-technical-specifications)
+- [5. Software's technical specifications](#5-softwares-technical-specifications)
   - [Overview](#overview)
   - [Headers and defintition.h](#headers-and-defintitionh)
   - [The main file (.ino)](#the-main-file-ino)
@@ -58,9 +57,10 @@
   - [Detection of a theft](#detection-of-a-theft)
   - [Alarm](#alarm)
   - [NFC](#nfc)
-- [7. Suggestions (out of scope)](#7-suggestions-out-of-scope)
+- [6. Suggestions (out of scope)](#6-suggestions-out-of-scope)
   - [Electro-Magnetic lock](#electro-magnetic-lock)
   - [Power Button](#power-button)
+- [7. Glossary](#7-glossary)
 
 
 </details>
@@ -75,46 +75,44 @@ We therefore encourage a thorough reading of the [Functional Specifications](htt
 The aim is to clarify as many dark areas as possible to prevent the engineers from making decisions
 In a sense, while the Functional Requirements represent the "What/Why" aspect of the project, the Technical Requirements are supposed to represent the "How" of the project.
 
-# 2. Glossary
-
-# 3. Project Overview
+# 2. Project Overview
 
 ## Project Brief
 
-As fully explained in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md), our goal in this project is to improve the firmware of an embedded system called "SportShield". This "SportShield" is an anti-theft device intended only for snowboards and skis at present. It consists of a box equipped with a set of electronic and mechanical equipment, containing a steel cable to be wrapped around the object to be secured.
+As fully explained in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md), our goal in this project is to improve the firmware[^3] of an embedded system[^13] called "SportShield". This "SportShield" is an anti-theft device intended only for snowboards and skis at present. It consists of a box equipped with a set of electronic and mechanical equipment, containing a steel cable to be wrapped around the object to be secured.
 
 How does this SportShield work?
 
 When the cable is wrapped and the box is in a locked state, the device is looking for any physical disturbances. If any movement or vibration of the box is detected as a possible theft, it turns on a strong alarm, more or less loud according to the level of disturbance (intensity and duration of the movement). At the same time, it sends a warning notification to the owner by a dedicated smartphone application, using the internet network.
-To stop the alarm or unlock the shield, the owner uses the application and it processes via Bluetooth or NFC.
-Also, during the locked period, the device will send regularly the GPS position and battery level by the 2G network, to a remote server communicating with the app.
+To stop the alarm or unlock the shield, the owner uses the application and it processes via Bluetooth or NFC[^7].
+Also, during the locked period, the device will send regularly the GPS position and battery level by the 2G network[^12], to a remote server communicating with the app.
 The aim is to make the SportShield as rustic and resilient as possible, minimizing direct user interactions with the hardware and keeping them remote, via the Bluetooth app.
 
 ## Hardware
 
-This project is not about the entire conception of the device from scratch. To be able to develop the firmware of the device we needed only the electronic and informatic parts of the project being developed. Thus, we received :
+This project is not about the entire conception of the device from scratch. To be able to develop the firmware[^3] of the device we needed only the electronic and informatic parts of the project being developed. Thus, we received :
 
-- The electronic card (which gathers and links by soldered circuits all the micro-electronic) of the embedded system, which includes :
-  - **A programmable board**: a "Seeed Xiao BLE nRF52840 Sense" (more details below)
-  - **SIM card holder**: a "SIM800L GSM/GPRS 2G" version "S2-1065J-Z143N"
+- The electronic card (which gathers and links by soldered circuits all the micro-electronic) of the embedded system[^13], which includes :
+  - **A programmable board[^9]**: a "Seeed Xiao BLE nRF52840 Sense" (more details below)
+  - **SIM[^11] card holder**: a "SIM800L GSM/GPRS 2G" version "S2-1065J-Z143N"
   - **GPS module**: a "CD-PA1010D GNSS patch antenna module"
-  - **12V DC converter** : Based on a MT3608 DC-DC converter microchip, the circuit provides exactly 12.7V (the MT3608 handles "2V-24V ➔ 3V-28V" with 2A).
-  - **4V DC converter** : Based on the same MT3608 as above, this circuit provides exactly 4.13V.
-  - 3x **electronic-switch** circuits: basically, it is just a MOSFET transistor. Two are a "DMG1012t" and the last is not referenced.
+  - **12V DC Converter[^2]** : Based on a MT3608 DC-DC Converter[^2] microchip, the circuit provides exactly 12.7V (the MT3608 handles "2V-24V ➔ 3V-28V" with 2A).
+  - **4V DC Converter[^2]** : Based on the same MT3608 as above, this circuit provides exactly 4.13V.
+  - 3x **electronic-switch** circuits: basically, it is just a MOSFET[^6] transistor. Two are a "DMG1012t" and the last is not referenced.
   - 4x **2 pins plugs**: to connect the external components  
 ![map of the whole board](data/circuits.png)
 - The pluggable components :
   - **Battery** : a "LP603449" Lithium-Polymer battery ► 3.7V ► 1100mAh ► 4.3Wh (2 pins plug)
   - **Electromagnetic lock** : a 12V/500mA DC electromagnetic lock (2 pins plug)
   - **Buzzer** : a 3V-24V DC piezzo-electric buzzer (2 pins plug)
-  - **NFC antenna**: a "Molex 1462360031" NFC antenna directly plugged into the main board for NFC communication. (2 pins plug)
-  - **2G antenna**: pluggable on the SIM module (2 pins plug)
-  - **SIM card**: a 2G nano-SIM in its micro-SIM adapter, pluggable in the SIM holder 
+  - **NFC[^7] antenna**: a "Molex 1462360031" NFC[^7] antenna directly plugged into the main board for NFC[^7] communication. (2 pins plug)
+  - **2G antenna**: pluggable on the SIM[^11] module (2 pins plug)
+  - **SIM[^11] card**: a 2G nano-SIM[^11] in its micro-SIM[^11] adapter, pluggable in the SIM[^11] holder 
 ![all the pluggable components](data/components.png)
 
 ## Software
 
-This project uses C/C++ through the Arduino® IDE, to develop the firmware of the Seeed board.  
+This project uses C/C++ through the Arduino® IDE[^4], to develop the firmware[^3] of the Seeed board.  
 The company gave us their first version of the software they coded ([here to download](data/arduino-code-05-03.zip)), which includes all the features exposed in the [Functional Specifications](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md).
 
 The usage of public libraries is allowed.
@@ -127,24 +125,24 @@ For the Hardware, we received some documentation about the components and also t
 - [*Xiao NRF52840 sense* electronic architechture](data/Seeed-Studio-XIAO-nRF52840-Sense-v1.1.pdf) *(provided by the company)*
 - [NRF52840 microcontroller datasheet](data/nRF52840-PS-v1.5.pdf)
 - [GPS module datasheet](data/CD-PA1010D-datasheet-v.02.pdf) *(provided by the company)*
-- [SIM module datasheet](data/SIM800L-SIMCom.pdf) *(provided by the company)*
+- [SIM[^11] module datasheet](data/SIM800L-SIMCom.pdf) *(provided by the company)*
 - [Li-Po Battery datasheet](data/batterie-LP603449.pdf) *(provided by the company)*
 
-![gps, SIM, and seeed pinout](data/main-components-pinout.png)
+![gps, SIM[^11], and seeed pinout](data/main-components-pinout.png)
 ### Electronic circuit diagrams
 The power management of the board follows this diagram :
 ![Power management diagram](data/power_diagram.png)
-Here, the connectics for the Seeed Board, the SIM module and the GPS module :
-![SIM, GPS, and Seeed board connectics](data/easyEDA-connectics.png)([easyEDA sketch here](data/easyEDA-connectics.json))  
+Here, the connectics for the Seeed Board, the SIM[^11] module and the GPS module :
+![SIM[^11], GPS, and Seeed board connectics](data/easyEDA-connectics.png)([easyEDA[^14] sketch here](data/easyEDA-connectics.json))  
 
-To dive into the electronic circuits of the PCB, there is the [PCB circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET used to cut the battery to other components using the control pin D9.
+To dive into the electronic circuits of the PCB[^8], there is the [PCB[^8] circuit schematic](data/SportShield-Electronics-diagram.png) provided by the company. However, this scematic is not up to date. The most important is the absence of the Q5 MOSFET[^6] used to cut the battery to other components using the control pin D9.
 
-# 4. Set-up the environnement
+# 3. Set-up the environnement
 
 This is a tutoriel of how to upload in the hardware, the code we had been given :
 
 ## 1. Download and install the Arduino® IDE 
-Download the executable according to the OS from [the official website](https://www.arduino.cc/en/software).
+Download the executable according to the OS[^15] from [the official website](https://www.arduino.cc/en/software).
 
 ## 2. Add the board to Arduino®
 Open the software and click on 'File'->'Preferences' . Then, copy-paste this URL : "https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json" in the last blank section of the window. Then, click 'OK':
@@ -153,12 +151,12 @@ Now, open the board manager and install the "Seeed NRF52 mbed-enabled Boards" dr
    <img src="data/tutorial-arduino-2.png" height="500px">   
    
 ## 3. Add the libraries
-Open the library manager (button which is just under the board manager one) and intall at least these ones by searching them:
+Open the library manager[^5] (button which is just under the board manager one) and intall at least these ones by searching them:
    - NRF52_MBED_TimerInterrupt *V1.4.1*
    - ArduinoBLE *V1.3.6*
    - Adafruit GPS Library *V1.7.4 (instal all)*
    - Sim800L http connector *V1.14.0*
-   - Seeed Arduino LSM6DS3 *V2.0.3*
+   - Seeed Arduino[^1] LSM6DS3 *V2.0.3*
    - OneWire *V2.3.7*
   
 ## 4. Open the current code
@@ -169,7 +167,7 @@ Just connect the Seeed board with a USB-C cable. And to have a concrete result, 
 
 ## 6. Select the board and the port
 
-On the IDE, there is a some buttons on the top like that :  
+On the IDE[^4], there is a some buttons on the top like that :  
 <img src="data/tutorial-arduino-3.png" width="400px">  
 - The first button is to compile code.
 - The second button is to upload code to the board.
@@ -198,22 +196,22 @@ If the code is still not uploading, try first to run a simple code on the board 
 
 We won't expand on all the possible causes of a failure, so we encourage to read again attentively these 7 steps, and check if it worked well. If there are still some problems, find some help on the internet, by copying the error message of the terminal output. And if possible, try with another board.
 
-# 5. Methodology and Conventions
+# 4. Methodology and Conventions
 
 ## GitHub
 
 ### Branches
 
-The **main branch** hosts only files which are finished and reviewed by the Quality Assurance. This branch requires a 'pull request' reviewed by at least 1 other member of the team before a merge. It can't be bypassed by anybody.
+The **main branch** hosts only files which are finished and reviewed by the Quality Assurance. This branch requires a 'pull request[^10]' reviewed by at least 1 other member of the team before a merge. It can't be bypassed by anybody.
 
 The **document branch** hosts the document being redacted and doesn't follow any particular rule.
 
 The **dev branch** hosts the software we are coding, but requires the code inside to don't have any compilation errors, and, if possible, to work as expected at th current step.
-This branch requires a 'pull request' reviewed by at least 1 other member of the team before a merge.
+This branch requires a 'pull request[^10]' reviewed by at least 1 other member of the team before a merge.
 
 ### Files and folders architecture
 
-Each folder and file name will be in ```kebab-case```, except for the files used as illustrations or resources in the main documents of the project. Also, the folder and its .ino file where is contained the firmware will follow the ```snake_case```.
+Each folder and file name will be in ```kebab-case```, except for the files used as illustrations or resources in the main documents of the project. Also, the folder and its .ino file where is contained the firmware[^3] will follow the ```snake_case```.
 ```
 Root/
 ├── src/
@@ -318,29 +316,29 @@ void longAlarm(int period){
 ```
 **Of course this code doesn't make sense, it is just an example.*
 
-# 6. Software's technical specifications
+# 5. Software's technical specifications
 
 ## Overview
 
 Each of the following parts will explain the technical implementation, following the structure of the 'Functional Requirements' part of the [Functional specification](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) document.  
 
-We don't have access to the application, the server with which the SIM card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC or the bluetooth.  
-That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not".   
+We don't have access to the application, the server with which the SIM[^11] card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC[^7] or the bluetooth.  
+That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network[^12] (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not".   
 The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usally 6 or 7.)
 We will therefore focus on technical detail only on the points where we can take action. These are:  
 - battery management and energy consumption (sleep mode, power cut, ...)
 - multi tasks to make the buzzer ringing and to send the notification at the same time, while also being able to stop the alarm at any moment.
-- take the NFC into account
+- take the NFC[^7] into account
 - movement detection (improve the way to detect a theft)
 
 ## Headers and defintition.h
 
 In this file there are :
-- Inclusion of all the public libraries used in the firmware.
+- Inclusion of all the public libraries used in the firmware[^3].
 - Definition of all the constant values, used in the different headers
 - Definition of all the structures, classes, global functions, and so on
 
-The advantage would be to have all the "settings" of the entire firmware in one file. In this way, we can make some changes about values extremely easily.
+The advantage would be to have all the "settings" of the entire firmware[^3] in one file. In this way, we can make some changes about values extremely easily.
 
 Each header file will include the necessary public libraries a second time if it is needed. However, the use of a conditional inclusion is required to avoid multiple inclusions of the same library.
 
@@ -379,14 +377,14 @@ void loop(){
 
 We don't need to forecast what is in the 'void setup()' function. This is just all the initializations of the different components and libraries, and the setting of what is the initial state of the device.
 
-Now, the algorithm itself, the main loop of the firmware, is available in this diagram (please forgive the size !) :
+Now, the algorithm itself, the main loop of the firmware[^3], is available in this diagram (please forgive the size !) :
 
 ![algorithm diagram](data/algorithm-main-loop-diagram.png)
 
 It allows :
 - the battery consumption's management
 - execute parallel tasks when a theft is detected
-- to take advantage of the NFC
+- to take advantage of the NFC[^7]
 
 ## Power Management
 
@@ -397,9 +395,9 @@ The device will have different behaviors of power consumption according to 3 par
 - the level of battery (or charging the battery)
 - the period of inactivity.
 
-If the battery level is ABOVE 15%, NFC only is enabled because NFC consume like 5mA while Bluetooth Low Energy (BLE) consumes 15mA (3 times more).
+If the battery level is ABOVE 15%, NFC[^7] only is enabled because NFC[^7] consume like 5mA while Bluetooth Low Energy (BLE) consumes 15mA (3 times more).
 
-By default the buzzer, the electromagnetic lock and SIM module circuit are disabled by turning D9 and D4 'LOW' (Cf. [power management diagram](#electronic-circuit-diagrams)).  
+By default the buzzer, the electromagnetic lock and SIM[^11] module circuit are disabled by turning D9 and D4 'LOW' (Cf. [power management diagram](#electronic-circuit-diagrams)).  
 If only one of these components are required, we turn on both D4 and D9, and a variable have to keep track of the number of devices currently used. If there is any, D9 and D4 are turned OFF to save as much energy as possible.
 
 Each time we need to get the GPS position we first have to enable the wake up pin of the GPS module : D8, and then turned it off again.
@@ -417,7 +415,7 @@ And the library we use need some based values to be accurate due to the specific
 Indeed, the battery voltage follows a generic curve which looks like that : 
 ![battery discharge](data/battery-discharge.png)
 As we can see, the maximum voltage (charging voltage) is 4.2V and the voltage can drop down until 2.75V MAXIMUM before its cut-off according to the documentation provided.   
-Also, the SportShield is a low-consumption device, and will follow a 0.015C discharge for basic sleep mode (The 'C' unit means that the discharge flux it about C times the full capacity of the battery per hour. In our case 0.1C corresponds to 1100mAh*0.015C = 16.5 mA of discharge).
+Also, the SportShield is a low-consumption device, and will follow a 0.015C discharge for basic sleep mode (The 'C' unit means that the discharge flux it about C times the full capacity of the battery per hour. In our case 0.1C corresponds to 1100mAh*0.015C = 16.5 mA[^16] of discharge).
 
 Furthermore, as the temperature would be quite low, around 41°F to 23°F (as it is mainly for skis and snowboards), the discharge should avoid to eceed 80% of the total capacity. We finally get a minimum voltage (if the battery is in a cold environement) of 3.4V corresponding to a 0%. Also, we will used some standard curves of discharge to evaluate the current battery capacity based on the voltage we can get from the board itself (included function).
 
@@ -432,15 +430,49 @@ That's why we decided to just differenciate noise and movement, and to look at t
 
 ## Alarm
 
-As the buzzer is controlled by a MOSFET, we decided to use PWM (Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set), to make the piezzo-electric buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
+As the buzzer is controlled by a MOSFET[^6], we decided to use PWM (Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set), to make the piezzo-electric buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET[^6] has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
 
 ## NFC
 
-As the Seeed boards company released their Xiao-NRF52840 quite recently, we found on the official forum of the company website for documentation, that they said they still didn't ended to develop the NFC library of their board. The problem with this unfinished library, is that, as they have their own version of RFID microship and circuit, embedded in the board, the only solution we found to try having it working, is by coding our own library directly in assembly. That's why we probably won't develop the concrete NFC functions more than simulating input and output through the terminal.
+As the Seeed boards company released their Xiao-NRF52840 quite recently, we found on the official forum of the company website for documentation, that they said they still didn't ended to develop the NFC[^7] library of their board. The problem with this unfinished library, is that, as they have their own version of RFID microship and circuit, embedded in the board, the only solution we found to try having it working, is by coding our own library directly in assembly. That's why we probably won't develop the concrete NFC[^7] functions more than simulating input and output through the terminal.
 
 
-# 7. Suggestions (out of scope)
+# 6. Suggestions (out of scope)
 
 ## Electro-Magnetic lock
 
 ## Power Button
+
+# 7. Glossary
+
+[^1]: Arduino: An open-source electronics platform based on easy-to-use hardware and software.
+
+[^2]: DC Converter: A device that converts direct current (DC) from one voltage level to another.
+
+[^3]: Firmware: Software that controls the functionality of electronic devices.
+
+[^4]: IDE: Integrated Development Environment, a software application that provides comprehensive facilities to programmers for software development.
+
+[^5]: Library Manager: A tool for managing libraries, collections of pre-written code, in programming environments.
+
+[^6]: MOSFET: Metal-Oxide-Semiconductor Field-Effect Transistor, a type of transistor used for amplifying or switching electronic signals.
+
+[^7]: NFC: Near Field Communication, a technology that enables communication between devices when they are brought close together.
+
+[^8]: PCB: Printed Circuit Board, a board used to mechanically support and electrically connect electronic components.
+
+[^9]: Programmable Board: A board that allows users to program and customize its functionality.
+
+[^10]: Pull Request: A method of submitting contributions to a project on GitHub for review and inclusion.
+
+[^11]: SIM: Subscriber Identity Module, a smart card inside a GSM cellular phone.
+
+[^12]: 2G Network: Second Generation Network, a telecommunications network technology that provides improved data transmission speeds compared to its predecessor.
+
+[^13]: Embedded System: A computer system designed to perform specific tasks.
+
+[^14]: easyEDA: A free, web-based EDA (Electronic Design Automation) tool that allows for designing PCBs.
+
+[^15]: OS: Operating System, software that manages computer hardware and software resources and provides common services for computer programs.
+
+[^16]: mA: Milliampere, a unit of electrical current equal to one thousandth of an ampere.
