@@ -317,7 +317,7 @@ void loop() {
   //   send_position = false;
   // }
 
-  if (getBatteryLevel()<20){
+  if (getBatteryLevel() < 20) {
     deepSleepMode();
   }
 }
@@ -504,7 +504,7 @@ void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durati
   while (repetitions > 0) {
     timePassed = millis();
     BLE.poll();
-    if (AlarmCharacteristic.value()!=0) {
+    if (AlarmCharacteristic.value() != 0) {
       AlarmCharacteristic.setValue(0);
       break;
     }
@@ -669,17 +669,25 @@ String convertDMMtoDD(String dmmCoordinates) {
   return ddCoordinates;
 }
 
-int getBatteryLevel() {
+int getBatteryLevel(void) {
   int battery = analogRead(PIN_VBAT);
   int batteryLevel = map(battery, 0, 1023, 0, 100);
 
   return batteryLevel;
 }
 void deepSleepMode() {
-  battery = updateBatteryLevel();
+  battery = updateBatteryLevel(void);
+  // HERE
+  // send battery level and GPS location of the device
+  digitalWrite(aimantPin, LOW);
+  digitalWrite(SIM800_RST_PIN, LOW);
+  digitalWrite(GPS_WKUP_PIN, LOW);
+
   while (battery < 20) {
-    battery = updateBatteryLevel();
-    // Send battery level & gps location to the app
+
+    battery = updateBatteryLevel(void);
     delay(1000);
   }
+  gps_setup();
+  sim_setup();
 }
