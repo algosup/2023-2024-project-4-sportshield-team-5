@@ -17,81 +17,98 @@ The format is fairly simple:
 ### Code
 
 ```cpp
-72 -int currentRep = 0; // This value is not needed in the code anymore
+70 -void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff);
+70 +void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity); // The value intensity has been added to control the intensity of the buzzer
 
-78 -float SmallMT = 20.0;
-78 +float SmallMT = 5000.0;  // The minimum value has been increased to remove parasitic movements
+71 -unsigned long previousMillis = 0;
+71 +unsigned long startCycle = 0; //The name of the value has been changed to increase readability
 
-79 -float BigMT = 150.0;
-79 +float BigMT = 7000.0;    // The maximum value has been increased to match the minimum value
+72 -int currentRep = 0;     // This value was no longer necessary
 
-81 -float SmallRT = 20.0; 
-81 +float SmallRT = 45.0;  // The minimum value has been increased to remove parasitic movements
+79 -float SmallMT = 20.0;  
+79 +float SmallMT = 5000.0; // The minimum value has been increased because of the sensibility of the sensor
 
-82 -float BigRT = 125.0;
-82 +float BigRT = 100.0;   // The maximum value has been increased to match the minimum value
+80 -float BigMT = 150.0;  
+80 +float BigMT = 7000.0;   // The value has been increased to match the minimum value
 
-169 +  Config.isActivate = 1;   // To be able to test the program, the boolean is set to true, it has to be removed to make the project work as intended
+82 -float SmallRT = 20.0;  
+82 +float SmallRT = 45.0;   // The minimum value has been increased because of the sensibility of the sensor
 
-184 -    } else if ((MotionBig == false) && (MotionData > SmallMT || RotationData > SmallRT)) { 
-184 +    } else if (MotionData > SmallMT || RotationData > SmallRT) {  // The first condition was redundant with the previous if statement
+83 -float BigRT = 125.0;   
+83 +float BigRT = 100.0;    // The value has been increased to match the minimum value
 
-186  -        Serial.print(" Small motion: ");
-186  +        Serial.print("Small motion: "); // A space was present at the beginning of the string
-   
+169 +Config.isActivate = 1;    // The boolean of the structure is set to one to allow our team to effectuate tests on the code
 
-197 -    PulseBuzzer(5, 500, 1000);  // This line has been moved under the the print
-197 +    Serial.println("Big motion detected"); // A print has been added for testing purposes
+184 -} else if ((MotionBig == false) && (MotionData > SmallMT || RotationData > SmallRT)) {  
+184 +} else if (MotionData > SmallMT || RotationData > SmallRT) {  // The first condition has been deleted because of redundancy
 
-198 +    PulseBuzzer(3, 100, 100);  // This is the same line but as before, except for the number of repetitions that has been reduced
+197 -PulseBuzzer(5, 500, 1000);  
+197 +PulseBuzzer(5, 350, 350, 25);  // The use of the intensity has been added to the call and modifications on the alarm durations has been done
+
+202 -PulseBuzzer(3, 100, 100);  
+202 +PulseBuzzer(3, 200, 100, 12);  // The use of the intensity has been added to the call and modifications on the alarm durations has been done
+
+206 -if ((MotionData > SmallMT) || (RotationData > SmallRT)) { // This block of code has been deleted since it only served testing purposes
+        -if (MotionData > SmallMT) {
+            -Serial.print("WAKE UP : ");
+            -Serial.println(MotionData);
+        -} else {
+            -Serial.print("WAKE UP Rota: ");
+            -Serial.println(RotationData);
+        -}
+214 -}
+
+372  -while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
+     -  delay(1000);
+     -  network = sim800l->getRegistrationStatus();
+     -  Serial.print(network + " ");
+     -  Serial.println(F("Problem to register, retry in 1 sec"));
+     -  digitalWrite(LEDG, !digitalRead(LEDG));
+378  -}  
+372 +// while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) { // This block of code has been commented to pass be able to test the code
+    +//   delay(1000);
+    +//   network = sim800l->getRegistrationStatus();
+    +//   Serial.print(network + " ");
+    +//   Serial.println(F("Problem to register, retry in 1 sec"));
+    +//   digitalWrite(LEDG, !digitalRead(LEDG));
+378 +// }  
+
+438 -void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff) {
+438 +void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity) { // The value intensity has been added to the function to control the buzzer's intensity
+
+440  -unsigned long currentMillis = millis();
+440  +unsigned long timePassed; // The value currentMillis has been renamed and it's value is declared in the next loop
+
+441  +startCycle = millis(); // The variable is given the value equal to the time representing the start of the buzzer's cycle
+
+443  -if (currentRep < repetitions) {
+443  +while (repetitions > 0) { // The condition has been modified into a loop
+
+444  +timePassed = millis(); // This variable is set to the current time in milliseconds
+
+	
+456 -if (currentMillis - previousMillis >= (buzzerState == LOW ? durationOn : durationOff)) {
+456 +if (timePassed- startCycle <= (buzzerState == LOW ? durationOff : durationOn)) { // Calculate the difference of the distance between the start of the cycle and the current time, then compare it to the duration of a cycle
+
+457 -digitalWrite(buzzerPin, buzzerState = !buzzerState);
+457 +analogWrite(buzzerPin, (buzzerState == LOW ? 0 : intensity)); // The writting on the pin has been modified to manage different intensities
+
+458 -previousMillis = currentMillis;
+459 -if (!buzzerState) currentRep++; // These two lines weren't necessary anymore, thus they were deleted
+
+459 +} else if (timePassed - startCycle > (buzzerState == LOW ? durationOff : durationOn)) { // If the time between the start of the cycle and the present is higher than the duration
+
+460 +buzzerState = !buzzerState;        // Switch the state of the buzzer
+461 +startCycle = timePassed;           // Set the new cycle to the present 
+462 +if (!buzzerState) repetitions--;   // If the buzzer is off, decrease repetitions
 
 
-203 +    Serial.println("Small motion detected"); // A print has been added for testing purposes
+
+465 -} else {                          // Since we are now using a while loop, the else is no longer needed
+465 +analogWrite(buzzerPin, 0);        // Change the buzzer's state to OFF
+
+466 -currentRep = 0;                   // We no longer need this variable so it has been deleted
+467 -previousMillis = 0;               // We no longer need this variable so it has been deleted
 
 
-208 -  if ((MotionData > SmallMT) || (RotationData > SmallRT)) {
-    -    if (MotionData > SmallMT) {
-    -      Serial.print("WAKE UP : "); 
-    -      Serial.println(MotionData);
-    -    } else {
-    -      Serial.print("WAKE UP Rota: ");
-    -      Serial.println(RotationData);
-    -    }
-216 -  } // This block of code has been removed as it was redundant with the previous statements
-
-   
-382 -  while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
-    -    delay(1000);
-    -    network = sim800l->getRegistrationStatus();
-    -    Serial.print(network + " ");
-    -    Serial.println(F("Problem to register, retry in 1 sec"));
-    -    digitalWrite(LEDG, !digitalRead(LEDG));
-388 -  }
-382 +  // while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
-    +  //   delay(1000);
-    +  //   network = sim800l->getRegistrationStatus();
-    +  //   Serial.print(network + " ");
-    +  //   Serial.println(F("Problem to register, retry in 1 sec"));
-    +  //   digitalWrite(LEDG, !digitalRead(LEDG));
-288 +  // } // This block of code has been commented to be able to test the functionalities of the code
-
-
-442 -  unsigned long currentMillis = millis();
-442 +  unsigned long currentMillis; // Since it is now updated in a loop, it is not necessary to give the variable a value in this line
-
-443 +  while (repetitions > 0) { // A loop was necessary in this function as it wouldn't turn the flag to detect a motion to false
-
-444 +     currentMillis=millis(); // This line update the current time
-
-452 -  if (currentRep < repetitions) { // Since the code is noew looping and removing 1 to repetition at each repetition, it is now unecessarry to have this condition
-
-449 -      if (!buzzerState) currentRep++; 
-449 +      if (!buzzerState) repetitions--; // After the end of each buzz, remove 1 to repetitions to perform
-     
-451 -  } else {
-451 +  } // The else is not needed since it is now a loop
-
-460 -    currentRep = 0; // This variable does not exist anymore
-
-464 -  } // This bracket is not necessary anymore since the condition has been removed
 ```

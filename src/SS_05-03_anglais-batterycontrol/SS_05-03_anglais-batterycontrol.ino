@@ -31,11 +31,13 @@ BLEStringCharacteristic NameCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214
 BLEStringCharacteristic MACCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1217", BLERead, 20);
 BLEBooleanCharacteristic ActivationCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1215", BLERead | BLEWrite);
 BLEBooleanCharacteristic UnlockCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1216", BLEWrite);
+BLEBooleanCharacteristic AlarmCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1218", BLEWrite);
 
 BLEDescriptor PasswordDescriptor("2901", "Password");  // Bluetooth® Low Energy Descriptor
 BLEDescriptor NameDescriptor("2901", "Name");
 BLEDescriptor ActivationDescriptor("2901", "Activation");
 BLEDescriptor UnlockDescriptor("2901", "Unlock");
+BLEDescriptor AlarmDescriptor("2901", "Stop alarm");
 BLEDescriptor MACDescriptor("2901", "MAC Address");
 
 bool BLE_activated = true;  //true if the bluetooth is activated
@@ -68,11 +70,11 @@ bool send_move = false;
 // Buzzer
 const int buzzerPin = D2;
 void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity);
-unsigned long previousMillis = 0;
-
+unsigned long startCycle = 0;
 //Electroaimant
 const int aimantPin = D3;
 
+bool deactivate = false;  // A boolean which if turned on, stop any ongoing alarms. Activated by bluetooth
 // Set a threshold to determine a "small" or "big" movement
 
 float SmallMT = 5000.0;  //     SmallMotionThreshold
@@ -80,6 +82,14 @@ float BigMT = 7000.0;    //    BigMotionThreshold
 
 float SmallRT = 45.0;  //     SmallRotationThreshold
 float BigRT = 100.0;   //     BigRotationThreshold
+
+// Alarm
+float TimeLimit = 1.5;        // The maximum time margin where two shocks can be detected as a risk, unit in seconds
+float AlarmStart;             // A value to store when the alarm started
+float AlarmDuration;          // The duration of the current alarm;
+int MTCounter;                // Number of movements detected within the time limit value
+bool FirstAlarm = true;       // A boolean which indicates if it is the first alarm in a given time
+bool ActivationAlarm = true;  // A boolean to signal the activation of the product
 
 //batterie
 #define VBAT_ENABLE 14
@@ -161,8 +171,12 @@ void setup() {
   Serial.println(getBatteryVoltage());
 }
 
-//-------------------------------- LOOP --------f--------------------------------
+//-------------------------------- LOOP ----------------------------------------
 void loop() {
+  if (ActivationAlarm) {
+    PulseBuzzer(2, 200, 50, 25);
+    ActivationAlarm = false;
+  }
 
   MotionData = getMotionData();
   RotationData = getRotationData();
@@ -193,17 +207,32 @@ void loop() {
     }
   }
 
-  if (MotionBig) {
-    Serial.println("Big motion detected");
-    PulseBuzzer(3, 100, 100, 128);  // repetitions, DurationOn , DurationOff
-    //sending positions & shock notif via SIM module
+  if (!MotionSmall && !MotionBig && AlarmDuration - AlarmStart < TimeLimit) {
+    MTCounter = 0;
+    FirstAlarm = true;
+  }
+  if (MotionSmall || MotionBig) {
+    MTCounter++;
+    if (FirstAlarm && MTCounter >= 2) {
+      AlarmStart = millis();
+    } else {
+      AlarmDuration = millis();
+      if (AlarmDuration - AlarmStart >= TimeLimit) {
+        AlarmStart = millis();
+      }
+    }
   }
 
-  if (MotionSmall) {
-    Serial.println("Small motion detected");
-    PulseBuzzer(3, 100, 00, 64);  // repetitions, DurationOn , DurationOff
+  if ((MotionBig || MotionSmall) && MTCounter > 2) {
+    if (FirstAlarm) {
+      // Dissuasion alarm
+      PulseBuzzer(3, 200, 100, 12);  // repetitions, DurationOn , DurationOff, intensity
+      FirstAlarm = false;
+    } else {
+      // Theft alarm
+      PulseBuzzer(5, 350, 350, 25);  // repetitions, DurationOn , DurationOff, intensity
+    }
   }
-
   MotionDetect = true;
 
 
@@ -230,63 +259,63 @@ void loop() {
     BLE.end();
   }
 
-  //capture clocked GPS data
-  GPS.read();
-  if (GPS.newNMEAreceived()) {
-    Serial.print(GPS.lastNMEA());    // this also sets the newNMEAreceived() flag to false
-    if (!GPS.parse(GPS.lastNMEA()))  // this also sets the newNMEAreceived() flag to false
-      Serial.println("fail to parse");
-    ;  // we can fail to parse a   sentence in which case we should just wait for another
-  }
+  //   //capture clocked GPS data
+  //   GPS.read();
+  //   if (GPS.newNMEAreceived()) {
+  //     Serial.print(GPS.lastNMEA());    // this also sets the newNMEAreceived() flag to false
+  //     if (!GPS.parse(GPS.lastNMEA()))  // this also sets the newNMEAreceived() flag to false
+  //       Serial.println("fail to parse");
+  //     ;  // we can fail to parse a   sentence in which case we should just wait for another
+  //   }
 
-  if (GPS.fix && position_acquired == false) {  // if location detected
-    Serial.println("fix + false");
-    position_acquired = true;
-    GPS.fix = 0;
-    digitalWrite(GPS_WKUP_PIN, LOW);
-    GPS.sendCommand("$PMTK225,4*2F");  // send to backup mode
-  }
+  //   if (GPS.fix && position_acquired == false) {  // if location detected
+  //     Serial.println("fix + false");
+  //     position_acquired = true;
+  //     GPS.fix = 0;
+  //     digitalWrite(GPS_WKUP_PIN, LOW);
+  //     GPS.sendCommand("$PMTK225,4*2F");  // send to backup mode
+  //   }
 
-  if (send_move) {  //sending of positions via SIM module
-    Serial.println("Envoi detection mouvement");
-    sim800l->setupGPRS("iot.1nce.net");
-    sim800l->connectGPRS();
-    String Route = "http://141.94.244.11:2000/sendNotfication/" + BLE.address();
-    String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
-    String str = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\"}";
-    String bat = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryVoltage()) + "\"}";
-    char position[200];
-    char posbat[200];
-    str.toCharArray(position, str.length() + 1);
-    //Serial.println(str);
-    bat.toCharArray(posbat, bat.length() + 1);
-    Serial.println(posbat);
-    char direction[200];
-    char directionCoord[200];
-    Route.toCharArray(direction, Route.length() + 1);
-    RouteCoord.toCharArray(directionCoord, RouteCoord.length() + 1);
-    sim800l->doPost(direction, "application/json", position, 10000, 10000);
-    sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
-    sim800l->disconnectGPRS();
-    send_move = false;
-  }
+  //   if (send_move) {  //sending of positions via SIM module
+  //     Serial.println("Envoi detection mouvement");
+  //     sim800l->setupGPRS("iot.1nce.net");
+  //     sim800l->connectGPRS();
+  //     String Route = "http://141.94.244.11:2000/sendNotfication/" + BLE.address();
+  //     String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
+  //     String str = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\"}";
+  //     String bat = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryVoltage()) + "\"}";
+  //     char position[200];
+  //     char posbat[200];
+  //     str.toCharArray(position, str.length() + 1);
+  //     //Serial.println(str);
+  //     bat.toCharArray(posbat, bat.length() + 1);
+  //     Serial.println(posbat);
+  //     char direction[200];
+  //     char directionCoord[200];
+  //     Route.toCharArray(direction, Route.length() + 1);
+  //     RouteCoord.toCharArray(directionCoord, RouteCoord.length() + 1);
+  //     sim800l->doPost(direction, "application/json", position, 10000, 10000);
+  //     sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
+  //     sim800l->disconnectGPRS();
+  //     send_move = false;
+  //   }
 
-  if (send_position) {  //regular sending of positions via SIM module
-    Serial.println("Envoi regulier position");
-    sim800l->setupGPRS("iot.1nce.net");
-    sim800l->connectGPRS();
-    String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
-    String bat = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryVoltage()) + "\"}";
-    char posbat[200];
-    bat.toCharArray(posbat, bat.length() + 1);
-    Serial.println(posbat);
-    Serial.println(RouteCoord);
-    char directionCoord[200];
-    RouteCoord.toCharArray(directionCoord, RouteCoord.length() + 1);
-    sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
-    sim800l->disconnectGPRS();
-    send_position = false;
-  }
+  // if (send_position) {  //regular sending of positions via SIM module
+  //   Serial.println("Envoi regulier position");
+  //   sim800l->setupGPRS("iot.1nce.net");
+  //   sim800l->connectGPRS();
+  //   String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
+  //   String bat = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryVoltage()) + "\"}";
+  //   char posbat[200];
+  //   bat.toCharArray(posbat, bat.length() + 1);
+  //   Serial.println(posbat);
+  //   Serial.println(RouteCoord);
+  //   char directionCoord[200];
+  //   RouteCoord.toCharArray(directionCoord, RouteCoord.length() + 1);
+  //   sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
+  //   sim800l->disconnectGPRS();
+  //   send_position = false;
+  // }
 }
 
 //------------- SETUP FUNCTIONS ------------------------------
@@ -305,6 +334,7 @@ void ble_setup(void) {
   NameCharacteristic.addDescriptor(NameDescriptor);
   ActivationCharacteristic.addDescriptor(ActivationDescriptor);
   UnlockCharacteristic.addDescriptor(UnlockDescriptor);
+  AlarmCharacteristic.addDescriptor(AlarmDescriptor);
   MACCharacteristic.addDescriptor(MACDescriptor);
   // add the characteristic to the service
   PasswordService.addCharacteristic(PasswordCharacteristic);
@@ -312,6 +342,7 @@ void ble_setup(void) {
   ConfigService.addCharacteristic(ActivationCharacteristic);
   ConfigService.addCharacteristic(UnlockCharacteristic);
   ConfigService.addCharacteristic(MACCharacteristic);
+  ConfigService.addCharacteristic(AlarmCharacteristic);
   // add service
   BLE.addService(PasswordService);
   BLE.addService(ConfigService);
@@ -343,44 +374,69 @@ void imu_setup(void) {
 }
 
 void gps_setup(void) {
-  pinMode(GPS_WKUP_PIN, OUTPUT);
-  digitalWrite(GPS_WKUP_PIN, LOW);
-  GPS.begin(9600);
-  GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
-  GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);
-  GPS.sendCommand("$PMTK225,4*2F");  // send to backup mode
+  // pinMode(GPS_WKUP_PIN, OUTPUT);
+  // digitalWrite(GPS_WKUP_PIN, LOW);
+  // GPS.begin(9600);
+  // GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
+  // GPS.sendCommand(PMTK_SET_im800l->isReady()) {
+  //   Serial.println(F("Problem to initialize AT command, retry in 1 sec"));
+  //   digitalWrite(LEDR, !digitalRead(LEDR));
+  //   delay(1000);
+  // }
+  // sim800l->enableEchoMode();
+  // sim800l->setupGPRS("iot.1nce.net");
+
+  // uint8_t signal = sim800l->getSignal();
+  // while (signal <= 0) {
+  //   delay(1000);
+  //   signal = sim800l->getSignal();
+  // }
+  // Serial.println(String(signal));
+  // NetworkRegistration network = sim800l->getRegistrationStatus();
+  // // while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
+  // //   delay(1000);
+  // //   network = sim800l->getRegistrationStatus();
+  // //   Serial.print(network + " ");
+  // //   Serial.println(F("Problem to register, retry in 1 sec"));
+  // //   digitalWrite(LEDG, !digitalRead(LEDG));
+  // // }
+  // delay(50);
+  // sim800l->setPowerMode(MINIMUM);      // set minimum functionnality mode
+  // digiNMEA_UPDATE_1HZ);
+  // GPS.sendCommand("$PMTK225,4*2F");  // send to backup mode
   // GPS.sendCommand("$PMTK225,8*23");   // send to Always Locate backup mode
   // GPS.sendCommand("$PMTK225,9*22");   // send to Always Locate standby mode
   // GPS.sendCommand("$PMTK225,2,4000,15000,24000,90000*16");  // send to periodic standby mode
   // GPS.sendCommand("$PMTK161,0*28");   // send to standby mode
+  // }
 }
 
 void sim_setup(void) {
-  while (!sim800l->isReady()) {
-    Serial.println(F("Problem to initialize AT command, retry in 1 sec"));
-    digitalWrite(LEDR, !digitalRead(LEDR));
-    delay(1000);
-  }
-  sim800l->enableEchoMode();
-  sim800l->setupGPRS("iot.1nce.net");
-
-  uint8_t signal = sim800l->getSignal();
-  while (signal <= 0) {
-    delay(1000);
-    signal = sim800l->getSignal();
-  }
-  Serial.println(String(signal));
-  NetworkRegistration network = sim800l->getRegistrationStatus();
-  // while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
+  // while (!sim800l->isReady()) {
+  //   Serial.println(F("Problem to initialize AT command, retry in 1 sec"));
+  //   digitalWrite(LEDR, !digitalRead(LEDR));
   //   delay(1000);
-  //   network = sim800l->getRegistrationStatus();
-  //   Serial.print(network + " ");
-  //   Serial.println(F("Problem to register, retry in 1 sec"));
-  //   digitalWrite(LEDG, !digitalRead(LEDG));
   // }
-  delay(50);
-  sim800l->setPowerMode(MINIMUM);      // set minimum functionnality mode
-  digitalWrite(SIM800_DTR_PIN, HIGH);  // put in sleep mode
+  // sim800l->enableEchoMode();
+  // sim800l->setupGPRS("iot.1nce.net");
+
+  // uint8_t signal = sim800l->getSignal();
+  // while (signal <= 0) {
+  //   delay(1000);
+  //   signal = sim800l->getSignal();
+  // }
+  // Serial.println(String(signal));
+  // NetworkRegistration network = sim800l->getRegistrationStatus();
+  // // while (network != REGISTERED_HOME && network != REGISTERED_ROAMING) {
+  // //   delay(1000);
+  // //   network = sim800l->getRegistrationStatus();
+  // //   Serial.print(network + " ");
+  // //   Serial.println(F("Problem to register, retry in 1 sec"));
+  // //   digitalWrite(LEDG, !digitalRead(LEDG));
+  // // }
+  // delay(50);
+  // sim800l->setPowerMode(MINIMUM);      // set minimum functionnality mode
+  // digitalWrite(SIM800_DTR_PIN, HIGH);  // put in sleep mode
 }
 
 
@@ -436,22 +492,34 @@ void Temps(void) {
   Serial.print(seconds);
   Serial.println("s");
 }
-
 void PulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity) {
   static int buzzerState = LOW;
-  unsigned long currentMillis;
-  while (repetitions > 0) {
-    currentMillis = millis();
+  unsigned long timePassed;
 
-    if (currentMillis - previousMillis >= (buzzerState == LOW ? durationOn : durationOff)) {
-      analogWrite(buzzerPin, intensity);
-      previousMillis = currentMillis;
+  startCycle = millis();
+  while (repetitions > 0) {
+    timePassed = millis();
+    BLE.poll();
+    if (AlarmCharacteristic.value()!=0) {
+      AlarmCharacteristic.setValue(0);
+      break;
+    }
+
+
+    if (timePassed - startCycle <= (buzzerState == LOW ? durationOff : durationOn)) {
+
+      analogWrite(buzzerPin, (buzzerState == LOW ? 0 : intensity));
+
+    } else if (timePassed - startCycle > (buzzerState == LOW ? durationOff : durationOn)) {
+
+      buzzerState = !buzzerState;
+      startCycle = timePassed;
       if (!buzzerState) repetitions--;
     }
   }
   // Reset variables after performing all repetitions
   analogWrite(buzzerPin, 0);
-  previousMillis = 0;
+  delay(0500);
   MotionSmall = false;
   MotionBig = false;
 }
@@ -501,7 +569,7 @@ void onDisconnect(BLEDevice central) {
 }
 
 void onWritePassword(BLEDevice central, BLECharacteristic characteristic) {
-  const int motDePasseAttendu = 13330;
+  const int motDePasseAttendu = 1;
   short int value = PasswordCharacteristic.value();
   Conversion(value);
   isAuthenticate = (value == motDePasseAttendu);
