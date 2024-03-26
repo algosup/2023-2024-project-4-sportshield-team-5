@@ -64,7 +64,7 @@ The week started with a COMPANY presenting to us their sportshield prototype inn
 ## Metrics and KPIs
 
 1. **Code Metrics:**
-The image unders shows all the commit and push that have been done within the week. and global information on what have been done.
+The image under shows all the commit and push that have been done within the week. and global information on what have been done.
 
 <img src= "images/Commit&push_history.png">
 

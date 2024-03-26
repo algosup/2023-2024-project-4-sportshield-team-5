@@ -21,11 +21,11 @@ Provide a brief overview of the key activities and achievements during the week.
 
 ## Goals
 
-Outline the goals set for the week and evaluate the progress made towards each goal.
+4. Initiate the implementation phase of the project.
 
 ## Challenges
 
-Highlight any challenges or obstacles encountered during the week and discuss possible solutions.
+1. The software engineer struggle with the improvement of the alarm detection, and the buzzer.
 
 ## Key Accomplishments
 
