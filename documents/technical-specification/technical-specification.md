@@ -423,10 +423,35 @@ Nowing that, all these values and decisions are really subjective and need to be
 
 ## Detection of a theft
 
-WHen we received the project, the current idea was to split a detected movement into 3 categories : noise, small and big movements.
+When we received the project, the current idea was to split a detected movement into 3 categories : noise, small and big movements.
 
 However, they admitted that a smooth and slow theft could stay undetected.
 That's why we decided to just differenciate noise and movement, and to look at the duration of the movement more than the intensity. This way, a short shock, wich can happens won't be detected as a theft while any movement lasting more than 1 second is detected as a theft, and in any case, any movement trigger a small alarm for 1 second, as a dissuasion. However the GPRS signal to get a notification on the app will be received only when an real theft is detected.
+
+A specific movement of a 180° back-and-forth rotation on the x axis is required to wake up the device.
+
+Here are the different axis of the device : 
+<img src="data/3dModel.png" height="300px"> 
+
+How does work the specific movement detection, to wake up the device  ?
+
+The movement detection follows this algorithm :   
+<img src="data/specific-movement.png" width="200px"> 
+
+Now, the way to find if the trajectory is not followed, is by capturing very regularly the rotation and the acceleration on each axis using the embedded IMU (Inertial Measurement Unit) of the main board.
+
+Units of the IMU are in 'g' 1g = 9.81m/s2.
+
+The trajectory is considered as valid if :
+- A big positive rotation followed by a big negative rotation on the X axis is detected. Both need to have a ratio of intensity between 0.5 and 2.
+- Any too big acceleration is detected on X axis.
+- Any too big rotation is detected on both Z and Y axis.
+- Z acceleration goes from -1 stable to 1 (180° rotation) to -1 stable (-180° rotation) because gravity is 1 g. 
+- Y acceleration goes from 0 stable to 0 (180° rotation) to 0 stable (-180° rotation).
+
+Y and Z acceleration illustration :   
+<img src="data/acceleration.png" width="200px">  
+We won't look at the sinusoïdal aspect of the movement and but only look only at the peaks and their correlation in time.
 
 ## Alarm
 
