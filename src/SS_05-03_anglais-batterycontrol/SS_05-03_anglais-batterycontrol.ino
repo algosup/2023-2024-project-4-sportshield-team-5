@@ -1,19 +1,5 @@
-#define TIMER_INTERRUPT_DEBUG 0
-#define _TIMERINTERRUPT_LOGLEVEL_ 0
-#include "NRF52_MBED_TimerInterrupt.h"
-#include "NRF52_MBED_ISR_Timer.h"
-#include <Arduino.h>
-// BLE
-#include <ArduinoBLE.h>
-#include "struct.h"
-// IMU
-#include <LSM6DS3.h>
-#include <Wire.h>
-//GPS
-#include <Adafruit_GPS.h>
-//SIM
-#include "SIM800L.h"
 
+#include "global.h"
 //---------------- GLOBAL VARIABLES -----------------------------
 myConfig Config;
 bool isAuthenticate = false;
@@ -676,7 +662,7 @@ int getBatteryLevel(void) {
   return batteryLevel;
 }
 void deepSleepMode() {
-  battery = updateBatteryLevel(void);
+  int battery = getBatteryLevel();
   // HERE
   // send battery level and GPS location of the device
   digitalWrite(aimantPin, LOW);
@@ -685,7 +671,7 @@ void deepSleepMode() {
 
   while (battery < 20) {
 
-    battery = updateBatteryLevel(void);
+    battery = getBatteryLevel();
     delay(1000);
   }
   gps_setup();
