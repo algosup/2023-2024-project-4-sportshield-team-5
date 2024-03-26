@@ -383,6 +383,8 @@ It allows :
 
 ## Power Management
 
+#### specifications
+
 The device will have different behaviors of power consumption according to 3 parameters : 
 - the lock state of the SportShield
 - the level of battery (or charging the battery)
@@ -395,11 +397,39 @@ If only one of these components are required, we turn on both D4 and D9, and a v
 
 Each time we need to get the GPS position we first have to enable the wake up pin of the GPS module : D8, and then turned it off again.
 
-%%%%
+#### implementation
+
+Also, the percentage of the battery and the management of its charge will require a specific public library called...  
+
+A key feature of the battery management ids the ability to know the current capacity (%). There are 2 methods for that :
+- The ideal one but over-consuming electricity is to measure constantly the voltage and the intensity which goes out from the battery to know how much energy had beeen used or had been loaded in real-time. However it is almost impossible to imlement and this solution using though a 'coulombmeter' is reserved for very particular usages.
+- The very spread solution is to just measure the current voltage and to compare the value to a set of previous measures took to define the correlation between the current capacity and the current voltage.
+
+And the library we use need some based values to be accurate due to the specificities of each battery.
+
+Indeed, the battery voltage follows a generic curve which looks like that : 
+![battery discharge](data/battery-discharge.png)
+As we can see, the maximum voltage (charging voltage) is 4.2V and the voltage can drop down until 2.75V MAXIMUM before its cut-off according to the documentation provided.   
+Also, the SportShield is a low-consumption device, and will follow a 0.015C discharge for basic sleep mode (The 'C' unit means that the discharge flux it about C times the full capacity of the battery per hour. In our case 0.1C corresponds to 1100mAh*0.015C = 16.5 mA of discharge).
+
+Furthermore, as the temperature would be quite low, around 41°F to 23°F (as it is mainly for skis and snowboards), the discharge should avoid to eceed 80% of the total capacity. We finally get a minimum voltage (if the battery is in a cold environement) of 3.4V corresponding to a 0%. Also, we will used some standard curves of discharge to evaluate the current battery capacity based on the voltage we can get from the board itself (included function).
+
+Nowing that, all these values and decisions are really subjective and need to be defined precisely after a bunch of tests with the final hardware, in the real conditions. That's why we'll put these values without considering more than the assomptions above, cause with our current hardware, any measurement could be accurate.
 
 ## Detection of a theft
 
+WHen we received the project, the current idea was to split a detected movement into 3 categories : noise, small and big movements.
+
+However, they admitted that a smooth and slow theft could stay undetected.
+That's why we decided to just differenciate noise and movement, and to look at the duration of the movement more than the intensity. This way, a short shock, wich can happens won't be detected as a theft while any movement lasting more than 1 second is detected as a theft, and in any case, any movement trigger a small alarm for 1 second, as a dissuasion. However the GPRS signal to get a notification on the app will be received only when an real theft is detected.
+
+## Alarm
+
+As the buzzer is controlled by a MOSFET, we decided to use PWM (Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set), to make the piezzo-electric buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
+
 ## NFC
+
+As the Seeed boards company released their Xiao-NRF52840 quite recently, we found on the official forum of the company website for documentation, that they said they still didn't ended to develop the NFC library of their board. The problem with this unfinished library, is that, as they have their own version of RFID microship and circuit, embedded in the board, the only solution we found to try having it working, is by coding our own library directly in assembly. That's why we probably won't develop the concrete NFC functions more than simulating input and output through the terminal.
 
 
 
