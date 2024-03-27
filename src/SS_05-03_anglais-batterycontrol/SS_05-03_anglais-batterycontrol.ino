@@ -124,7 +124,16 @@ void loop()
       MotionSmall = true;
     }
   }
-
+  if (digitalRead(P0_17))
+  {
+    Serial.println("not charging");
+    PulseBuzzer(5, 350, 5000, 10);
+  }
+  else if (!digitalRead(P0_17))
+  {
+    Serial.println("charging");
+    PulseBuzzer(3, 350, 1000, 30);
+  }
   if (!MotionSmall && !MotionBig && AlarmDuration - AlarmStart < TimeLimit)
   {
     MTCounter = 0;

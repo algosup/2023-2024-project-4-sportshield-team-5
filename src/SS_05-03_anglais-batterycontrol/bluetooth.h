@@ -12,6 +12,7 @@
 BLEService PasswordService("19B10000-E8F2-537E-4F6C-D104768A1213"); // Bluetooth® Low Energy Service
 BLEService ConfigService("19B10000-E8F2-537E-4F6C-D104768A1214");
 
+//----------------------- CHARACTERISTICS ------------------------
 BLEShortCharacteristic PasswordCharacteristic("19B10000-E8F2-537E-4F6C-D104768A1213", BLEWrite); // Bluetooth® Low Energy Characteristic
 BLEStringCharacteristic NameCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite, 20);
 BLEStringCharacteristic MACCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1217", BLERead, 20);
@@ -19,6 +20,7 @@ BLEBooleanCharacteristic ActivationCharacteristic("19B10001-E8F2-537E-4F6C-D1047
 BLEBooleanCharacteristic UnlockCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1216", BLEWrite);
 BLEBooleanCharacteristic AlarmCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1218", BLEWrite);
 
+//----------------------- DESCRIPTORS ----------------------------
 BLEDescriptor PasswordDescriptor("2901", "Password"); // Bluetooth® Low Energy Descriptor
 BLEDescriptor NameDescriptor("2901", "Name");
 BLEDescriptor ActivationDescriptor("2901", "Activation");
@@ -26,6 +28,7 @@ BLEDescriptor UnlockDescriptor("2901", "Unlock");
 BLEDescriptor AlarmDescriptor("2901", "Stop alarm");
 BLEDescriptor MACDescriptor("2901", "MAC Address");
 
+//---------------------- Initialization --------------------------
 bool BLE_activated = true; // true if the bluetooth is activated
 uint32_t tim_connec = 0;   // time in ms or we start to activate the bluetooth following a detection of movements
 inline void onConnect(BLEDevice central);
@@ -38,7 +41,6 @@ inline void onReadActivation(BLEDevice central, BLECharacteristic characteristic
 inline void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic);
 
 //------------------------ SETUP FUNCTION ------------------------
-
 /**
  * This function starts the Bluetooth module to enable Bluetooth pairing.
  * @param None
@@ -94,6 +96,11 @@ void ble_setup(void)
 
 //--------------------------  FUNCTIONS --------------------------
 
+/**
+ * This function is called when an external device is paired.
+ * @param central (BLEDevice): A paired device.
+ * @result Print the MAC address of both the external device and this device.
+ */
 void onConnect(BLEDevice central)
 {
     Serial.print("Connected to ");
@@ -102,6 +109,11 @@ void onConnect(BLEDevice central)
     digitalWrite(LEDB, LOW);
 }
 
+/**
+ * This function is called when an external device disconnects.
+ * @param central (BLEDevice): A paired device.
+ * @result Print the MAC address of the disconnecting device.
+ */
 void onDisconnect(BLEDevice central)
 {
     Serial.print(F("Disconnected from central: "));
@@ -125,6 +137,12 @@ char Conversion(unsigned short int data)
     Serial.print("Written password  = ");
     Serial.println(mdphexadecimal);
 }
+
+/**
+ * This function is called when a password is sent by a paired device.
+ * @param central (BLEDevice): A paired device.
+ * @result If the password is correct, a boolean is turned on.
+ */
 void onWritePassword(BLEDevice central, BLECharacteristic characteristic)
 {
     const int motDePasseAttendu = 1;
@@ -134,6 +152,12 @@ void onWritePassword(BLEDevice central, BLECharacteristic characteristic)
     Serial.println(isAuthenticate ? "successful authentication" : "wrong password");
 }
 
+/**
+ * This function is called when the name of the device is changed.
+ * @param central (BLEDevice): A paired device.
+ * @param characteristic (BLECharacteristic): The Name characteristic.
+ * @result Change the name of the device on the mobile app (not yet implemented).
+ */
 void onWriteName(BLEDevice central, BLECharacteristic characteristic)
 {
     if (isAuthenticate)
@@ -149,6 +173,12 @@ void onWriteName(BLEDevice central, BLECharacteristic characteristic)
     }
 }
 
+/**
+ * This function is called when the name of the device is read.
+ * @param central (BLEDevice): A paired device.
+ * @param characteristic (BLECharacteristic): The Name characteristic.
+ * @result Read the name of the device.
+ */
 void onReadName(BLEDevice central, BLECharacteristic characteristic)
 {
     Serial.println("CALLBACK READ");
@@ -163,6 +193,12 @@ void onReadName(BLEDevice central, BLECharacteristic characteristic)
     }
 }
 
+/**
+ * This function is called when the device security mode is modified.
+ * @param central (BLEDevice): A paired device.
+ * @param characteristic (BLECharacteristic): The Activation characteristic.
+ * @result Change the security mode of the device to on if the input value is different than 0.
+ */
 void onWriteActivation(BLEDevice central, BLECharacteristic characteristic)
 {
     if (isAuthenticate)
@@ -170,14 +206,14 @@ void onWriteActivation(BLEDevice central, BLECharacteristic characteristic)
         Config.isActivate = ActivationCharacteristic.value();
         if (Config.isActivate != 0)
         {
-            Serial.println("Alarme enabled");
+            Serial.println("Alarm enabled");
             digitalWrite(SIM800_DTR_PIN, LOW); // put in normal mode
             delay(100);
             sim800l->setPowerMode(NORMAL); // set normal functionnality mode
         }
         else
         {
-            Serial.print("Désactivation");
+            Serial.print("Deactivation");
             sim800l->setPowerMode(MINIMUM);     // set minimum functionnality mode
             digitalWrite(SIM800_DTR_PIN, HIGH); // put in sleep mode
         }
@@ -188,6 +224,12 @@ void onWriteActivation(BLEDevice central, BLECharacteristic characteristic)
     }
 }
 
+/**
+ * This function is called when the device security mode is modified.
+ * @param central (BLEDevice): A paired device.
+ * @param characteristic (BLECharacteristic): The Activation characteristic.
+ * @result Read the security mode of the device.
+ */
 void onReadActivation(BLEDevice central, BLECharacteristic characteristic)
 {
     // Serial.println("CALLBACK READ");
@@ -195,6 +237,12 @@ void onReadActivation(BLEDevice central, BLECharacteristic characteristic)
     ActivationCharacteristic.writeValue(Config.isActivate);
 }
 
+/**
+ * This function is called when the unlock function is called from a paired device.
+ * @param central (BLEDevice): A paired device.
+ * @param characteristic (BLECharacteristic): The Unlock characteristic.
+ * @result If the user is authentified, unlock the magnet for 2 seconds.
+ */
 void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic)
 {
     if (isAuthenticate)
