@@ -24,12 +24,15 @@
     - [7.2 Resumption Criteria](#72-resumption-criteria)
   - [8. Resources and Environment](#8-resources-and-environment)
     - [8.1 Testing tools](#81-testing-tools)
+      - [8.1.1 Github Actions](#811-github-actions)
     - [8.2 Test Environment](#82-test-environment)
+    - [8.3 Workforce](#83-workforce)
   - [9. Schedules](#9-schedules)
     - [9.1 Estimated Schedule](#91-estimated-schedule)
     - [9.2 Actual Schedule](#92-actual-schedule)
   - [10. Risks/Assumptions](#10-risksassumptions)
-  - [11. Glossary](#11-glossary)
+  - [11. Deliverables](#11-deliverables)
+  - [12. Glossary](#12-glossary)
 
 </details>
 
@@ -63,14 +66,13 @@ The testing of SportShield will mainly consist of the validation of the core fea
 
 ### 3.1 In Scope
 
-This test plan mainly targets the testing of SportShield software and its reactivity to given situations. It also englobes 
+This test plan mainly targets the testing of SportShield software and its reactivity to given situations. It also englobes documentation control and consistence verfication during the whole project.
 
 #### 3.1.1 Scope of SportShield's software
 
-- Code
-  - Absence of significant bugs
-  - Final product meets the KPIs and reliability indicators given by the client.
-  - Conventions respect
+- Absence of significant bugs
+- Final product meets the KPIs and reliability indicators given by the client.
+- Conventions respect
 
 The following features of SportShield's software will be tested:
 
@@ -106,23 +108,93 @@ Entry criteria description
 
 ### 6.2 Exit Criteria
 
-Exit criteria description
+To consider the product as ready for distribution and end the test phase, some critical objectives must be met.
+
+1. Meet the client's Reliability Indicators minimal functionning rate:
+   - Shock detection - 99%
+   - Unlock - 99%
+   - Alarm - 98%
+   - Shock notification - 95%
+   - GNSS position acquisition and transmission - 80%
+
+2. Meet the client's expectations on battery operating time between two charges:
+   - At least 7 days of operating duration
+   - A day is considered as a 6 hours of activation mode and then 18 hours in stand-by mode.
+
+3. Test Case Coverage:
+   - A minimum test coverage of 95% for all identified features must be achieved before considering the test phase complete.
+   - This ensures our lock has its expected behaviour
+
+4. Bug Resolution Rate:
+   - All the issues must be addressed and resolved before exiting the testing phase.
+   - This allows you to create software that is less prone to bugs.
+
+5. Documentation completeness and correctness
+   - Comprehensive documentation including functional specifications, technical specifications, user manual, test plan, test cases and test reports must be verified to identify any possible mistake or missing information.
+   - The documentation should be easily understandable to any external person of the project. Additionally, it should be consistent across all documents.
 
 ## 7. Suspension and Resumption Criteria
 
 ### 7.1 Suspension Criteria
 
-Suspension Criteria description
+In case of a critical bug affecting the whole testing process, the testing phase can be temporarily suspended. The following cases can trigger this suspension:
+
+- Hardware problems/failure.
+- Assigned resources are not available when required by quality assurance team.
+- Significant change in requirements asked by the client
+- The firmware contains serious defects limiting or preventing testing.
 
 ### 7.2 Resumption Criteria
 
-Resumption requirements description
+To resume testing, the critical problem(s) that have caused the test suspension must have been addressed and resolved.
 
 ## 8. Resources and Environment
 
 ### 8.1 Testing tools
 
+To increase efficiency and guarantee the best quality for SportShield's software, we will use powerful monitoring tools running repetitive and measurable actions automatically.
+
+#### 8.1.1 Github Actions
+
+GitHub Actions is a platform we will use to adopt a continuous integration and continuous deployment workflow. Every time a push is triggered on a targetted branch, a test will automatically run.
+
 ### 8.2 Test Environment
+
+As this project is based on the supplied board, our tests will be carried out entirely using it. In addition, and in order to harmonize the test environment, we have decided to use a single computer to compile the software and upload it to the ARDUINO board.
+
+We will use the following card equipped with the components listed below:
+
+- Xiao BLE Sense nrf52840
+  - GNSS PA1010D
+  - GSM/2G SIM800L Module
+  - Electromagnet
+  - Piezoelectric buzzer
+  - Lithium-Polymer battery with a capacity of 1100 mAh
+  - NFC Antenna
+
+The following libraries will be added in Arduino IDE:
+
+- NRF52_MBED_TimerInterrupt *V1.4.1*
+- ArduinoBLE *V1.3.6*
+- Adafruit GPS Library *V1.7.4 (install all)*
+- Sim800L http connector *V1.14.0*
+- Seeed Arduino[^1] LSM6DS3 *V2.0.3*
+- OneWire *V2.3.7*
+
+The computer characteristics follow the configuration listed below:
+
+- Lenovo Ideapad Slim 1-14AST-05
+  - **Processor:** AMD® A4-9120e Radeon R3
+  - **RAM:** 4,0 GiB
+  - **Operating System:** Ubuntu 22.04.4 LTS x64
+
+To test our software, we will not rely on the mobile app itself as we want to add some functionalities for battery saving. Instead, we are going to use LightBlue app showing the device available fields via Bluetooth.
+
+- Iphone 11
+  - **iOS version:** 17.4.1
+  - **LightBlue version:** 4.2.7
+
+### 8.3 Workforce
 
 ## 9. Schedules
 
@@ -172,4 +244,11 @@ Resumption requirements description
 | Limited time or ressources for testing | Identify the most critical features to test them first |
 | An hardware failure occurs             | Get extra hardware or share hardware among teams       |
 
-## 11. Glossary
+## 11. Deliverables
+
+- Test Plan
+- Test Cases Description
+- Bugs Reports and reports regarding the testing progress
+- QA meetings reports
+
+## 12. Glossary
