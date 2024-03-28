@@ -207,7 +207,7 @@ The **main branch** hosts only files which are finished and reviewed by the Qual
 
 The **document branch** hosts the document being redacted and doesn't follow any particular rule.
 
-The **dev branch** hosts the software we are coding, but requires the code inside to don't have any compilation errors, and, if possible, to work as expected at th current step.
+The **dev branch** hosts the software we are coding, but requires the code inside to don't have any compilation errors, and, if possible, to work as expected at the current step.
 This branch requires a 'pull request[^10]' reviewed by at least 1 other member of the team before a merge.
 
 ### Files and folders architecture
@@ -259,11 +259,11 @@ Root/
 
 #### Appearence
 
-The variables' names are in ```snake_case```.
-The functions' names are in ```camelCase```.
-The definitions' names are in ```COBOL_CASE```.
+The variable names are in ```snake_case```.
+The function names are in ```camelCase```.
+The definition names are in ```COBOL_CASE```.
 
-The indentation of 2 spaces is added after each carriage return in after a curly bracket.
+The indentation of 2 spaces is added after each carriage return after a curly bracket.
 
 When a condition or a loop occurs, the curly brackets are opened at the end of the first line of the statement, and closed in a single-last line without the indentation.
 
@@ -279,7 +279,7 @@ In the same idea, variables' declaration and first assignment should be separate
 
 #### Comments
 
-Each function need a comment above explaining its behavior and how parameters are used.  
+Each function needs a comment above explaining its behaviour and its parameters.  
 Any weird or tricky algorithm has to be commented.  
 Any variable declaration need a comment on the same line to quickly explain what it is. If it is too obvious, just write ```// explicit```.
 
@@ -433,7 +433,7 @@ That's why we decided to just differentiate noise and movement, and to look at t
 
 A specific movement of a 180° back-and-forth rotation on the x axis is required to wake up the device.
 
-Here are the different axis of the device : 
+Here are the different axis of the device :  
 <img src="data/3dModel.png" height="300px"> 
 
 How does work the specific movement detection, to wake up the device  ?
