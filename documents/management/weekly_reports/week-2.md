@@ -55,7 +55,7 @@ The image below summarize key points noted during the meeting
 1. **Project management metrics:**
 The images below will show the progression level of the project in the documentation phase and in the coding phase.
 - Individual tasks.
-<img src="images/week2_tasks.png">
+<img src="images/Week2_Tasks.png">
 
 - Overall project percentage
 <img src="images/Progression.png">

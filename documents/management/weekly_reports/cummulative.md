@@ -150,6 +150,50 @@ The week was full of challenges but we are moving slowly and learning new things
 [Original Document](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/4694e76bd2befe8af7a87f23bf6c58e64aa6f18f/documents/management/weekly-reports/week-3.md)
 
 
+</details>
+
+------------
+## Overview
+We started the week with our main goal trying to complete as many tasks as possible on the implementation phase and deliver the technical document.
+
+## Goals
+
+- Implement the bluetooth
+- Complete with the improvement of the alarm
+- Complete and deliver the technical document
+- Start implementing the device management with NFC
+
+
+## Key Accomplishments
+
+- Bluetooth implementation
+<img src="images/Bluetooth_OK.png">
+- Technical document delivery
+<img src="images/Technical.png">
+- Improvement of the alarm.
+<img src="images/Alarm.png">
+
+## Upcoming Week
+
+- Continue with the coding phase
+- Continue with the user manual document
+- Complete the device management with NFC
+
+## Metrics and KPIs
+
+1. **Project management metrics:**
+The images below will show the progression level of the project in the documentation phase and in the coding phase.
+- Individual tasks.
+<img src="images/Week3_Tasks.png">
+
+- Project progression percentage
+<img src="images/progression_Week3.png">
+
+
+## Other Notes
+
+- We made significant progress on the coding phase this week and have a clear plan to finish the project before the deadline.
+
 # WEEK 4
 
 [Original Document](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/cad6adad2e0df4171eab92c59208b302e8bca699/documents/management/weekly-reports/week-4.md)
