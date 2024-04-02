@@ -45,8 +45,8 @@
       - [Appearence](#appearence)
       - [Variables](#variables)
       - [Comments](#comments)
-    - [Example of a good code\*](#example-of-a-good-code)
-- [5. Software's technical specifications](#5-softwares-technical-specifications)
+    - [Expected piece of code](#expected-piece-of-code)
+- [5. Software's technical implementation](#5-softwares-technical-implementation)
   - [Overview](#overview)
   - [Headers and defintition.h](#headers-and-defintitionh)
   - [The main file (.ino)](#the-main-file-ino)
@@ -267,7 +267,7 @@ The indentation of 2 spaces is added after each carriage return after a curly br
 
 When a condition or a loop occurs, the curly brackets are opened at the end of the first line of the statement, and closed in a single-last line without the indentation.
 
-However some simple statements can be written in one line, as long as it doesn't take more than 50 characters approximately.
+However, some simple statements can be written in one line, as long as it doesn't take more than 50 characters
 
 #### Variables
 
@@ -283,7 +283,7 @@ Each function needs a comment above explaining its behaviour and its parameters.
 Any weird or tricky algorithm has to be commented.  
 Any variable declaration need a comment on the same line to quickly explain what it is. If it is too obvious, just write ```// explicit```.
 
-### Example of a good code*
+### Expected piece of code
 
 ```cpp
 #define BUZZER D2
@@ -315,26 +315,24 @@ void longAlarm(int period){
   }
 }
 ```
-**Of course this code doesn't make sense, it is just an example.*
 
-# 5. Software's technical specifications
+# 5. Software's technical implementation
 
 ## Overview
 
 Each of the following parts will explain the technical implementation, following the structure of the 'Functional Requirements' part of the [Functional specification](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) document.  
 
-We don't have access to the application, the server with which the SIM[^11] card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC[^7] or the bluetooth.  
-That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network[^12] (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not".   
-The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usually 6 or 7.)
-We will therefore focus on technical detail only on the points where we can take action. These are:  
-- battery management and energy consumption (sleep mode, power cut, ...)
-- multi tasks to make the buzzer ringing and to send the notification at the same time, while also being able to stop the alarm at any moment.
-- take the NFC[^7] into account
-- movement detection (improve the way to detect a theft)
-
+We don't have access to the server with which SportShield communicates, thanks to the SIM[^11] card. Additionally, we don't have access to the final hardware as the product is still a prototype.  
+They allowed us to simulate some complex protocol requiring a complete app or the final hardware, as we couldn't have the right functions.
+However, the comany suggested we could add any function we want assuming it will be implemented on the server side or the app.
+We will therefore focus on the technical details of the full software implementations among the KPIs given by the client. These are:  
+- Battery management and energy consumption (sleep mode, power cut, ...)
+- Multi-tasking to make the buzzer ring and send notifications at the same time, while also being able to stop the alarm at any moment.
+- Add NFC[^7] management to unlock SportShield, but without having it working.
+- Improve movement detection to enhance the distinction between an accidental bump in the lock from a real theft attempt.
 ## Headers and defintition.h
 
-In this file there are :
+This file contains:
 - Inclusion of all the public libraries used in the firmware[^3].
 - Definition of all the constant values, used in the different headers
 - Definition of all the structures, classes, global functions, and so on
@@ -345,7 +343,7 @@ Each header file will include the necessary public libraries a second time if it
 
 ## The main file (.ino)
 
-In this file there are :
+This file contains:
 - **inclusion** of the different **headers** (and not the libraries -> 'definition.h')
 - the '**void setup()**' where are executed only functions.  
   this function contains the code which will be executed once at the beginning after a reload of the program on the board (after a power-up or reset)
@@ -374,18 +372,19 @@ void loop(){
 }
   ```
 
+IsrGPS
+
 ## Algorithm
 
-We don't need to forecast what is in the 'void setup()' function. This is just all the initializations of the different components and libraries, and the setting of what is the initial state of the device.
+The `void setup()` function is not part of the algorithm itself. Its only purpose is to import the required libraries and headers and describe the program's initial state.
 
-Now, the algorithm itself, the main loop of the firmware[^3], is available in this diagram (please forgive the size !) :
-
+This leaves the core of the algorithm, the `void loop()` function:  
 ![algorithm diagram](data/algorithm-main-loop-diagram.png)
 
 It allows :
-- the battery consumption's management
-- execute parallel tasks when a theft is detected
-- to take advantage of the NFC[^7]
+- To manage the battery consumption
+- To execute parallel tasks when a theft is detected
+- To take advantage of the NFC[^7]
 
 ## Power Management
 
@@ -396,18 +395,16 @@ The device will have different behaviors of power consumption according to 3 par
 - the level of battery (or charging the battery)
 - the period of inactivity.
 
-If the battery level is ABOVE 15%, NFC[^7] only is enabled because NFC[^7] consume like 5mA while Bluetooth Low Energy (BLE) consumes 15mA (3 times more).
+If the battery level is ABOVE 15%, NFC[^7] only as it is less energy-consuming (5mA) compared to Bluetooth Low Energy (BLE) which consumes 15mA.
 
 By default the buzzer, the electromagnetic lock and SIM[^11] module circuit are disabled by turning D9 and D4 'LOW' (Cf. [power management diagram](#electronic-circuit-diagrams)).  
-If only one of these components are required, we turn on both D4 and D9, and a variable have to keep track of the number of devices currently used. If there is any, D9 and D4 are turned OFF to save as much energy as possible.
+If only one of these components is required, we turn on both pins D4 and D9. Concurrently, a variable has to keep track of the number of devices currently in use. If none is in use, D9 and D4 are turned OFF to save as much energy as possible.
 
 Each time we need to get the GPS position we first have to enable the wake up pin of the GPS module : D8, and then turned it off again.
 
 #### implementation
 
-Also, the percentage of the battery and the management of its charge will require a specific public library called...  
-
-A key feature of the battery management ids the ability to know the current capacity (%). There are 2 methods for that :
+A key feature of battery management is the ability to know the current capacity as a percentage. There are 2 methods to achieve this objective:  
 - The ideal one but over-consuming electricity is to measure constantly the voltage and the intensity which goes out from the battery to know how much energy had been used or had been loaded in real-time. However it is almost impossible to implement and this solution using though a 'colorimeter' is reserved for very particular usages.
 - The very spread solution is to just measure the current voltage and to compare the value to a set of previous measures took to define the correlation between the current capacity and the current voltage.
 
