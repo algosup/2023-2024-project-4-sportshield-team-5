@@ -1,24 +1,30 @@
 
+//------------------------------- INCLUDES --------------------------------------
+// BLE
 #include "bluetooth.h"
-#include "buzzer.h"
-#include "motionDetection.h"
-#include "sim.h"
+// IMU
+#include "detection.h"
+// GPS
 #include "gps.h"
+// SIM
+#include "sim.h"
+// BUZZER
+#include "buzzer.h"
+// BATTERY
 #include "battery.h"
-
 //-------------------------------- SETUP ----------------------------------------
 void setup()
 {
-  pinMode(buzzerPin, OUTPUT); // setup for buzzer
-  digitalWrite(buzzerPin, HIGH);
+  pinMode(buzzer_pin, OUTPUT); // setup for buzzer
+  digitalWrite(buzzer_pin, HIGH);
   delay(1000);
-  digitalWrite(buzzerPin, LOW);
+  digitalWrite(buzzer_pin, LOW);
   Serial.println(" buzzer");
 
-  pinMode(aimantPin, OUTPUT); // setup electro-aimant
-  digitalWrite(aimantPin, HIGH);
+  pinMode(aimant_pin, OUTPUT); // setup electro-aimant
+  digitalWrite(aimant_pin, HIGH);
   delay(1000);
-  digitalWrite(aimantPin, LOW);
+  digitalWrite(aimant_pin, LOW);
   Serial.println("electro");
 
   // debug led initialization
@@ -43,25 +49,25 @@ void setup()
   Serial.println("BLE Antivol Peripheral");
 
   // Timer
-  if (ITimer.attachInterruptInterval(HW_TIMER_INTERVAL_MS * 1000, TimerHandler)) // Interval in microsecs
+  if (ITimer.attachInterruptInterval(HW_TIMER_INTERVAL_MS * 1000, timerHandler)) // Interval in microsecs
   {
     Serial.print(F("Starting ITimer OK, millis() = "));
     Serial.println(millis());
   }
-  ISR_Timer.setInterval(TIMER_INTERVAL_120S, GPS_ISR);
+  ISR_Timer.setInterval(TIMER_INTERVAL_120S, GPSIsr);
 
-  ble_setup();
-  Serial.println(" ble_setup");
-  imu_setup();
-  Serial.println(" imu_setup");
-  gps_setup();
-  Serial.println(" gps_setup");
+  bleSetup();
+  Serial.println(" bleSetup");
+  imuSetup();
+  Serial.println(" imuSetup");
+  gpsSetup();
+  Serial.println(" gpsSetup");
   Serial2.begin(9600);
   delay(100);
   sim800l = new SIM800L((Stream *)&Serial2, SIM800_RST_PIN, 200, 512);
   pinMode(SIM800_DTR_PIN, OUTPUT);
   delay(1000);
-  sim_setup();
+  simSetup();
   Serial.println("SIM SETUP");
 
   analogReadResolution(ADC_RESOLUTION); // setup battery reading
@@ -72,7 +78,7 @@ void setup()
   Serial.println("fin setup ");
   digitalWrite(LEDR, HIGH);
   digitalWrite(LEDG, LOW);
-  Temps();
+  temps();
 
   Serial.print("Battery level: ");
   Serial.println(getBatteryLevel());
@@ -81,107 +87,98 @@ void setup()
 //--------------------------- LOOP -----------------------------
 void loop()
 {
-  if (ActivationAlarm)
+  if (activation_alarm)
   {
-    PulseBuzzer(2, 200, 50, 25);
-    ActivationAlarm = false;
+    pulseBuzzer(2, 200, 50, 25);
+    activation_alarm = false;
   }
 
-  MotionData = getMotionData();
-  RotationData = getRotationData();
+  motion_data = getMotionData();
+  rotation_data = getRotationData();
   Config.isActivate = 1; // TO REMOVE !!!
   if (Config.isActivate)
   { // alarm enalbled
     activateGPS();
-    if (MotionData > BigMT || RotationData > BigRT)
+    if (motion_data > big_MT || rotation_data > big_RT)
     { // Big motion detection
-      if (MotionData > BigMT)
+      if (motion_data > big_MT)
       {
         Serial.print("Motion detected : ");
-        Serial.println(MotionData);
+        Serial.println(motion_data);
       }
       else
       {
         Serial.print("Rotation detected : ");
-        Serial.println(RotationData);
+        Serial.println(rotation_data);
       }
-      MotionBig = true;
-      MotionSmall = false;
+      motion_big = true;
+      motion_small = false;
       send_move = true;
     }
-    else if (MotionData > SmallMT || RotationData > SmallRT)
+    else if (motion_data > small_MT || rotation_data > small_RT)
     { // Small motion detection
-      if (MotionData > SmallMT)
+      if (motion_data > small_MT)
       {
         Serial.print("Small motion: ");
-        Serial.println(MotionData);
+        Serial.println(motion_data);
       }
       else
       {
         Serial.print("Small rota : ");
-        Serial.println(RotationData);
+        Serial.println(rotation_data);
       }
-      MotionSmall = true;
+      motion_small = true;
     }
   }
-  if (digitalRead(P0_17))
+
+  if (!motion_small && !motion_big && alarm_duration - alarm_start < time_limit)
   {
-    Serial.println("not charging");
-    PulseBuzzer(5, 350, 5000, 10);
+    MT_counter = 0;
+    first_alarm = true;
   }
-  else if (!digitalRead(P0_17))
+  if (motion_small || motion_big)
   {
-    Serial.println("charging");
-    PulseBuzzer(3, 350, 1000, 30);
-  }
-  if (!MotionSmall && !MotionBig && AlarmDuration - AlarmStart < TimeLimit)
-  {
-    MTCounter = 0;
-    FirstAlarm = true;
-  }
-  if (MotionSmall || MotionBig)
-  {
-    MTCounter++;
-    if (FirstAlarm && MTCounter >= 2)
+    MT_counter++;
+    if (first_alarm && MT_counter >= 2)
     {
-      AlarmStart = millis();
+      alarm_start = millis();
     }
     else
     {
-      AlarmDuration = millis();
-      if (AlarmDuration - AlarmStart >= TimeLimit)
+      alarm_duration = millis();
+      if (alarm_duration - alarm_start >= time_limit)
       {
-        AlarmStart = millis();
+        alarm_start = millis();
       }
     }
   }
 
-  if ((MotionBig || MotionSmall) && MTCounter > 2)
+  if ((motion_big || motion_small) && MT_counter > 2)
   {
-    if (FirstAlarm)
+    if (first_alarm)
     {
       // Dissuasion alarm
-      PulseBuzzer(3, 200, 100, 12); // repetitions, DurationOn , DurationOff, intensity
-      FirstAlarm = false;
+      pulseBuzzer(3, 200, 100, 12); // repetitions, DurationOn , DurationOff, intensity
+      first_alarm = false;
     }
     else
     {
       // Theft alarm
-      PulseBuzzer(5, 350, 350, 25); // repetitions, DurationOn , DurationOff, intensity
+      pulseBuzzer(5, 350, 350, 25); // repetitions, DurationOn , DurationOff, intensity
     }
   }
-  MotionDetect = true;
+  motion_detect = true;
 
   // if a mvt is detected and bluetooth is disabled bluetooth activation
-  if (MotionDetect == true)
+  if (motion_detect == true)
   {
     tim_connec = millis();
-    MotionDetect = false;
+    motion_detect = false;
     if (BLE_activated == false)
     {
       BLE_activated = true;
       Serial.println("MVT_detect->setup");
-      ble_setup();
+      bleSetup();
     }
   }
 
@@ -256,16 +253,17 @@ void loop()
   //   sim800l->disconnectGPRS();
   //   send_position = false;
   // }
-
-  if (getBatteryLevel() < 20)
+  
+  if (getBatteryLevel() < 80)
   {
+    Serial.print("Enter sleep mode");
     deepSleepMode();
   }
 }
 
 //------------- ADDITIONAL FUNCTIONS ------------------------------
 
-void Temps(void)
+void temps(void)
 {
   unsigned long millisPassed = millis();
   unsigned int seconds = (millisPassed / 1000) % 60;
@@ -280,7 +278,7 @@ void Temps(void)
   Serial.println("s");
 }
 
-void TimerHandler()
+void timerHandler()
 {
   ISR_Timer.run();
 }

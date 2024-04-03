@@ -1,7 +1,7 @@
 #ifndef _BLUETOOTH_
 #define _BLUETOOTH_
 
-#include "global.h"
+#include "definitions.h"
 
 /*
     This file contains every functions and initializations related to the Bluetooth.
@@ -46,7 +46,7 @@ inline void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic);
  * @param None
  * @result None.
  */
-void ble_setup(void)
+void bleSetup(void)
 {
     if (!BLE.begin())
     {
@@ -118,38 +118,41 @@ void onDisconnect(BLEDevice central)
 {
     Serial.print(F("Disconnected from central: "));
     Serial.println(central.address());
-    isAuthenticate = false;
+    is_authenticate = false;
     digitalWrite(LEDB, HIGH);
 }
 
 char Conversion(unsigned short int data)
 {
-    char mdphexadecimal[5];
-    sprintf(mdphexadecimal, "%04X", data);
+    char mdp_hexadecimal[5];
+    // sprintf(mdp_hexadecimal, "%04X", data);
 
-    for (int i = 0; i < 2; ++i)
-    {
-        char temp = mdphexadecimal[i];
-        mdphexadecimal[i] = mdphexadecimal[2 + i];
-        mdphexadecimal[2 + i] = temp;
-    }
+    // for (int i = 0; i < 2; ++i)
+    // {
+    //     char temp = mdp_hexadecimal[i];
+    //     mdp_hexadecimal[i] = mdp_hexadecimal[2 + i];
+    //     mdp_hexadecimal[2 + i] = temp;
+    // }
     // Serial.println("Mot de passe : " + String(valeur) + " ");  //used to see the value in decimal
-    Serial.print("Written password  = ");
-    Serial.println(mdphexadecimal);
+    // Serial.print("Written password  = ");
+    // Serial.println(String(mdp_hexadecimal));
 }
 
 /**
  * This function is called when a password is sent by a paired device.
  * @param central (BLEDevice): A paired device.
- * @result If the password is correct, a boolean is turned on.
+ * @result If the password is correct, a boolean is turned true.
  */
 void onWritePassword(BLEDevice central, BLECharacteristic characteristic)
 {
-    const int motDePasseAttendu = 1;
+    const int expected_password = 1;
     short int value = PasswordCharacteristic.value();
+    if(value==72){
+        Serial.println("I was right!");
+    }
     Conversion(value);
-    isAuthenticate = (value == motDePasseAttendu);
-    Serial.println(isAuthenticate ? "successful authentication" : "wrong password");
+    is_authenticate = (value == expected_password);
+    Serial.println(is_authenticate ? "successful authentication" : "wrong password");
 }
 
 /**
@@ -160,7 +163,7 @@ void onWritePassword(BLEDevice central, BLECharacteristic characteristic)
  */
 void onWriteName(BLEDevice central, BLECharacteristic characteristic)
 {
-    if (isAuthenticate)
+    if (is_authenticate)
     {
         Config.Name = NameCharacteristic.value();
         String value = NameCharacteristic.value();
@@ -182,8 +185,8 @@ void onWriteName(BLEDevice central, BLECharacteristic characteristic)
 void onReadName(BLEDevice central, BLECharacteristic characteristic)
 {
     Serial.println("CALLBACK READ");
-    Serial.println(isAuthenticate);
-    if (isAuthenticate)
+    Serial.println(is_authenticate);
+    if (is_authenticate)
     {
         NameCharacteristic.writeValue(Config.Name);
     }
@@ -201,7 +204,7 @@ void onReadName(BLEDevice central, BLECharacteristic characteristic)
  */
 void onWriteActivation(BLEDevice central, BLECharacteristic characteristic)
 {
-    if (isAuthenticate)
+    if (is_authenticate)
     {
         Config.isActivate = ActivationCharacteristic.value();
         if (Config.isActivate != 0)
@@ -233,7 +236,7 @@ void onWriteActivation(BLEDevice central, BLECharacteristic characteristic)
 void onReadActivation(BLEDevice central, BLECharacteristic characteristic)
 {
     // Serial.println("CALLBACK READ");
-    // Serial.println(isAuthenticate);
+    // Serial.println(is_authenticate);
     ActivationCharacteristic.writeValue(Config.isActivate);
 }
 
@@ -245,13 +248,13 @@ void onReadActivation(BLEDevice central, BLECharacteristic characteristic)
  */
 void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic)
 {
-    if (isAuthenticate)
+    if (is_authenticate)
     {
         // activate electromagnet
         Serial.println("Unlock");
-        digitalWrite(aimantPin, HIGH);
+        digitalWrite(aimant_pin, HIGH);
         delay(2000);
-        digitalWrite(aimantPin, LOW);
+        digitalWrite(aimant_pin, LOW);
     }
 }
 

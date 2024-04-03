@@ -1,6 +1,6 @@
 #ifndef _GPS_
 #define _GPS_
-#include "global.h"
+#include "definitions.h"
 
 /*
     This file contains every functions related to the geolocalisation of the device.
@@ -13,7 +13,7 @@
  * @param None
  * @result None.
  */
-void gps_setup(void)
+void gpsSetup(void)
 {
     // pinMode(GPS_WKUP_PIN, OUTPUT);
     // digitalWrite(GPS_WKUP_PIN, LOW);
@@ -55,31 +55,31 @@ void gps_setup(void)
 //-------------------------- FUNCTIONS ---------------------------
 /**
  * This function converts degrees minutes and decimal minutes coordinates into decimal degrees coordinates.
- * @param dmmCoordinates(String): Degrees minutes and decimal minutes coordinates.
+ * @param dmm_coordinates(String): Degrees minutes and decimal minutes coordinates.
  * @result A string containing decimal degrees coordinates.
  */
-String convertDMMtoDD(String dmmCoordinates)
+String convertDMMToDD(String dmm_coordinates)
 {
     int degrees;
     float minutes;
     // Separate coordinates in degrees and decimal minutes
-    if (dmmCoordinates.length() == 9)
+    if (dmm_coordinates.length() == 9)
     {
-        degrees = dmmCoordinates.substring(0, 2).toInt();
-        minutes = dmmCoordinates.substring(2).toFloat();
+        degrees = dmm_coordinates.substring(0, 2).toInt();
+        minutes = dmm_coordinates.substring(2).toFloat();
     }
     else
     {
-        degrees = dmmCoordinates.substring(0, 1).toInt();
-        minutes = dmmCoordinates.substring(1).toFloat();
+        degrees = dmm_coordinates.substring(0, 1).toInt();
+        minutes = dmm_coordinates.substring(1).toFloat();
     }
     // Convert decimal minutes to decimal degrees
-    float decimalDegrees = degrees + (minutes / 60.0);
+    float decimal_degrees = degrees + (minutes / 60.0);
 
     // Convert to string and format coordinates to decimal degrees
-    String ddCoordinates = String(decimalDegrees, 10); // You can adjust the number of decimals here
+    String dd_coordinates = String(decimal_degrees, 10); // You can adjust the number of decimals here
 
-    return ddCoordinates;
+    return dd_coordinates;
 }
 
 /**
@@ -87,7 +87,7 @@ String convertDMMtoDD(String dmmCoordinates)
  * @param None
  * @result None.
  */
-void GPS_ISR()
+void GPSIsr()
 {
     if (Config.isActivate != 0)
     {

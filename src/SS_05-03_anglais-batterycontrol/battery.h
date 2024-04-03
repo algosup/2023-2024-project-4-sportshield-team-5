@@ -1,11 +1,12 @@
 #ifndef _BATTERY_
 #define _BATTERY_
-#include "global.h"
+#include "definitions.h"
 
 /*
     This file contains every functions related to the battery management.
 */
 
+float battery;
 //-------------------------- FUNCTIONS ---------------------------
 
 /**
@@ -13,12 +14,15 @@
  * @param None
  * @result An int representing the remaining percentage of the battery.
  */
-int getBatteryLevel(void)
+int getBatteryLevel()
 {
-    int battery = analogRead(PIN_VBAT);
-    int batteryLevel = map(battery, 0, 1023, 0, 100);
+  /* Read the current voltage level on the A0 analog input pin.
+     This is used here to simulate the charge level of a battery.
+  */
 
-    return batteryLevel;
+  battery = analogRead(PIN_VBAT);
+  float batteryLevel = map(battery, 0, 1023, 0, 100);
+  return battery;
 }
 
 /**
@@ -28,21 +32,23 @@ int getBatteryLevel(void)
  */
 void deepSleepMode()
 {
-    int battery = getBatteryLevel();
-    // HERE
-    // send battery level and GPS location of the device
-    digitalWrite(aimantPin, LOW);
-    digitalWrite(SIM800_RST_PIN, LOW);
-    digitalWrite(GPS_WKUP_PIN, LOW);
+  int battery = getBatteryLevel();
+  // send battery level and GPS location of the device
+  // HERE!!!
+  digitalWrite(aimant_pin, LOW);
+  digitalWrite(SIM800_RST_PIN, LOW);
+  digitalWrite(GPS_WKUP_PIN, LOW);
 
-    while (battery < 20)
+  while (true)
+  {
+    if (!digitalRead(P0_17))
     {
-
-        battery = getBatteryLevel();
-        delay(1000);
+      break;
     }
-    gps_setup();
-    sim_setup();
+  }
+  gpsSetup();
+  imuSetup();
+  simSetup();
 }
 
 #endif

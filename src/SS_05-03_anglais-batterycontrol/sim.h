@@ -1,6 +1,6 @@
 #ifndef _SIM_
 #define _SIM_
-#include "global.h"
+#include "definitions.h"
 
 /*
     This file contains every functions related to the SIM card.
@@ -13,7 +13,7 @@
  * @param None
  * @result None.
  */
-void sim_setup(void)
+void simSetup(void)
 {
     // while (!sim800l->isReady()) {
     //   Serial.println(F("Problem to initialize AT command, retry in 1 sec"));
@@ -44,7 +44,7 @@ void sim_setup(void)
 
 //-------------------------- FUNCTIONS ---------------------------
 
-void SIM_ISR()
+void SIMIsr()
 {
     send_position = true;
 }
