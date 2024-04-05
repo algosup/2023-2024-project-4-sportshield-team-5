@@ -1,0 +1,1501 @@
+{
+  "tests": [
+    {
+      "test_id": 1,
+      "test_name": "Code compilatation",
+      "test_description": "The code compiles successfully without errors or warnings",
+      "test_requirements": [
+        {
+          "tests": []
+        },
+        {
+          "hardware": []
+        },
+        {
+          "external_tools": [
+            "GitHub Actions (https://github.com/arduino/compile-sketches)"
+          ]
+        }
+      ],
+      "test_type": "automated",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Push to the dev or the main branch of the repository. This test will be run automatically by GitHub Actions."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 2,
+      "test_name": "Coding conventions",
+      "test_description": "The source code follows the given conventions and guidelines",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": []
+        },
+        {
+          "external_tools": ["linter.py"]
+        }
+      ],
+      "test_type": "automated",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Push to the dev or the main branch of the repository. This test will be run automatically by GitHub Actions."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 3,
+      "test_name": "Small move detection",
+      "test_description": "When slightly moved for less than one second, SportShield emits a 3-tone sound",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Move the SportShield development board of 5 centimeters in less than one second."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 4,
+      "test_name": "Thief attempt/Major movement detection",
+      "test_description": "If the lock is moved one second or more in anti-thief mode, it triggers a 5-tone sound.",
+      "test_requirements": [
+        {
+          "tests": [1, 3]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Move the SportShield development board of 50 centimeters in two seconds."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 5,
+      "test_name": "Bluetooth connection",
+      "test_description": "Ensure that SportShield can connect to the LightBlue app via Bluetooth and send/receive data.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["LightBlue app"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Go on LightBlue app, and look for a device named 'SportShield 5'."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 6,
+      "test_name": "Bluetooth disconnection while charging",
+      "test_description": "Ensure that we cannot connect to SportShield via Bluetooth while it is charging.",
+      "test_requirements": [
+        {
+          "tests": [1, 5]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["LightBlue app"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Connect the SportShield development board to a power source."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Go on LightBlue app, and look for a device named 'SportShield 5'."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 7,
+      "test_name": "Silent lock while charging",
+      "test_description": "The lock cannot emit any sound while charging.",
+      "test_requirements": [
+        {
+          "tests": [1, 3, 4]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Connect the SportShield development board to a power source."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Move in diffferent directions the anti-thief device for 30 seconds to ensure it does not emit any sound."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 8,
+      "test_name": "Bluetooth linking",
+      "test_description": "You can only pair one device to the SportShield app, and it should be the only one that can connect to it.",
+      "test_requirements": [
+        {
+          "tests": [1, 3, 4]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["LightBlue app"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Connect to the SportShield development board via Bluetooth."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Try to connect to the SportShield development board via Bluetooth with another device."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 9,
+      "test_name": "2G connectivity",
+      "test_description": "Ensure that the device can connect to the 2G network and send data using the GPRS.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Wait for any packet to be sent to the server."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 10,
+      "test_name": "Wrong NFC card",
+      "test_description": "Ensure a notification is sent over GPRS to inform the user an attempt of unlock with another NFC device has been done on his behalf.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["NFC card"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Bring an unknown NFC card near the SportShield development board NFC reader."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 11,
+      "test_name": "NFC badging",
+      "test_description": "The lock can be unlocked by badging the linked NFC card/phone.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["NFC card / Phone equipped with NFC technology"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Put the anti-thief device in lock state if not already done."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Bring the known and predefined card near the SportShield development board NFC reader."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 12,
+      "test_name": "Theft tentative notification",
+      "test_description": "Ensure that the device sends a notification to the server when a theft attempt is detected.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Put the anti-thief device in lock state if not already done."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Move the anti-theft device for more than one second."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 13,
+      "test_name": "Battery autonomy: Extreme conditions",
+      "test_description": "The autonomy of the device is tested in extremely cold conditions to ensure it can least at least 7 days.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Freezer"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Put the development board in a plastic bag."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Empty the air from the bag and close it."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Put the bag in the freezer for 2 hours."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Take the development board out of the freezer and plug it to the GitHub Actions host computer"
+        },
+        {
+          "step_number": 5,
+          "step_description": "Check the console to see the percentage of battery left and enter it in the Python script to know if SportShield would last one week."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 14,
+      "test_name": "Battery autonomy: Normal conditions",
+      "test_description": "The autonomy of the device is tested in normal temperature conditions to ensure it can least at least 7 days.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Leave the development board in a room at room temperature for 2 hours."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Plug back the development board to the GitHub Actions host computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Check the console to see the percentage of battery left and enter it in the Python script to know if SportShield would last one week."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 15,
+      "test_name": "Charging threshold",
+      "test_description": "If the battery level is greater than or equal to 80% the charging speed si limited to 50mA",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug the development board and charge it until 80% of battery level."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Take an ammeter and measure if the charging speed is roughly 50mA."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 16,
+      "test_name": "Sleep mode disabled while charging",
+      "test_description": "If the anti-theft device is charging, sleep mode should be disabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug the development board to a power source."
+        },
+        {
+          "step_number": 2,
+          "step_description": "When moving the board a sound should be emitted."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify on your phone a notification has been sent."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 17,
+      "test_name": "Deep sleep mode disabled while charging",
+      "test_description": "If the anti-theft device is charging, deep sleep mode should be disabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug the development board to a power source."
+        },
+        {
+          "step_number": 2,
+          "step_description": "When moving the board a sound should be emitted."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify on your phone a notification has been sent."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 18,
+      "test_name": "Deep sleep mode automatically enabled",
+      "test_description": "If the anti-theft device hits 5% of the battery level, deep sleep mode should be enabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug the development board to the GitHub Actions host computer and check the battery level."
+        },
+        {
+          "step_number": 2,
+          "step_description": "If the battery level is greater than 5%, wait until the battery level is less than 5% by unplugging it from the computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "If the battery level is lower than 5%, unplug the board from the computer and start moving it."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Verify on your phone a notification has been sent and that no alarm has been triggered by the device."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 19,
+      "test_name": "Deep sleep mode manually enabled",
+      "test_description": "The Bluetooth has a field to enable directly the deep sleep mode from the app.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["LightBlue"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "On SportShield, find the device named 'SportShield 5'."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Log in to the board and find the deep sleep mode field."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Send the hexadecimal value 0x1"
+        },
+        {
+          "step_number": 4,
+          "step_description": "Move the board in multiple directions for 30 seconds."
+        },
+        {
+          "step_number": 5,
+          "step_description": "Verify on your phone a notification has not been sent and that no alarm has been triggered by the device."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+
+    {
+      "test_id": 20,
+      "test_name": "Deep sleep mode alarm disabled",
+      "test_description": "The alarm is disabled when the deep sleep mode is enabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Ensure that deep sleep mode is enabled."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Move the board in multiple directions for 30 seconds."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Ensure that no alarm has been triggered by the device during this duration."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Deep sleep mode GPRS disabled",
+      "test_description": "Communication with the server is disabled when the deep sleep mode is enabled",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Ensure that deep sleep mode is enabled."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Move the board in multiple directions for 30 seconds."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify on your phone you didn't receive any notification."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Deep sleep mode NFC disabled",
+      "test_description": "The NFC function is disabled when the deep sleep mode is enabled",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["NFC card / Phone equipped with NFC technology"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Ensure that deep sleep mode is enabled."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Put the anti-thief device in lock state if not already done."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Bring the known and predefined card near the SportShield development board NFC reader."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Verify the lock has not been unlocked and that you received no notification on your phone."
+        },
+        {
+          "step_number": 5,
+          "step_description": "Bring an unknown NFC card near the SportShield development board NFC reader."
+        },
+        {
+          "step_number": 6,
+          "step_description": "Verify the lock has not been unlocked and that you received no notification on your phone."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Deep sleep mode Bluetooth disabled",
+      "test_description": "Communication with the server is disabled when the deep sleep mode is enabled",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["LightBlue app"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Ensure that deep sleep mode is enabled."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Go on LightBlue app, and look for a device named 'SportShield 5'."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Sleep mode manually enabled",
+      "test_description": "The Bluetooth has a field to enable directly the sleep mode from the app.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["LightBlue app"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "On SportShield, find the device named 'SportShield 5'."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Log in to the board and find the sleep mode field."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Send the hexadecimal value 0x1"
+        },
+        {
+          "step_number": 4,
+          "step_description": "Move the board in multiple directions for 30 seconds, waiting for an alarm to trigger."
+        },
+        {
+          "step_number": 5,
+          "step_description": "Verify on your phone a notification has not been sent."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Sleep mode disabled with specific movement",
+      "test_description": "When doing a specific movement, the sleep mode is disabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Ensure that sleep mode is enabled."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Do the movement in the provided documentation to disable the sleep mode."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Move in diffferent directions the anti-thief device for 30 seconds."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Verify on your phone a notification has been sent and that no alarm has been triggered by the device."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Sleep mode automatically enabled",
+      "test_description": "When the lock is unlocked, and after 40 seconds of inactivity, the sleep mode is enabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Unlock the device if that's not already done."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Do not move the device for 40 seconds."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Move in diffferent directions the anti-thief device for 30 seconds."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Verify on your phone no notification has been sent and that an alarm has been triggered by the device."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Sleep mode alarm",
+      "test_description": "When the lock is in sleep mode and a movement is detected, an alarm is triggered.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Ensure that sleep mode is enabled."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Move in diffferent directions the anti-thief device for 30 seconds."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify that an alarm has been triggered by the device."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Sleep mode move packet",
+      "test_description": "When the lock is in sleep mode and a movement is detected, a packet is sent to the server indicating a movement detection.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Ensure that sleep mode is enabled."
+        },
+        {
+          "step_number": 2,
+          "step_description": "Move in diffferent directions the anti-thief device for 30 seconds."
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify that you received a notification"
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Ecomode automatically enabled",
+      "test_description": "When the lock battery reaches 15% of its maximum capacity, the ecomode is automatically enabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["LightBlue app", "Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug back the development board to the GitHub Actions host computer."
+        },
+        {
+          "step_number": 2,
+          "step_description": "If the battery level is greater than 15%, wait until the battery level is less than 15% by unplugging it from the computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "If the battery level is lower than 15%, go on LightBlue app."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Verify on LightBlue that none of the available device is named 'SportShield 5'."
+        },
+        {
+          "step_number": 5,
+          "step_description": "Move in diffferent directions the anti-thief device for 30 seconds."
+        },
+        {
+          "step_number": 6,
+          "step_description": "Verify on your phone a notification has been sent and that an alarm has been triggered by the device."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Ecomode Bluetooth disabled",
+      "test_description": "When the lock battery reaches 15% of its maximum capacity, Bluetooth is automatically disabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["LightBlue app"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug back the development board to the GitHub Actions host computer."
+        },
+        {
+          "step_number": 2,
+          "step_description": "If the battery level is greater than 15%, wait until the battery level is less than 15% by unplugging it from the computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "If the battery level is lower than 15%, go on LightBlue app."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Verify on LightBlue that none of the available device is named 'SportShield 5'."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Ecomode position and battery level sending",
+      "test_description": "When in ecomode, the battery level and the position of the device are sent to the server every 30 minutes.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug back the development board to the GitHub Actions host computer."
+        },
+        {
+          "step_number": 2,
+          "step_description": "If the battery level is greater than 15%, wait until the battery level is less than 15% by unplugging it from the computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "If the battery level is lower than 15%"
+        },
+        {
+          "step_number": 4,
+          "step_description": "Wait for the first position packet to be sent to the server for 15 minutes."
+        },
+        {
+          "step_number": 5,
+          "step_description": "Wait for the second position packet to be sent to the server another 15 minutes."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Ecomode alarm triggering",
+      "test_description": "When in ecomode, the battery level triggers if ecomode is enabled and the device is moved.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug back the development board to the GitHub Actions host computer."
+        },
+        {
+          "step_number": 2,
+          "step_description": "If the battery level is greater than 15%, wait until the battery level is less than 15% by unplugging it from the computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "If the battery level is lower than 15%"
+        },
+        {
+          "step_number": 4,
+          "step_description": "Wait for the first position packet to be sent to the server for 15 minutes."
+        },
+        {
+          "step_number": 5,
+          "step_description": "Wait for the second position packet to be sent to the server another 15 minutes."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Battery ecomode enabled packet sent",
+      "test_description": "When ecomode enables, a battery and position packet is sent to the server",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug back the development board to the GitHub Actions host computer."
+        },
+        {
+          "step_number": 2,
+          "step_description": "If the battery level is greater than 15%, wait until the battery level is less than 15% by unplugging it from the computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "If the battery level is lower than 15%, charge the device until the battery level is greater than 15%."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Wait until a battery and position packet is sent to the server indicating 15% of battery."
+        },
+        {
+          "step_number": 5,
+          "step_description": "Verify if ecomode has been enabled on the device."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Ecomode NFC enabled",
+      "test_description": "When the lock battery reaches 15% of its maximum capacity, NFC stays enabled.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["NFC card / Phone equipped with NFC technology"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug back the development board to the GitHub Actions host computer."
+        },
+        {
+          "step_number": 2,
+          "step_description": "If the battery level is greater than 15%, wait until the battery level is less than 15% by unplugging it from the computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "If the battery level is lower than 15%, take the NFC card."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Bring the known and predefined card near the SportShield development board NFC reader."
+        },
+        {
+          "step_number": 5,
+          "step_description": "Verify the lock has been unlocked and that you received no notification on your phone."
+        },
+        {
+          "step_number": 6,
+          "step_description": "Bring an unknown NFC card near the SportShield development board NFC reader."
+        },
+        {
+          "step_number": 7,
+          "step_description": "Verify the lock has not been unlocked and that you received a notification on your phone."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Ecomode packet sending",
+      "test_description": "When the lock battery reaches 15% of its maximum capacity, and a movement is detected, a packet is sent to the server indicating a movement detection.",
+      "test_requirements": [
+        {
+          "tests": [1]
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": ["Server"]
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Plug back the development board to the GitHub Actions host computer."
+        },
+        {
+          "step_number": 2,
+          "step_description": "If the battery level is greater than 15%, wait until the battery level is less than 15% by unplugging it from the computer."
+        },
+        {
+          "step_number": 3,
+          "step_description": "If the battery level is lower than 15%, move the board in multiple directions for 30 seconds."
+        },
+        {
+          "step_number": 4,
+          "step_description": "Verify on your phone that a notification has been sent."
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Anti-Theft mode sends position and battery every 15 minutes",
+      "test_description": "Ensure that the position of the device and the battery level are sent via 2G network",
+      "test_requirements": [
+        {
+          "tests": []
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Activate the Anti-Theft function"
+        },
+        {
+          "step_number": 2,
+          "step_description": "Leave it alone for 15 minutes"
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify that you received a notification"
+        },
+        {
+          "step_number": 4,
+          "step_description": "Leave it alone for 15 more minutes"
+        },
+        {
+          "step_number": 5,
+          "step_description": "Verify that you received a second notification"
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Sound intensity is twice as high for the big shock than for the light shock",
+      "test_description": "Ensure that the alarm of the device has a higher sound intensity ( ouble)for the 5 long tone ,than for the 3 short tone",
+      "test_requirements": [
+        {
+          "tests": []
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Activate the Anti-Theft function"
+        },
+        {
+          "step_number": 2,
+          "step_description": "Move the device to create a small shock so that it turns on the 3 short tones alarm"
+        },
+        {
+          "step_number": 3,
+          "step_description": "Move the device to create a big shock so that it turns on the 5 long tones alarms"
+        },
+        {
+          "step_number": 4,
+          "step_description": "Compare the sound intensity of both the alarms"
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "When the battery hits 15%, a notification is send to the server",
+      "test_description": "Ensure that the device send a notification to the server when its battery hit a low level (15%)",
+      "test_requirements": [
+        {
+          "tests": []
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Wait for the device's battery to deplete"
+        },
+        {
+          "step_number": 2,
+          "step_description": "When the battery hits 15%, verifiy that the server received a notification"
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "When the battery level is less than or equal to 15%, the lock cannot be activated",
+      "test_description": "Ensure that the device doesn't try to activate the lock if its battery is lower than or equal to 15%",
+      "test_requirements": [
+        {
+          "tests": []
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Wait for the device's battery to deplete"
+        },
+        {
+          "step_number": 2,
+          "step_description": "When the battery hits 15% or lower, try to activate the lock function of the device (activate the Anti-theft function"
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify that the device doesn't activate the lock"
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "When charging, the NFC function is disabled",
+      "test_description": "Ensure that the device deactivate the NFC function while it is charging",
+      "test_requirements": [
+        {
+          "tests": []
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Put the device on charge"
+        },
+        {
+          "step_number": 2,
+          "step_description": "Try to connect to the device via NFC"
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify that you cannot connect to the device"
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Only the NFC tag associated with the app unlocks the device",
+      "test_description": "Ensure that only one NFC tag can unlock the device for obvious security reasons",
+      "test_requirements": [
+        {
+          "tests": []
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "zzz"
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    },
+    {
+      "test_id": 0,
+      "test_name": "Charging automatically disable sleep mode",
+      "test_description": "Ensure that when the device is put in charge, it deactivate the sleep mode",
+      "test_requirements": [
+        {
+          "tests": []
+        },
+        {
+          "hardware": ["SportShield development board"]
+        },
+        {
+          "external_tools": []
+        }
+      ],
+      "test_type": "manual",
+      "test_criticity": 0,
+      "steps_to_follow": [
+        {
+          "step_number": 1,
+          "step_description": "Put the device in sleep mode"
+        },
+        {
+          "step_number": 2,
+          "step_description": "Put the device in charge"
+        },
+        {
+          "step_number": 3,
+          "step_description": "Verify that the divice isn't in sleep mode anymore"
+        }
+      ],
+      "test_data": {
+        "data": ""
+      }
+    }
+  ]
+}
