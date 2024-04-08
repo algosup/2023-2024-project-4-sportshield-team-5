@@ -2,7 +2,7 @@
   "tests": [
     {
       "test_id": 1,
-      "test_name": "Code compilatation",
+      "test_name": "Code compilation",
       "test_description": "The code compiles successfully without errors or warnings",
       "test_requirements": [
         {

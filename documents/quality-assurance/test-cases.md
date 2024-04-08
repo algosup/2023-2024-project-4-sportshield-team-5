@@ -8,7 +8,7 @@ This document outlines the different critical points of the software which will 
 
 The test cases are defined by a criticity level, indicating the importance of the feature in the system and the inner workings of the device.
 
-### 1. Code compilatation
+### 1. Code compilation
 
 | ID               | 1                                                         |
 | ---------------- | --------------------------------------------------------- |
