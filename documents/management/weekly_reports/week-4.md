@@ -6,9 +6,7 @@
 1. [Overview](#overview)
 2. [Goals](#goals)
 3. [Challenges](#challenges)
-4. [Key Accomplishments](#key-accomplishments)
 5. [Upcoming Week](#upcoming-week)
-6. [Meetings and Collaborations](#meetings-and-collaborations)
 7. [Metrics and KPIs](#metrics-and-kpis)
 8. [Other Notes](#other-notes)
 
@@ -17,35 +15,31 @@
 ------------
 ## Overview
 
-Provide a brief overview of the key activities and achievements during the week.
+We started the week with almost only one day project, quite challenging for, us since we were left with just a 2 days project.
 
 ## Goals
 
-Outline the goals set for the week and evaluate the progress made towards each goal.
+- Battery management.
+- Complete with the coding phase of the NFC.
 
 ## Challenges
 
-Highlight any challenges or obstacles encountered during the week and discuss possible solutions.
-
-## Key Accomplishments
-
-List the significant accomplishments and milestones achieved throughout the week.
+- It's proving to be extremely difficult to finish the remaining tasks within the given project timeline.
 
 ## Upcoming Week
 
-Preview the goals and tasks planned for the upcoming week.
-
-## Meetings and Collaborations
-
-Summarize any important meetings, collaborations, or discussions that took place during the week.
+- Complete with the coding phase of the NFC.
+- Complete with battery management.
 
 
 ## Metrics and KPIs
 
-Include relevant metrics and key performance indicators to measure progress.
+- **All Tasks**
+<img src="images/week4.png">
+
+- **Progrssion level**
+<img src="images/week4_progression.png">
 
 ## Other Notes
 
-Add any additional notes or comments that may be relevant to the overall report.
-
----
+The week was not full of project time, and we are a little behind schedule. However, we will catch up this week and do better.
