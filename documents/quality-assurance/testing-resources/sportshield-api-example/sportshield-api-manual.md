@@ -1,4 +1,4 @@
-# SportShield API Manual
+# SportShield Sample API Manual
 
 ## 1. Purpose
 
