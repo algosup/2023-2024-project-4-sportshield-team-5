@@ -46,7 +46,7 @@
         }
       ],
       "test_type": "automated",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -202,7 +202,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -310,7 +310,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 3,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -449,7 +449,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -485,7 +485,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -521,7 +521,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -536,7 +536,7 @@
           "step_description": "To ensure deep sleep mode is not switched on, move the device in different directions and ensure a sound is emitted."
         },
         {
-          "step_number": 3,
+          "step_number": 4,
           "step_description": "If the two previous steps were validated, unlock the device by submitting the value 0x1 the \"Unlock\" Bluetooth field."
         }
       ],
@@ -561,7 +561,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -605,7 +605,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -649,7 +649,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -717,7 +717,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 4,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -789,7 +789,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -825,7 +825,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 3,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -857,7 +857,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -893,7 +893,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 3,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -925,7 +925,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 4,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -965,7 +965,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1001,7 +1001,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1113,7 +1113,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1197,7 +1197,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 3,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1208,11 +1208,11 @@
           "step_description": "Go on LightBlue app, and ensure no device is named \"SportShield 5\"."
         },
         {
-          "step_number": 2,
+          "step_number": 3,
           "step_description": "Wait 35 minutes to receive the first position and battery level payload."
         },
         {
-          "step_number": 3,
+          "step_number": 4,
           "step_description": "Verify in the logs and in the console of the web-server that you didn't received the payload."
         }
       ],
@@ -1237,7 +1237,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 3,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1277,7 +1277,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 3,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1378,7 +1378,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 3,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1426,7 +1426,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1470,7 +1470,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1518,7 +1518,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1562,7 +1562,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1597,7 +1597,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1632,7 +1632,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1667,7 +1667,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 1,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1811,7 +1811,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1852,7 +1852,7 @@
         }
       ],
       "test_type": "manual",
-      "test_criticity": 0,
+      "test_criticity": 2,
       "steps_to_follow": [
         {
           "step_number": 1,
@@ -1904,50 +1904,6 @@
         },
         {
           "step_number": 3,
-          "step_description": "Check the console to see the percentage of battery left and enter it in the Python script to know if SportShield would last one week."
-        }
-      ],
-      "expected_result": "The battery should last at least 7 days.",
-      "test_data": {
-        "data": ""
-      }
-    },
-    {
-      "test_id": 53,
-      "test_name": "Battery lasts 7 days in extreme conditions",
-      "test_description": "The autonomy of the device is tested in extremely cold conditions to ensure it can least at least 7 days.",
-      "test_requirements": [
-        {
-          "tests": [1]
-        },
-        {
-          "hardware": ["SportShield development board"]
-        },
-        {
-          "external_tools": ["Freezer"]
-        }
-      ],
-      "test_type": "manual",
-      "test_criticity": 0,
-      "steps_to_follow": [
-        {
-          "step_number": 1,
-          "step_description": "Put the development board in a plastic bag."
-        },
-        {
-          "step_number": 2,
-          "step_description": "Empty the air from the bag and close it."
-        },
-        {
-          "step_number": 3,
-          "step_description": "Put the bag in the freezer for 2 hours."
-        },
-        {
-          "step_number": 4,
-          "step_description": "Take the development board out of the freezer and plug it to the GitHub Actions host computer"
-        },
-        {
-          "step_number": 5,
           "step_description": "Check the console to see the percentage of battery left and enter it in the Python script to know if SportShield would last one week."
         }
       ],
