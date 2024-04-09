@@ -12,10 +12,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 | ID               | 1                                                         |
 | ---------------- | --------------------------------------------------------- |
-| Name             | Code compilatation                                        |
+| Name             | Code compilation                                          |
 | Test Description | The code compiles successfully without errors or warnings |
 | Test Type        | Automated                                                 |
 | Test Criticity   | 🟣                                                         |
+| Expected Result  | The code should compile without any error or warning.     |
 
 **External Tools:**
 
@@ -27,12 +28,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 2. Coding conventions
 
-| ID               | 2                                                            |
-| ---------------- | ------------------------------------------------------------ |
-| Name             | Coding conventions                                           |
-| Test Description | The source code follows the given conventions and guidelines |
-| Test Type        | Automated                                                    |
-| Test Criticity   | 🟠                                                            |
+| ID               | 2                                                                               |
+| ---------------- | ------------------------------------------------------------------------------- |
+| Name             | Coding conventions                                                              |
+| Test Description | The source code follows the given conventions and guidelines                    |
+| Test Type        | Automated                                                                       |
+| Test Criticity   | 🟠                                                                               |
+| Expected Result  | The program should not return any warn or error into the console on every file. |
 
 **External Tools:**
 
@@ -44,12 +46,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 3. Moving the device triggers a sound
 
-| ID               | 3                                                       |
-| ---------------- | ------------------------------------------------------- |
-| Name             | Moving the device triggers a sound                      |
-| Test Description | Whenever the device is moved, a sound is emitted by it. |
-| Test Type        | Manual                                                  |
-| Test Criticity   | 🟣                                                       |
+| ID               | 3                                                               |
+| ---------------- | --------------------------------------------------------------- |
+| Name             | Moving the device triggers a sound                              |
+| Test Description | Whenever the device is moved, a sound is emitted by it.         |
+| Test Type        | Manual                                                          |
+| Test Criticity   | 🟣                                                               |
+| Expected Result  | The buzzer should emit either a 3-tone sound or a 5-tone sound. |
 
 **Tests:**
 
@@ -72,6 +75,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When slightly moved for less than one second, SportShield emits a 3-tone sound |
 | Test Type        | Manual                                                                         |
 | Test Criticity   | 🟣                                                                              |
+| Expected Result  | The buzzer should emit a 3-tone sound.                                         |
 
 **Tests:**
 
@@ -95,6 +99,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | If the lock detects a major move for less than 1 second, it triggers a 5-tone sound. |
 | Test Type        | Manual                                                                               |
 | Test Criticity   | 🟣                                                                                    |
+| Expected Result  | The buzzer should emit a 5-tone sound.                                               |
 
 **Tests:**
 
@@ -118,6 +123,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | If the lock is moved one second or more in anti-thief mode, it triggers a 5-tone sound. |
 | Test Type        | Manual                                                                                  |
 | Test Criticity   | 🟣                                                                                       |
+| Expected Result  | The buzzer should emit a 5-tone sound.                                                  |
 
 **Tests:**
 
@@ -135,12 +141,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 7. Sound level differences
 
-| ID               | 7                                                                  |
-| ---------------- | ------------------------------------------------------------------ |
-| Name             | Sound level differences                                            |
-| Test Description | The sound of a 5-tone sound is twice more loud than the 3-tone one |
-| Test Type        | Manual                                                             |
-| Test Criticity   | 🔴                                                                  |
+| ID               | 7                                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------------- |
+| Name             | Sound level differences                                                                                 |
+| Test Description | The sound of a 5-tone sound is twice more loud than the 3-tone one                                      |
+| Test Type        | Manual                                                                                                  |
+| Test Criticity   | 🔴                                                                                                       |
+| Expected Result  | The sound level of the second phase should be at least greater of 10dB compared to the first phase one. |
 
 **Tests:**
 
@@ -174,6 +181,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | Ensure that SportShield can connect to the LightBlue app via Bluetooth and send/receive data. |
 | Test Type        | Manual                                                                                        |
 | Test Criticity   | 🟣                                                                                             |
+| Expected Result  | A Bluetooth device should be named "SportShield 5" in the list.                               |
 
 **Tests:**
 
@@ -192,12 +200,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 9. 2G connectivity
 
-| ID               | 9                                                                                  |
-| ---------------- | ---------------------------------------------------------------------------------- |
-| Name             | 2G connectivity                                                                    |
-| Test Description | Ensure that the device can connect to the 2G network and send data using the GPRS. |
-| Test Type        | Manual                                                                             |
-| Test Criticity   | 🟣                                                                                  |
+| ID               | 9                                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------- |
+| Name             | 2G connectivity                                                                                       |
+| Test Description | Ensure that the device can connect to the 2G network and send data using the GPRS.                    |
+| Test Type        | Manual                                                                                                |
+| Test Criticity   | 🟣                                                                                                     |
+| Expected Result  | The logs of the server should log a data reception in the testing.log file as well as in the console. |
 
 **Tests:**
 
@@ -222,6 +231,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | The anti-thief device can be unlocked by badging the linked NFC card/phone. |
 | Test Type        | Manual                                                                      |
 | Test Criticity   | 🟡                                                                           |
+| Expected Result  | The device should be unlocked.                                              |
 
 **Tests:**
 
@@ -241,12 +251,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 11. Device charging
 
-| ID               | 11                                              |
-| ---------------- | ----------------------------------------------- |
-| Name             | Device charging                                 |
-| Test Description | SportShield can be charged using a powersource. |
-| Test Type        | Manual                                          |
-| Test Criticity   | 🟣                                               |
+| ID               | 11                                                                                  |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| Name             | Device charging                                                                     |
+| Test Description | SportShield can be charged using a powersource.                                     |
+| Test Type        | Manual                                                                              |
+| Test Criticity   | 🟣                                                                                   |
+| Expected Result  | The device should have charged and consequently gained some battery level percents. |
 
 **Hardware:**
 
@@ -263,12 +274,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 12. Device locking
 
-| ID               | 12                                   |
-| ---------------- | ------------------------------------ |
-| Name             | Device locking                       |
-| Test Description | The anti-thief device can be locked. |
-| Test Type        | Manual                               |
-| Test Criticity   | 🟣                                    |
+| ID               | 12                                                 |
+| ---------------- | -------------------------------------------------- |
+| Name             | Device locking                                     |
+| Test Description | The anti-thief device can be locked.               |
+| Test Type        | Manual                                             |
+| Test Criticity   | 🟣                                                  |
+| Expected Result  | The ammmeter should display a value equal to 0 mA. |
 
 **Tests:**
 
@@ -287,12 +299,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 13. Device unlocking
 
-| ID               | 13                                     |
-| ---------------- | -------------------------------------- |
-| Name             | Device unlocking                       |
-| Test Description | The anti-thief device can be unlocked. |
-| Test Type        | Manual                                 |
-| Test Criticity   | 🟣                                      |
+| ID               | 13                                                  |
+| ---------------- | --------------------------------------------------- |
+| Name             | Device unlocking                                    |
+| Test Description | The anti-thief device can be unlocked.              |
+| Test Type        | Manual                                              |
+| Test Criticity   | 🟣                                                   |
+| Expected Result  | The ammmeter should display a value close to 160mA. |
 
 **Tests:**
 
@@ -314,12 +327,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 14. Eco-mode - The lock cannot be locked back
 
-| ID               | 14                                                                           |
-| ---------------- | ---------------------------------------------------------------------------- |
-| Name             | Eco-mode - The lock cannot be locked back                                    |
-| Test Description | When the anti-thief device is in eco-mode, it cannot be locked if it wasn't. |
-| Test Type        | Manual                                                                       |
-| Test Criticity   | 🟠                                                                            |
+| ID               | 14                                                                                                             |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- |
+| Name             | Eco-mode - The lock cannot be locked back                                                                      |
+| Test Description | When the anti-thief device is in eco-mode, it cannot be locked if it wasn't.                                   |
+| Test Type        | Manual                                                                                                         |
+| Test Criticity   | 🟠                                                                                                              |
+| Expected Result  | The value you can then read in the field "Unlock" stays 0x1, indicating the lock will stay in an unlock state. |
 
 **Tests:**
 
@@ -346,6 +360,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the anti-thief device is in eco-mode, it can be unlocked using the linked NFC card/phone. |
 | Test Type        | Manual                                                                                         |
 | Test Criticity   | 🔴                                                                                              |
+| Expected Result  | The anti-thief device should be unlocked and the electromagnet should be active.               |
 
 **Tests:**
 
@@ -367,12 +382,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 16. Sleep mode - The lock cannot be locked back
 
-| ID               | 16                                                                             |
-| ---------------- | ------------------------------------------------------------------------------ |
-| Name             | Sleep mode - The lock cannot be locked back                                    |
-| Test Description | When the anti-thief device is in sleep mode, it cannot be locked if it wasn't. |
-| Test Type        | Manual                                                                         |
-| Test Criticity   | 🟠                                                                              |
+| ID               | 16                                                                                                             |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- |
+| Name             | Sleep mode - The lock cannot be locked back                                                                    |
+| Test Description | When the anti-thief device is in sleep mode, it cannot be locked if it wasn't.                                 |
+| Test Type        | Manual                                                                                                         |
+| Test Criticity   | 🟠                                                                                                              |
+| Expected Result  | The value you can then read in the field "Unlock" stays 0x1, indicating the lock will stay in an unlock state. |
 
 **Tests:**
 
@@ -400,6 +416,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the anti-thief device is in sleep mode, it cannot be unlocked. |
 | Test Type        | Manual                                                              |
 | Test Criticity   | 🟠                                                                   |
+| Expected Result  | Nothing should happen, the lock shouldn't be unlocking.             |
 
 **Tests:**
 
@@ -422,12 +439,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 18. Deep sleep mode - The lock must be locked
 
-| ID               | 18                                                                               |
-| ---------------- | -------------------------------------------------------------------------------- |
-| Name             | Deep sleep mode - The lock must be locked                                        |
-| Test Description | Deep sleep mode can only be enabled if the anti-thief device is in a lock state. |
-| Test Type        | Manual                                                                           |
-| Test Criticity   | 🔴                                                                                |
+| ID               | 18                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------- |
+| Name             | Deep sleep mode - The lock must be locked                                                         |
+| Test Description | Deep sleep mode can only be enabled if the anti-thief device is in a lock state.                  |
+| Test Type        | Manual                                                                                            |
+| Test Criticity   | 🔴                                                                                                 |
+| Expected Result  | The value should instantly reswitch to 0x0. When moving the device, it should not emit any sound. |
 
 **Tests:**
 
@@ -456,6 +474,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the anti-thief device is in deep sleep mode, it cannot be unlocked. |
 | Test Type        | Manual                                                                   |
 | Test Criticity   | 🟠                                                                        |
+| Expected Result  | Nothing should happen, the lock shouldn't be unlocking.                  |
 
 **Tests:**
 
@@ -476,12 +495,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 20. Single device pairing over BLE
 
-| ID               | 20                                                                           |
-| ---------------- | ---------------------------------------------------------------------------- |
-| Name             | Single device pairing over BLE                                               |
-| Test Description | The anti-thief device should be able to pair only with one Bluetooth device. |
-| Test Type        | Manual                                                                       |
-| Test Criticity   | 🟣                                                                            |
+| ID               | 20                                                                                       |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| Name             | Single device pairing over BLE                                                           |
+| Test Description | The anti-thief device should be able to pair only with one Bluetooth device.             |
+| Test Type        | Manual                                                                                   |
+| Test Criticity   | 🟣                                                                                        |
+| Expected Result  | The connection should be refused and the first device should not have been disconnected. |
 
 **Tests:**
 
@@ -508,6 +528,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the anti-thief device is charging, the possibility to connect to it over BLE should be disabled. |
 | Test Type        | Manual                                                                                                |
 | Test Criticity   | 🟢                                                                                                     |
+| Expected Result  | When charging, the device "SportShield 5" should have disappeared.                                    |
 
 **Tests:**
 
@@ -535,6 +556,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the battery level reaches 5% or less, the anti-thief device should automatically switch to deep sleep mode. |
 | Test Type        | Manual                                                                                                           |
 | Test Criticity   | 🟣                                                                                                                |
+| Expected Result  | An alarm should not be triggered when the device is moved and battery level is lower than or equal to 5%.        |
 
 **Tests:**
 
@@ -552,12 +574,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 23. Deep sleep mode manual activation (BLE)
 
-| ID               | 23                                                   |
-| ---------------- | ---------------------------------------------------- |
-| Name             | Deep sleep mode manual activation (BLE)              |
-| Test Description | The deep sleep mode can be enabled manually via BLE. |
-| Test Type        | Manual                                               |
-| Test Criticity   | 🟠                                                    |
+| ID               | 23                                                            |
+| ---------------- | ------------------------------------------------------------- |
+| Name             | Deep sleep mode manual activation (BLE)                       |
+| Test Description | The deep sleep mode can be enabled manually via BLE.          |
+| Test Type        | Manual                                                        |
+| Test Criticity   | 🟠                                                             |
+| Expected Result  | If the device is moved, the buzzer should not emit any sound. |
 
 **Tests:**
 
@@ -582,6 +605,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the anti-thief device is in deep sleep mode, BLE is not active. |
 | Test Type        | Manual                                                               |
 | Test Criticity   | 🟡                                                                    |
+| Expected Result  | No device should be named "SportShield 5".                           |
 
 **Tests:**
 
@@ -602,12 +626,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 25. Sleep mode manual activation (BLE)
 
-| ID               | 25                                              |
-| ---------------- | ----------------------------------------------- |
-| Name             | Sleep mode manual activation (BLE)              |
-| Test Description | The sleep mode can be enabled manually via BLE. |
-| Test Type        | Manual                                          |
-| Test Criticity   | 🟠                                               |
+| ID               | 25                                                                                                                |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Name             | Sleep mode manual activation (BLE)                                                                                |
+| Test Description | The sleep mode can be enabled manually via BLE.                                                                   |
+| Test Type        | Manual                                                                                                            |
+| Test Criticity   | 🟠                                                                                                                 |
+| Expected Result  | When bringing the NFC card, the lock should be unlocked, and no Bluetooth device should be named "SportShield 5". |
 
 **Tests:**
 
@@ -635,6 +660,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the anti-thief device is in sleep mode, BLE is not active. |
 | Test Type        | Manual                                                          |
 | Test Criticity   | 🟡                                                               |
+| Expected Result  | No device should be named "SportShield 5".                      |
 
 **Tests:**
 
@@ -661,6 +687,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the anti-thief device is in sleep mode, sleep mode can be disabled using a specific movement. |
 | Test Type        | Manual                                                                                             |
 | Test Criticity   | 🟢                                                                                                  |
+| Expected Result  | A device should be named "SportShield 5".                                                          |
 
 **Tests:**
 
@@ -688,6 +715,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the battery level reaches 15% or less, the anti-thief device should automatically switch on eco-mode. |
 | Test Type        | Manual                                                                                                     |
 | Test Criticity   | 🔴                                                                                                          |
+| Expected Result  | No device should be named "SportShield 5".                                                                 |
 
 **Tests:**
 
@@ -714,6 +742,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the anti-thief device is in eco-mode, BLE is not active. |
 | Test Type        | Manual                                                        |
 | Test Criticity   | 🟠                                                             |
+| Expected Result  | No device should be named "SportShield 5".                    |
 
 **Tests:**
 
@@ -734,12 +763,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 30. Anti-thief mode - Position and battery updates
 
-| ID               | 30                                                                                                      |
-| ---------------- | ------------------------------------------------------------------------------------------------------- |
-| Name             | Anti-thief mode - Position and battery updates                                                          |
-| Test Description | In the regular mode, the anti-thief device should send its position and battery level every 15 minutes. |
-| Test Type        | Manual                                                                                                  |
-| Test Criticity   | 🟣                                                                                                       |
+| ID               | 30                                                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Anti-thief mode - Position and battery updates                                                                            |
+| Test Description | In the regular mode, the anti-thief device should send its position and battery level every 15 minutes.                   |
+| Test Type        | Manual                                                                                                                    |
+| Test Criticity   | 🟣                                                                                                                         |
+| Expected Result  | You should have received two payloads with the position and battery level of the device which are visible in the console. |
 
 **Tests:**
 
@@ -763,12 +793,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 31. Theft tentative notification
 
-| ID               | 31                                                                                |
-| ---------------- | --------------------------------------------------------------------------------- |
-| Name             | Theft tentative notification                                                      |
-| Test Description | In anti-theft mode, when a theft is detected, a notification should be triggered. |
-| Test Type        | Manual                                                                            |
-| Test Criticity   | 🟣                                                                                 |
+| ID               | 31                                                                                           |
+| ---------------- | -------------------------------------------------------------------------------------------- |
+| Name             | Theft tentative notification                                                                 |
+| Test Description | In anti-theft mode, when a theft is detected, a notification should be triggered.            |
+| Test Type        | Manual                                                                                       |
+| Test Criticity   | 🟣                                                                                            |
+| Expected Result  | You should have received a payload in the console and the logs indicating a theft detection. |
 
 **Tests:**
 
@@ -790,12 +821,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 32. Eco-mode - Position and battery updates
 
-| ID               | 32                                                                                              |
-| ---------------- | ----------------------------------------------------------------------------------------------- |
-| Name             | Eco-mode - Position and battery updates                                                         |
-| Test Description | In eco-mode, the anti-thief device should send its position and battery level every 30 minutes. |
-| Test Type        | Manual                                                                                          |
-| Test Criticity   | 🔴                                                                                               |
+| ID               | 32                                                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Eco-mode - Position and battery updates                                                                                   |
+| Test Description | In eco-mode, the anti-thief device should send its position and battery level every 30 minutes.                           |
+| Test Type        | Manual                                                                                                                    |
+| Test Criticity   | 🔴                                                                                                                         |
+| Expected Result  | You should have received two payloads with the position and battery level of the device which are visible in the console. |
 
 **Tests:**
 
@@ -819,12 +851,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 33. Eco-mode - Theft tentative notification
 
-| ID               | 33                                                                         |
-| ---------------- | -------------------------------------------------------------------------- |
-| Name             | Eco-mode - Theft tentative notification                                    |
-| Test Description | In eco-mode, when a theft is detected, a notification should be triggered. |
-| Test Type        | Manual                                                                     |
-| Test Criticity   | 🟣                                                                          |
+| ID               | 33                                                                                           |
+| ---------------- | -------------------------------------------------------------------------------------------- |
+| Name             | Eco-mode - Theft tentative notification                                                      |
+| Test Description | In eco-mode, when a theft is detected, a notification should be triggered.                   |
+| Test Type        | Manual                                                                                       |
+| Test Criticity   | 🟣                                                                                            |
+| Expected Result  | You should have received a payload in the console and the logs indicating a theft detection. |
 
 **Tests:**
 
@@ -852,6 +885,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | In sleep mode, the anti-thief device should not send its position and battery level. |
 | Test Type        | Manual                                                                               |
 | Test Criticity   | 🟡                                                                                    |
+| Expected Result  | No packet should have been logged in the console or in the testing.log file.         |
 
 **Tests:**
 
@@ -880,6 +914,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | In deep sleep mode, the anti-thief device should not send its position and battery level. |
 | Test Type        | Manual                                                                                    |
 | Test Criticity   | 🟡                                                                                         |
+| Expected Result  | No packet should have been logged in the console or in the testing.log file.              |
 
 **Tests:**
 
@@ -907,6 +942,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | While charging, the anti-thief device should not send its position and battery level. |
 | Test Type        | Manual                                                                                |
 | Test Criticity   | 🟡                                                                                     |
+| Expected Result  | No packet should have been logged in the console or in the testing.log file.          |
 
 **Tests:**
 
@@ -935,6 +971,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | Ensure a notification is sent over GPRS to inform the user an attempt of unlock with another NFC device has been done on his behalf. |
 | Test Type        | Manual                                                                                                                               |
 | Test Criticity   | 🟣                                                                                                                                    |
+| Expected Result  | The console and testing.log file should contain a payload indicating an unknown NFC card has been detected.                          |
 
 **Tests:**
 
@@ -955,12 +992,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 38. Wrong NFC card - No unlock
 
-| ID               | 38                                                                          |
-| ---------------- | --------------------------------------------------------------------------- |
-| Name             | Wrong NFC card - No unlock                                                  |
-| Test Description | When a wrong NFC card is detected, the anti-thief device should not unlock. |
-| Test Type        | Manual                                                                      |
-| Test Criticity   | 🟣                                                                           |
+| ID               | 38                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| Name             | Wrong NFC card - No unlock                                                                 |
+| Test Description | When a wrong NFC card is detected, the anti-thief device should not unlock.                |
+| Test Type        | Manual                                                                                     |
+| Test Criticity   | 🟣                                                                                          |
+| Expected Result  | The electromagnet should not be enabled, neither should the anti-thief device be unlocked. |
 
 **Tests:**
 
@@ -980,12 +1018,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 39. Charging - NFC disabled
 
-| ID               | 39                                                              |
-| ---------------- | --------------------------------------------------------------- |
-| Name             | Charging - NFC disabled                                         |
-| Test Description | When the device is charging, the NFC reader should be disabled. |
-| Test Type        | Manual                                                          |
-| Test Criticity   | 🟡                                                               |
+| ID               | 39                                                                                                                                        |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Charging - NFC disabled                                                                                                                   |
+| Test Description | When the device is charging, the NFC reader should be disabled.                                                                           |
+| Test Type        | Manual                                                                                                                                    |
+| Test Criticity   | 🟡                                                                                                                                         |
+| Expected Result  | You should not have received any payload in the console or in the testing.log file, and the electromagnet should not have been turned on. |
 
 **Tests:**
 
@@ -1010,12 +1049,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 40. Deep sleep mode â€“ NFC disabled
 
-| ID               | 40                                                                        |
-| ---------------- | ------------------------------------------------------------------------- |
-| Name             | Deep sleep mode â€“ NFC disabled                                          |
-| Test Description | When the device is in deep sleep mode, the NFC reader should be disabled. |
-| Test Type        | Manual                                                                    |
-| Test Criticity   | 🟠                                                                         |
+| ID               | 40                                                                                                                                        |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Deep sleep mode â€“ NFC disabled                                                                                                          |
+| Test Description | When the device is in deep sleep mode, the NFC reader should be disabled.                                                                 |
+| Test Type        | Manual                                                                                                                                    |
+| Test Criticity   | 🟠                                                                                                                                         |
+| Expected Result  | You should not have received any payload in the console or in the testing.log file, and the electromagnet should not have been turned on. |
 
 **Tests:**
 
@@ -1039,12 +1079,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 41. Sleep mode â€“ NFC disabled
 
-| ID               | 41                                                                   |
-| ---------------- | -------------------------------------------------------------------- |
-| Name             | Sleep mode â€“ NFC disabled                                          |
-| Test Description | When the device is in sleep mode, the NFC reader should be disabled. |
-| Test Type        | Manual                                                               |
-| Test Criticity   | 🟠                                                                    |
+| ID               | 41                                                                                                                                        |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Sleep mode â€“ NFC disabled                                                                                                               |
+| Test Description | When the device is in sleep mode, the NFC reader should be disabled.                                                                      |
+| Test Type        | Manual                                                                                                                                    |
+| Test Criticity   | 🟠                                                                                                                                         |
+| Expected Result  | You should not have received any payload in the console or in the testing.log file, and the electromagnet should not have been turned on. |
 
 **Tests:**
 
@@ -1068,12 +1109,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 42. Eco-mode â€“ NFC enabled
 
-| ID               | 42                                                                |
-| ---------------- | ----------------------------------------------------------------- |
-| Name             | Eco-mode â€“ NFC enabled                                          |
-| Test Description | When the device is in eco-mode, the NFC reader should be enabled. |
-| Test Type        | Manual                                                            |
-| Test Criticity   | 🔴                                                                 |
+| ID               | 42                                                                                                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Eco-mode â€“ NFC enabled                                                                                                                                                                    |
+| Test Description | When the device is in eco-mode, the NFC reader should be enabled.                                                                                                                           |
+| Test Type        | Manual                                                                                                                                                                                      |
+| Test Criticity   | 🔴                                                                                                                                                                                           |
+| Expected Result  | You should not have received two payload (one for the unlock and one for the wrong NFC card) in the console and in the testing.log file, the electromagnet should have been turned on once. |
 
 **Tests:**
 
@@ -1103,6 +1145,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the device is charging and its battery level is greater than or equal to 80%, the charging speed should be limited to 50mA. |
 | Test Type        | Manual                                                                                                                           |
 | Test Criticity   | 🔴                                                                                                                                |
+| Expected Result  | The current should be limited to 50mA.                                                                                           |
 
 **Tests:**
 
@@ -1128,6 +1171,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the device is charging, the sleep mode is automatically disabled. |
 | Test Type        | Manual                                                                 |
 | Test Criticity   | 🔴                                                                      |
+| Expected Result  | Nothing should happen.                                                 |
 
 **Tests:**
 
@@ -1153,6 +1197,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the device is charging, the deep sleep mode is automatically disabled. |
 | Test Type        | Manual                                                                      |
 | Test Criticity   | 🔴                                                                           |
+| Expected Result  | Nothing should happen.                                                      |
 
 **Tests:**
 
@@ -1178,6 +1223,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the device is charging, the eco-mode is automatically disabled. |
 | Test Type        | Manual                                                               |
 | Test Criticity   | 🔴                                                                    |
+| Expected Result  | Nothing should happen.                                               |
 
 **Tests:**
 
@@ -1197,12 +1243,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 47. Deep sleep mode automatically enabled
 
-| ID               | 47                                                                                        |
-| ---------------- | ----------------------------------------------------------------------------------------- |
-| Name             | Deep sleep mode automatically enabled                                                     |
-| Test Description | If the anti-theft device hits 5% of the battery level, deep sleep mode should be enabled. |
-| Test Type        | Manual                                                                                    |
-| Test Criticity   | 🟣                                                                                         |
+| ID               | 47                                                                                                                           |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Deep sleep mode automatically enabled                                                                                        |
+| Test Description | If the anti-theft device hits 5% of the battery level, deep sleep mode should be enabled.                                    |
+| Test Type        | Manual                                                                                                                       |
+| Test Criticity   | 🟣                                                                                                                            |
+| Expected Result  | You should have received a payload indicating a battery level lower than 5% in the logs and in the console of the web-server |
 
 **Tests:**
 
@@ -1230,6 +1277,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When in eco-mode, the alarm triggers if eco-mode is enabled and the device is moved. |
 | Test Type        | Manual                                                                               |
 | Test Criticity   | 🟣                                                                                    |
+| Expected Result  | An alarm should have been triggered.                                                 |
 
 **Tests:**
 
@@ -1257,6 +1305,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When in sleep mode, the alarm triggers if sleep mode is enabled and the device is moved. |
 | Test Type        | Manual                                                                                   |
 | Test Criticity   | 🟣                                                                                        |
+| Expected Result  | An alarm should have been triggered.                                                     |
 
 **Tests:**
 
@@ -1284,6 +1333,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When in deep sleep mode, the alarm triggers if deep sleep mode is enabled and the device is moved. |
 | Test Type        | Manual                                                                                             |
 | Test Criticity   | 🟠                                                                                                  |
+| Expected Result  | No alarm have been triggered.                                                                      |
 
 **Tests:**
 
@@ -1311,6 +1361,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When charging, the alarm never triggers if the device is moved. |
 | Test Type        | Manual                                                          |
 | Test Criticity   | 🟠                                                               |
+| Expected Result  | No alarm have been triggered.                                   |
 
 **Tests:**
 
@@ -1339,6 +1390,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | The autonomy of the device is tested at a normal temperature conditions to ensure it can least at least 7 days. |
 | Test Type        | Manual                                                                                                          |
 | Test Criticity   | 🟣                                                                                                               |
+| Expected Result  | The battery should last at least 7 days.                                                                        |
 
 **Tests:**
 
@@ -1362,6 +1414,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | The autonomy of the device is tested in extremely cold conditions to ensure it can least at least 7 days. |
 | Test Type        | Manual                                                                                                    |
 | Test Criticity   | 🟣                                                                                                         |
+| Expected Result  | The battery should last at least 7 days.                                                                  |
 
 **Tests:**
 
@@ -1390,6 +1443,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | The alarm can be disabled by sending a BLE packet with a specific payload. |
 | Test Type        | Manual                                                                     |
 | Test Criticity   | 🟣                                                                          |
+| Expected Result  | The alarm should instantly stop.                                           |
 
 **Tests:**
 
