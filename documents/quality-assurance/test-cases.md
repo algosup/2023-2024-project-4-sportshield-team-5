@@ -597,11 +597,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 2. Connect to the device and ensure a "Deep Sleep Mode" field is available.
 3. Submit the value 0x1 in the "Deep Sleep Mode" field.
 
-### 24. Deep sleep mode â€“ Inactive BLE
+### 24. Deep sleep mode - Inactive BLE
 
 | ID               | 24                                                                   |
 | ---------------- | -------------------------------------------------------------------- |
-| Name             | Deep sleep mode â€“ Inactive BLE                                     |
+| Name             | Deep sleep mode - Inactive BLE                                       |
 | Test Description | When the anti-thief device is in deep sleep mode, BLE is not active. |
 | Test Type        | Manual                                                               |
 | Test Criticity   | 🟡                                                                    |
@@ -652,11 +652,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 2. Connect to the device and ensure a "Sleep Mode" field is available.
 3. Submit the value 0x1 in the "Sleep Mode" field.
 
-### 26. Sleep mode â€“ Inactive BLE
+### 26. Sleep mode - Inactive BLE
 
 | ID               | 26                                                              |
 | ---------------- | --------------------------------------------------------------- |
-| Name             | Sleep mode â€“ Inactive BLE                                     |
+| Name             | Sleep mode - Inactive BLE                                       |
 | Test Description | When the anti-thief device is in sleep mode, BLE is not active. |
 | Test Type        | Manual                                                          |
 | Test Criticity   | 🟡                                                               |
@@ -679,11 +679,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 1. Check if sleep mode is enabled by ensuring the device can be unlocked using NFC.
 2. Go on LightBlue app, and look for a device named "SportShield 5".
 
-### 27. Sleep mode â€“ Disabling with specific movement
+### 27. Sleep mode - Disabling with specific movement
 
 | ID               | 27                                                                                                 |
 | ---------------- | -------------------------------------------------------------------------------------------------- |
-| Name             | Sleep mode â€“ Disabling with specific movement                                                    |
+| Name             | Sleep mode - Disabling with specific movement                                                      |
 | Test Description | When the anti-thief device is in sleep mode, sleep mode can be disabled using a specific movement. |
 | Test Type        | Manual                                                                                             |
 | Test Criticity   | 🟢                                                                                                  |
@@ -734,11 +734,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 2. Check if eco-mode is enabled by ensuring no device in LightBlue is named "SportShield 5".
 3. If a device is called "SportShield 5", wait until the battery level is lower than or equal to 15%.
 
-### 29. Eco-mode â€“ Inactive BLE
+### 29. Eco-mode - Inactive BLE
 
 | ID               | 29                                                            |
 | ---------------- | ------------------------------------------------------------- |
-| Name             | Eco-mode â€“ Inactive BLE                                     |
+| Name             | Eco-mode - Inactive BLE                                       |
 | Test Description | When the anti-thief device is in eco-mode, BLE is not active. |
 | Test Type        | Manual                                                        |
 | Test Criticity   | 🟠                                                             |
@@ -963,11 +963,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 3. Wait 35 minutes to receive a position and battery level payload.
 4. Verify in the logs and in the console of the web-server that you didn't received the payload.
 
-### 37. Wrong NFC card â€“ Notification sent over GPRS
+### 37. Wrong NFC card - Notification sent over GPRS
 
 | ID               | 37                                                                                                                                   |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Name             | Wrong NFC card â€“ Notification sent over GPRS                                                                                       |
+| Name             | Wrong NFC card - Notification sent over GPRS                                                                                         |
 | Test Description | Ensure a notification is sent over GPRS to inform the user an attempt of unlock with another NFC device has been done on his behalf. |
 | Test Type        | Manual                                                                                                                               |
 | Test Criticity   | 🟣                                                                                                                                    |
@@ -1047,11 +1047,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 5. Bring the phone close to the board NFC reader.
 6. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
 
-### 40. Deep sleep mode â€“ NFC disabled
+### 40. Deep sleep mode - NFC disabled
 
 | ID               | 40                                                                                                                                        |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Deep sleep mode â€“ NFC disabled                                                                                                          |
+| Name             | Deep sleep mode - NFC disabled                                                                                                            |
 | Test Description | When the device is in deep sleep mode, the NFC reader should be disabled.                                                                 |
 | Test Type        | Manual                                                                                                                                    |
 | Test Criticity   | 🟠                                                                                                                                         |
@@ -1077,11 +1077,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 4. Bring the phone close to the board NFC reader.
 5. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
 
-### 41. Sleep mode â€“ NFC disabled
+### 41. Sleep mode - NFC disabled
 
 | ID               | 41                                                                                                                                        |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Sleep mode â€“ NFC disabled                                                                                                               |
+| Name             | Sleep mode - NFC disabled                                                                                                                 |
 | Test Description | When the device is in sleep mode, the NFC reader should be disabled.                                                                      |
 | Test Type        | Manual                                                                                                                                    |
 | Test Criticity   | 🟠                                                                                                                                         |
@@ -1107,11 +1107,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 4. Bring the phone close to the board NFC reader.
 5. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
 
-### 42. Eco-mode â€“ NFC enabled
+### 42. Eco-mode - NFC enabled
 
 | ID               | 42                                                                                                                                                                                          |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Eco-mode â€“ NFC enabled                                                                                                                                                                    |
+| Name             | Eco-mode - NFC enabled                                                                                                                                                                      |
 | Test Description | When the device is in eco-mode, the NFC reader should be enabled.                                                                                                                           |
 | Test Type        | Manual                                                                                                                                                                                      |
 | Test Criticity   | 🔴                                                                                                                                                                                           |
@@ -1163,11 +1163,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 1. Ensure the anti-thief device is charging and its battery level is greater than or equal to 80%.
 2. Put the test tips on the pins of the board shown as an attachement, to measure the current.
 
-### 44. Charging â€“ Sleep mode disabling
+### 44. Charging - Sleep mode disabling
 
 | ID               | 44                                                                     |
 | ---------------- | ---------------------------------------------------------------------- |
-| Name             | Charging â€“ Sleep mode disabling                                      |
+| Name             | Charging - Sleep mode disabling                                        |
 | Test Description | When the device is charging, the sleep mode is automatically disabled. |
 | Test Type        | Manual                                                                 |
 | Test Criticity   | 🔴                                                                      |
@@ -1189,11 +1189,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 1. Plug the USB-C part of the cable in the charging port of the board.
 2. Plug the USB-A part of the cable in the USB port of the computer.
 
-### 45. Charging â€“ Deep sleep mode disabling
+### 45. Charging - Deep sleep mode disabling
 
 | ID               | 45                                                                          |
 | ---------------- | --------------------------------------------------------------------------- |
-| Name             | Charging â€“ Deep sleep mode disabling                                      |
+| Name             | Charging - Deep sleep mode disabling                                        |
 | Test Description | When the device is charging, the deep sleep mode is automatically disabled. |
 | Test Type        | Manual                                                                      |
 | Test Criticity   | 🔴                                                                           |
@@ -1215,11 +1215,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 1. Plug the USB-C part of the cable in the charging port of the board.
 2. Plug the USB-A part of the cable in the USB port of the computer.
 
-### 46. Charging â€“ Eco-mode disabling
+### 46. Charging - Eco-mode disabling
 
 | ID               | 46                                                                   |
 | ---------------- | -------------------------------------------------------------------- |
-| Name             | Charging â€“ Eco-mode disabling                                      |
+| Name             | Charging - Eco-mode disabling                                        |
 | Test Description | When the device is charging, the eco-mode is automatically disabled. |
 | Test Type        | Manual                                                               |
 | Test Criticity   | 🔴                                                                    |

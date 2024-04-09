@@ -811,7 +811,7 @@
     },
     {
       "test_id": 24,
-      "test_name": "Deep sleep mode – Inactive BLE",
+      "test_name": "Deep sleep mode - Inactive BLE",
       "test_description": "When the anti-thief device is in deep sleep mode, BLE is not active.",
       "test_requirements": [
         {
@@ -879,7 +879,7 @@
     },
     {
       "test_id": 26,
-      "test_name": "Sleep mode – Inactive BLE",
+      "test_name": "Sleep mode - Inactive BLE",
       "test_description": "When the anti-thief device is in sleep mode, BLE is not active.",
       "test_requirements": [
         {
@@ -911,7 +911,7 @@
     },
     {
       "test_id": 27,
-      "test_name": "Sleep mode – Disabling with specific movement",
+      "test_name": "Sleep mode - Disabling with specific movement",
       "test_description": "When the anti-thief device is in sleep mode, sleep mode can be disabled using a specific movement.",
       "test_requirements": [
         {
@@ -987,7 +987,7 @@
     },
     {
       "test_id": 29,
-      "test_name": "Eco-mode – Inactive BLE",
+      "test_name": "Eco-mode - Inactive BLE",
       "test_description": "When the anti-thief device is in eco-mode, BLE is not active.",
       "test_requirements": [
         {
@@ -1303,7 +1303,7 @@
     },
     {
       "test_id": 37,
-      "test_name": "Wrong NFC card – Notification sent over GPRS",
+      "test_name": "Wrong NFC card - Notification sent over GPRS",
       "test_description": "Ensure a notification is sent over GPRS to inform the user an attempt of unlock with another NFC device has been done on his behalf.",
       "test_requirements": [
         {
@@ -1412,7 +1412,7 @@
     },
     {
       "test_id": 40,
-      "test_name": "Deep sleep mode – NFC disabled",
+      "test_name": "Deep sleep mode - NFC disabled",
       "test_description": "When the device is in deep sleep mode, the NFC reader should be disabled.",
       "test_requirements": [
         {
@@ -1456,7 +1456,7 @@
     },
     {
       "test_id": 41,
-      "test_name": "Sleep mode – NFC disabled",
+      "test_name": "Sleep mode - NFC disabled",
       "test_description": "When the device is in sleep mode, the NFC reader should be disabled.",
       "test_requirements": [
         {
@@ -1500,7 +1500,7 @@
     },
     {
       "test_id": 42,
-      "test_name": "Eco-mode – NFC enabled",
+      "test_name": "Eco-mode - NFC enabled",
       "test_description": "When the device is in eco-mode, the NFC reader should be enabled.",
       "test_requirements": [
         {
@@ -1580,7 +1580,7 @@
     },
     {
       "test_id": 44,
-      "test_name": "Charging – Sleep mode disabling",
+      "test_name": "Charging - Sleep mode disabling",
       "test_description": "When the device is charging, the sleep mode is automatically disabled.",
       "test_requirements": [
         {
@@ -1615,7 +1615,7 @@
     },
     {
       "test_id": 45,
-      "test_name": "Charging – Deep sleep mode disabling",
+      "test_name": "Charging - Deep sleep mode disabling",
       "test_description": "When the device is charging, the deep sleep mode is automatically disabled.",
       "test_requirements": [
         {
@@ -1650,7 +1650,7 @@
     },
     {
       "test_id": 46,
-      "test_name": "Charging – Eco-mode disabling",
+      "test_name": "Charging - Eco-mode disabling",
       "test_description": "When the device is charging, the eco-mode is automatically disabled.",
       "test_requirements": [
         {
