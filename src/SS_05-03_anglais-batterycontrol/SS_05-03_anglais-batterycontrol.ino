@@ -12,6 +12,7 @@
 #include "buzzer.h"
 // BATTERY
 #include "battery.h"
+
 //-------------------------------- SETUP ----------------------------------------
 void setup()
 {
@@ -113,7 +114,6 @@ void loop()
       }
       motion_big = true;
       motion_small = false;
-      send_move = true;
     }
     else if (motion_data > small_MT || rotation_data > small_RT)
     { // Small motion detection
@@ -155,6 +155,8 @@ void loop()
 
   if ((motion_big || motion_small) && MT_counter > 2)
   {
+    sendMovement();
+
     if (first_alarm)
     {
       // Dissuasion alarm
@@ -196,72 +198,89 @@ void loop()
     BLE.end();
   }
 
-  //   //capture clocked GPS data
-  //   GPS.read();
-  //   if (GPS.newNMEAreceived()) {
-  //     Serial.print(GPS.lastNMEA());    // this also sets the newNMEAreceived() flag to false
-  //     if (!GPS.parse(GPS.lastNMEA()))  // this also sets the newNMEAreceived() flag to false
-  //       Serial.println("fail to parse");
-  //     ;  // we can fail to parse a   sentence in which case we should just wait for another
-  //   }
+  // capture clocked GPS data
+  GPS.read();
+  if (GPS.newNMEAreceived())
+  {
+    Serial.print(GPS.lastNMEA());   // this also sets the newNMEAreceived() flag to false
+    if (!GPS.parse(GPS.lastNMEA())) // this also sets the newNMEAreceived() flag to false
+      Serial.println("fail to parse");
+    // we can fail to parse a sentence in which case we should just wait for another
+  }
 
-  //   if (GPS.fix && position_acquired == false) {  // if location detected
-  //     Serial.println("fix + false");
-  //     position_acquired = true;
-  //     GPS.fix = 0;
-  //     digitalWrite(GPS_WKUP_PIN, LOW);
-  //     GPS.sendCommand("$PMTK225,4*2F");  // send to backup mode
-  //   }
+  if (GPS.fix && position_acquired == false)
+  { // if location detected
+    Serial.println("fix + false");
+    position_acquired = true;
+    GPS.fix = 0;
+    digitalWrite(GPS_WKUP_PIN, LOW);
+    GPS.sendCommand("$PMTK225,4*2F"); // send to backup mode
+  }
 
-  //   if (send_move) {  //sending of positions via SIM module
-  //     Serial.println("Envoi detection mouvement");
-  //     sim800l->setupGPRS("iot.1nce.net");
-  //     sim800l->connectGPRS();
-  //     String Route = "http://141.94.244.11:2000/sendNotfication/" + BLE.address();
-  //     String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
-  //     String str = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\"}";
-  //     String bat = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryVoltage()) + "\"}";
-  //     char position[200];
-  //     char posbat[200];
-  //     str.toCharArray(position, str.length() + 1);
-  //     //Serial.println(str);
-  //     bat.toCharArray(posbat, bat.length() + 1);
-  //     Serial.println(posbat);
-  //     char direction[200];
-  //     char directionCoord[200];
-  //     Route.toCharArray(direction, Route.length() + 1);
-  //     RouteCoord.toCharArray(directionCoord, RouteCoord.length() + 1);
-  //     sim800l->doPost(direction, "application/json", position, 10000, 10000);
-  //     sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
-  //     sim800l->disconnectGPRS();
-  //     send_move = false;
-  //   }
-
-  // if (send_position) {  //regular sending of positions via SIM module
-  //   Serial.println("Envoi regulier position");
-  //   sim800l->setupGPRS("iot.1nce.net");
-  //   sim800l->connectGPRS();
-  //   String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
-  //   String bat = "{\"latitude\": \" " + convertDMMtoDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMtoDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryVoltage()) + "\"}";
-  //   char posbat[200];
-  //   bat.toCharArray(posbat, bat.length() + 1);
-  //   Serial.println(posbat);
-  //   Serial.println(RouteCoord);
-  //   char directionCoord[200];
-  //   RouteCoord.toCharArray(directionCoord, RouteCoord.length() + 1);
-  //   sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
-  //   sim800l->disconnectGPRS();
-  //   send_position = false;
-  // }
   
-  if (getBatteryLevel() < 80)
+  if (send_position)
+  {
+    sendPosition();
+  }
+
+  if (getBatteryLevel() <= 15) // if Vmin is reached
   {
     Serial.print("Enter sleep mode");
     deepSleepMode();
   }
+  if (getBatteryLevel() >= 95) // if Vmax is reached
+  {
+    // this is a placeholder, it will probably not work if unchanged
+    digitalWrite(VBAT_ENABLE, HIGH); // stop the charge
+  }
 }
 
 //------------- ADDITIONAL FUNCTIONS ------------------------------
+
+
+void sendMovement(void)
+{
+  // sending of positions via SIM module
+  Serial.println("Envoi detection mouvement");
+  sim800l->setupGPRS("iot.1nce.net");
+  sim800l->connectGPRS();
+  String Route = "http://141.94.244.11:2000/sendNotfication/" + BLE.address();
+  String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
+  String str = "{\"latitude\": \" " + convertDMMToDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMToDD(String(float(GPS.longitude), 4)) + "\"}";
+  String bat = "{\"latitude\": \" " + convertDMMToDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMToDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryLevel()) + "\"}";
+  char position[200];
+  char posbat[200];
+  str.toCharArray(position, str.length() + 1);
+  // Serial.println(str);
+  bat.toCharArray(posbat, bat.length() + 1);
+  Serial.println(posbat);
+  char direction[200];
+  char directionCoord[200];
+  Route.toCharArray(direction, Route.length() + 1);
+  RouteCoord.toCharArray(directionCoord, RouteCoord.length() + 1);
+  sim800l->doPost(direction, "application/json", position, 10000, 10000);
+  sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
+  sim800l->disconnectGPRS();
+}
+
+void sendPosition()
+{
+  // regular sending of positions via SIM module
+  Serial.println("Envoi regulier position");
+  sim800l->setupGPRS("iot.1nce.net");
+  sim800l->connectGPRS();
+  String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
+  String bat = "{\"latitude\": \" " + convertDMMToDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMToDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryLevel()) + "\"}";
+  char posbat[200];
+  bat.toCharArray(posbat, bat.length() + 1);
+  Serial.println(posbat);
+  Serial.println(RouteCoord);
+  char directionCoord[200];
+  RouteCoord.toCharArray(directionCoord, RouteCoord.length() + 1);
+  sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
+  sim800l->disconnectGPRS();
+  send_position = false;
+}
 
 void temps(void)
 {
