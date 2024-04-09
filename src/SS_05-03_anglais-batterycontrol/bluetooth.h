@@ -122,22 +122,6 @@ void onDisconnect(BLEDevice central)
     digitalWrite(LEDB, HIGH);
 }
 
-char Conversion(unsigned short int data)
-{
-    char mdp_hexadecimal[5];
-    // sprintf(mdp_hexadecimal, "%04X", data);
-
-    // for (int i = 0; i < 2; ++i)
-    // {
-    //     char temp = mdp_hexadecimal[i];
-    //     mdp_hexadecimal[i] = mdp_hexadecimal[2 + i];
-    //     mdp_hexadecimal[2 + i] = temp;
-    // }
-    // Serial.println("Mot de passe : " + String(valeur) + " ");  //used to see the value in decimal
-    // Serial.print("Written password  = ");
-    // Serial.println(String(mdp_hexadecimal));
-}
-
 /**
  * This function is called when a password is sent by a paired device.
  * @param central (BLEDevice): A paired device.
@@ -145,12 +129,8 @@ char Conversion(unsigned short int data)
  */
 void onWritePassword(BLEDevice central, BLECharacteristic characteristic)
 {
-    const int expected_password = 1;
-    short int value = PasswordCharacteristic.value();
-    if(value==72){
-        Serial.println("I was right!");
-    }
-    Conversion(value);
+    const int expected_password = 1; // The password is currently set to 1 and not modifiable on user's side
+    short int value = PasswordCharacteristic.value(); // Retrieve an int sent by the user
     is_authenticate = (value == expected_password);
     Serial.println(is_authenticate ? "successful authentication" : "wrong password");
 }

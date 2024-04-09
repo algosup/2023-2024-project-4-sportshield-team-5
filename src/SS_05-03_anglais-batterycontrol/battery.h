@@ -6,7 +6,32 @@
     This file contains every functions related to the battery management.
 */
 
+//-------------------------- VARIABLES ---------------------------
 float battery;
+float Batterypercentage[50][2] = {
+    {100.0, 4.2},
+    {95.0, 4.15},
+    {90.0, 4.08},
+    {85.0, 4.02},
+    {80.0, 3.98},
+    {75.0, 3.95},
+    {70.0, 3.91},
+    {65.0, 3.87},
+    {60.0, 3.85},
+    {55.0, 3.84},
+    {50.0, 3.82},
+    {45.0, 3.80},
+    {40.0, 3.79},
+    {35.0, 3.77},
+    {30.0, 3.75},
+    {25.0, 3.73},
+    {20.0, 3.71},
+    {15.0, 3.69},
+    {10.0, 3.61},
+    {5.0, 3.27}
+
+};
+
 //-------------------------- FUNCTIONS ---------------------------
 
 /**
@@ -21,7 +46,7 @@ int getBatteryLevel()
   */
 
   battery = analogRead(PIN_VBAT);
-  float batteryLevel = map(battery, 0, 1023, 0, 100);
+
   return battery;
 }
 
