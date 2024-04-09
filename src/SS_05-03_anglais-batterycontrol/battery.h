@@ -44,6 +44,7 @@ int getBatteryLevel()
 {
   // Read the current voltage level on the VBAT pin.
   battery = analogRead(PIN_VBAT);
+  battery = 50;
   return battery;
 }
 

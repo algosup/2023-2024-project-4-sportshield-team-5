@@ -258,6 +258,7 @@ void loop()
 
 void sendMovement(void)
 {
+  /*
   // sending of positions via SIM module
   Serial.println("Envoi detection mouvement");
   sim800l->setupGPRS("iot.1nce.net");
@@ -279,6 +280,7 @@ void sendMovement(void)
   sim800l->doPost(direction, "application/json", position, 10000, 10000);
   sim800l->doPost(directionCoord, "application/json", posbat, 10000, 10000);
   sim800l->disconnectGPRS();
+  */
 }
 
 void sendPosition()
