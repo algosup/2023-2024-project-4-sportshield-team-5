@@ -9,13 +9,13 @@ The image below shows a table of dependent tasks and independent tasks needed to
 <img src="weekly_reports/images/Dependencies.png">
 
 ### TASK ID:
-This is the unique identification of a particular task. It is essential to identify the pattern of dependent and independent tasks.
+This task requires a unique identification to distinguish it from others. It is crucial to identify which tasks are dependent on each other and which ones are independent.
 
 ### TASK NAME:
 This is the name of the task.
 
 ### PREDECESSOR:
-Here, we assign the TASK ID to different tasks that require a particular task to be completed before they can start executing. A dash is used to represent tasks that don't depend on any other tasks before starting.
+This field points out the tasks that require previous accomplishments on the project before being started. These accomplishments are represented by the identifiers of tasks in this field. A slash is used to represent tasks that don't depend on any other tasks before starting.
 
 ### DURATION:
 Here, we determine the estimated duration of each task.
