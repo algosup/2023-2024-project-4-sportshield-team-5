@@ -15,6 +15,7 @@ void setup()
 {
   delay(1000);
   Serial.println("SETUP\n");
+  delay(1000);
 
   // debug led initialization
   Serial.print("setup debug red LED ... ");
@@ -59,6 +60,11 @@ void setup()
 
   // SIM setup
   Serial.print("SIM Setup ... ");
+  Serial2.begin(9600);
+  delay(100);
+  sim800l = new SIM800L((Stream *)&Serial2, SIM800_RST_PIN, 200, 512);
+  pinMode(SIM800_DTR_PIN, OUTPUT);
+  delay(1000);
   simSetup();
   Serial.println("done !\n");
 
@@ -78,13 +84,11 @@ void setup()
   Serial.println("timer setup done !\n");
 
   //end of the setup
+
   digitalWrite(LEDR, LOW);
   digitalWrite(LEDG, HIGH);
   catchCurrentTime();
   Serial.println("\nSETUP DONE !\n");
-  
- 
-
 }
 
 //--------------------------- LOOP -----------------------------

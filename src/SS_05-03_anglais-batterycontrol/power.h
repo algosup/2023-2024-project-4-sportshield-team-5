@@ -95,13 +95,12 @@ void powerSwitchesSetup(){
  * @param intensity HIGH or LOW
  */
 void setChargingCurrent(int intensity){
-  Serial.print("Charging current set to ");
   if (intensity==LOW){
     digitalWrite(POWER_CHARGING_CONTROL, HIGH);
-    Serial.println("50mA");
+    Device.charging_current = 50;
   }else{
     digitalWrite(POWER_CHARGING_CONTROL, LOW);
-    Serial.println("100mA");
+    Device.charging_current = 100;
   }
   
 }
@@ -113,9 +112,17 @@ void batterySetup(){
   digitalWrite(VBAT_ENABLE, LOW);
   pinMode(POWER_CHARGING_CONTROL, OUTPUT);
   setChargingCurrent(HIGH);
+  Device.is_charging = !digitalRead(CHARGING_PIN);
   Device.battery_level = getBatteryLevel();
   Serial.print("Battery level: ");
-  Serial.println(Device.battery_level);
+  Serial.print(Device.battery_level);
+  Serial.println(" %");
+  if (Device.is_charging){
+    Serial.print("Currently charging at ");
+    Serial.print(Device.charging_current);
+    Serial.println(" mA");
+  }
+  
 }
 
 #endif

@@ -23,6 +23,7 @@ struct myConfig
   bool is_locked; //is the lock activated
   bool is_triggered; //is the alarm triggered
   bool is_charging; // is it plugged and charging
+  short int charging_current; //50 or 100 in mA
   short int battery_level; // battery level in percentage (5% resolution)
   bool is_bluetooth_activated; // obvious
   bool is_gps_activated; // obvious
@@ -33,11 +34,13 @@ myConfig Device;
 
 //----------------------- GLOBAL VARIABLES -----------------------
 
+//general
 #define TEST_DURATION 1000 //ms -> bip and EML duratios at setup
 #define ON HIGH
 #define OFF LOW
 
 //LOCKING
+#define UNLOCKING_DURATION 1000 //ms EML opened
 bool is_authenticate = false;
 
 // TIMER
@@ -103,6 +106,7 @@ unsigned long start_cooldown = 0; // check point for millis aided cooldown
 
 // BATTERY AND SWITCH PINS
 #define VBAT_ENABLE 14
+#define CHARGING_PIN P0_17
 #define POWER_CHARGING_CONTROL P0_13 //if this pin is H/L -> 50/100mA to charge
 #define POWER_BOOST_SWITCH_PIN D4
 #define BATTERY_SWITCH_PIN D9
