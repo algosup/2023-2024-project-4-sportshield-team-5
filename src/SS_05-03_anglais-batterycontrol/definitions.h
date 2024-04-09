@@ -90,7 +90,7 @@ float small_RT = 45.0; //     SmallRotationThreshold
 float big_RT = 100.0;  //     BigRotationThreshold
 
 // Alarm
-float time_limit = 1.5;       // The maximum time margin where two shocks can be detected as a risk, unit in seconds
+#define SHORT_SHOCK_DURATION 1.5;       // The maximum time margin where two shocks can be detected as a risk, unit in seconds
 float alarm_start;            // A value to store when the alarm started
 float alarm_duration;         // The duration of the current alarm;
 int MT_counter;               // Number of movements detected within the time limit value
@@ -113,7 +113,7 @@ unsigned long start_cooldown = 0; // check point for millis aided cooldown
 #define DEFAULT_CHARGING_POWER_CURRENT HIGH
 
 // POWER MODES
-#define NO_MODE 0
+#define NORMAL 0
 #define SLEEP_MODE 1// High 'battery save', while device not used (awaken by special movement)
 #define LIGHT_ECO_MODE 2 //'Light sleep mode' or 'ECO mode' when low battery (can't lock anymore, begin to save battery)
 #define DEEP_ECO_MODE 3//when really low battery (survivor mode)

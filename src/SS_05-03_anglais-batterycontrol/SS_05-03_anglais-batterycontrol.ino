@@ -94,7 +94,7 @@ void setup()
 //--------------------------- LOOP -----------------------------
 void loop()
 {
-
+  
   if (activation_alarm)
   {
     pulseBuzzer(2, 200, 50, 25);
@@ -138,7 +138,7 @@ void loop()
     }
   }
 
-  if (!motion_small && !motion_big && alarm_duration - alarm_start < time_limit)
+  if (!motion_small && !motion_big && alarm_duration - alarm_start < SHORT_SHOCK_DURATION)
   {
     MT_counter = 0;
     first_alarm = true;
@@ -153,7 +153,7 @@ void loop()
     else
     {
       alarm_duration = millis();
-      if (alarm_duration - alarm_start >= time_limit)
+      if (alarm_duration - alarm_start >= SHORT_SHOCK_DURATION)
       {
         alarm_start = millis();
       }
@@ -245,7 +245,7 @@ void loop()
 //------------- ADDITIONAL FUNCTIONS ------------------------------
 
 
-void sendMovement(void)
+void sendMovement(void) //send by GPRS to the app that a motion is detected
 {
   /*
   // sending of positions via SIM module
