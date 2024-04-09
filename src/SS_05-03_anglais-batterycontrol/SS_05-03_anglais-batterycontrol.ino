@@ -253,11 +253,16 @@ void loop()
   //   sim800l->disconnectGPRS();
   //   send_position = false;
   // }
-  
-  if (getBatteryLevel() < 80)
+
+  if (getBatteryLevel() <= 20) // if Vmin is reached
   {
     Serial.print("Enter sleep mode");
     deepSleepMode();
+  }
+  if (getBatteryLevel() >= 95) // if Vmax is reached
+  {
+    // this is a placeholder, it will probably not work if unchanged
+    digitalWrite(VBAT_ENABLE, HIGH); // stop the charge
   }
 }
 
