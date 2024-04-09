@@ -15,38 +15,53 @@
 //-------------------------------- SETUP ----------------------------------------
 void setup()
 {
-  pinMode(buzzer_pin, OUTPUT); // setup for buzzer
-  digitalWrite(buzzer_pin, HIGH);
-  delay(1000);
-  digitalWrite(buzzer_pin, LOW);
-  Serial.println(" buzzer");
-
-  pinMode(aimant_pin, OUTPUT); // setup electro-aimant
-  digitalWrite(aimant_pin, HIGH);
-  delay(1000);
-  digitalWrite(aimant_pin, LOW);
-  Serial.println("electro");
-
-  // debug led initialization
-  pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LEDR, LOW);
-
-  // power bridge control
-  pinMode(D4, OUTPUT);
-  digitalWrite(D4, HIGH);
-
-  // power battery control with the transistor
-  pinMode(D9, OUTPUT);
-  digitalWrite(D9, HIGH);
-
-  // battery charging enable with high current 100mA > 50mA
-  pinMode(P0_13, OUTPUT);
-  digitalWrite(P0_13, LOW);
-
   Serial.begin(115200);
   if (!Serial)
     delay(1000);
-  Serial.println("BLE Antivol Peripheral");
+  Serial.println("SETUP");
+  
+  // setup buzzer pin
+  Serial.print("setup buzzer ... ");
+  pinMode(BUZZER_PIN, OUTPUT); 
+  digitalWrite(BUZZER_PIN, HIGH);
+  delay(1000);
+  digitalWrite(BUZZER_PIN, LOW);
+  Serial.println("done !");
+
+  // setup electro-magnetic lock
+  Serial.print("setup electro-magnetic lock ... ");
+  pinMode(EML_PIN, OUTPUT); 
+  digitalWrite(EML_PIN, HIGH);
+  delay(1000);
+  digitalWrite(EML_PIN, LOW);
+  Serial.println("done !");
+
+  // debug led initialization
+  Serial.print("setup debug red LED ... ");
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LEDR, LOW);
+  Serial.println("done !");
+
+  // power bridge control
+  Serial.print("setup power bridge control ... ");
+  pinMode(POWER_BOOST_SWITCH_PIN, OUTPUT);
+  digitalWrite(POWER_BOOST_SWITCH_PIN, HIGH);
+  Serial.println("done !");
+
+  // power battery control with the transistor
+  Serial.print("setup battery switch pin ... ");
+  pinMode(BATTERY_SWITCH_PIN, OUTPUT);
+  digitalWrite(BATTERY_SWITCH_PIN, HIGH);
+  Serial.println("done !");
+
+  // battery charging power ,enable to high current (100mA). (If disabled, 50mA)
+  Serial.print("setup battery charging power ... ");
+  pinMode(POWER_CHARGING_CONTROL, OUTPUT);
+  digitalWrite(POWER_CHARGING_CONTROL, LOW);
+  Serial.println("done !");
+
+  
+
 
   // Timer
   if (ITimer.attachInterruptInterval(HW_TIMER_INTERVAL_MS * 1000, timerHandler)) // Interval in microsecs
@@ -57,18 +72,18 @@ void setup()
   ISR_Timer.setInterval(TIMER_INTERVAL_120S, GPSIsr);
 
   bleSetup();
-  Serial.println(" bleSetup");
+  Serial.println("BLE Setup, done");
   imuSetup();
-  Serial.println(" imuSetup");
+  Serial.println("IMU Setup, done");
   gpsSetup();
-  Serial.println(" gpsSetup");
+  Serial.println("GPS Setup, done");
   Serial2.begin(9600);
   delay(100);
   sim800l = new SIM800L((Stream *)&Serial2, SIM800_RST_PIN, 200, 512);
   pinMode(SIM800_DTR_PIN, OUTPUT);
   delay(1000);
   simSetup();
-  Serial.println("SIM SETUP");
+  Serial.println("SIM Setup, done");
 
   analogReadResolution(ADC_RESOLUTION); // setup battery reading
   pinMode(PIN_VBAT, INPUT);
@@ -80,13 +95,16 @@ void setup()
   digitalWrite(LEDG, LOW);
   temps();
 
+  Device.battery_level = getBatteryLevel();
+
   Serial.print("Battery level: ");
-  Serial.println(getBatteryLevel());
+  Serial.println(Device.battery_level);
 }
 
 //--------------------------- LOOP -----------------------------
 void loop()
 {
+
   if (activation_alarm)
   {
     pulseBuzzer(2, 200, 50, 25);
@@ -95,8 +113,8 @@ void loop()
 
   motion_data = getMotionData();
   rotation_data = getRotationData();
-  Config.isActivate = 1; // TO REMOVE !!!
-  if (Config.isActivate)
+  Device.is_locked = 1; // TO REMOVE !!!
+  if (Device.is_locked)
   { // alarm enalbled
     activateGPS();
     if (motion_data > big_MT || rotation_data > big_RT)
@@ -183,13 +201,13 @@ void loop()
   }
 
   // bluetooth actived when we are interacting with the module or when the alarm is on
-  if ((BLE_activated == true) || (Config.isActivate))
+  if ((BLE_activated == true) || (Device.is_locked))
   {
     BLE.poll(); // communication autorisé
   }
 
   // at the end of the time during which the lock has not moved, if bluetooth is activated, and the lock is not in activation mode then it is turned off to save the battery
-  if ((millis() - tim_connec > TIME_OUT_MS_BLE_ACT) && (BLE_activated == true) && (Config.isActivate != 1))
+  if ((millis() - tim_connec > TIME_OUT_MS_BLE_ACT) && (BLE_activated == true) && (Device.is_locked != 1))
   {
     BLE_activated = false;
     Serial.println("timeout->BLE_END");

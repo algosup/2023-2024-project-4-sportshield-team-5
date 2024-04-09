@@ -35,7 +35,7 @@ void pulseBuzzer(int repetitions, unsigned long duration_On, unsigned long durat
         if (time_passed - start_cycle <= (buzzer_state == LOW ? duration_Off : duration_On))
         {
 
-            analogWrite(buzzer_pin, (buzzer_state == LOW ? 0 : intensity));
+            analogWrite(BUZZER_PIN, (buzzer_state == LOW ? 0 : intensity));
         }
         else if (time_passed - start_cycle > (buzzer_state == LOW ? duration_Off : duration_On))
         {
@@ -47,7 +47,7 @@ void pulseBuzzer(int repetitions, unsigned long duration_On, unsigned long durat
         }
     }
     // Reset variables after performing all repetitions
-    analogWrite(buzzer_pin, 0);
+    analogWrite(BUZZER_PIN, 0);
     delay(0500);
     motion_small = false;
     motion_big = false;

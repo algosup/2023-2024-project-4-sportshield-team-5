@@ -89,7 +89,7 @@ String convertDMMToDD(String dmm_coordinates)
  */
 void GPSIsr()
 {
-    if (Config.isActivate != 0)
+    if (Device.is_locked != 0)
     {
         if (!position_acquired)
         {

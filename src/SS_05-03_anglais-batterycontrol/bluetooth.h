@@ -145,7 +145,7 @@ void onWriteName(BLEDevice central, BLECharacteristic characteristic)
 {
     if (is_authenticate)
     {
-        Config.Name = NameCharacteristic.value();
+        Device.Name = NameCharacteristic.value();
         String value = NameCharacteristic.value();
         Serial.print("Written name : ");
         Serial.println(value);
@@ -168,7 +168,7 @@ void onReadName(BLEDevice central, BLECharacteristic characteristic)
     Serial.println(is_authenticate);
     if (is_authenticate)
     {
-        NameCharacteristic.writeValue(Config.Name);
+        NameCharacteristic.writeValue(Device.Name);
     }
     else
     {
@@ -186,8 +186,8 @@ void onWriteActivation(BLEDevice central, BLECharacteristic characteristic)
 {
     if (is_authenticate)
     {
-        Config.isActivate = ActivationCharacteristic.value();
-        if (Config.isActivate != 0)
+        Device.is_locked = ActivationCharacteristic.value();
+        if (Device.is_locked != 0)
         {
             Serial.println("Alarm enabled");
             digitalWrite(SIM800_DTR_PIN, LOW); // put in normal mode
@@ -203,7 +203,7 @@ void onWriteActivation(BLEDevice central, BLECharacteristic characteristic)
     }
     else
     {
-        ActivationCharacteristic.writeValue(Config.isActivate);
+        ActivationCharacteristic.writeValue(Device.is_locked);
     }
 }
 
@@ -217,7 +217,7 @@ void onReadActivation(BLEDevice central, BLECharacteristic characteristic)
 {
     // Serial.println("CALLBACK READ");
     // Serial.println(is_authenticate);
-    ActivationCharacteristic.writeValue(Config.isActivate);
+    ActivationCharacteristic.writeValue(Device.is_locked);
 }
 
 /**
@@ -232,9 +232,9 @@ void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic)
     {
         // activate electromagnet
         Serial.println("Unlock");
-        digitalWrite(aimant_pin, HIGH);
+        digitalWrite(EML_PIN, HIGH);
         delay(2000);
-        digitalWrite(aimant_pin, LOW);
+        digitalWrite(EML_PIN, LOW);
     }
 }
 

@@ -60,7 +60,7 @@ void deepSleepMode()
   int battery = getBatteryLevel();
   // send battery level and GPS location of the device
   // HERE!!!
-  digitalWrite(aimant_pin, LOW);
+  digitalWrite(EML_PIN, LOW);
   digitalWrite(SIM800_RST_PIN, LOW);
   digitalWrite(GPS_WKUP_PIN, LOW);
 

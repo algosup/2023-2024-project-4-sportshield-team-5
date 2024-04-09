@@ -21,15 +21,22 @@
 //-------------------------- STRUCTURES --------------------------
 
 // Config
-struct myConfig
+struct myConfig 
 {
-  short int pin = 0;
-  String Name = "\n";
-  bool isActivate = false;
+  short int pin; //unknown feature
+  String Name; //
+  bool is_locked; //if the security is activated
+  bool is_triggered;
+  bool is_charging;
+  short int battery_level; // battery level in percentage (5% resolution)
+  bool is_bluetooth_activated;
+  bool is_gps_activated;
+  bool power_mode;
 };
 
 //----------------------- GLOBAL VARIABLES -----------------------
-myConfig Config;
+myConfig Device;
+
 bool is_authenticate = false;
 
 // Timer
@@ -62,11 +69,12 @@ bool send_position = false;
 bool send_move = false;
 
 // Buzzer
-const int buzzer_pin = D2;
+#define BUZZER_PIN D2
 void pulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity);
 unsigned long start_cycle = 0;
-// Electroaimant
-const int aimant_pin = D3;
+
+// Electro magnetic lock
+#define EML_PIN D3
 
 bool deactivate = false; // A boolean which if turned on, stop any ongoing alarms. Activated by bluetooth
 // Set a threshold to determine a "small" or "big" movement
@@ -92,7 +100,18 @@ float rotation_data;
 
 unsigned long start_cooldown = 0; // check point for millis aided cooldown
 
-// battery
+// BATTERY AND SWITCH PINS
 #define VBAT_ENABLE 14
+#define POWER_CHARGING_CONTROL P0_13 //if this pin is H/L -> 50/100mA to charge
+#define POWER_BOOST_SWITCH_PIN D4
+#define BATTERY_SWITCH_PIN D9
 
-#endif
+// POWER MODES
+#define NO_MODE 0
+#define SLEEP_MODE 1// High 'battery save', while device not used (awaken by special movement)
+#define LIGHT_ECO_MODE 2 //'Light sleep mode' or 'ECO mode' when low battery (can't lock anymore, begin to save battery)
+#define DEEP_ECO_MODE 3//when really low battery (survivor mode)
+#define LIGHT_SLEEP_MODE_BATT_LEVEL 15 //%
+#define DEEP_SLEEP_MODE_BATT_LEVEL 5 //%
+
+#endif //DEFINITIONS
