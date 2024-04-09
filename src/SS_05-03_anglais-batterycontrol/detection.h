@@ -17,12 +17,9 @@ void imuSetup(void)
 {
     if (!imu.begin())
     {
-        Serial.println("Device error");
+        Serial.println("IMU initialization failed");
     }
-    else
-    {
-        Serial.println("Accelerometer launched");
-    }
+    
 }
 
 //-------------------------- FUNCTIONS ---------------------------

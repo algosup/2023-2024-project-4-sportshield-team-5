@@ -1,5 +1,5 @@
-#ifndef _BATTERY_
-#define _BATTERY_
+#ifndef _POWER_
+#define _POWER_
 #include "definitions.h"
 
 /*
@@ -55,7 +55,7 @@ int getBatteryLevel()
  */
 void deepSleepMode()
 {
-  // send battery level and GPS location of the device
+  /*// send battery level and GPS location of the device
   // HERE!!!
   digitalWrite(EML_PIN, LOW);
   digitalWrite(SIM800_RST_PIN, LOW);
@@ -70,7 +70,52 @@ void deepSleepMode()
   }
   gpsSetup();
   imuSetup();
-  simSetup();
+  simSetup();*/
+}
+
+//Power switches are for SIM, Alarm and EML power supply control
+
+/**
+ * Switch on or off the voltage booster and the battery alimentation of them for SIM, EML ad alarm
+ * @param state ON or OFF
+ */
+void turnPowerSwitches(int state){
+  digitalWrite(POWER_BOOST_SWITCH_PIN, state);
+  digitalWrite(BATTERY_SWITCH_PIN, state);
+}
+
+void powerSwitchesSetup(){
+  pinMode(POWER_BOOST_SWITCH_PIN, OUTPUT);
+  pinMode(BATTERY_SWITCH_PIN, OUTPUT);
+  turnPowerSwitches(ON);
+}
+
+/**
+ * Switch the intensity of the battery charging current to 100mA for HIGH or to 50ma for LOW
+ * @param intensity HIGH or LOW
+ */
+void setChargingCurrent(int intensity){
+  Serial.print("Charging current set to ");
+  if (intensity==LOW){
+    digitalWrite(POWER_CHARGING_CONTROL, HIGH);
+    Serial.println("50mA");
+  }else{
+    digitalWrite(POWER_CHARGING_CONTROL, LOW);
+    Serial.println("100mA");
+  }
+  
+}
+
+void batterySetup(){
+  analogReadResolution(ADC_RESOLUTION); // setup battery reading
+  pinMode(PIN_VBAT, INPUT);
+  pinMode(VBAT_ENABLE, OUTPUT);
+  digitalWrite(VBAT_ENABLE, LOW);
+  pinMode(POWER_CHARGING_CONTROL, OUTPUT);
+  setChargingCurrent(HIGH);
+  Device.battery_level = getBatteryLevel();
+  Serial.print("Battery level: ");
+  Serial.println(Device.battery_level);
 }
 
 #endif

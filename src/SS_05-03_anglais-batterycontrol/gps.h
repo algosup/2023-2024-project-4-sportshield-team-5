@@ -15,7 +15,7 @@
  */
 void gpsSetup(void) 
 {
-//   pinMode(GPS_WKUP_PIN, OUTPUT);
+   pinMode(GPS_WKUP_PIN, OUTPUT);
 //   digitalWrite(GPS_WKUP_PIN, LOW);
 //   GPS.begin(9600);
 //   GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);

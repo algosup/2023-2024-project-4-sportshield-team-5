@@ -46,7 +46,7 @@ inline void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic);
  * @param None
  * @result None.
  */
-void bleSetup(void)
+void bluetoothSetup(void)
 {
     if (!BLE.begin())
     {

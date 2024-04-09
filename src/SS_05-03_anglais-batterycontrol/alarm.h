@@ -1,5 +1,5 @@
-#ifndef _BUZZER_
-#define _BUZZER_
+#ifndef _ALARM_
+#define _ALARM_
 #include "definitions.h"
 
 /*
@@ -7,6 +7,13 @@
 */
 
 //-------------------------- FUNCTIONS ---------------------------
+
+void alarmSetup(){
+  pinMode(BUZZER_PIN, OUTPUT); 
+  digitalWrite(BUZZER_PIN, HIGH);
+  delay(TEST_DURATION);
+  digitalWrite(BUZZER_PIN, LOW);
+}
 
 /**
  * This function starts the buzzer to generate a sound with a given intensity.

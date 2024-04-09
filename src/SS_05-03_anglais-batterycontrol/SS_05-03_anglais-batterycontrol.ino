@@ -1,105 +1,90 @@
 
 //------------------------------- INCLUDES --------------------------------------
-// BLE
-#include "bluetooth.h"
-// IMU
-#include "detection.h"
-// GPS
-#include "gps.h"
-// SIM
-#include "sim.h"
-// BUZZER
-#include "buzzer.h"
-// BATTERY
-#include "battery.h"
+#include "definitions.h" // -> libraries' inclusion, the global variables and structures
+#include "bluetooth.h"   // -> bluetooth functions and setup
+#include "detection.h"   // -> distubtion's detection and specific movement detection and setup
+#include "alarm.h"       // -> buzzer and alarm setup and functions and setup
+#include "power.h"       // -> battery's and power modes' functions and setup
+#include "lock.h"        // -> Electro magnetic lock functions and setup
+#include "sim.h"         // -> GPRS functinos with the 2G SIM and setup
+#include "gps.h"         // -> GPS module's functions and setup
+#include "nfc.h"         // -> NFC detection's and authentification's functions and setup
 
 //-------------------------------- SETUP ----------------------------------------
 void setup()
 {
-  Serial.begin(115200);
-  if (!Serial)
-    delay(1000);
-  Serial.println("SETUP");
-  
-  // setup buzzer pin
-  Serial.print("setup buzzer ... ");
-  pinMode(BUZZER_PIN, OUTPUT); 
-  digitalWrite(BUZZER_PIN, HIGH);
   delay(1000);
-  digitalWrite(BUZZER_PIN, LOW);
-  Serial.println("done !");
-
-  // setup electro-magnetic lock
-  Serial.print("setup electro-magnetic lock ... ");
-  pinMode(EML_PIN, OUTPUT); 
-  digitalWrite(EML_PIN, HIGH);
-  delay(1000);
-  digitalWrite(EML_PIN, LOW);
-  Serial.println("done !");
+  Serial.println("SETUP\n");
 
   // debug led initialization
   Serial.print("setup debug red LED ... ");
   pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LEDR, LOW);
-  Serial.println("done !");
+  digitalWrite(LEDR, HIGH);
+  Serial.println("done !\n");
 
-  // power bridge control
-  Serial.print("setup power bridge control ... ");
-  pinMode(POWER_BOOST_SWITCH_PIN, OUTPUT);
-  digitalWrite(POWER_BOOST_SWITCH_PIN, HIGH);
-  Serial.println("done !");
-
-  // power battery control with the transistor
-  Serial.print("setup battery switch pin ... ");
-  pinMode(BATTERY_SWITCH_PIN, OUTPUT);
-  digitalWrite(BATTERY_SWITCH_PIN, HIGH);
-  Serial.println("done !");
-
-  // battery charging power ,enable to high current (100mA). (If disabled, 50mA)
-  Serial.print("setup battery charging power ... ");
-  pinMode(POWER_CHARGING_CONTROL, OUTPUT);
-  digitalWrite(POWER_CHARGING_CONTROL, LOW);
-  Serial.println("done !");
-
+  // power bridge and battery switch setup
+  Serial.print("setup power bridge & battery switches ... "); 
+  powerSwitchesSetup();
+  Serial.println("done !\n");
   
+  //Alarm setup
+  Serial.print("Setup alarm ... "); 
+  alarmSetup();
+  Serial.println("done !\n");
 
+  //EML setup
+  Serial.print("Setup electro-magnetic lock ... ");
+  lockSetup();
+  Serial.println("done !\n");
+  
+  // change baudrate
+  Serial.begin(115200); //Serial initialization
+  if (!Serial)
+    delay(1000);
 
-  // Timer
+  //Bluetooth setup
+  Serial.println("setup bluetooth ... ");
+  bluetoothSetup();
+  Serial.println("bluetooth setup done !\n");
+
+  // IMU setup
+  Serial.println("setup IMU ... ");
+  imuSetup();
+  Serial.println("IMU Setup done !\n");
+
+  // GPS setup
+  Serial.print("GPS Setup ... ");
+  gpsSetup();
+  Serial.println("done !\n");
+
+  // SIM setup
+  Serial.print("SIM Setup ... ");
+  simSetup();
+  Serial.println("done !\n");
+
+  // battery charging current setup
+  Serial.println("setup battery ... ");
+  batterySetup();
+  Serial.println("done !\n");
+
+  // Timer setup
+  Serial.println ("setup timer ... ");
   if (ITimer.attachInterruptInterval(HW_TIMER_INTERVAL_MS * 1000, timerHandler)) // Interval in microsecs
   {
     Serial.print(F("Starting ITimer OK, millis() = "));
     Serial.println(millis());
   }
   ISR_Timer.setInterval(TIMER_INTERVAL_120S, GPSIsr);
+  Serial.println("timer setup done !\n");
 
-  bleSetup();
-  Serial.println("BLE Setup, done");
-  imuSetup();
-  Serial.println("IMU Setup, done");
-  gpsSetup();
-  Serial.println("GPS Setup, done");
-  Serial2.begin(9600);
-  delay(100);
-  sim800l = new SIM800L((Stream *)&Serial2, SIM800_RST_PIN, 200, 512);
-  pinMode(SIM800_DTR_PIN, OUTPUT);
-  delay(1000);
-  simSetup();
-  Serial.println("SIM Setup, done");
+  //end of the setup
+  digitalWrite(LEDR, LOW);
+  digitalWrite(LEDG, HIGH);
+  catchCurrentTime();
+  Serial.println("\nSETUP DONE !\n");
+  
+ 
 
-  analogReadResolution(ADC_RESOLUTION); // setup battery reading
-  pinMode(PIN_VBAT, INPUT);
-  pinMode(VBAT_ENABLE, OUTPUT);
-  digitalWrite(VBAT_ENABLE, LOW);
-
-  Serial.println("fin setup ");
-  digitalWrite(LEDR, HIGH);
-  digitalWrite(LEDG, LOW);
-  temps();
-
-  Device.battery_level = getBatteryLevel();
-
-  Serial.print("Battery level: ");
-  Serial.println(Device.battery_level);
 }
 
 //--------------------------- LOOP -----------------------------
@@ -198,7 +183,7 @@ void loop()
     {
       BLE_activated = true;
       Serial.println("MVT_detect->setup");
-      bleSetup();
+      bluetoothSetup();
     }
   }
 
@@ -302,13 +287,13 @@ void sendPosition()
   send_position = false;
 }
 
-void temps(void)
+void catchCurrentTime(void)
 {
   unsigned long millisPassed = millis();
   unsigned int seconds = (millisPassed / 1000) % 60;
   unsigned int minutes = (millisPassed / (1000 * 60)) % 60;
   unsigned int hours = (millisPassed / (1000 * 60 * 60)) % 24;
-  Serial.print("Détecté a : ");
+  Serial.print("Current Time : ");
   Serial.print(hours);
   Serial.print("h");
   Serial.print(minutes);

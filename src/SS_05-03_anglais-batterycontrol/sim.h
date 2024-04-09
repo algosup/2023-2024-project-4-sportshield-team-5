@@ -16,6 +16,13 @@
 void simSetup(void)
 {
 
+    Serial2.begin(9600);
+    delay(100);
+
+    sim800l = new SIM800L((Stream *)&Serial2, SIM800_RST_PIN, 200, 512);
+    pinMode(SIM800_DTR_PIN, OUTPUT);
+    delay(1000);
+
     // while (!sim800l->isReady())
     // {
     //     Serial.println(F("Problem to initialize AT command, retry in 1 sec"));

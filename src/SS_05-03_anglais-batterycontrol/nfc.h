@@ -12,13 +12,9 @@
 
 //-------------------------- FUNCTIONS ---------------------------
 
-void NFCUnlock(void)
-{
-    // activate electromagnet
-    Serial.println("Unlock");
-    digitalWrite(aimant_pin, HIGH);
-    delay(2000);
-    digitalWrite(aimant_pin, LOW);
+void nfcSetup(){
+    //future simulation of the NFC setup
 }
+
 
 #endif // DEBUG

@@ -7,39 +7,40 @@
 #include "NRF52_MBED_TimerInterrupt.h"
 #include "NRF52_MBED_ISR_Timer.h"
 #include <Arduino.h>
-// BLE
-#include <ArduinoBLE.h>
-// IMU
-#include <LSM6DS3.h>
-#include <Wire.h>
-// GPS
-#include <Adafruit_GPS.h>
-// SIM
-#include "SIM800L.h"
-
+#include <ArduinoBLE.h>// BLE
+#include <LSM6DS3.h>// IMU
+#include <Wire.h>// IMU
+#include <Adafruit_GPS.h>// GPS
+#include "SIM800L.h"// SIM
 
 //-------------------------- STRUCTURES --------------------------
 
-// Config
+// Config for the device state
 struct myConfig 
 {
   short int pin; //unknown feature
-  String Name; //
-  bool is_locked; //if the security is activated
-  bool is_triggered;
-  bool is_charging;
+  String Name; // name of the device
+  bool is_locked; //is the lock activated
+  bool is_triggered; //is the alarm triggered
+  bool is_charging; // is it plugged and charging
   short int battery_level; // battery level in percentage (5% resolution)
-  bool is_bluetooth_activated;
-  bool is_gps_activated;
-  bool power_mode;
+  bool is_bluetooth_activated; // obvious
+  bool is_gps_activated; // obvious
+  bool power_mode; // the different power modes are defined at the end, there are 4 :
+                   // 'NORMAL' 'LIGHT Eco mode' 'deep eco mode' and 'sleep mode' Cf. below
 };
-
-//----------------------- GLOBAL VARIABLES -----------------------
 myConfig Device;
 
+//----------------------- GLOBAL VARIABLES -----------------------
+
+#define TEST_DURATION 1000 //ms -> bip and EML duratios at setup
+#define ON HIGH
+#define OFF LOW
+
+//LOCKING
 bool is_authenticate = false;
 
-// Timer
+// TIMER
 #define HW_TIMER_INTERVAL_MS 1
 NRF52_MBED_Timer ITimer(NRF_TIMER_3);
 NRF52_MBED_ISRTimer ISR_Timer;
@@ -105,6 +106,7 @@ unsigned long start_cooldown = 0; // check point for millis aided cooldown
 #define POWER_CHARGING_CONTROL P0_13 //if this pin is H/L -> 50/100mA to charge
 #define POWER_BOOST_SWITCH_PIN D4
 #define BATTERY_SWITCH_PIN D9
+#define DEFAULT_CHARGING_POWER_CURRENT HIGH
 
 // POWER MODES
 #define NO_MODE 0
