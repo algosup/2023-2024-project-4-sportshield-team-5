@@ -8,6 +8,7 @@
 
 //-------------------------- VARIABLES ---------------------------
 float battery;
+// The values used for this table are taken from this source: https://blog.ampow.com/lipo-voltage-chart/
 float Batterypercentage[50][2] = {
     {100.0, 4.2},
     {95.0, 4.15},
@@ -41,12 +42,8 @@ float Batterypercentage[50][2] = {
  */
 int getBatteryLevel()
 {
-  /* Read the current voltage level on the A0 analog input pin.
-     This is used here to simulate the charge level of a battery.
-  */
-
+  // Read the current voltage level on the VBAT pin.
   battery = analogRead(PIN_VBAT);
-
   return battery;
 }
 
@@ -57,7 +54,6 @@ int getBatteryLevel()
  */
 void deepSleepMode()
 {
-  int battery = getBatteryLevel();
   // send battery level and GPS location of the device
   // HERE!!!
   digitalWrite(EML_PIN, LOW);
