@@ -273,15 +273,15 @@ However, some simple statements can be written in one line, as long as it doesn'
 
 **No value can be hard-coded !**
 
-If a number or a constant is needed in the code, it have to be defined in the 'definitions.h' header and not directly inserted in the algorithm itself, even if "it shouldn't change".
+If a number or a constant is needed in the code, it has to be defined in the 'definitions.h' header and not directly inserted in the algorithm itself, even if "it shouldn't change".
 
 In the same idea, variables' declaration and first assignment should be separated : the declaration in 'definition.h. An example of this appears in the example below.
 
 #### Comments
 
-Each function needs a comment above explaining its behaviour and its parameters.  
-Any weird or tricky algorithm has to be commented.  
-Any variable declaration need a comment on the same line to quickly explain what it is. If it is too obvious, just write ```// explicit```.
+Each function needs a comment above explaining its behaviour and needed parameters along with their type.
+Any weird or tricky algorithm has to be commented.
+Any variable declaration needs a comment on the same line to quickly explain what it is. If it is too obvious, just write \``// explicit```.`
 
 ### Expected piece of code
 
@@ -290,9 +290,9 @@ Any variable declaration need a comment on the same line to quickly explain what
 #define LONG_ALARM_REPETITIONS 5
 #define LONG_ALARM_PERIOD 350
 
-int current_period; // duration of silence at the end of the alarm loop
+int current_period;
 
-// Generic arduino function containing the code executed after a RESET
+
 void setup(){
   pinMode(BUZZER, OUTPUT);
   current_period = LONG_ALARM_PERIOD;
@@ -305,13 +305,13 @@ void loop(){
   }
 }
 
-// Make the buzzer ringing 5 times : (period)ms ON / (period)ms OFF
+
 void longAlarm(int period){
   for (int i=0; i<LONG_ALARM_REPETITIONS; i++){
     digitalWrite(BUZZER, HIGH);
     delay(period);
     digitalWrite(BUZZER, LOW);
-    if (i>0){delay(period);} //skip the last silence
+    if (i>0){delay(period);} 
   }
 }
 ```
@@ -330,7 +330,8 @@ We will therefore focus on the technical details of the full software implementa
 - Multi-tasking to make the buzzer ring and send notifications at the same time, while also being able to stop the alarm at any moment.
 - Add NFC[^7] management to unlock SportShield, but without having it working.
 - Improve movement detection to enhance the distinction between an accidental bump in the lock from a real theft attempt.
-## Headers and defintition.h
+
+## Headers and definition.h
 
 This file contains:
 - Inclusion of all the public libraries used in the firmware[^3].
@@ -343,12 +344,11 @@ Each header file will include the necessary public libraries a second time if it
 
 ## The main file (.ino)
 
-This file contains:
-- **inclusion** of the different **headers** (and not the libraries -> 'definition.h')
-- the '**void setup()**' where are executed only functions.  
-  this function contains the code which will be executed once at the beginning after a reload of the program on the board (after a power-up or reset)
-- the '**void loop()**'
-  this function has the role of a 'while(true)' loop : it is the main loop
+This file includes:
+
+- Calls to the different **headers** (*.h/*.hpp files)
+- The `void setup()` function: *It contains the code executed once to setup the environment after a startup or a reset of the board.*
+- The `void loop()` function: *It contains the code which will be ran during the whole execution of the program. It acts as a while loop.*
 
 Base of the .ino file :  
   ```cpp
@@ -388,43 +388,48 @@ It allows :
 
 ## Power Management
 
-#### specifications
+#### Specifications
 
 The device will have different behaviors of power consumption according to 3 parameters : 
 - the lock state of the SportShield
 - the level of battery (or charging the battery)
 - the period of inactivity.
 
-If the battery level is ABOVE 15%, NFC[^7] only as it is less energy-consuming (5mA) compared to Bluetooth Low Energy (BLE) which consumes 15mA.
+If the battery level is ABOVE 15%, NFC only as it is less energy-consuming (5mA) compared to Bluetooth Low Energy (BLE) which consumes 15mA.
 
-By default the buzzer, the electromagnetic lock and SIM[^11] module circuit are disabled by turning D9 and D4 'LOW' (Cf. [power management diagram](#electronic-circuit-diagrams)).  
+By default the buzzer, the electromagnetic lock and SIM[^11] module circuit are disabled by turning D9 and D4 'LOW' (Cf. [power management diagram](#electronic-circuit-diagrams)).
 If only one of these components is required, we turn on both pins D4 and D9. Concurrently, a variable has to keep track of the number of devices currently in use. If none is in use, D9 and D4 are turned OFF to save as much energy as possible.
 
-Each time we need to get the GPS position we first have to enable the wake up pin of the GPS module : D8, and then turned it off again.
+Each time we need to get the GPS position we first have to enable the wake-up pin of the GPS module: D8, and then turn it off again.
 
-#### implementation
+#### Implementation
 
-A key feature of battery management is the ability to know the current capacity as a percentage. There are 2 methods to achieve this objective:  
-- The ideal one but over-consuming electricity is to measure constantly the voltage and the intensity which goes out from the battery to know how much energy had been used or had been loaded in real-time. However it is almost impossible to implement and this solution using though a 'colorimeter' is reserved for very particular usages.
-- The very spread solution is to just measure the current voltage and to compare the value to a set of previous measures took to define the correlation between the current capacity and the current voltage.
+A key feature of battery management is the ability to know the current capacity as a percentage. There are 2 methods to achieve this objective:
+
+- The ideal but most energy-consuming option is to measure constantly tension and intensity in the battery to know the battery level in real-time. However, in our case, this option is not convenient as it requires a coulombmeter.
+
+- The very spread solution is to just measure the present voltage and to compare the obtained value to a set of previously measured values. We can then correlate values between the maximum and the present voltage to obtain the battery level.
 
 And the library we use need some based values to be accurate due to the specificities of each battery.
 
 Indeed, the battery voltage follows a generic curve which looks like that : 
 ![battery discharge](data/battery-discharge.png)
-As we can see, the maximum voltage (charging voltage) is 4.2V and the voltage can drop down until 2.75V MAXIMUM before its cut-off according to the documentation provided.   
+As we can see, the maximum voltage (charging voltage) is 4.2V and the voltage can drop down until 2.75V MINIMUM before its cut-off according to the documentation provided.
 Also, the SportShield is a low-consumption device, and will follow a 0.015C discharge for basic sleep mode (The 'C' unit means that the discharge flux it about C times the full capacity of the battery per hour. In our case 0.1C corresponds to 1100mAh*0.015C = 16.5 mA[^16] of discharge).
 
-Furthermore, as the temperature would be quite low, around 41°F to 23°F (as it is mainly for skis and snowboards), the discharge should avoid to exceed 80% of the total capacity. We finally get a minimum voltage (if the battery is in a cold environment) of 3.4V corresponding to a 0%. Also, we will used some standard curves of discharge to evaluate the current battery capacity based on the voltage we can get from the board itself (included function).
+Furthermore, as the temperature would be quite low, from 41°F to 23°F on average (as this product targets winter sports equipment), the discharge should avoid falling below 20% of the battery level. This limits the risk of the user device reaching the minimum voltage we can get in the battery: 3.4V, corresponding to 0% of charge, meaning the battery cannot be charged again anymore.  Complementarily, we will use some standard curves of discharge to evaluate the current battery capacity based on the voltage we can get from the board itself.
 
 Knowing that, all these values and decisions are really subjective and need to be defined precisely after a bunch of tests with the final hardware, in the real conditions. That's why we'll put these values without considering more than the assumptions above, cause with our current hardware, any measurement could be accurate.
 
 ## Detection of a theft
 
-When we received the project, the current idea was to split a detected movement into 3 categories : noise, small and big movements.
+When we received the project, the current idea was to split a detected movement into 3 categories: noise, small and big movements.
 
 However, they admitted that a smooth and slow theft could stay undetected.
-That's why we decided to just differentiate noise and movement, and to look at the duration of the movement more than the intensity. This way, a short shock, which can happens won't be detected as a theft while any movement lasting more than 1 second is detected as a theft, and in any case, any movement trigger a small alarm for 1 second, as a dissuasion. However the GPRS[^17] signal to get a notification on the app will be received only when an real theft is detected.
+
+This is the reason why we decided to just differentiate noise and movement and to focus on the duration of the movement rather than its intensity. This way, a short shock, which can happen won't be detected as a theft while any movement lasting more than 1 second is detected as one. In any case, any movement triggers a small alarm for 1 second, as a dissuasion to warn the person responsible for this movement.
+ 
+However, the GPRS signal to get a notification on the app will be received only when a real theft is detected, after one second of movement.
 
 ## Detection of the wake-up movement
 
@@ -455,11 +460,11 @@ We won't look at the sinusoidal aspect of the movement and but only look only at
 
 ## Alarm
 
-As the buzzer is controlled by a MOSFET[^6], we decided to use PWM (Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set), to make the piezoelectric[^18] buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET[^6] has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
+As the buzzer is controlled by a MOSFET[^6], we decided to use PWM[^19], to make the piezoelectric[^18] buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET[^6] has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
 
 ## NFC
 
-As the Seeed boards company released their Xiao-NRF52840 quite recently, we found on the official forum of the company website for documentation, that they said they still didn't ended to develop the NFC[^7] library of their board. The problem with this unfinished library, is that, as they have their own version of RFID microchip and circuit, embedded in the board, the only solution we found to try having it working, is by coding our own library directly in assembly. That's why we probably won't develop the concrete NFC[^7] functions more than simulating input and output through the terminal.
+As the Seeed boards' company released their Xiao-NRF52840 quite recently, they still didn't end up developing the NFC library of their board, as said on their forum. This raises a major issue. As they have their proprietary version of the RFID microchip and circuit, the only workaround would be coding our library directly in assembly. That's why we probably won't develop the concrete NFC functions more than simulating input and output through the terminal.
 
 
 # 6. Suggestions (out of scope)
@@ -510,3 +515,5 @@ As the Seeed boards company released their Xiao-NRF52840 quite recently, we foun
 [^17]: GPRS: General packet radio service
 
 [^18]: Piezoelectric: The ability of certain materials to generate an electric charge in response to applied mechanical stress
+
+[^19]: PWM: Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set.
