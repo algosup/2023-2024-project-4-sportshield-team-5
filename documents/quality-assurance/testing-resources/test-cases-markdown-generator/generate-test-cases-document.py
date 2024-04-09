@@ -70,6 +70,7 @@ for i in data["tests"]:
 | Test Description | {i["test_description"]} |
 | Test Type | {str(i["test_type"]).capitalize()} |
 | Test Criticity | {criticity_emojis[int(i["test_criticity"])]} |
+| Expected Result | {i["expected_result"]} |
 
 {requirements_text}
 {steps_text}""" # Test case output string
