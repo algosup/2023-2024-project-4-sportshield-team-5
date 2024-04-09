@@ -112,6 +112,7 @@ void batterySetup(){
   digitalWrite(VBAT_ENABLE, LOW);
   pinMode(POWER_CHARGING_CONTROL, OUTPUT);
   setChargingCurrent(HIGH);
+  pinMode(CHARGING_PIN, INPUT);
   Device.is_charging = !digitalRead(CHARGING_PIN);
   Device.battery_level = getBatteryLevel();
   Serial.print("Battery level: ");

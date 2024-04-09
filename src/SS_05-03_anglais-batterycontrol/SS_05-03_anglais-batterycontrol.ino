@@ -94,7 +94,9 @@ void setup()
 //--------------------------- LOOP -----------------------------
 void loop()
 {
-  
+
+
+
   if (activation_alarm)
   {
     pulseBuzzer(2, 200, 50, 25);
@@ -138,7 +140,7 @@ void loop()
     }
   }
 
-  if (!motion_small && !motion_big && alarm_duration - alarm_start < SHORT_SHOCK_DURATION)
+  if ((!motion_small && !motion_big) && ((alarm_duration - alarm_start) < SHORT_SHOCK_DURATION))
   {
     MT_counter = 0;
     first_alarm = true;
