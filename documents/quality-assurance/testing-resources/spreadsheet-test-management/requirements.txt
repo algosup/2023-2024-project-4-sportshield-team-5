@@ -2,3 +2,5 @@ google-api-python-client == 2.124.0
 google-auth-httplib2 == 0.2.0
 google-auth-oauthlib == 1.2.0
 gspread == 6.1.0
+selenium == 4.19.0
+bs4 == 0.0.2
