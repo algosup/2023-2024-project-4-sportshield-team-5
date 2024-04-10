@@ -124,6 +124,11 @@ Our testing strategy includes manual and autonmous testing, the autonomous tests
 - Conventions related tests, for all documents, files and for the code
 - Code compilation
 
+The manual tests are:
+
+- Any test that requires device manipulation
+- Any test that requires measurements using an ammeter or other measuring instrument
+
 ### 5.2 Testing approach
 
 For this project we chose to use smoke testing covering every test present in this document: [test cases](./test-cases.md)
