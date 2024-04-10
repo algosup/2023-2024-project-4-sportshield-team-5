@@ -52,12 +52,14 @@ NRF52_MBED_Timer ITimer(NRF_TIMER_3);
 NRF52_MBED_ISRTimer ISR_Timer;
 #define TIMER_INTERVAL_120S 120000L
 
+uint32_t waiting_for_sleep_mode_time_ref = 0;
+#define SLEEP_MODE_DELAY 40000 //milliseconds
+
 // IMU : LSM6DS3
 LSM6DS3 imu(I2C_MODE, 0x6A); // I2C device address 0x6A
 uint32_t timer_imu = millis();
-bool motion_big = false;
-bool motion_small = false;
-bool motion_detect = false;
+bool long_motion = false;
+bool short_motion = false;
 
 // GPS PA1010D
 Adafruit_GPS GPS(&Serial1);
@@ -74,6 +76,7 @@ UART Serial2(D0, D1, NC, NC);
 SIM800L *sim800l;
 bool send_position = false;
 bool send_move = false;
+int frequency_for_sending_data = 15; //minutes, each Xminutes, when locked, it sends geolocation and battery level
 
 // Buzzer
 #define BUZZER_PIN D2
@@ -84,13 +87,13 @@ unsigned long start_cycle = 0;
 #define EML_PIN D3
 
 bool deactivate = false; // A boolean which if turned on, stop any ongoing alarms. Activated by bluetooth
-// Set a threshold to determine a "small" or "big" movement
 
-#define small_MT 5000 //     SmallMotionThreshold
-#define big_MT 7000  //    BigMotionThreshold
-
-#define small_RT 45.0 //     SmallRotationThreshold
-#define big_RT 100.0  //     BigRotationThreshold
+// MOVEMENTS
+#define ACCELERATION_NOISE_THRESHOLD 5000 //     SmallMotionThreshold
+#define ACCELERATION_MOVEMENT_THRESHOLD 7000  //    BigMotionThreshold
+#define ROTATION_NOISE_THRESHOLD 45.0 //     SmallRotationThreshold
+#define ROTATION_MOVEMENT_THRESHOLD 100.0  //     BigRotationThreshold
+bool movement_finished = false;
 
 // Alarm
 const float SHORT_SHOCK_DURATION = 1.5;       // The maximum time margin where two shocks can be detected as a risk, unit in seconds

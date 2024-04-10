@@ -35,8 +35,139 @@ float battery_percentages[20][2] = {
 
 //------------------------------------------------------- FUNCTIONS ------------------------------------------------------
 
-//-------------------------------BATTERY----------------------------------
+//-----------Power switches (for SIM, Alarm and EML power supply control) ------------
 
+/**
+ * Switch on or off the voltage booster and the battery alimentation of them for SIM, EML ad alarm
+ * @param state ON or OFF
+ */
+void turnPowerSwitches(int state){
+  digitalWrite(POWER_BOOST_SWITCH_PIN, state);
+  digitalWrite(BATTERY_SWITCH_PIN, state);
+}
+
+void powerSwitchesSetup(){
+  pinMode(POWER_BOOST_SWITCH_PIN, OUTPUT);
+  pinMode(BATTERY_SWITCH_PIN, OUTPUT);
+  turnPowerSwitches(ON);
+}
+
+//----------------------------------------------------------------------------------
+
+//---------------------------------POWER MODES--------------------------------------
+/**
+ * This function puts the device into a deep eco mode, deactivating everything after sending a last notification to the app containing the battery level and the geolocalisation.
+ * @param state turn 'ON' or 'OFF'
+ * @result None.
+ */
+void turnDeepEco(bool state)
+{
+  if (state==ON){
+
+    // Send a notification to warn the user by GPRS on the app that :
+    //- Can't use anymore
+    //- Can only use it again by rechharging it
+    //- Completely out of battery
+
+    Device.power_mode = DEEP_ECO_MODE;
+    Device.bluetooth_activated = false;
+    Device.nfc_activated = false;
+    Device.gps_activated = false;
+
+    turnPowerSwitches(OFF); // cut current of SIM, Alarm and EML
+    digitalWrite(SIM800_RST_PIN, LOW);
+    digitalWrite(GPS_WKUP_PIN, LOW);
+    //turn off the bluetooth
+    //turn off the IMU
+  }
+  if (state==OFF){
+    Device.power_mode = NORMAL_MODE;
+    Device.bluetooth_activated = true;
+    Device.nfc_activated = true;
+    Device.gps_activated = true;
+
+    //turn on the IMU
+    //turn on the bluetooth and try to connect
+  }
+}
+
+/**
+ * This function puts the device into a light eco mode, deactivating bluetooth, keeping only NFC. It will finish the lock cycle a last time and send GPRS data only every 30 mins
+ * @param state turn 'ON' or 'OFF'
+ * @result None.
+ */
+void turnLightEco(bool state)
+{
+  if (state==ON){
+
+    // Send a notification to warn the user by GPRS on the app that :
+    // - Can't lock the device the next time, if not recharged
+    // - Can unlock only with NFC
+    // - Need to charge ! (but will still work until the end of the lock cycle)
+
+    frequency_for_sending_data = 30; //minutes
+
+    Device.power_mode = LIGHT_ECO_MODE;
+    Device.bluetooth_activated = false;
+    Device.nfc_activated = true;
+
+    //turn off the bluetooth to keep only NFC
+
+  }
+  if (state==OFF){
+
+    frequency_for_sending_data = 15;
+
+    Device.power_mode = NORMAL_MODE;
+    Device.bluetooth_activated = true;
+
+    //turn on the bluetooth and try to connect
+
+  }
+}
+
+/**
+ * This function puts the device into sleep mode, deactivating everything except IMU to detect a specifi movement.
+ * @param state turn 'ON' or 'OFF'
+ * @result None.
+ */
+void turnSleepMode(bool state)
+{
+  if (state==ON){
+
+    // Send a notification to warn the user by GPRS on the app that :
+    //- Use the specific movement or recharge to awake it
+    waiting_for_sleep_mode_time_ref = 0;
+    Device.power_mode = SLEEP_MODE;
+    Device.bluetooth_activated = false;
+    Device.nfc_activated = false;
+    Device.gps_activated = false;
+
+    turnPowerSwitches(OFF); // cut current of SIM, Alarm and EML
+    digitalWrite(SIM800_RST_PIN, LOW);
+    digitalWrite(GPS_WKUP_PIN, LOW);
+    //turn off the bluetooth
+
+  }
+  if (state==OFF){
+    Device.power_mode = NORMAL_MODE;
+    Device.bluetooth_activated = true;
+    Device.nfc_activated = true;
+    Device.gps_activated = true;
+
+    //turn on the bluetooth and try to connect
+  }
+}
+void lauchWaitingForSleepTimer(){
+  waiting_for_sleep_mode_time_ref = millis();
+}
+uint getWaitingForSleepTimer(){
+  uint diff = millis() - waiting_for_sleep_mode_time_ref;
+  return diff;
+}
+//-----------------------------------------------------------------------------------
+
+//------------------------------------------BATTERY----------------------------------
 
 /**
  * This function gets the battery level and returns a percentage with 5% resolution ased on a array of correspondances.
@@ -71,51 +202,13 @@ void setChargingCurrent(int intensity){
     Device.charging_current = 100;
   }
 }
-//---------------------------------------------------------------------------
 
-//---------------------------------POWER MODES-------------------------------
-/**
- * This function puts the device into a deep sleep mode, deactivating everything after sending a last notification to the app containing the battery level and the geolocalisation.
- * @param None
- * @result None.
- */
-void deepSleepMode()
-{
-  /*// send battery level and GPS location of the device
-  // HERE!!!
-  digitalWrite(EML_PIN, LOW);
-  digitalWrite(SIM800_RST_PIN, LOW);
-  digitalWrite(GPS_WKUP_PIN, LOW);
-
-  while (true)
-  {
-    if (!digitalRead(P0_17))
-    {
-      break;
-    }
+void adjustChargingCurrent(){
+  if (Device.battery_level >= 80){
+    setChargingCurrent(LOW);
+  }else{
+    setChargingCurrent(HIGH);
   }
-  gpsSetup();
-  imuSetup();
-  simSetup();*/
-}
-
-//-----------------------------------------------------------------------------------
-
-//-----------Power switches (for SIM, Alarm and EML power supply control) ------------
-
-/**
- * Switch on or off the voltage booster and the battery alimentation of them for SIM, EML ad alarm
- * @param state ON or OFF
- */
-void turnPowerSwitches(int state){
-  digitalWrite(POWER_BOOST_SWITCH_PIN, state);
-  digitalWrite(BATTERY_SWITCH_PIN, state);
-}
-
-void powerSwitchesSetup(){
-  pinMode(POWER_BOOST_SWITCH_PIN, OUTPUT);
-  pinMode(BATTERY_SWITCH_PIN, OUTPUT);
-  turnPowerSwitches(ON);
 }
 
 void batterySetup(){
@@ -139,5 +232,7 @@ void batterySetup(){
     Serial.println(" mA");
   }
 }
+
+//--------------------------------------------------------------------------------------
 
 #endif

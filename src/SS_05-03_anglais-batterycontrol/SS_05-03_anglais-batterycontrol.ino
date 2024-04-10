@@ -133,7 +133,7 @@ void loop()
         Serial.println("NFC disabled");
       }
     
-    // if input = "5%" or "76%", it will set the right percentage to the device data
+    // weither input = "5%" or "76%", it will set this percentage to the device current information treated after
     }else if (str.charAt(str.length()-1)=='%'){
       str.setCharAt((str.length()-1), '0');
       Device.battery_level = str.toInt()/10;
@@ -142,7 +142,78 @@ void loop()
   //---------------------------------------------------------------------------------------
 
   //------------Algorithm------------------------------------------------------------------
+  
+  // Fit the power mode consumption
+  if (!Device.is_charging){
+    if (Device.power_mode == DEEP_ECO_MODE){
+      if (Device.battery_level >= LIGHT_ECO_MODE_BATT_LEVEL){
+        turnDeepEco(OFF);
+      }
+      loop(); //go-back to the beginning of the loop
+    }else if(Device.power_mode == LIGHT_ECO_MODE){
+      //turn on nfc
+      checkNfc();
+    }else if(Device.power_mode == NORMAL_MODE){
+      if (getAcceleration() > ACCELERATION_MOVEMENT_THRESHOLD || getRotation() > ROTATION_MOVEMENT_THRESHOLD){
+        while(checkSpecialMovementTrajectory() && !movement_finished){
+          //check again until one of these conditions is false
+        }
+        if (movement_finished){
+          turnSleepMode(OFF);
+        }else{
+          loop();
+        }
+      }else{
+        loop();
+      }
+    }else{
+      //turn on bluetooth and NFC
+      //try ton connect with bluetooth
+      checkNfc();
+    }
+  }
 
+  // Fit the right activity according to the battery level
+  if(Device.is_charging){
+    adjustChargingCurrent();
+    if (Device.is_locked){
+      unlock();
+    }
+    Device.power_mode = DEEP_ECO_MODE;
+  }else if (Device.battery_level <= DEEP_ECO_MODE_BATT_LEVEL){
+    turnDeepEco(ON);
+  }else if (!Device.is_locked){
+    if (Device.battery_level <= LIGHT_ECO_MODE_BATT_LEVEL){
+      turnDeepEco(ON);
+      loop();
+    }else{
+      if (waiting_for_sleep_mode_time_ref != 0){
+        if(getWaitingForSleepTimer() >= SLEEP_MODE_DELAY){
+          turnSleepMode(ON);
+          loop();
+        }
+        loop();
+      }else{
+        lauchWaitingForSleepTimer();
+        loop();
+      }
+    }
+  }else{
+    if (Device.battery_level <= LIGHT_ECO_MODE_BATT_LEVEL){
+      turnLightEco(ON);
+    }else{
+      turnLightEco(OFF);
+    }
+    if (getAcceleration() > ACCELERATION_NOISE_THRESHOLD || getRotation() > ROTATION_NOISE_THRESHOLD){
+      Device.alarm_triggered = true;
+      //ALARM STUFF  and sending notif to update
+    }
+  } 
+
+
+
+
+/* 
   if (activation_alarm)
   {
     pulseBuzzer(2, 200, 50, 25);
@@ -277,18 +348,8 @@ void loop()
   {
     sendPosition();
   }
-
-  if (Device.battery_level <= 15) // if Vmin is reached
-  {
-    Serial.print("Enter sleep mode");
-    deepSleepMode();
-  }
-  if (Device.battery_level >= 95) // if Vmax is reached
-  {
-    // this is a placeholder, it will probably not work if unchanged
-    digitalWrite(VBAT_ENABLE, HIGH); // stop the charge
-  }
-}
+*/
+} 
 
 //------------- ADDITIONAL FUNCTIONS ------------------------------
 

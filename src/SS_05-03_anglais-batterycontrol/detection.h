@@ -28,7 +28,7 @@ void imuSetup(void)
  * @param None
  * @result The float value of the detected motion.
  */
-float getMotionData(void)
+float getAcceleration(void)
 {
     static float previous_acceleration = 0;
     float accelX = imu.readFloatAccelX();
@@ -38,6 +38,11 @@ float getMotionData(void)
     float current_acceleration = sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ) * 100;
     float motion_difference = current_acceleration - previous_acceleration; // Calculate the acceleration difference
     previous_acceleration = current_acceleration;
+    
+    if (motion_difference > ACCELERATION_NOISE_THRESHOLD){
+      Serial.print("Acceleration out of noise : ");
+      Serial.println(motion_difference);
+    }
 
     return fabs(motion_difference); // returns a value always positive (absolute value, float)
 }
@@ -47,7 +52,7 @@ float getMotionData(void)
  * @param None
  * @result The float value of the detected rotation.
  */
-float getRotationData()
+float getRotation()
 {
     static float previous_rotation = 0;
 
@@ -57,10 +62,21 @@ float getRotationData()
     float gyroZ = imu.readFloatGyroZ();
 
     float current_rotation = sqrt(gyroX * gyroX + gyroY * gyroY + gyroZ * gyroZ); // Calculate the current rotation based on gyroscope readings
-    float rotation_dataerence = current_rotation - previous_rotation;             // Calculate the difference in rotation
+    float rotation_difference = current_rotation - previous_rotation;             // Calculate the difference in rotation
     previous_rotation = current_rotation;                                         // Update the previous rotation value
+    
+    if (rotation_difference > ROTATION_NOISE_THRESHOLD){
+      Serial.print("Rotation out of noise : ");
+      Serial.println(rotation_difference);
+    }
+    
+    return fabs(rotation_difference);
+}
 
-    return fabs(rotation_dataerence);
+bool checkSpecialMovementTrajectory(){
+  //measure IMU and then compare to theoric values/conditions
+  movement_finished = true;
+  return true;
 }
 
 #endif

@@ -55,9 +55,8 @@ void pulseBuzzer(int repetitions, unsigned long duration_On, unsigned long durat
     }
     // Reset variables after performing all repetitions
     analogWrite(BUZZER_PIN, 0);
-    delay(0500);
-    motion_small = false;
-    motion_big = false;
+    delay(500);
+    //reset the motion detected
 }
 
 #endif
