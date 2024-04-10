@@ -100,8 +100,6 @@ int MT_counter;               // Number of movements detected within the time li
 bool first_alarm = true;      // A boolean which indicates if it is the first alarm in a given time
 bool activation_alarm = true; // A boolean to signal the activation of the product
 
-float getBatteryVoltage();
-
 float motion_data;
 float rotation_data;
 
@@ -109,18 +107,23 @@ unsigned long start_cooldown = 0; // check point for millis aided cooldown
 
 // BATTERY AND SWITCH PINS
 #define VBAT_ENABLE 14
+//#define PIN_VBAT P0_31 // automatically defined
 #define CHARGING_PIN P0_17
 #define POWER_CHARGING_CONTROL P0_13 //if this pin is H/L -> 50/100mA to charge
 #define POWER_BOOST_SWITCH_PIN D4
 #define BATTERY_SWITCH_PIN D9
 #define DEFAULT_CHARGING_POWER_CURRENT HIGH
+// For that the analogRead function cuts the voltage from 0 to 2.4v in values between 0 and 2^12 :
+#define ANALOG_READ_RESOLUTION 12 //bits
+#define ANALOG_READ_REFERENCE AR_INTERNAL2V4 //2.4 volts 
+const float analog_read_ref = 2.4; //volts
 
 // POWER MODES
 #define NORMAL_MODE 0
 #define SLEEP_MODE 1// High 'battery save', while device not used (awaken by special movement)
 #define LIGHT_ECO_MODE 2 //'Light sleep mode' or 'ECO mode' when low battery (can't lock anymore, begin to save battery)
 #define DEEP_ECO_MODE 3//when really low battery (survivor mode)
-#define LIGHT_SLEEP_MODE_BATT_LEVEL 15 //%
-#define DEEP_SLEEP_MODE_BATT_LEVEL 5 //%
+#define LIGHT_ECO_MODE_BATT_LEVEL 15 //%
+#define DEEP_ECO_MODE_BATT_LEVEL 5 //%
 
 #endif //DEFINITIONS

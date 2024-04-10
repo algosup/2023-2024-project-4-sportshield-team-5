@@ -278,12 +278,12 @@ void loop()
     sendPosition();
   }
 
-  if (getBatteryLevel() <= 15) // if Vmin is reached
+  if (Device.battery_level <= 15) // if Vmin is reached
   {
     Serial.print("Enter sleep mode");
     deepSleepMode();
   }
-  if (getBatteryLevel() >= 95) // if Vmax is reached
+  if (Device.battery_level >= 95) // if Vmax is reached
   {
     // this is a placeholder, it will probably not work if unchanged
     digitalWrite(VBAT_ENABLE, HIGH); // stop the charge
@@ -303,7 +303,7 @@ void sendMovement(void) //send by GPRS to the app that a motion is detected
   String Route = "http://141.94.244.11:2000/sendNotfication/" + BLE.address();
   String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
   String str = "{\"latitude\": \" " + convertDMMToDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMToDD(String(float(GPS.longitude), 4)) + "\"}";
-  String bat = "{\"latitude\": \" " + convertDMMToDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMToDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryLevel()) + "\"}";
+  String bat = "{\"latitude\": \" " + convertDMMToDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMToDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(Device.battery_level) + "\"}";
   char position[200];
   char posbat[200];
   str.toCharArray(position, str.length() + 1);
@@ -327,7 +327,7 @@ void sendPosition()
   sim800l->setupGPRS("iot.1nce.net");
   sim800l->connectGPRS();
   String RouteCoord = "http://141.94.244.11:2000/updateCoordinate/" + BLE.address();
-  String bat = "{\"latitude\": \" " + convertDMMToDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMToDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(getBatteryLevel()) + "\"}";
+  String bat = "{\"latitude\": \" " + convertDMMToDD(String(float(GPS.latitude), 4)) + "\", \"longitude\":\"" + convertDMMToDD(String(float(GPS.longitude), 4)) + "\", \"batterie\":\"" + String(Device.battery_level) + "\"}";
   char posbat[200];
   bat.toCharArray(posbat, bat.length() + 1);
   Serial.println(posbat);

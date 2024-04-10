@@ -9,7 +9,7 @@
 //-------------------------- VARIABLES ---------------------------
 float battery;
 // The values used for this table are taken from this source: https://blog.ampow.com/lipo-voltage-chart/
-float Batterypercentage[50][2] = {
+float battery_percentages[20][2] = {
     {100.0, 4.2},
     {95.0, 4.15},
     {90.0, 4.11},
@@ -33,21 +33,47 @@ float Batterypercentage[50][2] = {
 
 };
 
-//-------------------------- FUNCTIONS ---------------------------
+//------------------------------------------------------- FUNCTIONS ------------------------------------------------------
+
+//-------------------------------BATTERY----------------------------------
+
 
 /**
- * This function gets the battery level and returns a percentage.
+ * This function gets the battery level and returns a percentage with 5% resolution ased on a array of correspondances.
  * @param None
- * @result An int representing the remaining percentage of the battery.
+ * @result An int representing the remaining percentage of the battery with a 5% resolution.
  */
 int getBatteryLevel()
 {
-  // Read the current voltage level on the VBAT pin.
-  battery = analogRead(PIN_VBAT);
-  battery = 50;
-  return battery;
+  int current_battery_level = Device.battery_level;
+  // Read the current voltage of the voltage divider bridge on the VBAT pin.
+  int bridge_voltage = analogRead(PIN_VBAT);
+  float battery_voltage = ((510e3 + 1000e3) / 510e3) * analog_read_ref * bridge_voltage / pow(2,ANALOG_READ_RESOLUTION); //according to the 2 resistances of 510Kohm and 1Mohm
+  for (int i=20; i--; i>0){
+    if (battery_percentages[i-1][1] <= battery_voltage){
+      int percentage = battery_percentages[i-1][0];
+      return percentage;
+    }
+  }
+  return current_battery_level;
 }
 
+/**
+ * Switch the intensity of the battery charging current to 100mA for HIGH or to 50ma for LOW
+ * @param intensity HIGH or LOW
+ */
+void setChargingCurrent(int intensity){
+  if (intensity==LOW){
+    digitalWrite(POWER_CHARGING_CONTROL, HIGH);
+    Device.charging_current = 50;
+  }else{
+    digitalWrite(POWER_CHARGING_CONTROL, LOW);
+    Device.charging_current = 100;
+  }
+}
+//---------------------------------------------------------------------------
+
+//---------------------------------POWER MODES-------------------------------
 /**
  * This function puts the device into a deep sleep mode, deactivating everything after sending a last notification to the app containing the battery level and the geolocalisation.
  * @param None
@@ -73,7 +99,9 @@ void deepSleepMode()
   simSetup();*/
 }
 
-//Power switches are for SIM, Alarm and EML power supply control
+//-----------------------------------------------------------------------------------
+
+//-----------Power switches (for SIM, Alarm and EML power supply control) ------------
 
 /**
  * Switch on or off the voltage booster and the battery alimentation of them for SIM, EML ad alarm
@@ -90,31 +118,18 @@ void powerSwitchesSetup(){
   turnPowerSwitches(ON);
 }
 
-/**
- * Switch the intensity of the battery charging current to 100mA for HIGH or to 50ma for LOW
- * @param intensity HIGH or LOW
- */
-void setChargingCurrent(int intensity){
-  if (intensity==LOW){
-    digitalWrite(POWER_CHARGING_CONTROL, HIGH);
-    Device.charging_current = 50;
-  }else{
-    digitalWrite(POWER_CHARGING_CONTROL, LOW);
-    Device.charging_current = 100;
-  }
-  
-}
-
 void batterySetup(){
   analogReadResolution(ADC_RESOLUTION); // setup battery reading
   pinMode(PIN_VBAT, INPUT);
   pinMode(VBAT_ENABLE, OUTPUT);
+  analogReference(ANALOG_READ_REFERENCE);
+  analogReadResolution(ANALOG_READ_RESOLUTION);
   digitalWrite(VBAT_ENABLE, LOW);
   pinMode(POWER_CHARGING_CONTROL, OUTPUT);
   setChargingCurrent(HIGH);
   pinMode(CHARGING_PIN, INPUT);
   Device.is_charging = !digitalRead(CHARGING_PIN);
-  Device.battery_level = getBatteryLevel();
+  Device.battery_level = 50;//getBatteryLevel(); //WARNING, TEST !!!!!!!!!!!!!!!
   Serial.print("Battery level: ");
   Serial.print(Device.battery_level);
   Serial.println(" %");
@@ -123,7 +138,6 @@ void batterySetup(){
     Serial.print(Device.charging_current);
     Serial.println(" mA");
   }
-  
 }
 
 #endif
