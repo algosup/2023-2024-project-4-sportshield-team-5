@@ -16,6 +16,7 @@
     - [3.2 Out of Scope](#32-out-of-scope)
   - [4. Roles \& Responsibilities](#4-roles--responsibilities)
   - [5. Testing Strategy](#5-testing-strategy)
+    - [5.1 Bug life cycle](#51-bug-life-cycle)
   - [6. Entry and Exit Criteria](#6-entry-and-exit-criteria)
     - [6.1 Entry Criteria](#61-entry-criteria)
     - [6.2 Exit Criteria](#62-exit-criteria)
@@ -114,7 +115,9 @@ The following features of SportShield's software will be tested:
 
 ## 5. Testing Strategy
 
-The testing 
+### 5.1 Bug life cycle
+
+![bug life cycle](./images/bug-life-cycle.png)
 
 ## 6. Entry and Exit Criteria
 
