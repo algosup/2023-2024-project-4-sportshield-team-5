@@ -17,7 +17,8 @@
   - [4. Roles \& Responsibilities](#4-roles--responsibilities)
   - [5. Testing Strategy](#5-testing-strategy)
     - [5.1 Manual and autonomous testing](#51-manual-and-autonomous-testing)
-    - [5.2 Bug life cycle](#52-bug-life-cycle)
+    - [5.2 Testing approach](#52-testing-approach)
+    - [5.3 Bug life cycle](#53-bug-life-cycle)
   - [6. Entry and Exit Criteria](#6-entry-and-exit-criteria)
     - [6.1 Entry Criteria](#61-entry-criteria)
     - [6.2 Exit Criteria](#62-exit-criteria)
@@ -116,7 +117,6 @@ The following features of SportShield's software will be tested:
 
 ## 5. Testing Strategy
 
-
 ### 5.1 Manual and autonomous testing
 
 Our testing strategy includes manual and autonmous testing, the autonomous tests are:
@@ -124,7 +124,11 @@ Our testing strategy includes manual and autonmous testing, the autonomous tests
 - Conventions related tests, for all documents, files and for the code
 - Code compilation
 
-### 5.2 Bug life cycle
+### 5.2 Testing approach
+
+For this project we chose to use smoke testing covering every test present in this document: [test cases](./test-cases.md)
+
+### 5.3 Bug life cycle
 
 ![bug life cycle](./images/bug-life-cycle.png)
 
