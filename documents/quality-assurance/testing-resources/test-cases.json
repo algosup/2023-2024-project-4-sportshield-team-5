@@ -3,7 +3,7 @@
     {
       "test_id": 1,
       "test_name": "Code compilation",
-      "test_description": "The code compiles successfully without errors or warnings",
+      "test_description": "The code compiles successfully without any error or warning",
       "test_requirements": [
         {
           "tests": []
@@ -53,7 +53,7 @@
           "step_description": "Push to the dev or the main branch of the repository. This test will be run automatically by GitHub Actions."
         }
       ],
-      "expected_result": "The program should not return any warn or error into the console on every file.",
+      "expected_result": "The program should not return any warning or error into the console on every file.",
       "test_data": {
         "data": ""
       }
@@ -388,7 +388,7 @@
           "step_description": "Verify the inactivity of the electromagnet using the ammeter."
         }
       ],
-      "expected_result": "The ammmeter should display a value equal to 0 mA.",
+      "expected_result": "The ammeter should display a value equal to 0 mA.",
       "test_data": {
         "data": ""
       }
@@ -428,7 +428,7 @@
           "step_description": "In the second following the submission of the value, check the value displayed on the ammeter screen."
         }
       ],
-      "expected_result": "The ammmeter should display a value close to 160mA.",
+      "expected_result": "The ammeter should display a value close to 160mA.",
       "test_data": {
         "data": ""
       }
