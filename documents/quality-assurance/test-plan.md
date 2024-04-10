@@ -25,6 +25,7 @@
   - [8. Resources and Environment](#8-resources-and-environment)
     - [8.1 Testing tools](#81-testing-tools)
       - [8.1.1 Github Actions](#811-github-actions)
+      - [8.1.2 GitHub Issues](#812-github-issues)
     - [8.2 Test Environment](#82-test-environment)
     - [8.3 Workforce](#83-workforce)
   - [9. Schedules](#9-schedules)
@@ -54,15 +55,28 @@ This document has been created to facilitate communication between the team memb
 
 The system integration test of SportShield's software should validate from the requirements perspective that:
 
-- List of all objectives
+- Shock detection accuracy is more than 99%
+- Unlock happens at least 99% of the time when requested
+- The alarm is triggered in at least 98% of shock detections
+- Shock/Thief attempt notifications are sent in at least 95% of shock detections
+- GNSS position acquisition and transmission have a 80% chance of being successful
+- Battery operating time between two charges is at lesat 7 days considering an average usage.
+
+These features embody the fundamental functioning of the device and align with client expectations. Any defect within the aforementioned categories would trigger the suspension criteria.
 
 ### 2.2 Secondary Objectives
 
-List secondary objectives
+Additionally, the objectives will involve implementing and testing functionalities aimed at enhancing the perceived quality and durability of the anti-theft device over time. Consequently, this test plan will also emphasize the following aspects:
+
+- Optimized battery charging with a charging threshold should work in at lesat 95% of cases.
+- Correct battery modes are enabled in at least 90% of situations.
+- Bluetooth communications should be successful in at least 90% of attempts
+
+Even if those functionalities cannot not suspend testing phase, a flaw in those would drastically lower the perceived reliability as well as a lack of trust in the product, particularly in security field.
 
 ## 3. Scope of Testing
 
-The testing of SportShield will mainly consist of the validation of the core features asked by the client, but also of the system resilience in extreme conditions ensuring this lock is a reliable piece of winter sports equipment. Nevertheless, it is worth noting that the hardware will not be tested, as these objectives are beyond the scope of this testing.
+The testing of SportShield will mainly consist of the validation of the core features asked by the client, but also of the system resilience in extreme conditions ensuring this anti-thief device is a reliable piece of winter sports equipment. Nevertheless, it is worth noting that the hardware will not be tested, as these objectives are beyond the scope of this testing.
 
 ### 3.1 In Scope
 
@@ -85,7 +99,7 @@ The following features of SportShield's software will be tested:
 
 ### 3.2 Out of Scope
 
-- Hardware-related issues
+- Hardware
 
 <!-- Test approach? -->
 
@@ -98,13 +112,13 @@ The following features of SportShield's software will be tested:
 
 ## 5. Testing Strategy
 
-z
+The testing 
 
 ## 6. Entry and Exit Criteria
 
 ### 6.1 Entry Criteria
 
-Entry criteria description
+This project 
 
 ### 6.2 Exit Criteria
 
@@ -141,7 +155,7 @@ In case of a critical bug affecting the whole testing process, the testing phase
 
 - Hardware problems/failure.
 - Assigned resources are not available when required by quality assurance team.
-- Significant change in requirements asked by the client
+- Significant change in requirements asked by the client.
 - The firmware contains serious defects limiting or preventing testing.
 
 ### 7.2 Resumption Criteria
@@ -157,6 +171,14 @@ To increase efficiency and guarantee the best quality for SportShield's software
 #### 8.1.1 Github Actions
 
 GitHub Actions is a platform we will use to adopt a continuous integration and continuous deployment workflow. Every time a push is triggered on a targetted branch, a test will automatically run.
+
+#### 8.1.2 GitHub Issues
+
+GitHub issues is a built-in feature of GitHub, allowing us to describe precisely the problems encountered during the testing phase.
+
+We define:
+
+- **Firmware bugs:**
 
 ### 8.2 Test Environment
 
@@ -178,7 +200,7 @@ The following libraries will be added in Arduino IDE:
 - ArduinoBLE *V1.3.6*
 - Adafruit GPS Library *V1.7.4 (install all)*
 - Sim800L http connector *V1.14.0*
-- Seeed Arduino[^1] LSM6DS3 *V2.0.3*
+- Seeed Arduino LSM6DS3 *V2.0.3*
 - OneWire *V2.3.7*
 
 The computer characteristics follow the configuration listed below:
@@ -250,5 +272,6 @@ To test our software, we will not rely on the mobile app itself as we want to ad
 - Test Cases Description
 - Bugs Reports and reports regarding the testing progress
 - QA meetings reports
+- Testing resources and scripts
 
 ## 12. Glossary
