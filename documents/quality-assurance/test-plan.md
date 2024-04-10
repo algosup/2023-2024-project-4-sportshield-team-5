@@ -16,7 +16,7 @@
     - [3.2 Out of Scope](#32-out-of-scope)
   - [4. Roles \& Responsibilities](#4-roles--responsibilities)
   - [5. Testing Strategy](#5-testing-strategy)
-    - [5.1 Testing tools](#51-testing-tools)
+    - [5.1 Manual and autonomous testing](#51-manual-and-autonomous-testing)
     - [5.2 Bug life cycle](#52-bug-life-cycle)
   - [6. Entry and Exit Criteria](#6-entry-and-exit-criteria)
     - [6.1 Entry Criteria](#61-entry-criteria)
@@ -116,13 +116,13 @@ The following features of SportShield's software will be tested:
 
 ## 5. Testing Strategy
 
-### 5.1 Testing tools
 
-To test the overall project we are using multiple tools such as:
-- Github actions
-- A live server running on ubuntu
-- 3 computer running on MacOS Sonoma 14.4.1
-- 3 computer running on Windows 11 Pro
+### 5.1 Manual and autonomous testing
+
+Our testing strategy includes manual and autonmous testing, the autonomous tests are:
+
+- Conventions related tests, for all documents, files and for the code
+- Code compilation
 
 ### 5.2 Bug life cycle
 
