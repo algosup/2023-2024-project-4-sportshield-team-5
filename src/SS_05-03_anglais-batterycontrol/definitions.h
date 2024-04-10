@@ -21,7 +21,7 @@ struct myConfig
   short int pin; //unknown feature
   String Name; // name of the device
   bool is_locked; //is the lock activated
-  bool is_triggered; //is the alarm triggered
+  bool alarm_triggered; //is the alarm triggered
   bool is_charging; // is it plugged and charging
   short int charging_current; //50 or 100 in mA
   short int battery_level; // battery level in percentage (5% resolution)

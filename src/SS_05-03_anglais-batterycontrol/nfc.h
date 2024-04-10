@@ -13,8 +13,18 @@
 //-------------------------- FUNCTIONS ---------------------------
 
 void nfcSetup(){
-    //future simulation of the NFC setup
+    //future implementation of the NFC setup
 }
 
+void checkNfc(){
+  if ("a device is detected ?" == 1){
+    if ("the phone" == "the good one"){
+      Device.alarm_triggered = false;
+      unlock();
+    }else{
+      // send a notification to say someone tried to unlock
+    }
+  }
+}
 
 #endif // DEBUG
