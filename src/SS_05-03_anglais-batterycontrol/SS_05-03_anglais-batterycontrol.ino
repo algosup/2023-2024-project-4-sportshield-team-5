@@ -181,7 +181,6 @@ void loop()
   // Fit the right activity according to the battery level
   if(Device.is_charging){
     adjustChargingCurrent();
-    Serial.println(Device.is_charging,Device.is_locked );
     if (Device.is_locked){
       unlock();
     }
@@ -206,9 +205,13 @@ void loop()
     }
   }else{
     if (Device.battery_level <= LIGHT_ECO_MODE_BATT_LEVEL){
-      turnLightEco(ON);
+      if (Device.power_mode!= LIGHT_ECO_MODE){
+        turnLightEco(ON);
+      }
     }else{
-      turnLightEco(OFF);
+      if (Device.power_mode == LIGHT_ECO_MODE){
+        turnLightEco(OFF);
+      }
     }
     if (getAcceleration() > ACCELERATION_NOISE_THRESHOLD || getRotation() > ROTATION_NOISE_THRESHOLD){
 
