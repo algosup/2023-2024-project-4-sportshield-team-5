@@ -29,6 +29,9 @@
     - [8.1 Testing tools](#81-testing-tools)
       - [8.1.1 Github Actions](#811-github-actions)
       - [8.1.2 GitHub Issues](#812-github-issues)
+        - [8.1.2.3 GitHub Issues Strategy](#8123-github-issues-strategy)
+      - [8.1.3 Sample SportShield API](#813-sample-sportshield-api)
+      - [8.1.4 Test Reports Spreadsheet management](#814-test-reports-spreadsheet-management)
     - [8.2 Test Environment](#82-test-environment)
     - [8.3 Workforce](#83-workforce)
   - [9. Schedules](#9-schedules)
@@ -112,6 +115,12 @@ The following features of SportShield's software will be tested:
 | QA              | Antoine     | 1. Understand project requirements <br>2. Add complementary elements when the test strategy is updated <br>3. Writing and executing Test cases <br>4. Reviewing Test cases <br>5. Creating and updating issues <br>6. Planning and organization of test processes <br>7. Coordinating with the tech lead and the software engineer(s) |
 | Program manager | Arthur      | <br>1. Write the functional specifications <br>2.  Keep the client updated on project progress and any potential issues <br> 3. Define success criteria of the project                                                                                                                                                                |
 | Tech lead       | Benoît      | <br>1. Manage and keep software engineer(s) updated regarding issues <br>2. Keep track of potential issues throughout the project                                                                                                                                                                                                     |
+| Role            | Team Member | Responsibilities                                                                                                                                                                                                                                                                                                                      |
+| --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project manager | Vivien      | 1. Contact between the QA and the rest of the team <br>2. Responsible for project schedule and overall success of the project                                                                                                                                                                                                         |
+| QA              | Antoine     | 1. Understand project requirements <br>2. Add complementary elements when the test strategy is updated <br>3. Writing and executing Test cases <br>4. Reviewing Test cases <br>5. Creating and updating issues <br>6. Planning and organization of test processes <br>7. Coordinating with the tech lead and the software engineer(s) |
+| Program manager | Arthur      | <br>1. Write the functional specifications <br>2.  Keep the client updated on project progress and any potential issues <br> 3. Define success criteria of the project                                                                                                                                                                |
+| Tech lead       | Benoît      | <br>1. Manage and keep software engineer(s) updated regarding issues <br>2. Keep track of potential issues throughout the project                                                                                                                                                                                                     |
 
 ## 5. Testing Strategy
 
@@ -139,12 +148,14 @@ For this project we chose to use smoke testing covering every test present in th
 
 ### 6.1 Entry Criteria
 
-- Arduino IDE must be installed on all team member's computers
-- All necessarry libraries must be installed and working properly
-- All necessary documentation and information regarding the project should have been given by the client
-- KPI needed to determine the success criteria must have been declared by the client and understood by the team
-- All hardware should be available and ready to be used
+Even if this project is a maintenance project, meaning that a code base already exists, the testing phase cannot be started directly. Here is an exhaustive list of all the tasks that need to be validated to start the testing phase:
 
+- All the necessary documentation and requirement information should be available in the repository to ensure a consistent testing. It will also allow testers to operate the system correctly
+- All the needed software tools including the testing tools must have been successfully installed and should work properly.
+- All the hardware platforms must have been successfully installed, configured and functionning properly.
+- The test environment, including the hardware, the software, and issue templates must be ready.
+- The test scenarios, test cases and testing suite have been reviewed.
+- Testers are familiar with the product's specific features and expected functionalities.
 
 ### 6.2 Exit Criteria
 
@@ -196,7 +207,7 @@ To increase efficiency and guarantee the best quality for SportShield's software
 
 #### 8.1.1 Github Actions
 
-GitHub Actions is a platform we will use to adopt a continuous integration and continuous deployment workflow. Every time a push is triggered on a targetted branch, a test will automatically run.
+GitHub Actions is a platform we will use to adopt a continuous integration and continuous deployment (CI/CD) workflow. Every time a push is triggered on a targetted branch, a test will automatically run.
 
 #### 8.1.2 GitHub Issues
 
@@ -204,7 +215,67 @@ GitHub issues is a built-in feature of GitHub, allowing us to describe precisely
 
 We define:
 
-- **Firmware bugs:** As an unintentional behavior from the code that could pose a risk to the successful functioning of the project 
+- **Firmware bugs:** Unexpected behaviours of the program
+- **Missing feature:** Critical functions not implemented in the program
+- **Documentation:** Review of the documentation documents and in the code
+- **Task allocation:** Define assignees for the task pointed out by the issue
+
+##### 8.1.2.3 GitHub Issues Strategy
+
+To create a seamless workflow and have seamless communications during testing sessions, issues will follow a strategy of which here are the key points.
+
+1. Explicit Issue Description
+
+- Clear title of issue
+- Include path to the file causing an issue
+
+2. Usage of templates
+
+Templates are generally used to gain time on the realization of a repetitive task, but our template also asserts the completeness of the information provided in the issues. We created an issue template for the four key usage in a Github repository and restrcited the opening of GitHub issues to the provided template, enforcing consistency and understanding among all the issues.
+
+![Issue types](./images/issue-types.png)
+
+When clicking on the option, the issue opener will be prompted with multiple fields to understand better the problem he is facing. The page shown to him will look as follows:
+
+![Software Issue Template](./images/issue-template-software.png)
+
+3. Usage of labels
+
+- Identify task nature and type easily.
+- Categorize issue in an ordered manner using labels such as "Bug" or "Documentation". An exhautstive list of the used labels is available [here](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/labels)
+
+4. Task assignments
+
+- Assign responsibility to the person responsible for addressing the problem
+- Assignees to the task get notified for every update on this issue, improving regular follow-up of the situation by making them take ownership of the task.
+
+5. Regular issue sorting
+
+- Daily review of the opened issues
+- Task prioritization using labels (Critical, High, Medium, Low)
+
+This strategy aims to foster efficiency on fixing issues and working on critical tasks rather than being lost among incomplete information.
+
+#### 8.1.3 Sample SportShield API
+
+Even though we have access to the client's API, to have a complete traceability for the testing, a [sample API](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/sportshield-api-example) was created.
+
+The available routes for this testing tool are:
+`http://185.157.246.36/deviceLinking/:BLEAddress` - Link an anti-theft device to a phone in the app
+`http://185.157.246.36/deviceUnlinking/:BLEAddress` - Unling an anti-theft device from a phone in the app
+`http://185.157.246.36/sendNotification/:BLEAddress` - Send a notification to the phone linked to the anti-theft device
+`http://185.157.246.36/updateCoordinate/:BLEAddress` - Regular update of the coordinates of the anti-theft device
+`http://185.157.246.36/NFCUnlockAttempt/:BLEAddress` - Notify the user a wrong NFC card was used to unlock his device
+
+This API helps ensure the data sent by the anti-theft device over 2G network are complete and reliable. You can find additional information in [the manual](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/sportshield-api-example/sportshield-api-manual.md) related to the sample API.
+
+#### 8.1.4 Test Reports Spreadsheet management
+
+As the allocated time for testing is quite short, the need of developing an automated tool managing the test execution and results in an efficient manner was needed. It can be found following [this link](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/spreadsheet-test-management).
+
+This tool manages both the test execution and the test report fill-in. It ensures consistency among all the test spreadhseet allocated to each test case.
+
+This script aims to reproduce in a twisted way the requirements traceability matrix, as we will show the history of success of the test case over the different runs.
 
 ### 8.2 Test Environment
 
@@ -241,6 +312,7 @@ To test our software, we will not rely on the mobile app itself as we want to ad
 - Iphone 11
   - **iOS version:** 17.4.1
   - **LightBlue version:** 4.2.7
+  - **Phyphox version:** 1.1.15
 
 ### 8.3 Workforce
 
