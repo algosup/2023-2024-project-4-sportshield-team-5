@@ -104,16 +104,14 @@ The following features of SportShield's software will be tested:
 
 - Hardware
 
-<!-- Test approach? -->
-
 ## 4. Roles & Responsibilities
 
-| Role            | Team Member | Responsibilities                                                                                                              |
-| --------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Project manager | Vivien      | 1. Contact between the QA and the rest of the team <br>2. Responsible for project schedule and overall success of the project |
-| QA              | Antoine     | 1. Understand project requirements <br>2. Add complementary elements when the test strategy is updated <br>3. Writing and executing Test cases <br>4. Reviewing Test cases <br>5. Creating and updating issues <br>6. Planning and organization of test processes <br>7. Coordinating with the tech lead and the software engineer(s)                                     |
-| Program manager              | Arthur     |<br>1. Write the functional specifications <br>2.  Keep the client updated on project progress and any potential issues <br> 3. Define success criteria of the project                                  |
-| Tech lead              | Benoît     |<br>1. Manage and keep software engineer(s) updated regarding issues <br>2. Keep track of potential issues throughout the project                       |
+| Role            | Team Member | Responsibilities                                                                                                                                                                                                                                                                                                                      |
+| --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project manager | Vivien      | 1. Contact between the QA and the rest of the team <br>2. Responsible for project schedule and overall success of the project                                                                                                                                                                                                         |
+| QA              | Antoine     | 1. Understand project requirements <br>2. Add complementary elements when the test strategy is updated <br>3. Writing and executing Test cases <br>4. Reviewing Test cases <br>5. Creating and updating issues <br>6. Planning and organization of test processes <br>7. Coordinating with the tech lead and the software engineer(s) |
+| Program manager | Arthur      | <br>1. Write the functional specifications <br>2.  Keep the client updated on project progress and any potential issues <br> 3. Define success criteria of the project                                                                                                                                                                |
+| Tech lead       | Benoît      | <br>1. Manage and keep software engineer(s) updated regarding issues <br>2. Keep track of potential issues throughout the project                                                                                                                                                                                                     |
 
 ## 5. Testing Strategy
 
@@ -141,7 +139,12 @@ For this project we chose to use smoke testing covering every test present in th
 
 ### 6.1 Entry Criteria
 
-This project 
+- Arduino IDE must be installed on all team member's computers
+- All necessarry libraries must be installed and working properly
+- All necessary documentation and information regarding the project should have been given by the client
+- KPI needed to determine the success criteria must have been declared by the client and understood by the team
+- All hardware should be available and ready to be used
+
 
 ### 6.2 Exit Criteria
 
