@@ -92,10 +92,10 @@ void setup()
   Serial.println("\nSETUP DONE !\n");
 }
 
-//--------------------------- LOOP -----------------------------
+//--------------------------------------------------- LOOP --------------------------------------------------------------
 void loop()
 {
-  // DATA update about the device
+  // -------------DATA update about the device-----------------------------------------------
   /*
   // With the final hardware : 
   Device.is_charging = !digitalRead(CHARGING_PIN); // as 0 : not charging and 1 : charging
@@ -103,8 +103,6 @@ void loop()
   Device.battery_level = getBatteryLevel();
   */
 
-  
- 
   if (Serial.available() > 0) {
     String str = Serial.readString();
 
@@ -140,9 +138,10 @@ void loop()
       str.setCharAt((str.length()-1), '0');
       Device.battery_level = str.toInt()/10;
     }
-    
-
   }
+  //---------------------------------------------------------------------------------------
+
+  //------------Algorithm------------------------------------------------------------------
 
   if (activation_alarm)
   {

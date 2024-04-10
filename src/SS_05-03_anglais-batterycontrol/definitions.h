@@ -86,11 +86,11 @@ unsigned long start_cycle = 0;
 bool deactivate = false; // A boolean which if turned on, stop any ongoing alarms. Activated by bluetooth
 // Set a threshold to determine a "small" or "big" movement
 
-float small_MT = 5000.0; //     SmallMotionThreshold
-float big_MT = 7000.0;   //    BigMotionThreshold
+#define small_MT 5000 //     SmallMotionThreshold
+#define big_MT 7000  //    BigMotionThreshold
 
-float small_RT = 45.0; //     SmallRotationThreshold
-float big_RT = 100.0;  //     BigRotationThreshold
+#define small_RT 45.0 //     SmallRotationThreshold
+#define big_RT 100.0  //     BigRotationThreshold
 
 // Alarm
 const float SHORT_SHOCK_DURATION = 1.5;       // The maximum time margin where two shocks can be detected as a risk, unit in seconds

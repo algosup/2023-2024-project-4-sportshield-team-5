@@ -36,10 +36,10 @@ float getMotionData(void)
     float accelZ = imu.readFloatAccelZ();
 
     float current_acceleration = sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ) * 100;
-    float motion_dataerence = current_acceleration - previous_acceleration; // Calculate the acceleration difference
+    float motion_difference = current_acceleration - previous_acceleration; // Calculate the acceleration difference
     previous_acceleration = current_acceleration;
 
-    return fabs(motion_dataerence); // returns a value always positive
+    return fabs(motion_difference); // returns a value always positive (absolute value, float)
 }
 
 /**

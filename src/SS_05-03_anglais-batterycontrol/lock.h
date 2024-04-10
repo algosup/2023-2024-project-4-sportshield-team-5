@@ -5,8 +5,8 @@
 #include "power.h"
 
 void lockSetup(){
-  pinMode(EML_PIN, OUTPUT); 
   //pinMode(CONTACT_LOCK_PIN, INPUT);
+  pinMode(EML_PIN, OUTPUT); 
   digitalWrite(EML_PIN, HIGH);
   delay(TEST_DURATION);
   digitalWrite(EML_PIN, LOW);
@@ -18,6 +18,7 @@ void unlock(){
   delay(UNLOCKING_DURATION);
   digitalWrite(EML_PIN, LOW);
   turnPowerSwitches(OFF);
+  Device.is_locked = false;
 }
 
 #endif
