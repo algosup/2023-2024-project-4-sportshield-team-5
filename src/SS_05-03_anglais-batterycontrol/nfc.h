@@ -17,7 +17,7 @@ void nfcSetup(){
 }
 
 void checkNfc(){
-  if ("a device is detected ?" == 1){
+  if ("a device is detected ?" == "yes"){
     if ("the phone" == "the good one"){
       Device.alarm_triggered = false;
       unlock();
