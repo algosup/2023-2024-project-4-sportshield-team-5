@@ -19,6 +19,7 @@
     - [5.1 Manual and autonomous testing](#51-manual-and-autonomous-testing)
     - [5.2 Testing approach](#52-testing-approach)
     - [5.3 Bug life cycle](#53-bug-life-cycle)
+    - [5.4 Test reports](#54-test-reports)
   - [6. Entry and Exit Criteria](#6-entry-and-exit-criteria)
     - [6.1 Entry Criteria](#61-entry-criteria)
     - [6.2 Exit Criteria](#62-exit-criteria)
@@ -45,15 +46,15 @@
 
 ## 1. Introduction
 
-The client contacted us to work on SportShield, the prototype of a lock which will be principally used for the protection of winter sports equipment and needs multiple enhancements. This product targets a wide audience, from people well-acquainted with the concept of securing their equipment to people wanting to protect their occasional rental of equipment and with any experience in this security field.
+The client contacted us to work on SportShield, the prototype of a lock that will be principally used for the protection of winter sports equipment and needs multiple enhancements. This product targets a wide audience, from people well-acquainted with the concept of securing their equipment to people wanting to protect their occasional rental of equipment and with any experience in this security field.
 
-This project aims to enhance the inner workings of SportShield from a software point of view, using C++ and the given hardware. The primary objective is to detect shocks and distinguish theft attempts from unintentional bumps into the sports equipment protected by the lock, as well as triggering an alarm if a theft is detected. The second objective is to enhance battery usage while adding the possibility of doing concurrent actions on the lock and offering NFC unlocking.
+This project aims to enhance the inner workings of SportShield from a software point of view, using C++[^1] and the given hardware. The primary objective is to detect shocks and distinguish theft attempts from unintentional bumps into the sports equipment protected by the lock, as well as triggering an alarm if a theft is detected. The second objective is to enhance battery usage while adding the possibility of doing concurrent actions on the lock and offering NFC unlocking.
 
 With these objectives, the product aims to serve as an educational tool for learning C++ language but also to help the client in their product prototyping. Given the specificity of SportShield, the lock's software must be fully tested ensuring it is bug-free.
 
 ### 1.1 Document purpose
 
-This document has been created to facilitate communication between the team members. It describes approaches and methodogies that will apply to the regression, security, boundary, performance and smoke testing of SportShield. It also identifies the test deliverables and the scope of this testing.
+This document has been created to facilitate communication between the team members. It describes approaches and methodologies that will apply to the regression[^2], security[^3], boundary[^4], performance[^5] and smoke testing[^6] of SportShield. It also identifies the test deliverables and the scope of this testing.
 
 ## 2. Quality objectives
 
@@ -65,8 +66,8 @@ The system integration test of SportShield's software should validate from the r
 - Unlock happens at least 99% of the time when requested
 - The alarm is triggered in at least 98% of shock detections
 - Shock/Thief attempt notifications are sent in at least 95% of shock detections
-- GNSS position acquisition and transmission have a 80% chance of being successful
-- Battery operating time between two charges is at lesat 7 days considering an average usage.
+- GNSS[^7] position acquisition and transmission have an 80% chance of being successful
+- Battery operating time between two charges is at least 7 days considering an average usage.
 
 These features embody the fundamental functioning of the device and align with client expectations. Any defect within the aforementioned categories would trigger the suspension criteria.
 
@@ -74,11 +75,11 @@ These features embody the fundamental functioning of the device and align with c
 
 Additionally, the objectives will involve implementing and testing functionalities aimed at enhancing the perceived quality and durability of the anti-theft device over time. Consequently, this test plan will also emphasize the following aspects:
 
-- Optimized battery charging with a charging threshold should work in at lesat 95% of cases.
+- Optimized battery charging with a charging threshold should work in at least 95% of cases.
 - Correct battery modes are enabled in at least 90% of situations.
-- Bluetooth communications should be successful in at least 90% of attempts
+- Bluetooth[^8] communications should be successful in at least 90% of attempts
 
-Even if those functionalities cannot not suspend testing phase, a flaw in those would drastically lower the perceived reliability as well as a lack of trust in the product, particularly in security field.
+Even if those functionalities cannot suspend the testing phase, a flaw in those would drastically lower the perceived reliability as well as a lack of trust in the product, particularly in the security field.
 
 ## 3. Scope of Testing
 
@@ -86,12 +87,12 @@ The testing of SportShield will mainly consist of the validation of the core fea
 
 ### 3.1 In Scope
 
-This test plan mainly targets the testing of SportShield software and its reactivity to given situations. It also englobes documentation control and consistence verfication during the whole project.
+This test plan mainly targets the testing of SportShield software and its reactivity to given situations. It also englobes documentation control and consistency verification during the whole project.
 
 #### 3.1.1 Scope of SportShield's software
 
 - Absence of significant bugs
-- Final product meets the KPIs and reliability indicators given by the client.
+- The final product meets the KPIs and reliability indicators given by the client.
 - Conventions respect
 
 The following features of SportShield's software will be tested:
@@ -112,17 +113,17 @@ The following features of SportShield's software will be tested:
 | Role            | Team Member | Responsibilities                                                                                                                                                                                                                                                                                                                      |
 | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Project manager | Vivien      | 1. Contact between the QA and the rest of the team <br>2. Responsible for project schedule and overall success of the project                                                                                                                                                                                                         |
-| QA              | Antoine     | 1. Understand project requirements <br>2. Add complementary elements when the test strategy is updated <br>3. Writing and executing Test cases <br>4. Reviewing Test cases <br>5. Creating and updating issues <br>6. Planning and organization of test processes <br>7. Coordinating with the tech lead and the software engineer(s) |
-| Program manager | Arthur      | <br>1. Write the functional specifications <br>2.  Keep the client updated on project progress and any potential issues <br> 3. Define success criteria of the project                                                                                                                                                                |
+| QA              | Antoine     | 1. Understand project requirements <br>2. Add complementary elements when the test strategy is updated <br>3. Writing and executing Test cases <br>4. Reviewing Test Cases <br>5. Creating and updating issues <br>6. Planning and organization of test processes <br>7. Coordinating with the tech lead and the software engineer(s) |
+| Program manager | Arthur      | <br>1. Write the functional specifications <br>2.  Keep the client updated on project progress and any potential issues <br> 3. Define the success criteria of the project                                                                                                                                                            |
 | Tech lead       | Benoît      | <br>1. Manage and keep software engineer(s) updated regarding issues <br>2. Keep track of potential issues throughout the project                                                                                                                                                                                                     |
 
 ## 5. Testing Strategy
 
 ### 5.1 Manual and autonomous testing
 
-Our testing strategy includes manual and autonmous testing, the autonomous tests are:
+Our testing strategy includes manual and autonomous testing, the autonomous tests include:
 
-- Conventions related tests, for all documents, files and for the code
+- Conventions-related tests, for all documents, files and the code
 - Code compilation
 
 The manual tests are:
@@ -132,11 +133,18 @@ The manual tests are:
 
 ### 5.2 Testing approach
 
-For this project we chose to use smoke testing covering every test present in this document: [test cases](./test-cases.md)
+For this project, we decided to use smoke testing covering every test present in this document: [test cases](./test-cases.md)
+We will additionally use regression testing, thanks to our test report spreadsheet, ensuring development doesn't hinder already existing features.
 
 ### 5.3 Bug life cycle
 
 ![bug life cycle](./images/bug-life-cycle.png)
+
+### 5.4 Test reports
+
+All the test reports listing test success, failures and additional comments are stored in this [Google Sheets document](https://docs.google.com/spreadsheets/d/1vLu0oecECq-B2gHba6w_XQCSSX2-hDMr_QxqF_5rOWs/edit#gid=1868265144).
+
+The Page "0. Overview" displays the average number of tests executed for each test phase and also gives the average success rate of the tests as a percentage. This data is also included for the last run to know the current status of the product compared to the final expectations.
 
 ## 6. Entry and Exit Criteria
 
@@ -144,9 +152,9 @@ For this project we chose to use smoke testing covering every test present in th
 
 Even if this project is a maintenance project, meaning that a code base already exists, the testing phase cannot be started directly. Here is an exhaustive list of all the tasks that need to be validated to start the testing phase:
 
-- All the necessary documentation and requirement information should be available in the repository to ensure a consistent testing. It will also allow testers to operate the system correctly
+- All the necessary documentation and requirement information should be available in the repository[^9] to ensure consistent testing. It will also allow testers to operate the system correctly
 - All the needed software tools including the testing tools must have been successfully installed and should work properly.
-- All the hardware platforms must have been successfully installed, configured and functionning properly.
+- All the hardware platforms must have been successfully installed, configured and functioning properly.
 - The test environment, including the hardware, the software, and issue templates must be ready.
 - The test scenarios, test cases and testing suite have been reviewed.
 - Testers are familiar with the product's specific features and expected functionalities.
@@ -155,7 +163,7 @@ Even if this project is a maintenance project, meaning that a code base already 
 
 To consider the product as ready for distribution and end the test phase, some critical objectives must be met.
 
-1. Meet the client's Reliability Indicators minimal functionning rate:
+1. Meet the client's Reliability Indicators and minimal functionning rate:
    - Shock detection - 99%
    - Unlock - 99%
    - Alarm - 98%
@@ -164,7 +172,7 @@ To consider the product as ready for distribution and end the test phase, some c
 
 2. Meet the client's expectations on battery operating time between two charges:
    - At least 7 days of operating duration
-   - A day is considered as a 6 hours of activation mode and then 18 hours in stand-by mode.
+   - A day is considered as 6 hours of activation mode and then 18 hours in standby mode.
 
 3. Test Case Coverage:
    - A minimum test coverage of 95% for all identified features must be achieved before considering the test phase complete.
@@ -185,7 +193,7 @@ To consider the product as ready for distribution and end the test phase, some c
 In case of a critical bug affecting the whole testing process, the testing phase can be temporarily suspended. The following cases can trigger this suspension:
 
 - Hardware problems/failure.
-- Assigned resources are not available when required by quality assurance team.
+- Assigned resources are not available when required by the quality assurance team.
 - Significant change in requirements asked by the client.
 - The firmware contains serious defects limiting or preventing testing.
 
@@ -201,7 +209,7 @@ To increase efficiency and guarantee the best quality for SportShield's software
 
 #### 8.1.1 Github Actions
 
-GitHub Actions is a platform we will use to adopt a continuous integration and continuous deployment (CI/CD) workflow. Every time a push is triggered on a targetted branch, a test will automatically run.
+GitHub Actions is a platform we will use to adopt a continuous integration and continuous deployment (CI/CD) workflow. Every time a push is triggered on a targeted branch, a test will automatically run.
 
 #### 8.1.2 GitHub Issues
 
@@ -211,21 +219,21 @@ We define:
 
 - **Firmware bugs:** Unexpected behaviours of the program
 - **Missing feature:** Critical functions not implemented in the program
-- **Documentation:** Review of the documentation documents and in the code
+- **Documentation:** Review of the documentation documents and the code
 - **Task allocation:** Define assignees for the task pointed out by the issue
 
 ##### 8.1.2.3 GitHub Issues Strategy
 
-To create a seamless workflow and have seamless communications during testing sessions, issues will follow a strategy of which here are the key points.
+To create a seamless workflow and have seamless communications during testing sessions, issues[^10] will follow a strategy of which here are the key points.
 
 1. Explicit Issue Description
 
-- Clear title of issue
-- Include path to the file causing an issue
+- Clear title of the issue
+- Include the path to the file causing an issue
 
 2. Usage of templates
 
-Templates are generally used to gain time on the realization of a repetitive task, but our template also asserts the completeness of the information provided in the issues. We created an issue template for the four key usage in a Github repository and restrcited the opening of GitHub issues to the provided template, enforcing consistency and understanding among all the issues.
+Templates are generally used to gain time on the realization of a repetitive task, but our template also asserts the completeness of the information provided in the issues. We created an issue template for the four key usages in a GitHub repository and restricted the opening of GitHub issues to the provided template, enforcing consistency and understanding among all the issues.
 
 ![Issue types](./images/issue-types.png)
 
@@ -236,7 +244,7 @@ When clicking on the option, the issue opener will be prompted with multiple fie
 3. Usage of labels
 
 - Identify task nature and type easily.
-- Categorize issue in an ordered manner using labels such as "Bug" or "Documentation". An exhautstive list of the used labels is available [here](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/labels)
+- Categorize issues in an ordered manner using labels such as "Bug" or "Documentation". An exhaustive list of the used labels is available [here](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/labels)
 
 4. Task assignments
 
@@ -248,11 +256,11 @@ When clicking on the option, the issue opener will be prompted with multiple fie
 - Daily review of the opened issues
 - Task prioritization using labels (Critical, High, Medium, Low)
 
-This strategy aims to foster efficiency on fixing issues and working on critical tasks rather than being lost among incomplete information.
+This strategy aims to foster efficiency in fixing issues and working on critical tasks rather than being lost in incomplete information.
 
 #### 8.1.3 Sample SportShield API
 
-Even though we have access to the client's API, to have a complete traceability for the testing, a [sample API](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/sportshield-api-example) was created.
+Even though we have access to the client's API[^11], to have complete traceability for the testing, a [sample API](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/sportshield-api-example) was created.
 
 The available routes for this testing tool are:
 `http://185.157.246.36/deviceLinking/:BLEAddress` - Link an anti-theft device to a phone in the app
@@ -261,31 +269,31 @@ The available routes for this testing tool are:
 `http://185.157.246.36/updateCoordinate/:BLEAddress` - Regular update of the coordinates of the anti-theft device
 `http://185.157.246.36/NFCUnlockAttempt/:BLEAddress` - Notify the user a wrong NFC card was used to unlock his device
 
-This API helps ensure the data sent by the anti-theft device over 2G network are complete and reliable. You can find additional information in [the manual](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/sportshield-api-example/sportshield-api-manual.md) related to the sample API.
+This API helps ensure the data sent by the anti-theft device over a 2G network are complete and reliable. You can find additional information in [the manual](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/sportshield-api-example/sportshield-api-manual.md) related to the sample API.
 
 #### 8.1.4 Test Reports Spreadsheet management
 
-As the allocated time for testing is quite short, the need of developing an automated tool managing the test execution and results in an efficient manner was needed. It can be found following [this link](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/spreadsheet-test-management).
+As the allocated time for testing is quite short, the need to develop an automated tool managing the test execution and results efficiently was needed. It can be found following [this link](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/tree/main/documents/quality-assurance/testing-resources/spreadsheet-test-management).
 
-This tool manages both the test execution and the test report fill-in. It ensures consistency among all the test spreadhseet allocated to each test case.
+This tool manages both the test execution and the test report fill-in. It ensures consistency among all the test spreadsheets allocated to each test case.
 
 This script aims to reproduce in a twisted way the requirements traceability matrix, as we will show the history of success of the test case over the different runs.
 
 ### 8.2 Test Environment
 
-As this project is based on the supplied board, our tests will be carried out entirely using it. In addition, and in order to harmonize the test environment, we have decided to use a single computer to compile the software and upload it to the ARDUINO board.
+As this project is based on the supplied board, our tests will be carried out entirely using it. In addition, and to harmonize the test environment, we have decided to use a single computer to compile the software and upload it to the ARDUINO board.
 
 We will use the following card equipped with the components listed below:
 
 - Xiao BLE Sense nrf52840
   - GNSS PA1010D
-  - GSM/2G SIM800L Module
+  - GSM/2G SIM800L Module [^12]
   - Electromagnet
   - Piezoelectric buzzer
-  - Lithium-Polymer battery with a capacity of 1100 mAh
-  - NFC Antenna
+  - Lithium-polymer battery with a capacity of 1100 mAh
+  - NFC Antenna [^13]
 
-The following libraries will be added in Arduino IDE:
+The following libraries will be added to Arduino IDE:
 
 - NRF52_MBED_TimerInterrupt *V1.4.1*
 - ArduinoBLE *V1.3.6*
@@ -301,14 +309,16 @@ The computer characteristics follow the configuration listed below:
   - **RAM:** 4,0 GiB
   - **Operating System:** Ubuntu 22.04.4 LTS x64
 
-To test our software, we will not rely on the mobile app itself as we want to add some functionalities for battery saving. Instead, we are going to use LightBlue app showing the device available fields via Bluetooth.
+To test our software, we will not rely on the mobile app itself as we want to add some functionalities for battery saving. Instead, we are going to use the LightBlue app to show the device's available fields via Bluetooth. We are also going to use the Phyphox app, to measure sound intensity but also acceleration graphs.
 
-- Iphone 11
+- iPhone 11
   - **iOS version:** 17.4.1
   - **LightBlue version:** 4.2.7
   - **Phyphox version:** 1.1.15
 
 ### 8.3 Workforce
+
+Thanks to the testing aforementioned, testing will only require 1 person responsible for this task considering the full-time effort and including weekends and bank holidays.
 
 ## 9. Schedules
 
@@ -352,18 +362,32 @@ To test our software, we will not rely on the mobile app itself as we want to ad
 
 ## 10. Risks/Assumptions
 
-| Risk                                   | Mitigation                                             |
-| -------------------------------------- | ------------------------------------------------------ |
-| The provided code base isn't working   | Troubleshoot errors by isolating code's component      |
-| Limited time or ressources for testing | Identify the most critical features to test them first |
-| An hardware failure occurs             | Get extra hardware or share hardware among teams       |
+| Risk                                  | Mitigation                                             |
+| ------------------------------------- | ------------------------------------------------------ |
+| The provided code base isn't working  | Troubleshoot errors by isolating code's component      |
+| Limited time or resources for testing | Identify the most critical features to test them first |
+| A hardware failure occurs             | Get extra hardware or share hardware among teams       |
 
 ## 11. Deliverables
 
 - Test Plan
 - Test Cases Description
 - Bugs Reports and reports regarding the testing progress
-- QA meetings reports
+- QA meeting reports
 - Testing resources and scripts
 
 ## 12. Glossary
+
+[^1]: C++ is a high-level programming language that encompasses both procedural and object-oriented paradigms.
+[^2]: Regression testing is the process of re-running previously conducted tests to ensure that recent changes to a software application have not adversely affected its existing functionality.
+[^3]: Security testing involves evaluating a software system's ability to protect data, maintain functionality, and resist malicious attacks, ensuring that vulnerabilities and weaknesses are identified and mitigated to enhance overall security posture.
+[^4]: Boundary testing is a software testing technique that focuses on examining the behaviour of a system at its boundaries or limits, such as minimum and maximum input values, to uncover potential errors, vulnerabilities, or unexpected behaviour.
+[^5]: Performance testing is a type of software testing that evaluates the speed, responsiveness, scalability, and stability of a system under various workloads, aiming to identify performance bottlenecks and ensure optimal performance under different conditions.
+[^6]: A preliminary testing process that checks whether the most crucial functionalities of a software build are working correctly. It is typically conducted to ensure that the build is stable enough for further, more comprehensive testing.
+[^7]: GNSS (Global Navigation Satellite System) is a technology that utilizes a network of satellites to provide location and time information to users anywhere on or near the Earth's surface.
+[^8]: Bluetooth is a wireless technology standard for exchanging data over short distances between electronic devices, facilitating communication and connectivity without the need for cables or wires.
+[^9]: A GitHub repository is a location where code and related files for a software project are stored and managed using the Git version control system, allowing multiple contributors to collaborate, track changes, and manage project history.
+[^10]: A feature that allows users to report problems, suggest enhancements or discuss ideas related to the project.
+[^11]: An API (Application Programming Interface) is a set of rules, protocols, and tools that allows different software applications to communicate and interact with each other, enabling the exchange of data and functionality between them.
+[^12]: GSM (Global System for Mobile Communications) is a standard developed for digital mobile communication, providing voice and data services for mobile phones. It is widely used worldwide and forms the basis of 2G mobile networks.
+[^13]: GSM (Global System for Mobile Communications) is a standard developed for digital mobile communication, providing voice and data services for mobile phones. It is widely used worldwide and forms the basis of 2G mobile networks.
