@@ -108,6 +108,4 @@ void desactivateGPS()
 
 
 
-}
-
 #endif

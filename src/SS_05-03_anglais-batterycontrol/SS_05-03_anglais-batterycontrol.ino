@@ -6,9 +6,10 @@
 #include "alarm.h"       // -> buzzer and alarm setup and functions and setup
 #include "power.h"       // -> battery's and power modes' functions and setup
 #include "lock.h"        // -> Electro magnetic lock functions and setup
-#include "sim.h"         // -> GPRS functinos with the 2G SIM and setup
+
 #include "gps.h"         // -> GPS module's functions and setup
 #include "nfc.h"         // -> NFC detection's and authentification's functions and setup
+#include "sim.h"         // -> GPRS functinos with the 2G SIM and setup
 
 //-------------------------------- SETUP ----------------------------------------
 void setup()
@@ -83,6 +84,8 @@ void setup()
   ISR_Timer.setInterval(TIMER_INTERVAL_120S, GPSIsr);
   Serial.println("timer setup done !\n");
 
+  Device.is_charging = false;
+
   //end of the setup
   Serial.begin(9600);
   Serial.setTimeout(10); //time for reading a string input
@@ -109,13 +112,15 @@ void loop()
     if (str=="plug"){
       Device.is_charging = true;
       Device.power_mode = NORMAL_MODE;
+      Serial.println("plugged");
 
     }else if(str=="unplug"){
       Device.is_charging = false;
-      Serial.print("unplugged");
+      Serial.println("unplugged");
       
     }else if(str=="lock"){
       Device.is_locked = true;
+      Serial.println("locked");
       
     }else if(str=="bluetooth unlock"){
       if (Device.bluetooth_activated){
@@ -176,6 +181,7 @@ void loop()
   // Fit the right activity according to the battery level
   if(Device.is_charging){
     adjustChargingCurrent();
+    Serial.println(Device.is_charging,Device.is_locked );
     if (Device.is_locked){
       unlock();
     }
@@ -209,7 +215,7 @@ void loop()
       if (getSmallAlarmTimer() == 0){
         launchSmallAlarm();
       }else if (getSmallAlarmTimer() <= SHORT_SHOCK_DURATION){
-        updateAlarm(); 
+        updateSmallAlarm(); 
 
       }else if (getSmallAlarmTimer() >= SHORT_SHOCK_DURATION){
         delay(100); //to see if it did calm down
@@ -218,9 +224,9 @@ void loop()
             resetSmallAlarm();
             launchBigAlarm();
             sendMovement();
-            LaunchRegularSent(); 
+            launchRegularSent(); 
           }else if (getBigAlarmTimer() <= LONG_ALARM_DURATION){
-            updateAlarm();
+            updateBigAlarm();
             updateRegularSent();
           }else{
             resetRegularSent();

@@ -20,15 +20,15 @@ struct myConfig
 {
   short int pin; //unknown feature
   String Name; // name of the device
-  bool is_locked; //is the lock activated
-  bool alarm_triggered; //is the alarm triggered
-  bool is_charging; // is it plugged and charging
-  short int charging_current; //50 or 100 in mA
-  short int battery_level; // battery level in percentage (5% resolution)
-  bool bluetooth_activated; // obvious
-  bool gps_activated; // obvious
-  bool nfc_activated;
-  bool power_mode; // the different power modes are defined at the end, there are 4 :
+  bool is_locked = true; //is the lock activated
+  bool alarm_triggered = false; //is the alarm triggered
+  bool is_charging = false; // is it plugged and charging
+  short int charging_current = 100; //50 or 100 in mA
+  short int battery_level = 50; // battery level in percentage (5% resolution)
+  bool bluetooth_activated = true; // obvious
+  bool gps_activated = false; // obvious
+  bool nfc_activated = false;
+  bool power_mode = 0; // the different power modes are defined at the end, there are 4 :
                    // 'NORMAL' 'LIGHT Eco mode' 'deep eco mode' and 'sleep mode' Cf. below
 };
 myConfig Device;
@@ -53,7 +53,7 @@ NRF52_MBED_ISRTimer ISR_Timer;
 #define TIMER_INTERVAL_120S 120000L
 
 uint32_t waiting_for_sleep_mode_time_ref = 0;
-#define SLEEP_MODE_DELAY 40000 //milliseconds
+#define SLEEP_MODE_DELAY 4000 //milliseconds //!!!! To modify
 
 // IMU : LSM6DS3
 LSM6DS3 imu(I2C_MODE, 0x6A); // I2C device address 0x6A
@@ -98,8 +98,8 @@ bool deactivate = false; // A boolean which if turned on, stop any ongoing alarm
 bool movement_finished = false;
 
 // Alarm
-#define SHORT_SHOCK_DURATION = 1200;       // The maximum time margin where two shocks can be detected as a risk, unit in seconds
-#define LONG_ALARM_DURATION = 3500;
+#define SHORT_SHOCK_DURATION 1200      // The maximum time margin where two shocks can be detected as a risk, unit in seconds
+#define LONG_ALARM_DURATION 3500
 float alarm_start;            // A value to store when the alarm started
 float alarm_duration;         // The duration of the current alarm;
 int MT_counter;               // Number of movements detected within the time limit value
@@ -113,6 +113,7 @@ uint32_t small_alarm_timer_start = 0;
 uint small_alarm_timer = 0;
 uint32_t small_alarm_period_timer_start = 0;
 uint small_alarm_period_timer = 0;
+int small_alarm_cycles = 0;
 
 #define BIG_ALARM_PERIOD 350 //ms
 #define BIG_ALARM_CYCLES  5//ms
@@ -121,6 +122,7 @@ uint32_t big_alarm_timer_start = 0;
 uint big_alarm_timer = 0;
 uint32_t big_alarm_period_timer_start = 0;
 uint big_alarm_period_timer = 0;
+int big_alarm_cycles = 0;
 
 #define SENDING_FREQUENCY_WHEN_LOCKED 1000 //ms
 uint32_t regular_sent_timer_start = 0;

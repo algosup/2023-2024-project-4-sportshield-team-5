@@ -64,6 +64,7 @@ void powerSwitchesSetup(){
 void turnDeepEco(bool state)
 {
   if (state==ON){
+    Serial.println("deep eco on ...");
 
     // Send a notification to warn the user by GPRS on the app that :
     //- Can't use anymore
@@ -81,8 +82,10 @@ void turnDeepEco(bool state)
     //BLE_activated = false;
     BLE.end();
     //turn off the IMU
+    Serial.println("Bluetooth, NFC, GPS, SIM, IMU and power boost desactivated");
   }
   if (state==OFF){
+    Serial.println("deep eco off ...");
     Device.power_mode = NORMAL_MODE;
     Device.bluetooth_activated = true;
     Device.nfc_activated = true;
@@ -90,7 +93,9 @@ void turnDeepEco(bool state)
 
     //turn on the IMU
     //BLE_activated = true;
-    bluetoothSetup();
+    //bluetoothSetup();
+
+    Serial.println("Bluetooth and NFC activated");
     BLE.poll();
   }
 }
@@ -103,6 +108,7 @@ void turnDeepEco(bool state)
 void turnLightEco(bool state)
 {
   if (state==ON){
+    Serial.println("eco light on...");
 
     // Send a notification to warn the user by GPRS on the app that :
     // - Can't lock the device the next time, if not recharged
@@ -118,9 +124,11 @@ void turnLightEco(bool state)
     //BLE_activated = false;
     BLE.end();
     // to keep only NFC
+    Serial.println("Bluetooth desactivated, 15min-> 30min");
 
   }
   if (state==OFF){
+    Serial.println("eco light off...");
 
     frequency_for_sending_data = 15;
 
@@ -128,8 +136,10 @@ void turnLightEco(bool state)
     Device.bluetooth_activated = true;
 
     //BLE_activated = true;
-    bluetoothSetup();
-    BLE.poll();
+    //bluetoothSetup();
+    //BLE.poll();
+
+    Serial.println("Bluetooth activated");
 
   }
 }
@@ -142,7 +152,7 @@ void turnLightEco(bool state)
 void turnSleepMode(bool state)
 {
   if (state==ON){
-
+    Serial.println("sleep mode on...");
     // Send a notification to warn the user by GPRS on the app that :
     //- Use the specific movement or recharge to awake it
     waiting_for_sleep_mode_time_ref = 0;
@@ -156,18 +166,21 @@ void turnSleepMode(bool state)
     digitalWrite(GPS_WKUP_PIN, LOW);
 
     //BLE_activated = false;
-    BLE.end();
+    //BLE.end();
+    Serial.println("Bluetooth, NFC, GPS, SIM and power boost desactivated");
 
   }
   if (state==OFF){
+    Serial.println("sleep mode off...");
     Device.power_mode = NORMAL_MODE;
     Device.bluetooth_activated = true;
     Device.nfc_activated = true;
     Device.gps_activated = true;
 
     //BLE_activated = true;
-    bluetoothSetup();
-    BLE.poll();
+    //bluetoothSetup();
+    Serial.println("Bluetooth activated");
+    //BLE.poll();
   }
 }
 void lauchWaitingForSleepTimer(){
@@ -186,6 +199,7 @@ uint getWaitingForSleepTimer(){
  * @param None
  * @result An int representing the remaining percentage of the battery with a 5% resolution.
  */
+
 int getBatteryLevel()
 {
   int current_battery_level = Device.battery_level;

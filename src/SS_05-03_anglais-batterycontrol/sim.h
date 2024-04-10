@@ -1,7 +1,6 @@
 #ifndef _SIM_
 #define _SIM_
 #include "definitions.h"
-#include "bluetooth.h"
 
 /*
     This file contains every functions related to the SIM card.
@@ -54,19 +53,19 @@ void SIMIsr()
 }
 
 void sendLocationBattery(){
-  if(Device.gps_desactivated){
+  if(Device.gps_activated){
     activateGPS();
   }
-  turnPowerBridges(ON);
+  turnPowerSwitches(ON);
 
   Serial.println("Location and battery sent");
   //SEND GPS DATA BATTERY/LOCATION
 
   if (!Device.alarm_triggered){
     desactivateGPS();
-    turnPowerBridge(OFF);
+    turnPowerSwitches(OFF);
   }
-
+}
 void launchRegularSent(){
   regular_sent_timer_start = millis();
 }
