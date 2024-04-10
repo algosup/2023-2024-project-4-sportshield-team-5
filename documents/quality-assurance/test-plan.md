@@ -204,7 +204,7 @@ GitHub issues is a built-in feature of GitHub, allowing us to describe precisely
 
 We define:
 
-- **Firmware bugs:**
+- **Firmware bugs:** As an unintentional behavior from the code that could pose a risk to the successful functioning of the project 
 
 ### 8.2 Test Environment
 
