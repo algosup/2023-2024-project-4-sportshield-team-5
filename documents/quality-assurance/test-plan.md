@@ -16,7 +16,8 @@
     - [3.2 Out of Scope](#32-out-of-scope)
   - [4. Roles \& Responsibilities](#4-roles--responsibilities)
   - [5. Testing Strategy](#5-testing-strategy)
-    - [5.1 Bug life cycle](#51-bug-life-cycle)
+    - [5.1 Testing tools](#51-testing-tools)
+    - [5.2 Bug life cycle](#52-bug-life-cycle)
   - [6. Entry and Exit Criteria](#6-entry-and-exit-criteria)
     - [6.1 Entry Criteria](#61-entry-criteria)
     - [6.2 Exit Criteria](#62-exit-criteria)
@@ -115,7 +116,15 @@ The following features of SportShield's software will be tested:
 
 ## 5. Testing Strategy
 
-### 5.1 Bug life cycle
+### 5.1 Testing tools
+
+To test the overall project we are using multiple tools such as:
+- Github actions
+- A live server running on ubuntu
+- 3 computer running on MacOS Sonoma 14.4.1
+- 3 computer running on Windows 11 Pro
+
+### 5.2 Bug life cycle
 
 ![bug life cycle](./images/bug-life-cycle.png)
 
