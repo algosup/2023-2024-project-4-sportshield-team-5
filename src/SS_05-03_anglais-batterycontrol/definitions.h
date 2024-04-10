@@ -25,8 +25,9 @@ struct myConfig
   bool is_charging; // is it plugged and charging
   short int charging_current; //50 or 100 in mA
   short int battery_level; // battery level in percentage (5% resolution)
-  bool is_bluetooth_activated; // obvious
-  bool is_gps_activated; // obvious
+  bool bluetooth_activated; // obvious
+  bool gps_activated; // obvious
+  bool nfc_activated;
   bool power_mode; // the different power modes are defined at the end, there are 4 :
                    // 'NORMAL' 'LIGHT Eco mode' 'deep eco mode' and 'sleep mode' Cf. below
 };
@@ -42,6 +43,8 @@ myConfig Device;
 //LOCKING
 #define UNLOCKING_DURATION 1000 //ms EML opened
 bool is_authenticate = false;
+// pin of the contact button if locked or not
+//  #define CONTACT_LOCK_PIN DX
 
 // TIMER
 #define HW_TIMER_INTERVAL_MS 1

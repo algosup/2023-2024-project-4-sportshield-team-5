@@ -84,7 +84,8 @@ void setup()
   Serial.println("timer setup done !\n");
 
   //end of the setup
-
+  Serial.begin(9600);
+  Serial.setTimeout(10); //time for reading a string input
   digitalWrite(LEDR, LOW);
   digitalWrite(LEDG, HIGH);
   catchCurrentTime();
@@ -94,8 +95,54 @@ void setup()
 //--------------------------- LOOP -----------------------------
 void loop()
 {
+  // DATA update about the device
+  /*
+  // With the final hardware : 
+  Device.is_charging = !digitalRead(CHARGING_PIN); // as 0 : not charging and 1 : charging
+  Device.is_locked = digitalRead(CONTACT_LOCK_PIN);
+  Device.battery_level = getBatteryLevel();
+  */
 
+  
+ 
+  if (Serial.available() > 0) {
+    String str = Serial.readString();
 
+    if (str=="plug"){
+      Device.is_charging = true;
+      Device.power_mode = NORMAL_MODE;
+
+    }else if(str=="unplug"){
+      Device.is_charging = false;
+      Serial.print("unplugged");
+      
+    }else if(str=="lock"){
+      Device.is_locked = true;
+      
+    }else if(str=="bluetooth unlock"){
+      if (Device.bluetooth_activated){
+        Device.is_locked = false;
+        Serial.println("unlocked");
+      }else{
+        Serial.println("bluetooth disabled");
+      }
+      
+    }else if(str=="nfc unlock"){
+      if (Device.nfc_activated){
+        Device.is_locked = false;
+        Serial.println("unlocked");
+      }else{
+        Serial.println("NFC disabled");
+      }
+    
+    // if input = "5%" or "76%", it will set the right percentage to the device data
+    }else if (str.charAt(str.length()-1)=='%'){
+      str.setCharAt((str.length()-1), '0');
+      Device.battery_level = str.toInt()/10;
+    }
+    
+
+  }
 
   if (activation_alarm)
   {

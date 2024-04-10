@@ -2,6 +2,7 @@
 #define _BLUETOOTH_
 
 #include "definitions.h"
+#include "lock.h"
 
 /*
     This file contains every functions and initializations related to the Bluetooth.
@@ -231,10 +232,7 @@ void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic)
     if (is_authenticate)
     {
         // activate electromagnet
-        Serial.println("Unlock");
-        digitalWrite(EML_PIN, HIGH);
-        delay(2000);
-        digitalWrite(EML_PIN, LOW);
+        unlock();
     }
 }
 
