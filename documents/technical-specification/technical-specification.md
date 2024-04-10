@@ -45,8 +45,8 @@
       - [Appearence](#appearence)
       - [Variables](#variables)
       - [Comments](#comments)
-    - [Example of a good code\*](#example-of-a-good-code)
-- [5. Software's technical specifications](#5-softwares-technical-specifications)
+    - [Expected piece of code](#expected-piece-of-code)
+- [5. Software's technical implementation](#5-softwares-technical-implementation)
   - [Overview](#overview)
   - [Headers and defintition.h](#headers-and-defintitionh)
   - [The main file (.ino)](#the-main-file-ino)
@@ -207,7 +207,7 @@ The **main branch** hosts only files which are finished and reviewed by the Qual
 
 The **document branch** hosts the document being redacted and doesn't follow any particular rule.
 
-The **dev branch** hosts the software we are coding, but requires the code inside to don't have any compilation errors, and, if possible, to work as expected at th current step.
+The **dev branch** hosts the software we are coding, but requires the code inside to don't have any compilation errors, and, if possible, to work as expected at the current step.
 This branch requires a 'pull request[^10]' reviewed by at least 1 other member of the team before a merge.
 
 ### Files and folders architecture
@@ -259,40 +259,40 @@ Root/
 
 #### Appearence
 
-The variables' names are in ```snake_case```.
-The functions' names are in ```camelCase```.
-The definitions' names are in ```COBOL_CASE```.
+The variable names are in ```snake_case```.
+The function names are in ```camelCase```.
+The definition names are in ```COBOL_CASE```.
 
-The indentation of 2 spaces is added after each carriage return in after a curly bracket.
+The indentation of 2 spaces is added after each carriage return after a curly bracket.
 
 When a condition or a loop occurs, the curly brackets are opened at the end of the first line of the statement, and closed in a single-last line without the indentation.
 
-However some simple statements can be written in one line, as long as it doesn't take more than 50 characters approximately.
+However, some simple statements can be written in one line, as long as it doesn't take more than 50 characters
 
 #### Variables
 
 **No value can be hard-coded !**
 
-If a number or a constant is needed in the code, it have to be defined in the 'definitions.h' header and not directly inserted in the algorithm itself, even if "it shouldn't change".
+If a number or a constant is needed in the code, it has to be defined in the 'definitions.h' header and not directly inserted in the algorithm itself, even if "it shouldn't change".
 
 In the same idea, variables' declaration and first assignment should be separated : the declaration in 'definition.h. An example of this appears in the example below.
 
 #### Comments
 
-Each function need a comment above explaining its behavior and how parameters are used.  
-Any weird or tricky algorithm has to be commented.  
-Any variable declaration need a comment on the same line to quickly explain what it is. If it is too obvious, just write ```// explicit```.
+Each function needs a comment above explaining its behaviour and needed parameters along with their type.
+Any weird or tricky algorithm has to be commented.
+Any variable declaration needs a comment on the same line to quickly explain what it is. If it is too obvious, just write \``// explicit```.`
 
-### Example of a good code*
+### Expected piece of code
 
 ```cpp
 #define BUZZER D2
 #define LONG_ALARM_REPETITIONS 5
 #define LONG_ALARM_PERIOD 350
 
-int current_period; // duration of silence at the end of the alarm loop
+int current_period;
 
-// Generic arduino function containing the code executed after a RESET
+
 void setup(){
   pinMode(BUZZER, OUTPUT);
   current_period = LONG_ALARM_PERIOD;
@@ -305,36 +305,35 @@ void loop(){
   }
 }
 
-// Make the buzzer ringing 5 times : (period)ms ON / (period)ms OFF
+
 void longAlarm(int period){
   for (int i=0; i<LONG_ALARM_REPETITIONS; i++){
     digitalWrite(BUZZER, HIGH);
     delay(period);
     digitalWrite(BUZZER, LOW);
-    if (i>0){delay(period);} //skip the last silence
+    if (i>0){delay(period);} 
   }
 }
 ```
-**Of course this code doesn't make sense, it is just an example.*
 
-# 5. Software's technical specifications
+# 5. Software's technical implementation
 
 ## Overview
 
 Each of the following parts will explain the technical implementation, following the structure of the 'Functional Requirements' part of the [Functional specification](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/functional-specification/functional-specification.md) document.  
 
-We don't have access to the application, the server with which the SIM[^11] card communicates or the final hardware. And we are not supposed to use our smartphones to test the NFC[^7] or the bluetooth.  
-That's why the company has explicitly suggested that we only **simulate** the complex interactions with the hardware, such as Bluetooth communication or sending data over the 2G network[^12] (soon to be obsolete), by using forced values such as "bluetooth_unlock = 1 or 0 : the user has pressed the button on the application or not".   
-The company's request is really to improve the software by finding an effective algorithm, and not to write assembly to make components working. (It is the reason why we only had 4.5 weeks to work on, while it is usually 6 or 7.)
-We will therefore focus on technical detail only on the points where we can take action. These are:  
-- battery management and energy consumption (sleep mode, power cut, ...)
-- multi tasks to make the buzzer ringing and to send the notification at the same time, while also being able to stop the alarm at any moment.
-- take the NFC[^7] into account
-- movement detection (improve the way to detect a theft)
+We don't have access to the server with which SportShield communicates, thanks to the SIM[^11] card. Additionally, we don't have access to the final hardware as the product is still a prototype.  
+They allowed us to simulate some complex protocol requiring a complete app or the final hardware, as we couldn't have the right functions.
+However, the comany suggested we could add any function we want assuming it will be implemented on the server side or the app.
+We will therefore focus on the technical details of the full software implementations among the KPIs given by the client. These are:  
+- Battery management and energy consumption (sleep mode, power cut, ...)
+- Multi-tasking to make the buzzer ring and send notifications at the same time, while also being able to stop the alarm at any moment.
+- Add NFC[^7] management to unlock SportShield, but without having it working.
+- Improve movement detection to enhance the distinction between an accidental bump in the lock from a real theft attempt.
 
-## Headers and defintition.h
+## Headers and definition.h
 
-In this file there are :
+This file contains:
 - Inclusion of all the public libraries used in the firmware[^3].
 - Definition of all the constant values, used in the different headers
 - Definition of all the structures, classes, global functions, and so on
@@ -345,12 +344,11 @@ Each header file will include the necessary public libraries a second time if it
 
 ## The main file (.ino)
 
-In this file there are :
-- **inclusion** of the different **headers** (and not the libraries -> 'definition.h')
-- the '**void setup()**' where are executed only functions.  
-  this function contains the code which will be executed once at the beginning after a reload of the program on the board (after a power-up or reset)
-- the '**void loop()**'
-  this function has the role of a 'while(true)' loop : it is the main loop
+This file includes:
+
+- Calls to the different **headers** (*.h/*.hpp files)
+- The `void setup()` function: *It contains the code executed once to setup the environment after a startup or a reset of the board.*
+- The `void loop()` function: *It contains the code which will be ran during the whole execution of the program. It acts as a while loop.*
 
 Base of the .ino file :  
   ```cpp
@@ -374,66 +372,70 @@ void loop(){
 }
   ```
 
+IsrGPS
+
 ## Algorithm
 
-We don't need to forecast what is in the 'void setup()' function. This is just all the initializations of the different components and libraries, and the setting of what is the initial state of the device.
+The `void setup()` function is not part of the algorithm itself. Its only purpose is to import the required libraries and headers and describe the program's initial state.
 
-Now, the algorithm itself, the main loop of the firmware[^3], is available in this diagram (please forgive the size !) :
-
+This leaves the core of the algorithm, the `void loop()` function:  
 ![algorithm diagram](data/algorithm-main-loop-diagram.png)
 
 It allows :
-- the battery consumption's management
-- execute parallel tasks when a theft is detected
-- to take advantage of the NFC[^7]
+- To manage the battery consumption
+- To execute parallel tasks when a theft is detected
+- To take advantage of the NFC[^7]
 
 ## Power Management
 
-#### specifications
+#### Specifications
 
 The device will have different behaviors of power consumption according to 3 parameters : 
 - the lock state of the SportShield
 - the level of battery (or charging the battery)
 - the period of inactivity.
 
-If the battery level is ABOVE 15%, NFC[^7] only is enabled because NFC[^7] consume like 5mA while Bluetooth Low Energy (BLE) consumes 15mA (3 times more).
+If the battery level is ABOVE 15%, NFC only as it is less energy-consuming (5mA) compared to Bluetooth Low Energy (BLE) which consumes 15mA.
 
-By default the buzzer, the electromagnetic lock and SIM[^11] module circuit are disabled by turning D9 and D4 'LOW' (Cf. [power management diagram](#electronic-circuit-diagrams)).  
-If only one of these components are required, we turn on both D4 and D9, and a variable have to keep track of the number of devices currently used. If there is any, D9 and D4 are turned OFF to save as much energy as possible.
+By default the buzzer, the electromagnetic lock and SIM[^11] module circuit are disabled by turning D9 and D4 'LOW' (Cf. [power management diagram](#electronic-circuit-diagrams)).
+If only one of these components is required, we turn on both pins D4 and D9. Concurrently, a variable has to keep track of the number of devices currently in use. If none is in use, D9 and D4 are turned OFF to save as much energy as possible.
 
-Each time we need to get the GPS position we first have to enable the wake up pin of the GPS module : D8, and then turned it off again.
+Each time we need to get the GPS position we first have to enable the wake-up pin of the GPS module: D8, and then turn it off again.
 
-#### implementation
+#### Implementation
 
-Also, the percentage of the battery and the management of its charge will require a specific public library called...  
+A key feature of battery management is the ability to know the current capacity as a percentage. There are 2 methods to achieve this objective:
 
-A key feature of the battery management ids the ability to know the current capacity (%). There are 2 methods for that :
-- The ideal one but over-consuming electricity is to measure constantly the voltage and the intensity which goes out from the battery to know how much energy had been used or had been loaded in real-time. However it is almost impossible to implement and this solution using though a 'colorimeter' is reserved for very particular usages.
-- The very spread solution is to just measure the current voltage and to compare the value to a set of previous measures took to define the correlation between the current capacity and the current voltage.
+- The ideal but most energy-consuming option is to measure constantly tension and intensity in the battery to know the battery level in real-time. However, in our case, this option is not convenient as it requires a coulombmeter.
+
+- The very spread solution is to just measure the present voltage and to compare the obtained value to a set of previously measured values. We can then correlate values between the maximum and the present voltage to obtain the battery level.
 
 And the library we use need some based values to be accurate due to the specificities of each battery.
 
 Indeed, the battery voltage follows a generic curve which looks like that : 
 ![battery discharge](data/battery-discharge.png)
-As we can see, the maximum voltage (charging voltage) is 4.2V and the voltage can drop down until 2.75V MAXIMUM before its cut-off according to the documentation provided.   
+As we can see, the maximum voltage (charging voltage) is 4.2V and the voltage can drop down until 2.75V MINIMUM before its cut-off according to the documentation provided.
 Also, the SportShield is a low-consumption device, and will follow a 0.015C discharge for basic sleep mode (The 'C' unit means that the discharge flux it about C times the full capacity of the battery per hour. In our case 0.1C corresponds to 1100mAh*0.015C = 16.5 mA[^16] of discharge).
 
-Furthermore, as the temperature would be quite low, around 41°F to 23°F (as it is mainly for skis and snowboards), the discharge should avoid to exceed 80% of the total capacity. We finally get a minimum voltage (if the battery is in a cold environment) of 3.4V corresponding to a 0%. Also, we will used some standard curves of discharge to evaluate the current battery capacity based on the voltage we can get from the board itself (included function).
+Furthermore, as the temperature would be quite low, from 41°F to 23°F on average (as this product targets winter sports equipment), the discharge should avoid falling below 20% of the battery level. This limits the risk of the user device reaching the minimum voltage we can get in the battery: 3.4V, corresponding to 0% of charge, meaning the battery cannot be charged again anymore.  Complementarily, we will use some standard curves of discharge to evaluate the current battery capacity based on the voltage we can get from the board itself.
 
 Knowing that, all these values and decisions are really subjective and need to be defined precisely after a bunch of tests with the final hardware, in the real conditions. That's why we'll put these values without considering more than the assumptions above, cause with our current hardware, any measurement could be accurate.
 
 ## Detection of a theft
 
-When we received the project, the current idea was to split a detected movement into 3 categories : noise, small and big movements.
+When we received the project, the current idea was to split a detected movement into 3 categories: noise, small and big movements.
 
 However, they admitted that a smooth and slow theft could stay undetected.
-That's why we decided to just differentiate noise and movement, and to look at the duration of the movement more than the intensity. This way, a short shock, which can happens won't be detected as a theft while any movement lasting more than 1 second is detected as a theft, and in any case, any movement trigger a small alarm for 1 second, as a dissuasion. However the GPRS[^17] signal to get a notification on the app will be received only when an real theft is detected.
+
+This is the reason why we decided to just differentiate noise and movement and to focus on the duration of the movement rather than its intensity. This way, a short shock, which can happen won't be detected as a theft while any movement lasting more than 1 second is detected as one. In any case, any movement triggers a small alarm for 1 second, as a dissuasion to warn the person responsible for this movement.
+ 
+However, the GPRS signal to get a notification on the app will be received only when a real theft is detected, after one second of movement.
 
 ## Detection of the wake-up movement
 
 A specific movement of a 180° back-and-forth rotation on the x axis is required to wake up the device.
 
-Here are the different axis of the device : 
+Here are the different axis of the device :  
 <img src="data/3dModel.png" height="300px"> 
 
 How does work the specific movement detection, to wake up the device  ?
@@ -458,11 +460,11 @@ We won't look at the sinusoidal aspect of the movement and but only look only at
 
 ## Alarm
 
-As the buzzer is controlled by a MOSFET[^6], we decided to use PWM (Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set), to make the piezoelectric[^18] buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET[^6] has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
+As the buzzer is controlled by a MOSFET[^6], we decided to use PWM[^19], to make the piezoelectric[^18] buzzer ring lower. A simple R-C circuit would have been better to smooth the output voltage to the buzzer, but as the MOSFET[^6] has a capacitance, even if the song is not the same we succeeded to get a lower noise from the buzzer.
 
 ## NFC
 
-As the Seeed boards company released their Xiao-NRF52840 quite recently, we found on the official forum of the company website for documentation, that they said they still didn't ended to develop the NFC[^7] library of their board. The problem with this unfinished library, is that, as they have their own version of RFID microchip and circuit, embedded in the board, the only solution we found to try having it working, is by coding our own library directly in assembly. That's why we probably won't develop the concrete NFC[^7] functions more than simulating input and output through the terminal.
+As the Seeed boards' company released their Xiao-NRF52840 quite recently, they still didn't end up developing the NFC library of their board, as said on their forum. This raises a major issue. As they have their proprietary version of the RFID microchip and circuit, the only workaround would be coding our library directly in assembly. That's why we probably won't develop the concrete NFC functions more than simulating input and output through the terminal.
 
 
 # 6. Suggestions (out of scope)
@@ -513,3 +515,5 @@ As the Seeed boards company released their Xiao-NRF52840 quite recently, we foun
 [^17]: GPRS: General packet radio service
 
 [^18]: Piezoelectric: The ability of certain materials to generate an electric charge in response to applied mechanical stress
+
+[^19]: PWM: Pulse Wave Modulation = a high frequency square wave, where the proportion of ON/OFF time in average can be set.
