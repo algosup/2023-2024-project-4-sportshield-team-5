@@ -2,11 +2,11 @@
 
 ## Overview
 
-This document outlines the different critical points of the software which will be tested. Those tests will ensure the device can be used in production by anyone without significant bug.
+This document outlines the different critical points of the software which will be tested. Those tests will ensure the device can be used in production by anyone without significant bugs.
 
 ## Criticity
 
-The test cases are defined by a criticity level, indicating the importance of the feature in the system and the inner workings of the device.
+The test cases are defined by a criticality level, indicating the importance of the feature in the system and the inner workings of the device.
 
 ### 1. Code compilation
 
@@ -28,13 +28,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 2. Coding conventions
 
-| ID               | 2                                                                               |
-| ---------------- | ------------------------------------------------------------------------------- |
-| Name             | Coding conventions                                                              |
-| Test Description | The source code follows the given conventions and guidelines                    |
-| Test Type        | Automated                                                                       |
-| Test Criticity   | 🟠                                                                               |
-| Expected Result  | The program should not return any warn or error into the console on every file. |
+| ID               | 2                                                                                |
+| ---------------- | -------------------------------------------------------------------------------- |
+| Name             | Coding conventions                                                               |
+| Test Description | The source code follows the given conventions and guidelines                     |
+| Test Type        | Automated                                                                        |
+| Test Criticity   | 🟠                                                                                |
+| Expected Result  | The program should not return any warning or error to the console on every file. |
 
 **External Tools:**
 
@@ -88,7 +88,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 **Steps:**
 
-1. Move the SportShield development board of 5 centimeters in less than one second.
+1. Move the SportShield development board by 5 centimetres in less than one second.
 2. Listen for any sound emitted by the device's buzzer.
 
 ### 5. Thief attempt/Major movement detection
@@ -112,7 +112,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 **Steps:**
 
-1. Move the SportShield development board of 50 centimeters in less than one second.
+1. Move the SportShield development board of 50 centimetres in less than one second.
 2. Listen for any sound emitted by the device's buzzer.
 
 ### 6. Thief attempt/Long movement detection
@@ -141,20 +141,20 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 7. Sound level differences
 
-| ID               | 7                                                                                                       |
-| ---------------- | ------------------------------------------------------------------------------------------------------- |
-| Name             | Sound level differences                                                                                 |
-| Test Description | The sound of a 5-tone sound is twice more loud than the 3-tone one                                      |
-| Test Type        | Manual                                                                                                  |
-| Test Criticity   | 🔴                                                                                                       |
-| Expected Result  | The sound level of the second phase should be at least greater of 10dB compared to the first phase one. |
+| ID               | 7                                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------- |
+| Name             | Sound level differences                                                                               |
+| Test Description | The sound of a 5-tone sound is twice as loud as the 3-tone one                                        |
+| Test Type        | Manual                                                                                                |
+| Test Criticity   | 🔴                                                                                                     |
+| Expected Result  | The sound level of the second phase should be at least greater than 10dB compared to the first phase. |
 
 **Tests:**
 
 - 1 - Coding conventions
 - 3 - Small move detection
 - 4 - Thief attempt/Major movement detection
-- 5 - Thief attempt/Long movement detection
+- 5 - Thief attempts/Long movement detection
 
 **Hardware:**
 
@@ -166,12 +166,12 @@ The test cases are defined by a criticity level, indicating the importance of th
 **Steps:**
 
 1. Ensure the anti-theft device is not in deep sleep mode and enable Phyphox on the "Audio Amplitude" tab.
-2. Move the SportShield development board of 5 centimeters in less than one second.
+2. Move the SportShield development board of 5 centimetres in less than one second.
 3. Note down the maximum value displayed on the chart.
-4. Reset the activity chart in Phyphox application using the "Clear History" button.
+4. Reset the activity chart in the Phyphox application using the "Clear History" button.
 5. Move the SportShield development board for 5 seconds.
 6. Note down the maximum value displayed on the chart.
-7. Comapre if the second sound level is equal or greater than the first sound level + 10dB.
+7. Compare if the second sound level is equal to or greater than the first sound level + 10dB.
 
 ### 8. Bluetooth connection
 
@@ -196,7 +196,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 **Steps:**
 
-1. Go on LightBlue app, and look for a device named "SportShield 5".
+1. Go on the LightBlue app, and look for a device named "SportShield 5".
 
 ### 9. 2G connectivity
 
@@ -242,45 +242,45 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Iphone 11 NFC module
+- iPhone 11 NFC module
 
 **Steps:**
 
-1. Put the anti-thief device in lock state if not already done.
-2. Bring the Iphone near the SportShield development board NFC reader.
+1. Put the anti-thief device in a lock state if not already done.
+2. Bring the iPhone near the SportShield development board NFC reader.
 
 ### 11. Device charging
 
 | ID               | 11                                                                                  |
 | ---------------- | ----------------------------------------------------------------------------------- |
 | Name             | Device charging                                                                     |
-| Test Description | SportShield can be charged using a powersource.                                     |
+| Test Description | SportShield can be charged using a power source.                                    |
 | Test Type        | Manual                                                                              |
 | Test Criticity   | 🟣                                                                                   |
-| Expected Result  | The device should have charged and consequently gained some battery level percents. |
+| Expected Result  | The device should have charged and consequently gained some battery level per cent. |
 
 **Hardware:**
 
 - SportShield development board
 **External Tools:**
 
-- Github Actions server USB port- USB-A to USB-C cable
+- GitHub Actions server USB port- USB-A to USB-C cable
 
 **Steps:**
 
-1. Plug the USB-C part of the cable in the charging port of the board.
-2. Plug the USB-A part of the cable in the USB port of the computer.
-3. Wait for 30 minutes to receive two battery level payload and verify the linked level increased over time.
+1. Plug the USB-C part of the cable into the charging port of the board.
+2. Plug the USB-A part of the cable into the USB port of the computer.
+3. Wait for 30 minutes to receive two battery-level payloads and verify the linked level increased over time.
 
 ### 12. Device locking
 
-| ID               | 12                                                 |
-| ---------------- | -------------------------------------------------- |
-| Name             | Device locking                                     |
-| Test Description | The anti-thief device can be locked.               |
-| Test Type        | Manual                                             |
-| Test Criticity   | 🟣                                                  |
-| Expected Result  | The ammmeter should display a value equal to 0 mA. |
+| ID               | 12                                                |
+| ---------------- | ------------------------------------------------- |
+| Name             | Device locking                                    |
+| Test Description | The anti-thief device can be locked.              |
+| Test Type        | Manual                                            |
+| Test Criticity   | 🟣                                                 |
+| Expected Result  | The ammeter should display a value equal to 0 mA. |
 
 **Tests:**
 
@@ -299,13 +299,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 13. Device unlocking
 
-| ID               | 13                                                  |
-| ---------------- | --------------------------------------------------- |
-| Name             | Device unlocking                                    |
-| Test Description | The anti-thief device can be unlocked.              |
-| Test Type        | Manual                                              |
-| Test Criticity   | 🟣                                                   |
-| Expected Result  | The ammmeter should display a value close to 160mA. |
+| ID               | 13                                                 |
+| ---------------- | -------------------------------------------------- |
+| Name             | Device unlocking                                   |
+| Test Description | The anti-thief device can be unlocked.             |
+| Test Type        | Manual                                             |
+| Test Criticity   | 🟣                                                  |
+| Expected Result  | The ammeter should display a value close to 160mA. |
 
 **Tests:**
 
@@ -322,18 +322,18 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Verify the inactivity of the electromagnet using the ammeter.
 2. Leave the ammeter on the pins on which you were doing the previous step's measurements.
-3. Go on LightBlue app, and put the unlock field value to 0.
+3. Go to the LightBlue app, and put the unlock field value to 0.
 4. In the second following the submission of the value, check the value displayed on the ammeter screen.
 
 ### 14. Eco-mode - The lock cannot be locked back
 
-| ID               | 14                                                                                                             |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| Name             | Eco-mode - The lock cannot be locked back                                                                      |
-| Test Description | When the anti-thief device is in eco-mode, it cannot be locked if it wasn't.                                   |
-| Test Type        | Manual                                                                                                         |
-| Test Criticity   | 🟠                                                                                                              |
-| Expected Result  | The value you can then read in the field "Unlock" stays 0x1, indicating the lock will stay in an unlock state. |
+| ID               | 14                                                                                                   |
+| ---------------- | ---------------------------------------------------------------------------------------------------- |
+| Name             | Eco-mode - The lock cannot be locked back                                                            |
+| Test Description | When the anti-thief device is in eco-mode, it cannot be locked if it isn't.                          |
+| Test Type        | Manual                                                                                               |
+| Test Criticity   | 🟠                                                                                                    |
+| Expected Result  | The value you can then read in the field "Unlock" stays 0x1, indicating the lock will stay unlocked. |
 
 **Tests:**
 
@@ -350,7 +350,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Check if the eco-mode is enabled by checking if a "SportShield 5" Bluetooth device is available.
 2. If you see one, wait until the battery level is lower than or equal to 15%
-3. If you don't see one, unlock the device by submitting the value 0x1 the "Unlock" Bluetooth field.
+3. If you don't see one, unlock the device by submitting the value 0x1 in the "Unlock" Bluetooth field.
 
 ### 15. Eco-mode - The lock can be unlocked via NFC
 
@@ -372,23 +372,23 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Iphone 11 NFC module
+- iPhone 11 NFC module
 
 **Steps:**
 
 1. Check if the eco-mode is enabled by checking if a "SportShield 5" Bluetooth device is available.
 2. If you see one, wait until the battery level is lower than or equal to 15%
-3. If you don't see one, bring the Iphone close to the NFC reader of the SportShield development board.
+3. If you don't see one, bring the iPhone close to the NFC reader of the SportShield development board.
 
 ### 16. Sleep mode - The lock cannot be locked back
 
-| ID               | 16                                                                                                             |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| Name             | Sleep mode - The lock cannot be locked back                                                                    |
-| Test Description | When the anti-thief device is in sleep mode, it cannot be locked if it wasn't.                                 |
-| Test Type        | Manual                                                                                                         |
-| Test Criticity   | 🟠                                                                                                              |
-| Expected Result  | The value you can then read in the field "Unlock" stays 0x1, indicating the lock will stay in an unlock state. |
+| ID               | 16                                                                                                   |
+| ---------------- | ---------------------------------------------------------------------------------------------------- |
+| Name             | Sleep mode - The lock cannot be locked back                                                          |
+| Test Description | When the anti-thief device is in sleep mode, it cannot be locked if it isn't.                        |
+| Test Type        | Manual                                                                                               |
+| Test Criticity   | 🟠                                                                                                    |
+| Expected Result  | The value you can then read in the field "Unlock" stays 0x1, indicating the lock will stay unlocked. |
 
 **Tests:**
 
@@ -399,14 +399,14 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- LightBlue app- Iphone 11 NFC module
+- LightBlue app- iPhone 11 NFC module
 
 **Steps:**
 
 1. Check if the sleep mode is enabled by checking if a "SportShield 5" Bluetooth device is available and by bringing the phone close to the NFC reader.
 2. If you see a device named "SportShield 5", or the lock is unlocked via NFC, go on LightBlue and submit the value 0x1 in the "Sleep Mode 5" field.
 3. To ensure deep sleep mode is not switched on, move the device in different directions and ensure a sound is emitted.
-4. If the two previous steps were validated, unlock the device by submitting the value 0x1 the "Unlock" Bluetooth field.
+4. If the two previous steps were validated, unlock the device by submitting the value 0x1 in the "Unlock" Bluetooth field.
 
 ### 17. Sleep mode - The lock cannot be unlocked
 
@@ -427,25 +427,25 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Iphone 11 NFC module- LightBlue app
+- iPhone 11 NFC module- LightBlue app
 
 **Steps:**
 
 1. Check if the sleep mode is enabled by checking if a "SportShield 5" Bluetooth device is available and by bringing the phone close to the NFC reader.
 2. If you see a device named "SportShield 5", or the lock is unlocked via NFC, go on LightBlue and submit the value 0x1 in the "Sleep Mode 5" field.
 3. To ensure deep sleep mode is not switched on, move the device in different directions and ensure a sound is emitted.
-4. Try to access via Bluetooth to the device. You shouldn't be able to access it and find it on LightBlue app.
+4. Try to access via Bluetooth to the device. You shouldn't be able to access it and find it on the LightBlue app.
 5. Bring the phone close to the board NFC reader.
 
 ### 18. Deep sleep mode - The lock must be locked
 
-| ID               | 18                                                                                                |
-| ---------------- | ------------------------------------------------------------------------------------------------- |
-| Name             | Deep sleep mode - The lock must be locked                                                         |
-| Test Description | Deep sleep mode can only be enabled if the anti-thief device is in a lock state.                  |
-| Test Type        | Manual                                                                                            |
-| Test Criticity   | 🔴                                                                                                 |
-| Expected Result  | The value should instantly reswitch to 0x0. When moving the device, it should not emit any sound. |
+| ID               | 18                                                                                              |
+| ---------------- | ----------------------------------------------------------------------------------------------- |
+| Name             | Deep sleep mode - The lock must be locked                                                       |
+| Test Description | Deep sleep mode can only be enabled if the anti-thief device is in a lock state.                |
+| Test Type        | Manual                                                                                          |
+| Test Criticity   | 🔴                                                                                               |
+| Expected Result  | The value should instantly switch to 0x0. When moving the device, it should not emit any sound. |
 
 **Tests:**
 
@@ -462,7 +462,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Check if a "SportShield 5" Bluetooth device is available
 2. Submit the value 0x1 in the "Unlock field"
-3. Try to submit the value 0x1 in the "Deep Sleep Mode" field. The value should instantly reswitch to 0x0
+3. Try to submit the value 0x1 in the "Deep Sleep Mode" field. The value should instantly switch to 0x0
 4. Submit the value 0x0 in the "Unlock field"
 5. Try to submit the value 0x1 in the "Deep Sleep Mode" field.
 
@@ -485,12 +485,12 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Iphone 11 NFC module- LightBlue app
+- iPhone 11 NFC module- LightBlue app
 
 **Steps:**
 
 1. Check if the deep sleep mode is enabled by moving the device and ensuring no sound is emitted from it.
-2. Check on LightBlue app that no Bluetooth device named "SportShield 5" is available.
+2. Check on the LightBlue app that no Bluetooth device named "SportShield 5" is available.
 3. Bring the phone close to the board NFC reader.
 
 ### 20. Single device pairing over BLE
@@ -517,18 +517,18 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 **Steps:**
 
-1. Check if a Bluetooth device named "SportShield 5" is available and connect to it with the first phone using LightBlue app.
-2. Take the second phone and try connect to the device named "SportShield 5".
+1. Check if a Bluetooth device named "SportShield 5" is available and connect to it with the first phone using the LightBlue app.
+2. Take the second phone and try to connect to the device named "SportShield 5".
 
 ### 21. Charging - Bluetooth connectivity disabled
 
-| ID               | 21                                                                                                    |
-| ---------------- | ----------------------------------------------------------------------------------------------------- |
-| Name             | Charging - Bluetooth connectivity disabled                                                            |
-| Test Description | When the anti-thief device is charging, the possibility to connect to it over BLE should be disabled. |
-| Test Type        | Manual                                                                                                |
-| Test Criticity   | 🟢                                                                                                     |
-| Expected Result  | When charging, the device "SportShield 5" should have disappeared.                                    |
+| ID               | 21                                                                                                       |
+| ---------------- | -------------------------------------------------------------------------------------------------------- |
+| Name             | Charging - Bluetooth connectivity disabled                                                               |
+| Test Description | When the anti-thief device is charging, the possibility of connecting to it over BLE should be disabled. |
+| Test Type        | Manual                                                                                                   |
+| Test Criticity   | 🟢                                                                                                        |
+| Expected Result  | When charging, the device "SportShield 5" should have disappeared.                                       |
 
 **Tests:**
 
@@ -545,8 +545,8 @@ The test cases are defined by a criticity level, indicating the importance of th
 **Steps:**
 
 1. Check if a Bluetooth device named "SportShield 5" is available.
-2. Plug the development board to a power source.
-3. Verify on LightBlue that none of the available device is named "SportShield 5".
+2. Plug the development board into a power source.
+3. Verify on LightBlue that none of the available devices is named "SportShield 5".
 
 ### 22. Deep sleep mode - Automatic switch-on
 
@@ -556,7 +556,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When the battery level reaches 5% or less, the anti-thief device should automatically switch to deep sleep mode. |
 | Test Type        | Manual                                                                                                           |
 | Test Criticity   | 🟣                                                                                                                |
-| Expected Result  | An alarm should not be triggered when the device is moved and battery level is lower than or equal to 5%.        |
+| Expected Result  | An alarm should not be triggered when the device is moved and the battery level is lower than or equal to 5%.    |
 
 **Tests:**
 
@@ -622,7 +622,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 **Steps:**
 
 1. Check if deep sleep mode is enabled by ensuring no alarm is triggered when the device is moved.
-2. Go on LightBlue app, and look for a device named "SportShield 5".
+2. Go on the LightBlue app, and look for a device named "SportShield 5".
 
 ### 25. Sleep mode manual activation (BLE)
 
@@ -644,7 +644,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- LightBlue app- Iphone 11 NFC module
+- LightBlue app- iPhone 11 NFC module
 
 **Steps:**
 
@@ -672,12 +672,12 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- LightBlue app- Iphone 11 NFC module
+- LightBlue app- iPhone 11 NFC module
 
 **Steps:**
 
 1. Check if sleep mode is enabled by ensuring the device can be unlocked using NFC.
-2. Go on LightBlue app, and look for a device named "SportShield 5".
+2. Go on the LightBlue app, and look for a device named "SportShield 5".
 
 ### 27. Sleep mode - Disabling with specific movement
 
@@ -698,14 +698,14 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- LightBlue app- Iphone 11 NFC module
+- LightBlue app- iPhone 11 NFC module
 
 **Steps:**
 
 1. Check if sleep mode is enabled by ensuring the device can be unlocked using NFC.
-2. Go on LightBlue app, and ensure no device is named "SportShield 5".
+2. Go on the LightBlue app, and ensure no device is named "SportShield 5".
 3. Move the lock in the way shown in the attachments
-4. Go on LightBlue app to look for a device named "SportShield 5".
+4. Go on the LightBlue app to look for a device named "SportShield 5".
 
 ### 28. Eco-mode - Automatic switch-on
 
@@ -754,19 +754,19 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- LightBlue app- Iphone 11 NFC module
+- LightBlue app- iPhone 11 NFC module
 
 **Steps:**
 
 1. Check if eco-mode is enabled by ensuring the device can be unlocked using NFC.
-2. Go on LightBlue app, and look for a device named "SportShield 5".
+2. Go on the LightBlue app, and look for a device named "SportShield 5".
 
 ### 30. Anti-thief mode - Position and battery updates
 
 | ID               | 30                                                                                                                        |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Name             | Anti-thief mode - Position and battery updates                                                                            |
-| Test Description | In the regular mode, the anti-thief device should send its position and battery level every 15 minutes.                   |
+| Test Description | In regular mode, the anti-thief device should send its position and battery level every 15 minutes.                       |
 | Test Type        | Manual                                                                                                                    |
 | Test Criticity   | 🟣                                                                                                                         |
 | Expected Result  | You should have received two payloads with the position and battery level of the device which are visible in the console. |
@@ -787,9 +787,9 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Ensure the anti-theft device is not in a particular battery-saving mode.
 2. Wait 15 minutes to receive the first position and battery level payload.
-3. Verify in the logs and in the console of the web-server that you received the payload.
+3. Verify in the logs and in the console of the web server that you received the payload.
 4. Wait 15 additional minutes to receive the first position and battery level payload.
-5. Verify in the logs and in the console of the web-server that you received the second payload.
+5. Verify in the logs and in the console of the web server that you received the second payload.
 
 ### 31. Theft tentative notification
 
@@ -817,7 +817,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Ensure the anti-theft device is not in a particular battery-saving mode.
 2. Move the device during 30 seconds.
-3. Verify in the logs and in the console of the web-server that you received a notification payload.
+3. Verify in the logs and in the console of the web server that you received a notification payload.
 
 ### 32. Eco-mode - Position and battery updates
 
@@ -845,9 +845,9 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Ensure the anti-theft device is in eco-mode.
 2. Wait 30 minutes to receive the first position and battery level payload.
-3. Verify in the logs and in the console of the web-server that you received the payload.
+3. Verify in the logs and in the console of the web server that you received the payload.
 4. Wait 30 additional minutes to receive the first position and battery level payload.
-5. Verify in the logs and in the console of the web-server that you received the second payload.
+5. Verify in the logs and in the console of the web server that you received the second payload.
 
 ### 33. Eco-mode - Theft tentative notification
 
@@ -875,7 +875,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Ensure the anti-theft device is in eco-mode.
 2. Move the device during 30 seconds.
-3. Verify in the logs and in the console of the web-server that you received a notification payload.
+3. Verify in the logs and in the console of the web server that you received a notification payload.
 
 ### 34. Sleep mode - Position and battery updates
 
@@ -885,7 +885,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | In sleep mode, the anti-thief device should not send its position and battery level. |
 | Test Type        | Manual                                                                               |
 | Test Criticity   | 🟡                                                                                    |
-| Expected Result  | No packet should have been logged in the console or in the testing.log file.         |
+| Expected Result  | No packet should have been logged in the console or the testing.log file.            |
 
 **Tests:**
 
@@ -897,14 +897,14 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Testing web-server- LightBlue app- Iphone 11 NFC module
+- Testing web server- LightBlue app- iPhone 11 NFC module
 
 **Steps:**
 
 1. Check if sleep mode is enabled by ensuring the device can be unlocked using NFC.
-2. Go on LightBlue app, and ensure no device is named "SportShield 5".
+2. Go on the LightBlue app, and ensure no device is named "SportShield 5".
 3. Wait 35 minutes to receive the first position and battery level payload.
-4. Verify in the logs and in the console of the web-server that you didn't received the payload.
+4. Verify in the logs and in the console of the web server that you didn't receive the payload.
 
 ### 35. Deep sleep mode - Position and battery updates
 
@@ -914,7 +914,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | In deep sleep mode, the anti-thief device should not send its position and battery level. |
 | Test Type        | Manual                                                                                    |
 | Test Criticity   | 🟡                                                                                         |
-| Expected Result  | No packet should have been logged in the console or in the testing.log file.              |
+| Expected Result  | No packet should have been logged in the console or the testing.log file.                 |
 
 **Tests:**
 
@@ -932,7 +932,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Check if deep sleep mode is enabled by moving the anti-thief device for 30 seconds.
 2. If no alarm was triggered, wait 35 minutes to receive a position and battery level payload.
-3. Verify in the logs and in the console of the web-server that you didn't received the payload.
+3. Verify in the logs and in the console of the web server that you didn't receive the payload.
 
 ### 36. Charging - Position and battery updates
 
@@ -942,7 +942,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | While charging, the anti-thief device should not send its position and battery level. |
 | Test Type        | Manual                                                                                |
 | Test Criticity   | 🟡                                                                                     |
-| Expected Result  | No packet should have been logged in the console or in the testing.log file.          |
+| Expected Result  | No packet should have been logged in the console or the testing.log file.             |
 
 **Tests:**
 
@@ -954,21 +954,21 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Testing web-server- Github Actions server USB port- USB-A to USB-C cable
+- Testing web server- Github Actions server USB port- USB-A to USB-C cable
 
 **Steps:**
 
-1. Plug the USB-C part of the cable in the charging port of the board.
-2. Plug the USB-A part of the cable in the USB port of the computer.
-3. Wait 35 minutes to receive a position and battery level payload.
-4. Verify in the logs and in the console of the web-server that you didn't received the payload.
+1. Plug the USB-C part of the cable into the charging port of the board.
+2. Plug the USB-A part of the cable into the USB port of the computer.
+3. Wait 35 minutes to receive a position and battery-level payload.
+4. Verify in the logs and in the console of the web server that you didn't receive the payload.
 
 ### 37. Wrong NFC card - Notification sent over GPRS
 
 | ID               | 37                                                                                                                                   |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | Name             | Wrong NFC card - Notification sent over GPRS                                                                                         |
-| Test Description | Ensure a notification is sent over GPRS to inform the user an attempt of unlock with another NFC device has been done on his behalf. |
+| Test Description | Ensure a notification is sent over GPRS to inform the user an attempt to unlock with another NFC device has been made on his behalf. |
 | Test Type        | Manual                                                                                                                               |
 | Test Criticity   | 🟣                                                                                                                                    |
 | Expected Result  | The console and testing.log file should contain a payload indicating an unknown NFC card has been detected.                          |
@@ -992,13 +992,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 38. Wrong NFC card - No unlock
 
-| ID               | 38                                                                                         |
-| ---------------- | ------------------------------------------------------------------------------------------ |
-| Name             | Wrong NFC card - No unlock                                                                 |
-| Test Description | When a wrong NFC card is detected, the anti-thief device should not unlock.                |
-| Test Type        | Manual                                                                                     |
-| Test Criticity   | 🟣                                                                                          |
-| Expected Result  | The electromagnet should not be enabled, neither should the anti-thief device be unlocked. |
+| ID               | 38                                                                                             |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| Name             | Wrong NFC card - No unlock                                                                     |
+| Test Description | When a wrong NFC card is detected, the anti-thief device should not unlock.                    |
+| Test Type        | Manual                                                                                         |
+| Test Criticity   | 🟣                                                                                              |
+| Expected Result  | The electromagnet should not be enabled, and neither should the anti-thief device be unlocked. |
 
 **Tests:**
 
@@ -1018,13 +1018,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 39. Charging - NFC disabled
 
-| ID               | 39                                                                                                                                        |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Charging - NFC disabled                                                                                                                   |
-| Test Description | When the device is charging, the NFC reader should be disabled.                                                                           |
-| Test Type        | Manual                                                                                                                                    |
-| Test Criticity   | 🟡                                                                                                                                         |
-| Expected Result  | You should not have received any payload in the console or in the testing.log file, and the electromagnet should not have been turned on. |
+| ID               | 39                                                                                                                                     |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Charging - NFC disabled                                                                                                                |
+| Test Description | When the device is charging, the NFC reader should be disabled.                                                                        |
+| Test Type        | Manual                                                                                                                                 |
+| Test Criticity   | 🟡                                                                                                                                      |
+| Expected Result  | You should not have received any payload in the console or the testing.log file, and the electromagnet should not have been turned on. |
 
 **Tests:**
 
@@ -1036,26 +1036,26 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Unknown NFC card- Iphone 11 NFC module- Github Actions server USB port- USB-A to USB-C cable
+- Unknown NFC card- iPhone 11 NFC module- Github Actions server USB port- USB-A to USB-C cable
 
 **Steps:**
 
-1. Plug the USB-C part of the cable in the charging port of the board.
-2. Plug the USB-A part of the cable in the USB port of the computer.
+1. Plug the USB-C part of the cable into the charging port of the board.
+2. Plug the USB-A part of the cable into the USB port of the computer.
 3. Bring an unknown NFC card near the SportShield development board NFC reader.
-4. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
+4. Verify in the logs and in the console of the web server that you didn't receive the payload and that the electromagnet was not turned on.
 5. Bring the phone close to the board NFC reader.
-6. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
+6. Verify in the logs and in the console of the web server that you didn't receive the payload and that the electromagnet was not turned on.
 
 ### 40. Deep sleep mode - NFC disabled
 
-| ID               | 40                                                                                                                                        |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Deep sleep mode - NFC disabled                                                                                                            |
-| Test Description | When the device is in deep sleep mode, the NFC reader should be disabled.                                                                 |
-| Test Type        | Manual                                                                                                                                    |
-| Test Criticity   | 🟠                                                                                                                                         |
-| Expected Result  | You should not have received any payload in the console or in the testing.log file, and the electromagnet should not have been turned on. |
+| ID               | 40                                                                                                                                     |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Deep sleep mode - NFC disabled                                                                                                         |
+| Test Description | When the device is in deep sleep mode, the NFC reader should be disabled.                                                              |
+| Test Type        | Manual                                                                                                                                 |
+| Test Criticity   | 🟠                                                                                                                                      |
+| Expected Result  | You should not have received any payload in the console or the testing.log file, and the electromagnet should not have been turned on. |
 
 **Tests:**
 
@@ -1067,25 +1067,25 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Unknown NFC card- Iphone 11 NFC module
+- Unknown NFC card- iPhone 11 NFC module
 
 **Steps:**
 
 1. Ensure that deep sleep mode is enabled by moving the device in different directions and ensuring no sound is emitted.
 2. Bring an unknown NFC card near the SportShield development board NFC reader.
-3. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
+3. Verify in the logs and in the console of the web server that you didn't receive the payload and that the electromagnet was not turned on.
 4. Bring the phone close to the board NFC reader.
-5. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
+5. Verify in the logs and in the console of the web server that you didn't receive the payload and that the electromagnet was not turned on.
 
 ### 41. Sleep mode - NFC disabled
 
-| ID               | 41                                                                                                                                        |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Sleep mode - NFC disabled                                                                                                                 |
-| Test Description | When the device is in sleep mode, the NFC reader should be disabled.                                                                      |
-| Test Type        | Manual                                                                                                                                    |
-| Test Criticity   | 🟠                                                                                                                                         |
-| Expected Result  | You should not have received any payload in the console or in the testing.log file, and the electromagnet should not have been turned on. |
+| ID               | 41                                                                                                                                     |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Sleep mode - NFC disabled                                                                                                              |
+| Test Description | When the device is in sleep mode, the NFC reader should be disabled.                                                                   |
+| Test Type        | Manual                                                                                                                                 |
+| Test Criticity   | 🟠                                                                                                                                      |
+| Expected Result  | You should not have received any payload in the console or the testing.log file, and the electromagnet should not have been turned on. |
 
 **Tests:**
 
@@ -1097,25 +1097,25 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Unknown NFC card- Iphone 11 NFC module
+- Unknown NFC card- iPhone 11 NFC module
 
 **Steps:**
 
 1. Ensure that sleep mode is enabled by moving the device in different directions and ensuring a sound is emitted.
 2. Bring an unknown NFC card near the SportShield development board NFC reader.
-3. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
+3. Verify in the logs and in the console of the web server that you didn't receive the payload and that the electromagnet was not turned on.
 4. Bring the phone close to the board NFC reader.
-5. Verify in the logs and in the console of the web-server that you didn't received the payload and that the electromagnet was not turned on.
+5. Verify in the logs and in the console of the web server that you didn't receive the payload and that the electromagnet was not turned on.
 
 ### 42. Eco-mode - NFC enabled
 
-| ID               | 42                                                                                                                                                                                          |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Eco-mode - NFC enabled                                                                                                                                                                      |
-| Test Description | When the device is in eco-mode, the NFC reader should be enabled.                                                                                                                           |
-| Test Type        | Manual                                                                                                                                                                                      |
-| Test Criticity   | 🔴                                                                                                                                                                                           |
-| Expected Result  | You should not have received two payload (one for the unlock and one for the wrong NFC card) in the console and in the testing.log file, the electromagnet should have been turned on once. |
+| ID               | 42                                                                                                                                                                                           |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Eco-mode - NFC enabled                                                                                                                                                                       |
+| Test Description | When the device is in eco-mode, the NFC reader should be enabled.                                                                                                                            |
+| Test Type        | Manual                                                                                                                                                                                       |
+| Test Criticity   | 🔴                                                                                                                                                                                            |
+| Expected Result  | You should not have received two payloads (one for the unlock and one for the wrong NFC card) in the console and in the testing.log file, the electromagnet should have been turned on once. |
 
 **Tests:**
 
@@ -1127,15 +1127,15 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Unknown NFC card- Iphone 11 NFC module- LightBlue app
+- Unknown NFC card- iPhone 11 NFC module- LightBlue app
 
 **Steps:**
 
-1. Ensure that eco-mode is enabled by going on LightBlue app and looking for a device named "SportShield 5".
+1. Ensure that eco-mode is enabled by going on the LightBlue app and looking for a device named "SportShield 5".
 2. Bring an unknown NFC card near the SportShield development board NFC reader.
-3. Verify in the logs and in the console of the web-server that you received the payload and that the electromagnet was not turned on.
+3. Verify in the logs and in the console of the web server that you received the payload and that the electromagnet was not turned on.
 4. Bring the phone close to the board NFC reader.
-5. Verify in the logs and in the console of the web-server that you received the payload and that the electromagnet was turned on.
+5. Verify in the logs and in the console of the web server that you received the payload and that the electromagnet was turned on.
 
 ### 43. Optimized battery charging
 
@@ -1161,7 +1161,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 **Steps:**
 
 1. Ensure the anti-thief device is charging and its battery level is greater than or equal to 80%.
-2. Put the test tips on the pins of the board shown as an attachement, to measure the current.
+2. Put the test tips on the pins of the board shown as an attachment, to measure the current.
 
 ### 44. Charging - Sleep mode disabling
 
@@ -1182,12 +1182,12 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Github Actions server USB port- USB-A to USB-C cable
+- GitHub Actions server USB port- USB-A to USB-C cable
 
 **Steps:**
 
-1. Plug the USB-C part of the cable in the charging port of the board.
-2. Plug the USB-A part of the cable in the USB port of the computer.
+1. Plug the USB-C part of the cable into the charging port of the board.
+2. Plug the USB-A part of the cable into the USB port of the computer.
 
 ### 45. Charging - Deep sleep mode disabling
 
@@ -1208,12 +1208,12 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Github Actions server USB port- USB-A to USB-C cable
+- GitHub Actions server USB port- USB-A to USB-C cable
 
 **Steps:**
 
-1. Plug the USB-C part of the cable in the charging port of the board.
-2. Plug the USB-A part of the cable in the USB port of the computer.
+1. Plug the USB-C part of the cable into the charging port of the board.
+2. Plug the USB-A part of the cable into the USB port of the computer.
 
 ### 46. Charging - Eco-mode disabling
 
@@ -1234,22 +1234,22 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Github Actions server USB port- USB-A to USB-C cable
+- GitHub Actions server USB port- USB-A to USB-C cable
 
 **Steps:**
 
-1. Plug the USB-C part of the cable in the charging port of the board.
-2. Plug the USB-A part of the cable in the USB port of the computer.
+1. Plug the USB-C part of the cable into the charging port of the board.
+2. Plug the USB-A part of the cable into the USB port of the computer.
 
 ### 47. Deep sleep mode automatically enabled
 
-| ID               | 47                                                                                                                           |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Name             | Deep sleep mode automatically enabled                                                                                        |
-| Test Description | If the anti-theft device hits 5% of the battery level, deep sleep mode should be enabled.                                    |
-| Test Type        | Manual                                                                                                                       |
-| Test Criticity   | 🟣                                                                                                                            |
-| Expected Result  | You should have received a payload indicating a battery level lower than 5% in the logs and in the console of the web-server |
+| ID               | 47                                                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Name             | Deep sleep mode automatically enabled                                                                                     |
+| Test Description | If the anti-theft device hits 5% of the battery level, deep sleep mode should be enabled.                                 |
+| Test Type        | Manual                                                                                                                    |
+| Test Criticity   | 🟣                                                                                                                         |
+| Expected Result  | You should have received a payload indicating a battery level lower than 5% in the logs and the console of the web server |
 
 **Tests:**
 
@@ -1260,14 +1260,14 @@ The test cases are defined by a criticity level, indicating the importance of th
 - SportShield development board
 **External Tools:**
 
-- Github Actions server USB port
+- GitHub Actions server USB port
 
 **Steps:**
 
-1. Plug the development board to the GitHub Actions host computer and check the battery level.
+1. Plug the development board into the GitHub Actions host computer and check the battery level.
 2. If the battery level is greater than 5%, wait until the battery level is less than 5% by unplugging it from the computer.
 3. If the battery level is lower than 5%, unplug the board from the computer and start moving it.
-4. Wait for 35 minutes to receive a position and battery level payload.
+4. Wait for 35 minutes to receive a position and battery-level payload.
 
 ### 48. Eco-mode - Alarm triggers if detecting a movement
 
@@ -1293,7 +1293,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 **Steps:**
 
-1. Ensure that eco-mode is enabled by going on LightBlue app and looking for a device named "SportShield 5".
+1. Ensure that eco-mode is enabled by going on the LightBlue app and looking for a device named "SportShield 5".
 2. Check if the device can be unlocked using NFC using the phone.
 3. Move the device for 30 seconds.
 
@@ -1321,7 +1321,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 **Steps:**
 
-1. Ensure that sleep mode is enabled by going on LightBlue app and looking for a device named "SportShield 5".
+1. Ensure that sleep mode is enabled by going on the LightBlue app and looking for a device named "SportShield 5".
 2. Check if the device can be unlocked using NFC using the phone.
 3. Move the device for 30 seconds.
 
@@ -1333,7 +1333,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When in deep sleep mode, the alarm triggers if deep sleep mode is enabled and the device is moved. |
 | Test Type        | Manual                                                                                             |
 | Test Criticity   | 🟠                                                                                                  |
-| Expected Result  | No alarm have been triggered.                                                                      |
+| Expected Result  | No alarms have been triggered.                                                                     |
 
 **Tests:**
 
@@ -1349,11 +1349,11 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 **Steps:**
 
-1. Ensure that deep sleep mode is enabled by going on LightBlue app and looking for a device named "SportShield 5".
+1. Ensure that deep sleep mode is enabled by going on the LightBlue app and looking for a device named "SportShield 5".
 2. Check if the device can be unlocked using NFC using the phone.
 3. Move the device for 30 seconds.
 
-### 51. Charging - Alarm is disabled
+### 51. Charging - The alarm is disabled
 
 | ID               | 51                                                              |
 | ---------------- | --------------------------------------------------------------- |
@@ -1361,7 +1361,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 | Test Description | When charging, the alarm never triggers if the device is moved. |
 | Test Type        | Manual                                                          |
 | Test Criticity   | 🟠                                                               |
-| Expected Result  | No alarm have been triggered.                                   |
+| Expected Result  | No alarms have been triggered.                                  |
 
 **Tests:**
 
@@ -1377,20 +1377,20 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 **Steps:**
 
-1. Plug the USB-C part of the cable in the charging port of the board.
-2. Plug the USB-A part of the cable in the USB port of the computer.
+1. Plug the USB-C part of the cable into the charging port of the board.
+2. Plug the USB-A part of the cable into the USB port of the computer.
 3. Ensure that the device can be unlocked using NFC.
 4. Move the device for 30 seconds.
 
 ### 52. Battery lasts 7 days in normal conditions
 
-| ID               | 52                                                                                                              |
-| ---------------- | --------------------------------------------------------------------------------------------------------------- |
-| Name             | Battery lasts 7 days in normal conditions                                                                       |
-| Test Description | The autonomy of the device is tested at a normal temperature conditions to ensure it can least at least 7 days. |
-| Test Type        | Manual                                                                                                          |
-| Test Criticity   | 🟣                                                                                                               |
-| Expected Result  | The battery should last at least 7 days.                                                                        |
+| ID               | 52                                                                                                           |
+| ---------------- | ------------------------------------------------------------------------------------------------------------ |
+| Name             | Battery lasts 7 days in normal conditions                                                                    |
+| Test Description | The autonomy of the device is tested at normal temperature conditions to ensure it can last at least 7 days. |
+| Test Type        | Manual                                                                                                       |
+| Test Criticity   | 🟣                                                                                                            |
+| Expected Result  | The battery should last at least 7 days.                                                                     |
 
 **Tests:**
 
@@ -1408,13 +1408,13 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 ### 53. Battery lasts 7 days in extreme conditions
 
-| ID               | 53                                                                                                        |
-| ---------------- | --------------------------------------------------------------------------------------------------------- |
-| Name             | Battery lasts 7 days in extreme conditions                                                                |
-| Test Description | The autonomy of the device is tested in extremely cold conditions to ensure it can least at least 7 days. |
-| Test Type        | Manual                                                                                                    |
-| Test Criticity   | 🟣                                                                                                         |
-| Expected Result  | The battery should last at least 7 days.                                                                  |
+| ID               | 53                                                                                                       |
+| ---------------- | -------------------------------------------------------------------------------------------------------- |
+| Name             | Battery lasts 7 days in extreme conditions                                                               |
+| Test Description | The autonomy of the device is tested in extremely cold conditions to ensure it can last at least 7 days. |
+| Test Type        | Manual                                                                                                   |
+| Test Criticity   | 🟣                                                                                                        |
+| Expected Result  | The battery should last at least 7 days.                                                                 |
 
 **Tests:**
 
@@ -1432,14 +1432,14 @@ The test cases are defined by a criticity level, indicating the importance of th
 1. Put the development board in a plastic bag.
 2. Empty the air from the bag and close it.
 3. Put the bag in the freezer for 2 hours.
-4. Take the development board out of the freezer and plug it to the GitHub Actions host computer
+4. Take the development board out of the freezer and plug it into the GitHub Actions host computer
 5. Check the console to see the percentage of battery left and enter it in the Python script to know if SportShield would last one week.
 
 ### 54. Thief attempt disabling over BLE
 
 | ID               | 54                                                                         |
 | ---------------- | -------------------------------------------------------------------------- |
-| Name             | Thief attempt disabling over BLE                                           |
+| Name             | Thief attempts disabling over BLE                                          |
 | Test Description | The alarm can be disabled by sending a BLE packet with a specific payload. |
 | Test Type        | Manual                                                                     |
 | Test Criticity   | 🟣                                                                          |
@@ -1448,7 +1448,7 @@ The test cases are defined by a criticity level, indicating the importance of th
 **Tests:**
 
 - 1 - Coding conventions
-- 5 - Thief attempt/Long movement detection
+- 5 - Thief attempts/Long movement detection
 - 6 - Sound level differences
 - 8 - 2G connectivity
 
@@ -1463,5 +1463,5 @@ The test cases are defined by a criticity level, indicating the importance of th
 
 1. Ensure the anti-theft device is not in a particular battery-saving mode.
 2. Move the device during 30 seconds.
-3. Go on LightBlue app to look for a device named "SportShield 5".
-4. Go in the "Alarm" tab and submit the value 0x0.
+3. Go on the LightBlue app to look for a device named "SportShield 5".
+4. Go to the "Alarm" tab and submit the value 0x0.
