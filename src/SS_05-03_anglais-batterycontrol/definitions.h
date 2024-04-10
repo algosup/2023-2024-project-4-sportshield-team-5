@@ -58,8 +58,7 @@ uint32_t waiting_for_sleep_mode_time_ref = 0;
 // IMU : LSM6DS3
 LSM6DS3 imu(I2C_MODE, 0x6A); // I2C device address 0x6A
 uint32_t timer_imu = millis();
-bool long_motion = false;
-bool short_motion = false;
+
 
 // GPS PA1010D
 Adafruit_GPS GPS(&Serial1);
@@ -77,11 +76,14 @@ SIM800L *sim800l;
 bool send_position = false;
 bool send_move = false;
 int frequency_for_sending_data = 15; //minutes, each Xminutes, when locked, it sends geolocation and battery level
+uint32_t time_of_the_last_sent = 0;
 
 // Buzzer
 #define BUZZER_PIN D2
 void pulseBuzzer(int repetitions, unsigned long durationOn, unsigned long durationOff, int intensity);
 unsigned long start_cycle = 0;
+bool long_motion_alarm = false;
+bool short_motion_alarm = false;
 
 // Electro magnetic lock
 #define EML_PIN D3
@@ -96,12 +98,34 @@ bool deactivate = false; // A boolean which if turned on, stop any ongoing alarm
 bool movement_finished = false;
 
 // Alarm
-const float SHORT_SHOCK_DURATION = 1.5;       // The maximum time margin where two shocks can be detected as a risk, unit in seconds
+#define SHORT_SHOCK_DURATION = 1200;       // The maximum time margin where two shocks can be detected as a risk, unit in seconds
+#define LONG_ALARM_DURATION = 3500;
 float alarm_start;            // A value to store when the alarm started
 float alarm_duration;         // The duration of the current alarm;
 int MT_counter;               // Number of movements detected within the time limit value
 bool first_alarm = true;      // A boolean which indicates if it is the first alarm in a given time
 bool activation_alarm = true; // A boolean to signal the activation of the product
+
+#define SMALL_ALARM_PERIOD 200 //ms
+#define SMALL_ALARM_CYCLES  3//ms
+#define SMALL_ALARM_INTENSITY 512 //   /1023
+uint32_t small_alarm_timer_start = 0;
+uint small_alarm_timer = 0;
+uint32_t small_alarm_period_timer_start = 0;
+uint small_alarm_period_timer = 0;
+
+#define BIG_ALARM_PERIOD 350 //ms
+#define BIG_ALARM_CYCLES  5//ms
+#define BIG_ALARM_INTENSITY 1023 //   /1023
+uint32_t big_alarm_timer_start = 0;
+uint big_alarm_timer = 0;
+uint32_t big_alarm_period_timer_start = 0;
+uint big_alarm_period_timer = 0;
+
+#define SENDING_FREQUENCY_WHEN_LOCKED 1000 //ms
+uint32_t regular_sent_timer_start = 0;
+uint regular_sent_timer = 0;
+
 
 float motion_data;
 float rotation_data;

@@ -1,6 +1,7 @@
 #ifndef _SIM_
 #define _SIM_
 #include "definitions.h"
+#include "bluetooth.h"
 
 /*
     This file contains every functions related to the SIM card.
@@ -15,6 +16,8 @@
  */
 void simSetup(void)
 {
+
+
 
     // while (!sim800l->isReady())
     // {
@@ -48,6 +51,35 @@ void simSetup(void)
 void SIMIsr()
 {
     send_position = true;
+}
+
+void sendLocationBattery(){
+  if(Device.gps_desactivated){
+    activateGPS();
+  }
+  turnPowerBridges(ON);
+
+  Serial.println("Location and battery sent");
+  //SEND GPS DATA BATTERY/LOCATION
+
+  if (!Device.alarm_triggered){
+    desactivateGPS();
+    turnPowerBridge(OFF);
+  }
+
+void launchRegularSent(){
+  regular_sent_timer_start = millis();
+}
+void updateRegularSent(){
+  regular_sent_timer = millis() - regular_sent_timer_start;
+  if (regular_sent_timer >= SENDING_FREQUENCY_WHEN_LOCKED){
+    sendLocationBattery();
+    regular_sent_timer_start = millis();
+  }
+}
+void resetRegularSent(){
+  regular_sent_timer_start = 0;
+  regular_sent_timer = 0;
 }
 
 #endif

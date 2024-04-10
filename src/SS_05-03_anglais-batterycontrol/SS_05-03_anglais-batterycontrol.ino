@@ -205,124 +205,43 @@ void loop()
       turnLightEco(OFF);
     }
     if (getAcceleration() > ACCELERATION_NOISE_THRESHOLD || getRotation() > ROTATION_NOISE_THRESHOLD){
-      Device.alarm_triggered = true;
-      //ALARM STUFF  and sending notif to update
-    }
-  } 
 
+      if (getSmallAlarmTimer() == 0){
+        launchSmallAlarm();
+      }else if (getSmallAlarmTimer() <= SHORT_SHOCK_DURATION){
+        updateAlarm(); 
 
-
-
-/* 
-  if (activation_alarm)
-  {
-    pulseBuzzer(2, 200, 50, 25);
-    activation_alarm = false;
-  }
-
-  motion_data = getMotionData();
-  rotation_data = getRotationData();
-  Device.is_locked = 1; // TO REMOVE !!!
-  if (Device.is_locked)
-  { // alarm enalbled
-    activateGPS();
-    if (motion_data > big_MT || rotation_data > big_RT)
-    { // Big motion detection
-      if (motion_data > big_MT)
-      {
-        Serial.print("Motion detected : ");
-        Serial.println(motion_data);
-      }
-      else
-      {
-        Serial.print("Rotation detected : ");
-        Serial.println(rotation_data);
-      }
-      motion_big = true;
-      motion_small = false;
-    }
-    else if (motion_data > small_MT || rotation_data > small_RT)
-    { // Small motion detection
-      if (motion_data > small_MT)
-      {
-        Serial.print("Small motion: ");
-        Serial.println(motion_data);
-      }
-      else
-      {
-        Serial.print("Small rota : ");
-        Serial.println(rotation_data);
-      }
-      motion_small = true;
-    }
-  }
-
-  if ((!motion_small && !motion_big) && ((alarm_duration - alarm_start) < SHORT_SHOCK_DURATION))
-  {
-    MT_counter = 0;
-    first_alarm = true;
-  }
-  if (motion_small || motion_big)
-  {
-    MT_counter++;
-    if (first_alarm && MT_counter >= 2)
-    {
-      alarm_start = millis();
-    }
-    else
-    {
-      alarm_duration = millis();
-      if (alarm_duration - alarm_start >= SHORT_SHOCK_DURATION)
-      {
-        alarm_start = millis();
+      }else if (getSmallAlarmTimer() >= SHORT_SHOCK_DURATION){
+        delay(100); //to see if it did calm down
+        if (getAcceleration() > ACCELERATION_NOISE_THRESHOLD || getRotation() > ROTATION_NOISE_THRESHOLD){
+          if (getBigAlarmTimer() == 0){
+            resetSmallAlarm();
+            launchBigAlarm();
+            sendMovement();
+            LaunchRegularSent(); 
+          }else if (getBigAlarmTimer() <= LONG_ALARM_DURATION){
+            updateAlarm();
+            updateRegularSent();
+          }else{
+            resetRegularSent();
+            resetBigAlarm();
+          }
+        }else{
+          resetRegularSent();
+          resetSmallAlarm();
+        }
       }
     }
   }
 
-  if ((motion_big || motion_small) && MT_counter > 2)
-  {
-    sendMovement();
-
-    if (first_alarm)
-    {
-      // Dissuasion alarm
-      pulseBuzzer(3, 200, 100, 12); // repetitions, DurationOn , DurationOff, intensity
-      first_alarm = false;
-    }
-    else
-    {
-      // Theft alarm
-      pulseBuzzer(5, 350, 350, 25); // repetitions, DurationOn , DurationOff, intensity
+  if ((Device.power_mode != DEEP_ECO_MODE) && (Device.power_mode != SLEEP_MODE) && Device.is_locked){
+    uint sending_timelapse = millis()-time_of_the_last_sent;
+    if (sending_timelapse >= frequency_for_sending_data*60000) {
+      sendLocationBattery();
+      time_of_the_last_sent = millis();
     }
   }
-  motion_detect = true;
-
-  // if a mvt is detected and bluetooth is disabled bluetooth activation
-  if (motion_detect == true)
-  {
-    tim_connec = millis();
-    motion_detect = false;
-    if (BLE_activated == false)
-    {
-      BLE_activated = true;
-      Serial.println("MVT_detect->setup");
-      bluetoothSetup();
-    }
-  }
-
-  // bluetooth actived when we are interacting with the module or when the alarm is on
-  if ((BLE_activated == true) || (Device.is_locked))
-  {
-    BLE.poll(); // communication autorisé
-  }
-
-  // at the end of the time during which the lock has not moved, if bluetooth is activated, and the lock is not in activation mode then it is turned off to save the battery
-  if ((millis() - tim_connec > TIME_OUT_MS_BLE_ACT) && (BLE_activated == true) && (Device.is_locked != 1))
-  {
-    BLE_activated = false;
-    Serial.println("timeout->BLE_END");
-    BLE.end();
-  }
+/*
 
   // capture clocked GPS data
   GPS.read();

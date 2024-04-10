@@ -1,6 +1,7 @@
 #ifndef _POWER_
 #define _POWER_
 #include "definitions.h"
+#include "bluetooth.h"
 
 /*
     This file contains every functions related to the battery management.
@@ -77,7 +78,8 @@ void turnDeepEco(bool state)
     turnPowerSwitches(OFF); // cut current of SIM, Alarm and EML
     digitalWrite(SIM800_RST_PIN, LOW);
     digitalWrite(GPS_WKUP_PIN, LOW);
-    //turn off the bluetooth
+    //BLE_activated = false;
+    BLE.end();
     //turn off the IMU
   }
   if (state==OFF){
@@ -87,7 +89,9 @@ void turnDeepEco(bool state)
     Device.gps_activated = true;
 
     //turn on the IMU
-    //turn on the bluetooth and try to connect
+    //BLE_activated = true;
+    bluetoothSetup();
+    BLE.poll();
   }
 }
 
@@ -111,7 +115,9 @@ void turnLightEco(bool state)
     Device.bluetooth_activated = false;
     Device.nfc_activated = true;
 
-    //turn off the bluetooth to keep only NFC
+    //BLE_activated = false;
+    BLE.end();
+    // to keep only NFC
 
   }
   if (state==OFF){
@@ -121,7 +127,9 @@ void turnLightEco(bool state)
     Device.power_mode = NORMAL_MODE;
     Device.bluetooth_activated = true;
 
-    //turn on the bluetooth and try to connect
+    //BLE_activated = true;
+    bluetoothSetup();
+    BLE.poll();
 
   }
 }
@@ -146,7 +154,9 @@ void turnSleepMode(bool state)
     turnPowerSwitches(OFF); // cut current of SIM, Alarm and EML
     digitalWrite(SIM800_RST_PIN, LOW);
     digitalWrite(GPS_WKUP_PIN, LOW);
-    //turn off the bluetooth
+
+    //BLE_activated = false;
+    BLE.end();
 
   }
   if (state==OFF){
@@ -155,7 +165,9 @@ void turnSleepMode(bool state)
     Device.nfc_activated = true;
     Device.gps_activated = true;
 
-    //turn on the bluetooth and try to connect
+    //BLE_activated = true;
+    bluetoothSetup();
+    BLE.poll();
   }
 }
 void lauchWaitingForSleepTimer(){

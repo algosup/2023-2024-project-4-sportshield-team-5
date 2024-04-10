@@ -91,8 +91,23 @@ void activateGPS()
     if (start_gps == true)
     {
         digitalWrite(GPS_WKUP_PIN, HIGH);
+        Device.gps_activated = true;
         start_gps = false;
     }
+}
+
+void desactivateGPS()
+{
+    if (start_gps == false)
+    {
+        digitalWrite(GPS_WKUP_PIN, LOW);
+        Device.gps_activated = false;
+        start_gps = true;
+    }
+}
+
+
+
 }
 
 #endif
