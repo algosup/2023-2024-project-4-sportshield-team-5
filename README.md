@@ -25,9 +25,9 @@ Additionally, SportShield incorporates smart features such as:
 
 [Test plan](./documents/quality-assurance/test-plan.md)
 
-[User manual in english](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/user-manual/UserManuelEN.pdf)
+[User manual in English](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/user-manual/UserManualEN.pdf)
 
-[User manual in french](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/user-manual/UserManuelFR.pdf)
+[User manual in French](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/main/documents/user-manual/UserManualFR.pdf)
 
 [Weekly reports](./documents/management/weekly_reports/cummulative.md)
 
