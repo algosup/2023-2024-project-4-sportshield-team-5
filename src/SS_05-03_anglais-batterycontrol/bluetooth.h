@@ -8,8 +8,10 @@
     This file contains every functions and initializations related to the Bluetooth.
 */
 
-//---------------------------- SETUP -----------------------------
+//-------------------------- VARIABLES ---------------------------
+BLEDevice paired_central;
 
+//---------------------------- SETUP -----------------------------
 BLEService PasswordService("19B10000-E8F2-537E-4F6C-D104768A1213"); // Bluetooth® Low Energy Service
 BLEService ConfigService("19B10000-E8F2-537E-4F6C-D104768A1214");
 
@@ -104,10 +106,15 @@ void bluetoothSetup(void)
  */
 void onConnect(BLEDevice central)
 {
-    Serial.print("Connected to ");
-    Serial.println(central.address());
-    Serial.println(BLE.address());
-    digitalWrite(LEDB, LOW);
+    if (!paired_central.connected())
+    {
+        Serial.print("Connected to ");
+        Serial.println(central.address());
+        Serial.println(BLE.address());
+        digitalWrite(LEDB, LOW);
+
+        paired_central = central;
+    }
 }
 
 /**
@@ -117,10 +124,15 @@ void onConnect(BLEDevice central)
  */
 void onDisconnect(BLEDevice central)
 {
-    Serial.print(F("Disconnected from central: "));
-    Serial.println(central.address());
-    is_authenticate = false;
-    digitalWrite(LEDB, HIGH);
+    if (paired_central == central)
+    {
+        Serial.print(F("Disconnected from central: "));
+        Serial.println(central.address());
+        is_authenticate = false;
+        digitalWrite(LEDB, HIGH);
+
+        paired_central.disconnect();
+    }
 }
 
 /**
@@ -130,10 +142,16 @@ void onDisconnect(BLEDevice central)
  */
 void onWritePassword(BLEDevice central, BLECharacteristic characteristic)
 {
-    const int expected_password = 1; // The password is currently set to 1 and not modifiable on user's side
-    short int value = PasswordCharacteristic.value(); // Retrieve an int sent by the user
-    is_authenticate = (value == expected_password);
-    Serial.println(is_authenticate ? "successful authentication" : "wrong password");
+    if (paired_central == central)
+    {
+
+        const int expected_password = 1;                  // The password is currently set to 1 and not modifiable on user's side
+        short int value = PasswordCharacteristic.value(); // Retrieve an int sent by the user
+        is_authenticate = (value == expected_password);
+        Serial.println(is_authenticate ? "successful authentication" : "wrong password");
+    }else{
+        Serial.println("A different device attempted to connect.");
+    }
 }
 
 /**
@@ -144,7 +162,7 @@ void onWritePassword(BLEDevice central, BLECharacteristic characteristic)
  */
 void onWriteName(BLEDevice central, BLECharacteristic characteristic)
 {
-    if (is_authenticate)
+    if (is_authenticate && paired_central == central)
     {
         Device.Name = NameCharacteristic.value();
         String value = NameCharacteristic.value();
@@ -167,7 +185,7 @@ void onReadName(BLEDevice central, BLECharacteristic characteristic)
 {
     Serial.println("CALLBACK READ");
     Serial.println(is_authenticate);
-    if (is_authenticate)
+    if (is_authenticate && paired_central == central)
     {
         NameCharacteristic.writeValue(Device.Name);
     }
@@ -185,7 +203,7 @@ void onReadName(BLEDevice central, BLECharacteristic characteristic)
  */
 void onWriteActivation(BLEDevice central, BLECharacteristic characteristic)
 {
-    if (is_authenticate)
+    if (is_authenticate && paired_central == central)
     {
         Device.is_locked = ActivationCharacteristic.value();
         if (Device.is_locked != 0)
@@ -229,7 +247,7 @@ void onReadActivation(BLEDevice central, BLECharacteristic characteristic)
  */
 void onWriteUnlock(BLEDevice central, BLECharacteristic characteristic)
 {
-    if (is_authenticate)
+    if (is_authenticate && paired_central == central)
     {
         // activate electromagnet
         unlock();
