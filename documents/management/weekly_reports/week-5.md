@@ -8,7 +8,6 @@
 3. [Challenges](#challenges)
 4. [Key Accomplishments](#key-accomplishments)
 5. [Upcoming Week](#upcoming-week)
-6. [Meetings and Collaborations](#meetings-and-collaborations)
 7. [Metrics and KPIs](#metrics-and-kpis)
 8. [Other Notes](#other-notes)
 
@@ -16,36 +15,37 @@
 
 ------------
 ## Overview
-
-Provide a brief overview of the key activities and achievements during the week.
+We were almost meeting the project deadline, but unfortunately, we didn't have enough time to complete the project.
 
 ## Goals
 
-Outline the goals set for the week and evaluate the progress made towards each goal.
+- Complete the the NFC
+- Complete the user manual document
+- Complete the test plan document
 
 ## Challenges
 
-Highlight any challenges or obstacles encountered during the week and discuss possible solutions.
+We saw that the NFC was a big challenge so we didn't manage to implement it.
 
 ## Key Accomplishments
 
-List the significant accomplishments and milestones achieved throughout the week.
+- User manual document.
+<img src="images/User-manual.png">
+- Test plan document.
+<img src="images/TestPlan.png">
 
 ## Upcoming Week
 
-Preview the goals and tasks planned for the upcoming week.
-
-## Meetings and Collaborations
-
-Summarize any important meetings, collaborations, or discussions that took place during the week.
-
+- Start preparing for the final Oral presentation.
 
 ## Metrics and KPIs
 
-Include relevant metrics and key performance indicators to measure progress.
+- **All Tasks**
+<img src="images/Week5.png">
+
+- **Progrssion level**
+<img src="images/progression5.png">
 
 ## Other Notes
 
-Add any additional notes or comments that may be relevant to the overall report.
-
----
+We finished with the implementation phase of the project even though we did not implement everything. Our next focus is preparing for the final oral presentation.

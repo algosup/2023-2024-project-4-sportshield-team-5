@@ -150,9 +150,6 @@ The week was full of challenges but we are moving slowly and learning new things
 [Original Document](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/4694e76bd2befe8af7a87f23bf6c58e64aa6f18f/documents/management/weekly-reports/week-3.md)
 
 
-</details>
-
-------------
 ## Overview
 We started the week with our main goal trying to complete as many tasks as possible on the implementation phase and deliver the technical document.
 
@@ -198,11 +195,104 @@ The images below will show the progression level of the project in the documenta
 
 [Original Document](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/cad6adad2e0df4171eab92c59208b302e8bca699/documents/management/weekly-reports/week-4.md)
 
+## Overview
+
+We started the week with almost only one day project, quite challenging for, us since we were left with just a 2 days project.
+
+## Goals
+
+- Battery management.
+- Complete with the coding phase of the NFC.
+
+## Challenges
+
+- It's proving to be extremely difficult to finish the remaining tasks within the given project timeline.
+
+## Upcoming Week
+
+- Complete with the coding phase of the NFC.
+- Complete with battery management.
+
+
+## Metrics and KPIs
+
+- **All Tasks**
+<img src="images/week4.png">
+
+- **Progrssion level**
+<img src="images/week4_progression.png">
+
+## Other Notes
+
+The week was not full of project time, and we are a little behind schedule. However, we will catch up this week and do better.
+
 # WEEK 5
 
 [Original Document](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/cad6adad2e0df4171eab92c59208b302e8bca699/documents/management/weekly-reports/week-5.md)
 
+## Overview
+We were almost meeting the project deadline, but unfortunately, we didn't have enough time to complete the project.
+
+## Goals
+
+- Complete the the NFC
+- Complete the user manual document
+- Complete the test plan document
+
+## Challenges
+
+We saw that the NFC was a big challenge so we didn't manage to implement it.
+
+## Key Accomplishments
+
+- User manual document.
+<img src="images/User-manual.png">
+- Test plan document.
+<img src="images/TestPlan.png">
+
+## Upcoming Week
+
+- Start preparing for the final Oral presentation.
+
+## Metrics and KPIs
+
+- **All Tasks**
+<img src="images/Week5.png">
+
+- **Progrssion level**
+<img src="images/progression5.png">
+
+## Other Notes
+
+We finished with the implementation phase of the project even though we did not implement everything. Our next focus is preparing for the final oral presentation.
+
 # WEEK 6
 
 [Original Document](https://github.com/algosup/2023-2024-project-4-sportshield-team-5/blob/cad6adad2e0df4171eab92c59208b302e8bca699/documents/management/weekly-reports/week-6.md)
+
+## Overview
+
+This week we focus on working on our canvas presentation, rehearsing what we have to say in front of the juries, and finally presenting our product.
+
+## Goals
+- Preparing all the slides for the presentation.
+- Practice for the final oral presentation.
+- Present the final product in front of the juries.
+
+## Key Accomplishments
+- Slides preparation.
+- Oral presentation practice.
+- Final oral presentation.
+
+## Metrics and KPIs
+
+- **All Tasks**
+<img src="images/Week6.png">
+
+- **Progrssion level**
+<img src="images/Progression6.png">
+
+## Other Notes
+
+We did the final Oral presentation, we were glad to work on this project. It was a good experience as some of us learned some new skills.
 
