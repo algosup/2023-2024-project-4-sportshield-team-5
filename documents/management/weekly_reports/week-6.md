@@ -29,10 +29,10 @@ This week we focus on working on our canvas presentation, rehearsing what we hav
 ## Metrics and KPIs
 
 - **All Tasks**
-<img src="images/Week6.png">
+<img src ="images/week6-tasks.png">
 
 - **Progrssion level**
-<img src="images/Progression6.png">
+<img src="images/tasks-progression6.png">
 
 ## Other Notes
 
