@@ -6,9 +6,9 @@ This document describes how the project went through with everyone, and what are
 
 ## MAD, SAD, GLAD
 
-| Team members |                                       MAD |                                   SAD |                                         GLAD |
-|--------------|-------------------------------------------|---------------------------------------|----------------------------------------------|
-| Bistrel      | Someone ruinned our slide during our oral presentation | During the presentation I 
+| Team members |                                       MAD |                                   SAD |                                                    GLAD |
+|--------------|-------------------------------------------|---------------------------------------|-----------------------------------------------------------|
+| Bistrel      | Someone ruinned our slide during our oral presentation | During the final oral presentation, words started mixing up in my head, I got confused and I did some mistakes. | Be truthful towards each other in the group |--------------------------------------------------------
 | Arthur       |
 | Aurélien     |
 | Antoine      |
